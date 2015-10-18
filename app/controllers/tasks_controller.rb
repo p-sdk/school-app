@@ -17,9 +17,6 @@ class TasksController < ApplicationController
     @task = @course.tasks.build
   end
 
-  def edit
-  end
-
   def create
     @task = @course.tasks.build(task_params)
     if @task.save

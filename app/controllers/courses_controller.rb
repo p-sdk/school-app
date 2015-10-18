@@ -8,14 +8,8 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
-  def show
-  end
-
   def new
     @course = current_user.teacher_courses.build
-  end
-
-  def edit
   end
 
   def create
@@ -43,8 +37,6 @@ class CoursesController < ApplicationController
     redirect_to courses_path
   end
 
-  def students; end
-
   private
 
   def set_course
@@ -54,7 +46,6 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:name, :desc, :category_id)
   end
-
 
   def require_correct_teacher
     raise AccessDenied unless current_user? @course.teacher

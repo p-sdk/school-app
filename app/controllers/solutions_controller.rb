@@ -6,12 +6,6 @@ class SolutionsController < ApplicationController
   before_action :require_correct_teacher, only: [:edit, :update, :destroy]
   before_action :require_correct_student, only: [:create]
 
-  def show
-  end
-
-  def edit
-  end
-
   def create
     if @task.solve content: @content, student: current_user
       flash[:success] = 'Rozwiązanie zostało wysłane'

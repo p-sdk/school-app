@@ -9,14 +9,8 @@ class LecturesController < ApplicationController
     @lectures = @course.lectures
   end
 
-  def show
-  end
-
   def new
     @lecture = @course.lectures.build
-  end
-
-  def edit
   end
 
   def create
