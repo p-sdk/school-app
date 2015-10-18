@@ -1,0 +1,17 @@
+.row
+  .col-md-3
+    .back
+      = link_to [@course, @lecture], class: 'btn btn-default' do
+        %i.fa.fa-arrow-left
+        Wróć
+    .delete
+      = link_to course_lecture_path(@course, @lecture), method: :delete, class: 'btn btn-default' do
+        %i.fa.fa-trash
+        Usuń wykład
+
+  .col-md-9
+    %h1= @course.name
+    %h2 Edytuj wykład
+    = form_for [@course, @lecture] do |f|
+      = render 'fields', f: f
+      = f.submit 'Zapisz zmiany', class: 'btn btn-primary'

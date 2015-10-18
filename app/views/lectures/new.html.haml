@@ -1,0 +1,12 @@
+.row
+  .col-md-3
+    = link_to course_lectures_path(@course), class: 'btn btn-default' do
+      %i.fa.fa-arrow-left
+      Wróć
+
+  .col-md-9
+    %h1= @course.name
+    %h2 Utwórz nowy wykład
+    = form_for [@course, @lecture] do |f|
+      = render 'fields', f: f
+      = f.submit 'Utwórz wykład', class: 'btn btn-primary'

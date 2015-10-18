@@ -1,0 +1,13 @@
+= render 'shared/error_messages', object: f.object
+
+.field
+  = f.label :category_id, 'Kategoria'
+  = f.collection_select :category_id, Category.all, :id, :name
+
+.field
+  = f.label :name, 'Nazwa'
+  = f.text_field :name, class: 'form-control'
+
+.field
+  = f.label :desc, 'Opis'
+  = f.text_area :desc, class: 'form-control'

@@ -1,0 +1,11 @@
+.row
+  .col-md-3
+    = link_to root_path, class: 'btn btn-default' do
+      %i.fa.fa-arrow-left
+      Wróć
+
+  .col-md-9
+    %h1 Utwórz nowy kurs
+    = form_for @course do |f|
+      = render 'fields', f: f
+      = f.submit 'Utwórz kurs', class: 'btn btn-primary'

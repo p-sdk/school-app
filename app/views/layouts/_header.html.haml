@@ -1,0 +1,30 @@
+%header.navbar.navbar-fixed-top.navbar-inverse
+  .container
+    = link_to root_path, id: 'logo', class: 'navbar-brand' do
+      %i.fa.fa-graduation-cap
+      e-kursy
+    %ul.nav.navbar-nav.navbar-right
+      - if signed_in?
+        %li= link_to 'Moje kursy', root_path
+      %li= link_to 'Kursy', courses_path
+      - if signed_in?
+        %li.dropdown
+          %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' } }
+            = current_user.name
+            %i.caret
+          %ul.dropdown-menu
+            %li
+              = link_to current_user do
+                %i.fa.fa-user
+                Mój profil
+            %li
+              = link_to edit_user_path(current_user) do
+                %i.fa.fa-cogs
+                Ustawienia
+            %li.divider
+            %li
+              = link_to signout_path, method: :delete do
+                %i.fa.fa-sign-out
+                Wyloguj
+      - else
+        %li= link_to 'Zaloguj', signin_path

@@ -1,0 +1,17 @@
+= render 'shared/error_messages', object: f.object
+
+.field
+  = f.label :name, 'Imię i nazwisko'
+  = f.text_field :name, class: 'form-control'
+
+.field
+  = f.label :email
+  = f.text_field :email, class: 'form-control'
+
+.field
+  = f.label :password, 'Hasło'
+  = f.password_field :password, class: 'form-control'
+
+.field
+  = f.label :password_confirmation, 'Potwierdzenie hasła'
+  = f.password_field :password_confirmation, class: 'form-control'

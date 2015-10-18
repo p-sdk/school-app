@@ -1,0 +1,16 @@
+- if @courses.any?
+  %h2 Kursy na które jesteś zapisany
+  %ul.courses= render @courses
+- else
+  Nie zapisałeś się jeszcze na żaden kurs.
+  = link_to 'Przeglądaj kursy', courses_path
+
+- if current_user.teacher?
+  - unless @teacher_courses.empty?
+    %h2 Kursy które prowadzisz
+    %ul.courses= render @teacher_courses
+  .new_course= link_to 'Utwórz nowy kurs', new_course_path, class: 'btn btn-primary'
+
+- if current_user.admin?
+  = link_to 'Zarządzaj kategoriami', categories_path, class: 'btn btn-default'
+  = link_to 'Zarządzaj użytkownikami', users_path, class: 'btn btn-default'

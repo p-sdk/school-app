@@ -1,0 +1,13 @@
+= render 'shared/error_messages', object: f.object
+
+.field
+  = f.label :title, 'Tytuł'
+  = f.text_field :title, class: 'form-control'
+
+.field
+  = f.label :desc, 'Opis'
+  = f.text_area :desc, class: 'form-control'
+
+.field
+  = f.label :points, 'Liczba punktów'
+  = f.number_field :points, min: 1, class: 'form-control'
