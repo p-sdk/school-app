@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from NotSignedIn, with: :not_signed_in
   rescue_from AccessDenied, with: :access_denied
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   include SessionsHelper
 
@@ -39,6 +40,10 @@ class ApplicationController < ActionController::Base
 
   def access_denied
     flash[:danger] = 'Odmowa dostępu'
+    redirect_to root_path
+  end
+
+  def not_found
     redirect_to root_path
   end
 end
