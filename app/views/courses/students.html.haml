@@ -1,10 +1,10 @@
 .row
   .col-md-3
-    = link_to @course, class: 'btn btn-default' do
+    = link_to course, class: 'btn btn-default' do
       %i.fa.fa-arrow-left
       Wróć
 
   .col-md-9
-    %h1= @course.name
+    %h1= course.name
     %h2 Zapisani studenci
-    %ul.students= render @course.students
+    %ul.students= render course.students

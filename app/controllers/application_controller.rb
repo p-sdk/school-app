@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   rescue_from AccessDenied, with: :access_denied
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  expose(:current_user) { User.find_by id: session[:user_id] }
+
   include SessionsHelper
 
   private

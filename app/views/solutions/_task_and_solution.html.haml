@@ -1,11 +1,11 @@
-%h1= @task.title
+%h1= task.title
 
 .solution-description
   %h3 Opis
-  .desc= markdown @task.desc
+  .desc= markdown task.desc
 
 %h3 Rozwiązanie
-.solution= markdown @solution.content
+.solution= markdown solution.content
 
 Autor:
-%i.author= @solution.student.name
+%i.author= solution.student.name

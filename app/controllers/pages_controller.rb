@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
+  expose(:courses) { current_user.courses }
+  expose(:teacher_courses) { current_user.teacher_courses }
+
   def home
     return unless signed_in?
-    @courses = current_user.courses
-    @teacher_courses = current_user.teacher_courses if current_user.teacher?
     render 'dashboard'
   end
 end

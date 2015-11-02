@@ -1,5 +1,7 @@
 class SolutionsController < ApplicationController
-  before_action :set_solution, only: [:show, :edit, :update, :destroy]
+  expose(:solution, attributes: :solution_params)
+  expose(:task) { solution.task }
+
   before_action :set_create_params, only: [:create]
   before_action :require_sign_in
   before_action :require_correct_user, only: [:show]
@@ -16,26 +18,21 @@ class SolutionsController < ApplicationController
   end
 
   def update
-    if @solution.update(solution_params)
+    if solution.save
       flash[:success] = 'Rozwiązanie zostało ocenione'
-      redirect_to @solution
+      redirect_to solution
     else
       render :edit
     end
   end
 
   def destroy
-    @solution.destroy
+    solution.destroy
     flash[:success] = 'Rozwiązanie zostało usunięte'
-    redirect_to solutions_course_task_path(@task.course, @task)
+    redirect_to solutions_course_task_path(task.course, task)
   end
 
   private
-
-  def set_solution
-    @solution = Solution.find(params[:id])
-    @task = @solution.task
-  end
 
   def set_create_params
     @task = Task.find(params[:solution][:task_id])
@@ -47,13 +44,13 @@ class SolutionsController < ApplicationController
   end
 
   def require_correct_user
-    return if current_user? @solution.student
-    return if current_user? @task.course.teacher
+    return if current_user? solution.student
+    return if current_user? task.course.teacher
     raise AccessDenied
   end
 
   def require_correct_teacher
-    raise AccessDenied unless current_user? @task.course.teacher
+    raise AccessDenied unless current_user? task.course.teacher
   end
 
   def require_correct_student

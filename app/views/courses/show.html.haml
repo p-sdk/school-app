@@ -1,27 +1,27 @@
 .row
   .col-md-3
     - if signed_in?
-      - if current_user? @course.teacher
-        = link_to edit_course_path(@course), class: 'btn btn-default' do
+      - if current_user? course.teacher
+        = link_to edit_course_path(course), class: 'btn btn-default' do
           %i.fa.fa-edit
           Edytuj
-        = link_to students_course_path(@course), class: 'btn btn-default' do
+        = link_to students_course_path(course), class: 'btn btn-default' do
           %i.fa.fa-group
           Zapisani studenci
-      - elsif !current_user.enrolled_in? @course
+      - elsif !current_user.enrolled_in? course
         .enroll= render 'enroll'
 
-    - if current_user?(@course.teacher) || @course.has_student?(current_user)
-      = link_to course_lectures_path(@course), class: 'btn btn-default' do
+    - if current_user?(course.teacher) || course.has_student?(current_user)
+      = link_to course_lectures_path(course), class: 'btn btn-default' do
         %i.fa.fa-file-text
         Wykłady
-      = link_to course_tasks_path(@course), class: 'btn btn-default' do
+      = link_to course_tasks_path(course), class: 'btn btn-default' do
         %i.fa.fa-tasks
         Zadania
 
   .col-md-9
-    %h1= @course.name
+    %h1= course.name
     .teacher
-      %i= link_to @course.teacher.name, @course.teacher
+      %i= link_to course.teacher.name, course.teacher
 
-    .desc= markdown @course.desc
+    .desc= markdown course.desc

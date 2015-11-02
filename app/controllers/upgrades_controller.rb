@@ -1,7 +1,8 @@
 class UpgradesController < ApplicationController
-  before_action :set_user, only: [:update, :destroy]
   before_action :require_sign_in
   before_action :require_admin, only: [:update, :destroy]
+
+  expose(:user)
 
   def create
     current_user.request_upgrade
@@ -10,18 +11,14 @@ class UpgradesController < ApplicationController
   end
 
   def update
-    @user.upgrade
+    user.upgrade
     flash[:success] = 'Uprawnienia użytkownika zostały rozszerzone'
-    redirect_to @user
+    redirect_to user
   end
 
   def destroy
-    @user.downgrade
+    user.downgrade
     flash[:success] = 'Wniosek o rozszerzenie uprawnień został odrzucony'
-    redirect_to @user
-  end
-
-  def set_user
-    @user = User.find(params[:id])
+    redirect_to user
   end
 end

@@ -7,12 +7,12 @@
   .col-md-9
     %h1 Użytkownicy
 
-    - if @users_requesting_upgrade.any?
+    - if users_requesting_upgrade.any?
       %h2 Użytkownicy wnioskujący o rozszerzenie uprawnień
-      %ul= render @users_requesting_upgrade
+      %ul= render users_requesting_upgrade
 
     %h2 Nauczyciele
-    %ul= render @teachers
+    %ul= render teachers
 
     %h2 Studenci
-    %ul= render @students
+    %ul= render students

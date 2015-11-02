@@ -7,21 +7,21 @@
           Wróć do listy użytkowników
     .center
       #avatar
-        = gravatar_for @user
+        = gravatar_for user
       .email
-        %a{ href: "mailto:#{@user.email}" }= @user.email
+        %a{ href: "mailto:#{user.email}" }= user.email
 
   .col-md-9
-    %h1= @user.name
+    %h1= user.name
 
-    - if @user.teacher?
-      %ul.courses= render @user.teacher_courses
+    - if user.teacher?
+      %ul.courses= render user.teacher_courses
 
-    - if @user.requesting_upgrade? && current_user && current_user.admin?
+    - if user.requesting_upgrade? && current_user && current_user.admin?
       %p Ten użytkownik chce uzyskać uprawnienia nauczyciela
-      = link_to upgrade_user_path(@user), method: :patch, class: 'btn btn-success' do
+      = link_to upgrade_user_path(user), method: :patch, class: 'btn btn-success' do
         %i.fa.fa-check
         Zatwierdź
-      = link_to upgrade_user_path(@user), method: :delete, class: 'btn btn-danger' do
+      = link_to upgrade_user_path(user), method: :delete, class: 'btn btn-danger' do
         %i.fa.fa-remove
         Odrzuć

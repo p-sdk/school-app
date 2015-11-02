@@ -1,3 +1,3 @@
-= form_for current_user.enrollments.build(course: @course) do |f|
+= form_for current_user.enrollments.build(course: course) do |f|
   = f.hidden_field :course_id
   = f.submit 'Zapisz się', class: 'btn btn-primary'

@@ -1,12 +1,12 @@
 .row
   .col-md-3
-    = link_to course_tasks_path(@course), class: 'btn btn-default' do
+    = link_to course_tasks_path(course), class: 'btn btn-default' do
       %i.fa.fa-arrow-left
       Wróć
 
   .col-md-9
-    %h1= @course.name
+    %h1= course.name
     %h2 Utwórz nowe zadanie
-    = form_for [@course, @task] do |f|
+    = form_for [course, task] do |f|
       = render 'fields', f: f
       = f.submit 'Utwórz zadanie', class: 'btn btn-primary'

@@ -1,26 +1,26 @@
 .row
   .col-md-3
     .back
-      = link_to course_tasks_path(@course), class: 'btn btn-default' do
+      = link_to course_tasks_path(course), class: 'btn btn-default' do
         %i.fa.fa-arrow-left
         Wróć do listy zadań
-    - if current_user? @course.teacher
+    - if current_user? course.teacher
       .edit
-        = link_to edit_course_task_path(@course, @task), class: 'btn btn-default' do
+        = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
           %i.fa.fa-edit
           Edytuj
       .solutions
-        = link_to solutions_course_task_path(@course, @task), class: 'btn btn-default' do
+        = link_to solutions_course_task_path(course, task), class: 'btn btn-default' do
           Rozwiązania
       .avg-score
         Przeciętny wynik:
-        = @task.avg_score || '---'
+        = task.avg_score || '---'
     .points
       Punktów do zdobycia:
-      = @task.points
+      = task.points
 
   .col-md-9
-    %h1= @course.name
-    %h2= @task.title
-    .desc= markdown @task.desc
-    = render 'solution' if current_user.enrolled_in? @course
+    %h1= course.name
+    %h2= task.title
+    .desc= markdown task.desc
+    = render 'solution' if current_user.enrolled_in? course

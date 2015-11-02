@@ -1,4 +1,4 @@
 %li
-  = link_to task.title, [@course, task]
-  - if @course.has_student? current_user
+  = link_to task.title, [course, task]
+  - if course.has_student? current_user
     .task-status= task.status_for(current_user)

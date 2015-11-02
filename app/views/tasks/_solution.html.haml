@@ -1,7 +1,7 @@
-- if @solution
-  = link_to 'Moje rozwiązanie', @solution
+- if solution
+  = link_to 'Moje rozwiązanie', solution
 - else
-  = form_for Solution.new(task: @task) do |f|
+  = form_for Solution.new(task: task) do |f|
     = f.hidden_field :task_id
     = f.label :content, 'Rozwiązanie'
     = f.text_area :content, class: 'form-control'

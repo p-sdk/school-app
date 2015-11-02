@@ -1,6 +1,6 @@
 .row
   .col-md-6.col-md-offset-3
     %h1 Rejestracja
-    = form_for @user do |f|
+    = form_for user do |f|
       = render 'fields', f: f
       = f.submit 'Załóż konto', class: 'btn btn-primary'
