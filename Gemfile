@@ -13,7 +13,6 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'redcarpet'
-gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
 
