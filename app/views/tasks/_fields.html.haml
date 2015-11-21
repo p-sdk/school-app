@@ -1,13 +1,5 @@
-= render 'shared/error_messages', object: f.object
+= f.error_notification
 
-.field
-  = f.label :title, 'Tytuł'
-  = f.text_field :title, class: 'form-control'
-
-.field
-  = f.label :desc, 'Opis'
-  = f.text_area :desc, class: 'form-control'
-
-.field
-  = f.label :points, 'Liczba punktów'
-  = f.number_field :points, min: 1, class: 'form-control'
+= f.input :title, label: 'Tytuł'
+= f.input :desc, label: 'Opis'
+= f.input :points, label: 'Liczba punktów', input_html: { min: 1 }

@@ -7,9 +7,9 @@
 
   .col-md-9
     %h1 Edytuj mój profil
-    = form_for user do |f|
+    = simple_form_for user do |f|
       = render 'fields', f: f
-      = f.submit 'Zapisz zmiany', class: 'btn btn-primary'
+      = f.button :submit, 'Zapisz zmiany', class: 'btn-primary'
 
     - unless user.teacher?
       .upgrade

@@ -1,13 +1,5 @@
-= render 'shared/error_messages', object: f.object
+= f.error_notification
 
-.field
-  = f.label :title, 'Tytuł'
-  = f.text_field :title, class: 'form-control'
-
-.field
-  = f.label :content, 'Treść'
-  = f.text_area :content, class: 'form-control'
-
-.field
-  = f.label :attachment, 'Załącznik'
-  = f.file_field :attachment, class: 'form-control'
+= f.input :title, label: 'Tytuł'
+= f.input :content, label: 'Treść'
+= f.input :attachment, label: 'Załącznik'

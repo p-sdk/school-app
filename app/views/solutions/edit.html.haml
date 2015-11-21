@@ -11,9 +11,8 @@
 
   .col-md-9
     = render 'task_and_solution'
-    = form_for solution do |f|
-      = render 'shared/error_messages', object: f.object
-      .field
-        = f.label :earned_points, "Uzyskane punkty (0 - #{task.points})"
-        = f.number_field :earned_points, min: 0, max: task.points, value: 0
-      = f.submit 'Oceń', class: 'btn btn-primary'
+    = simple_form_for solution do |f|
+      = f.error_notification
+      = f.input :earned_points, input_html: { min: 0, max: task.points, value: 0 },
+        label: "Uzyskane punkty (0 - #{task.points})", required: true
+      = f.button :submit, 'Oceń', class: 'btn-primary'

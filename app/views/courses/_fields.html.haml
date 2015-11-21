@@ -1,13 +1,5 @@
-= render 'shared/error_messages', object: f.object
+= f.error_notification
 
-.field
-  = f.label :category_id, 'Kategoria'
-  = f.collection_select :category_id, Category.all, :id, :name
-
-.field
-  = f.label :name, 'Nazwa'
-  = f.text_field :name, class: 'form-control'
-
-.field
-  = f.label :desc, 'Opis'
-  = f.text_area :desc, class: 'form-control'
+= f.association :category, label: 'Kategoria', prompt: 'Wybierz kategorię'
+= f.input :name, label: 'Nazwa'
+= f.input :desc, label: 'Opis'

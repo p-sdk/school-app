@@ -1,5 +1,3 @@
-= render 'shared/error_messages', object: f.object
+= f.error_notification
 
-.field
-  = f.label :name, 'Nazwa'
-  = f.text_field :name, class: 'form-control'
+= f.input :name, label: 'Nazwa'
