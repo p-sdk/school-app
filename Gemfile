@@ -15,6 +15,7 @@ gem 'font-awesome-sass'
 gem 'redcarpet'
 gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
+gem 'simple_form'
 
 group :development, :test do
   gem 'rspec-rails'
