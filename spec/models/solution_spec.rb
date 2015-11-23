@@ -48,7 +48,6 @@ RSpec.describe Solution, type: :model do
 
     it do
       should validate_numericality_of(:earned_points)
-        .only_integer
         .is_greater_than_or_equal_to(0)
         .is_less_than_or_equal_to(task.points)
         # on: :update
