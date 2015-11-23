@@ -4,10 +4,12 @@
 
 $ ->
   description = $ '.solution-description'
-  button = $ '<a id="show-desc" class="btn btn-sm btn-default" href="#">pokaż opis</a>'
-  description.before(button)
-  description.hide()
-  button.on 'click', (e) ->
-    e.preventDefault()
-    button.fadeOut()
-    description.slideDown()
+  if description.length
+    button = $ '<a id="show-desc" class="btn btn-default" href="#"><i class="fa fa-file-text"></i> Pokaż opis</a>'
+    sidebar = $('.back').parent()
+    sidebar.append(button)
+    description.hide()
+    button.on 'click', (e) ->
+      button.toggleClass 'active'
+      description.slideToggle()
+      false
