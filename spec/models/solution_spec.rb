@@ -50,7 +50,7 @@ RSpec.describe Solution, type: :model do
       should validate_numericality_of(:earned_points)
         .is_greater_than_or_equal_to(0)
         .is_less_than_or_equal_to(task.points)
-        # on: :update
+        .on :update
     end
 
     describe 'enrollment and task belong to the same course' do
