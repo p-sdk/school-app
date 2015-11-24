@@ -1,8 +1,7 @@
 .row
   .col-md-3
     = link_to course_task_path(course, task), class: 'btn btn-default' do
-      %i.fa.fa-arrow-left
-      Wróć do zadania
+      = icon 'arrow-left', 'Wróć do zadania'
 
   .col-md-9
     %h1= course.name

@@ -3,21 +3,17 @@
     - if signed_in?
       - if current_user? course.teacher
         = link_to edit_course_path(course), class: 'btn btn-default' do
-          %i.fa.fa-edit
-          Edytuj
+          = icon 'edit', 'Edytuj'
         = link_to students_course_path(course), class: 'btn btn-default' do
-          %i.fa.fa-group
-          Zapisani studenci
+          = icon 'group', 'Zapisani studenci'
       - elsif !current_user.enrolled_in? course
         .enroll= render 'enroll'
 
     - if current_user?(course.teacher) || course.has_student?(current_user)
       = link_to course_lectures_path(course), class: 'btn btn-default' do
-        %i.fa.fa-file-text
-        Wykłady
+        = icon 'file-text', 'Wykłady'
       = link_to course_tasks_path(course), class: 'btn btn-default' do
-        %i.fa.fa-tasks
-        Zadania
+        = icon 'tasks', 'Zadania'
 
   .col-md-9
     %h1= course.name

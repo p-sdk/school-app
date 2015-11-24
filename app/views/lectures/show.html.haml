@@ -2,13 +2,11 @@
   .col-md-3
     .back
       = link_to course_lectures_path(course), class: 'btn btn-default' do
-        %i.fa.fa-arrow-left
-        Wróć do listy wykładów
+        = icon 'arrow-left', 'Wróć do listy wykładów'
     - if current_user? course.teacher
       .edit
         = link_to edit_course_lecture_path(course, lecture), class: 'btn btn-default' do
-          %i.fa.fa-edit
-          Edytuj
+          = icon 'edit', 'Edytuj'
 
   .col-md-9
     %h1= course.name
@@ -16,8 +14,7 @@
     .lecture= markdown lecture.content
     - if lecture.attachment?
       = link_to lecture.attachment.url, target: :_blank do
-        %i.fa.fa-paperclip
-        = lecture.attachment_file_name
+        = icon 'paperclip', lecture.attachment_file_name
         (
         = number_to_human_size(lecture.attachment_file_size)
         )

@@ -2,8 +2,7 @@
   .col-md-3
     .delete
       = link_to user_path(user), method: :delete, class: 'btn btn-default' do
-        %i.fa.fa-trash
-        Usuń
+        = icon 'trash', 'Usuń'
 
   .col-md-9
     %h1 Edytuj mój profil

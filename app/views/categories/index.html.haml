@@ -1,15 +1,13 @@
 .row
   .col-md-3
     = link_to courses_path, class: 'btn btn-default' do
-      %i.fa.fa-arrow-left
-      Wróć do wszystkich kursów
+      = icon 'arrow-left', 'Wróć do wszystkich kursów'
 
   .col-md-9
     %h1 Kategorie
 
     - if current_user && current_user.admin?
       = link_to new_category_path, class: 'btn btn-primary' do
-        %i.fa.fa-plus
-        Dodaj nową kategorię
+        = icon 'plus', 'Dodaj nową kategorię'
 
     %ul= render categories

@@ -1,19 +1,16 @@
 .row
   .col-md-3
     = link_to categories_path, class: 'btn btn-default' do
-      %i.fa.fa-arrow-left
-      Wróć do listy kategorii
+      = icon 'arrow-left', 'Wróć do listy kategorii'
 
   .col-md-9
     %h1= category.name
 
     - if current_user && current_user.admin?
       = link_to edit_category_path(category), class: 'btn btn-default' do
-        %i.fa.fa-edit
-        Edytuj
+        = icon 'edit', 'Edytuj'
 
       = link_to category_path(category), method: :delete, class: 'btn btn-default' do
-        %i.fa.fa-trash
-        Usuń
+        = icon 'trash', 'Usuń'
 
     %ul= render category.courses

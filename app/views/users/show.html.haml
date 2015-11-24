@@ -3,8 +3,7 @@
     - if current_user && current_user.admin?
       .back
         = link_to users_path, class: 'btn btn-default' do
-          %i.fa.fa-arrow-left
-          Wróć do listy użytkowników
+          = icon 'arrow-left', 'Wróć do listy użytkowników'
     .center
       #avatar
         = gravatar_for user
@@ -20,8 +19,6 @@
     - if user.requesting_upgrade? && current_user && current_user.admin?
       %p Ten użytkownik chce uzyskać uprawnienia nauczyciela
       = link_to upgrade_user_path(user), method: :patch, class: 'btn btn-success' do
-        %i.fa.fa-check
-        Zatwierdź
+        = icon 'check', 'Zatwierdź'
       = link_to upgrade_user_path(user), method: :delete, class: 'btn btn-danger' do
-        %i.fa.fa-remove
-        Odrzuć
+        = icon 'remove', 'Odrzuć'

@@ -2,13 +2,11 @@
   .col-md-3
     .back
       = link_to course, class: 'btn btn-default' do
-        %i.fa.fa-arrow-left
-        Wróć do kursu
+        = icon 'arrow-left', 'Wróć do kursu'
     - if current_user? course.teacher
       .add
         = link_to new_course_lecture_path(course), class: 'btn btn-primary' do
-          %i.fa.fa-plus
-          Dodaj wykład
+          = icon 'plus', 'Dodaj wykład'
 
   .col-md-9
     %h1= course.name

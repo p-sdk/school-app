@@ -2,13 +2,11 @@
   .col-md-3
     .back
       = link_to course_tasks_path(course), class: 'btn btn-default' do
-        %i.fa.fa-arrow-left
-        Wróć do listy zadań
+        = icon 'arrow-left', 'Wróć do listy zadań'
     - if current_user? course.teacher
       .edit
         = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
-          %i.fa.fa-edit
-          Edytuj
+          = icon 'edit', 'Edytuj'
       .solutions
         = link_to solutions_course_task_path(course, task), class: 'btn btn-default' do
           Rozwiązania
