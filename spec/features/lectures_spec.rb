@@ -13,10 +13,10 @@ RSpec.feature 'Lectures', type: :feature do
       visit course_lectures_path(course)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_link 'Wróć', href: course_path(course) }
-    it { should have_selector 'h2', text: 'Wykłady' }
     it 'should list course lectures' do
+      should have_selector 'h1', text: course.name
+      should have_selector 'h2', text: 'Wykłady'
+      should have_link 'Wróć', href: course_path(course)
       lectures.each do |lecture|
         expect(page).to have_link lecture.title, href: course_lecture_path(course, lecture)
       end
@@ -40,10 +40,12 @@ RSpec.feature 'Lectures', type: :feature do
       visit course_lecture_path(course, lecture)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_selector 'h2', text: lecture.title }
-    it { should have_link 'Wróć', href: course_lectures_path(course) }
-    it { should have_selector 'div.lecture', text: lecture.content }
+    it 'should display the lecture' do
+      should have_selector 'h1', text: course.name
+      should have_selector 'h2', text: lecture.title
+      should have_link 'Wróć', href: course_lectures_path(course)
+      should have_selector 'div.lecture', text: lecture.content
+    end
 
     context 'for the teacher' do
       before do
@@ -61,9 +63,11 @@ RSpec.feature 'Lectures', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: course.name }
-      it { should have_link 'Wróć', href: course_lectures_path(course) }
-      it { should have_selector 'h2', text: 'Utwórz nowy wykład' }
+      it do
+        should have_selector 'h1', text: course.name
+        should have_link 'Wróć', href: course_lectures_path(course)
+        should have_selector 'h2', text: 'Utwórz nowy wykład'
+      end
     end
 
     describe 'with invalid information' do
@@ -73,8 +77,10 @@ RSpec.feature 'Lectures', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz wykład' }
-        it { should have_selector 'h2', text: 'Utwórz nowy wykład' }
-        it { should have_error_message }
+        it 'should display error message' do
+          should have_selector 'h2', text: 'Utwórz nowy wykład'
+          should have_error_message
+        end
       end
     end
 
@@ -91,8 +97,10 @@ RSpec.feature 'Lectures', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz wykład' }
-        it { should have_selector 'h2', text: valid_lecture.title }
-        it { should have_success_message }
+        it 'should display success message' do
+          should have_selector 'h2', text: valid_lecture.title
+          should have_success_message
+        end
       end
     end
   end
@@ -105,9 +113,11 @@ RSpec.feature 'Lectures', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: course.name }
-      it { should have_selector 'h2', text: 'Edytuj wykład' }
-      it { should have_link 'Wróć', href: course_lecture_path(course, lecture) }
+      it do
+        should have_selector 'h1', text: course.name
+        should have_selector 'h2', text: 'Edytuj wykład'
+        should have_link 'Wróć', href: course_lecture_path(course, lecture)
+      end
     end
 
     context 'with invalid information' do
@@ -115,8 +125,10 @@ RSpec.feature 'Lectures', type: :feature do
         fill_in 'Tytuł', with: ''
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h2', text: 'Edytuj wykład' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h2', text: 'Edytuj wykład'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
@@ -125,9 +137,11 @@ RSpec.feature 'Lectures', type: :feature do
         fill_in 'Treść', with: new_content
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h2', text: lecture.title }
-      it { should have_selector 'div.lecture', text: new_content }
-      it { should have_success_message }
+      it 'should display success message' do
+        should have_selector 'h2', text: lecture.title
+        should have_selector 'div.lecture', text: new_content
+        should have_success_message
+      end
     end
   end
 
@@ -144,8 +158,10 @@ RSpec.feature 'Lectures', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq course_lectures_path(course) }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq course_lectures_path(course)
+        should have_success_message
+      end
     end
   end
 end

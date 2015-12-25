@@ -35,9 +35,11 @@ RSpec.feature 'Users', type: :feature do
     let(:user) { create :user }
     before { visit user_path(user) }
 
-    it { should have_selector 'h1', text: user.name }
-    it { should have_link user.email }
-    it { should have_selector 'div#avatar img.gravatar' }
+    it 'should display the user' do
+      should have_selector 'h1', text: user.name
+      should have_link user.email
+      should have_selector 'div#avatar img.gravatar'
+    end
 
     describe 'teacher' do
       let(:teacher) { create :teacher }
@@ -60,9 +62,11 @@ RSpec.feature 'Users', type: :feature do
           sign_in_as admin
           visit user_path(user)
         end
-        it { should have_link 'Wróć', users_path }
-        it { should have_link 'Zatwierdź' }
-        it { should have_link 'Odrzuć' }
+        it 'should display proper links' do
+          should have_link 'Wróć', users_path
+          should have_link 'Zatwierdź'
+          should have_link 'Odrzuć'
+        end
       end
     end
   end
@@ -81,8 +85,10 @@ RSpec.feature 'Users', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Załóż konto' }
-        it { should have_selector 'h1', text: 'Rejestracja' }
-        it { should have_error_message }
+        it 'should display error message' do
+          should have_selector 'h1', text: 'Rejestracja'
+          should have_error_message
+        end
       end
     end
 
@@ -101,9 +107,11 @@ RSpec.feature 'Users', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Załóż konto' }
-        it { should have_link 'Przeglądaj kursy', href: courses_path }
-        it { should have_success_message }
-        it { should have_link 'Wyloguj' }
+        it 'should display success message' do
+          should have_link 'Przeglądaj kursy', href: courses_path
+          should have_link 'Wyloguj'
+          should have_success_message
+        end
       end
     end
   end
@@ -116,14 +124,18 @@ RSpec.feature 'Users', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Edytuj mój profil' }
-      it { should have_link 'rozszerzenie' }
+      it do
+        should have_selector 'h1', text: 'Edytuj mój profil'
+        should have_link 'rozszerzenie'
+      end
     end
 
     context 'with invalid information' do
       before { click_button 'Zapisz zmiany' }
-      it { should have_selector 'h1', text: 'Edytuj mój profil' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h1', text: 'Edytuj mój profil'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
@@ -137,10 +149,12 @@ RSpec.feature 'Users', type: :feature do
         click_button 'Zapisz zmiany'
       end
 
-      it { should have_selector 'h1', text: new_name }
-      it { should have_selector 'div.email', text: new_email }
-      it { should have_success_message }
-      it { should have_link 'Wyloguj', href: signout_path }
+      it 'should display success message' do
+        should have_selector 'h1', text: new_name
+        should have_selector 'div.email', text: new_email
+        should have_link 'Wyloguj', href: signout_path
+        should have_success_message
+      end
     end
 
     describe 'submitting request to upgrade to teacher account' do
@@ -148,12 +162,14 @@ RSpec.feature 'Users', type: :feature do
       it 'should be waiting for approval' do
         expect(User.requesting_upgrade).to include user
         expect(user.reload).to be_requesting_upgrade
+        should have_success_message
       end
-      it { should have_success_message }
       describe 'edit page' do
         before { visit edit_user_path(user) }
-        it { should_not have_link 'rozszerzenie' }
-        it { should have_content 'czeka na akceptację' }
+        it 'should have proper message' do
+          should_not have_link 'rozszerzenie'
+          should have_content 'czeka na akceptację'
+        end
       end
     end
   end
@@ -171,8 +187,10 @@ RSpec.feature 'Users', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq signup_path }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq signup_path
+        should have_success_message
+      end
     end
   end
 
@@ -186,16 +204,20 @@ RSpec.feature 'Users', type: :feature do
     end
     context 'after approving' do
       before { click_on 'Zatwierdź' }
-      it { should have_success_message }
-      specify { expect(User.requesting_upgrade).not_to include user }
-      specify { expect(user.reload).to be_teacher }
+      it 'should upgrade the user' do
+        expect(User.requesting_upgrade).not_to include user
+        expect(user.reload).to be_teacher
+        should have_success_message
+      end
     end
 
     context 'after dismissing' do
       before { click_on 'Odrzuć' }
-      it { should have_success_message }
-      specify { expect(User.requesting_upgrade).not_to include user }
-      specify { expect(user.reload).not_to be_teacher }
+      it 'should not upgrade the user' do
+        expect(User.requesting_upgrade).not_to include user
+        expect(user.reload).not_to be_teacher
+        should have_success_message
+      end
     end
   end
 end

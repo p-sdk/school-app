@@ -13,32 +13,35 @@ RSpec.feature 'Authentication', type: :feature do
     context 'with invalid information' do
       before { click_button 'Zaloguj' }
 
-      it { should have_selector 'h1', text: 'Logowanie' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h1', text: 'Logowanie'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
       let!(:user) { create :user }
       before { sign_in_as user }
 
-      it 'should redirect to root path' do
+      it 'should be signed in' do
         expect(current_path).to eq root_path
+        should have_link user.name, href: '#'
+        should have_link 'Mój profil', href: user_path(user)
+        should have_link 'Ustawienia', href: edit_user_path(user)
+        should have_link 'Wyloguj', href: signout_path
+        should_not have_link 'Zaloguj', href: signin_path
       end
-
-      it { should have_link user.name, href: '#' }
-      it { should have_link 'Mój profil', href: user_path(user) }
-      it { should have_link 'Ustawienia', href: edit_user_path(user) }
-      it { should have_link 'Wyloguj', href: signout_path }
-      it { should_not have_link 'Zaloguj', href: signin_path }
 
       describe 'followed by signout' do
         before { click_link 'Wyloguj' }
 
-        it { should have_link 'Zaloguj', href: signin_path }
-        it { should_not have_link user.name }
-        it { should_not have_link 'Mój profil' }
-        it { should_not have_link 'Ustawienia' }
-        it { should_not have_link 'Wyloguj' }
+        it 'should be signed out' do
+          should have_link 'Zaloguj', href: signin_path
+          should_not have_link user.name
+          should_not have_link 'Mój profil'
+          should_not have_link 'Ustawienia'
+          should_not have_link 'Wyloguj'
+        end
       end
     end
   end

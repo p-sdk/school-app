@@ -12,24 +12,26 @@ RSpec.feature 'Solutions', type: :feature do
       sign_in_as course.teacher
       visit solution_path(solution)
     end
-    it { should have_selector 'h1', text: task.title }
-    it { should have_selector 'h3', text: 'Opis' }
-    it { should have_selector 'div.desc', text: task.desc }
-    it { should have_selector 'h3', text: 'Rozwiązanie' }
-    it { should have_selector 'div.solution', text: solution.content }
-
-    it { should have_content 'Uzyskane punkty' }
-    it { should have_link 'Wróć do listy rozwiązań', href: solutions_course_task_path(course, task) }
-
-    it { should have_link 'Usuń', href: solution_path(solution) }
+    it 'should display the solution' do
+      should have_selector 'h1', text: task.title
+      should have_selector 'h3', text: 'Opis'
+      should have_selector 'div.desc', text: task.desc
+      should have_selector 'h3', text: 'Rozwiązanie'
+      should have_selector 'div.solution', text: solution.content
+      should have_content 'Uzyskane punkty'
+      should have_link 'Wróć do listy rozwiązań', href: solutions_course_task_path(course, task)
+      should have_link 'Usuń', href: solution_path(solution)
+    end
 
     context 'when signed in as student' do
       before do
         sign_in_as enrollment.student
         visit solution_path(solution)
       end
-      it { should have_link 'Wróć do listy zadań', href: course_tasks_path(course) }
-      it { should_not have_link 'Usuń' }
+      it 'should have proper links' do
+        should have_link 'Wróć do listy zadań', href: course_tasks_path(course)
+        should_not have_link 'Usuń'
+      end
     end
 
     context 'when solution is not graded' do
@@ -85,42 +87,30 @@ RSpec.feature 'Solutions', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: task.title }
-      it { should have_link 'Wróć', href: solutions_course_task_path(course, task) }
-      it { should have_selector 'h3', text: 'Opis' }
-      it { should have_selector 'div.desc', text: task.desc }
-      it { should have_selector 'h3', text: 'Rozwiązanie' }
-      it { should have_selector 'div.solution', text: solution.content }
-
-      it { should have_content 'Uzyskane punkty' }
-      it { should have_content "(0 - #{task.points})" }
-
-      it { should have_link 'Usuń', href: solution_path(solution) }
+      it 'should display the solution' do
+        should have_selector 'h1', text: task.title
+        should have_link 'Wróć', href: solutions_course_task_path(course, task)
+        should have_selector 'h3', text: 'Opis'
+        should have_selector 'div.desc', text: task.desc
+        should have_selector 'h3', text: 'Rozwiązanie'
+        should have_selector 'div.solution', text: solution.content
+        should have_content 'Uzyskane punkty'
+        should have_content "(0 - #{task.points})"
+        should have_link 'Usuń', href: solution_path(solution)
+      end
     end
 
     context 'with invalid information' do
-      describe '(too many points)' do
-        before do
-          fill_in 'Uzyskane punkty', with: 2 * task.points
-          click_button 'Oceń'
-        end
-        it { should have_error_message }
-      end
-
-      describe '(text instead of number)' do
-        before do
-          fill_in 'Uzyskane punkty', with: 'abc'
-          click_button 'Oceń'
-        end
-        it { should have_error_message }
-      end
-
-      describe '(empty)' do
-        before do
-          fill_in 'Uzyskane punkty', with: ''
-          click_button 'Oceń'
-        end
-        it { should have_error_message }
+      it 'should display error message' do
+        fill_in 'Uzyskane punkty', with: 2 * task.points
+        click_button 'Oceń'
+        should have_error_message
+        fill_in 'Uzyskane punkty', with: 'abc'
+        click_button 'Oceń'
+        should have_error_message
+        fill_in 'Uzyskane punkty', with: ''
+        click_button 'Oceń'
+        should have_error_message
       end
     end
 
@@ -129,9 +119,11 @@ RSpec.feature 'Solutions', type: :feature do
         fill_in 'Uzyskane punkty', with: rand(0..task.points)
         click_button 'Oceń'
       end
-      it { should have_selector 'h3', text: 'Uzyskane punkty' }
-      it { should have_selector 'div.points', text: "#{solution.earned_points} / #{solution.task.points}" }
-      it { should have_success_message }
+      it 'should display success message' do
+        should have_selector 'h3', text: 'Uzyskane punkty'
+        should have_selector 'div.points', text: "#{solution.earned_points} / #{solution.task.points}"
+        should have_success_message
+      end
     end
   end
 
@@ -147,8 +139,10 @@ RSpec.feature 'Solutions', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq solutions_course_task_path(course, task) }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq solutions_course_task_path(course, task)
+        should have_success_message
+      end
     end
   end
 end

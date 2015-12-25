@@ -13,11 +13,13 @@ RSpec.feature 'Categories', type: :feature do
       visit categories_path
     end
 
-    it { should have_link 'Wróć', href: courses_path }
-    it { should have_content "#{cat1.name} ( #{cat1.courses.size} )" }
-    it { should have_content "#{cat2.name} ( #{cat2.courses.size} )" }
-    it { should have_link cat1.name, href: category_path(cat1) }
-    it { should have_link cat2.name, href: category_path(cat2) }
+    it 'should display all categories' do
+      should have_link 'Wróć', href: courses_path
+      should have_content "#{cat1.name} ( #{cat1.courses.size} )"
+      should have_content "#{cat2.name} ( #{cat2.courses.size} )"
+      should have_link cat1.name, href: category_path(cat1)
+      should have_link cat2.name, href: category_path(cat2)
+    end
 
     context 'for admin' do
       before do
@@ -35,9 +37,9 @@ RSpec.feature 'Categories', type: :feature do
       visit category_path(category)
     end
 
-    it { should have_selector 'h1', text: category.name }
-    it { should have_link 'Wróć', href: categories_path }
     it 'should have link to courses from the category' do
+      should have_link 'Wróć', href: categories_path
+      should have_selector 'h1', text: category.name
       category.courses.each do |course|
         expect(page).to have_link course.name, href: course_path(course)
       end
@@ -48,8 +50,10 @@ RSpec.feature 'Categories', type: :feature do
         sign_in_as admin
         visit category_path(category)
       end
-      it { should have_link 'Edytuj', href: edit_category_path(category) }
-      it { should have_link 'Usuń', href: category_path(category) }
+      it 'should have proper links' do
+        should have_link 'Edytuj', href: edit_category_path(category)
+        should have_link 'Usuń', href: category_path(category)
+      end
     end
   end
 
@@ -60,8 +64,10 @@ RSpec.feature 'Categories', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Utwórz nową kategorię' }
-      it { should have_link 'Wróć', href: categories_path }
+      it do
+        should have_selector 'h1', text: 'Utwórz nową kategorię'
+        should have_link 'Wróć', href: categories_path
+      end
     end
 
     context 'with invalid information' do
@@ -71,8 +77,10 @@ RSpec.feature 'Categories', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz kategorię' }
-        it { should have_selector 'h1', text: 'Utwórz nową kategorię' }
-        it { should have_error_message }
+        it 'should display error message' do
+          should have_selector 'h1', text: 'Utwórz nową kategorię'
+          should have_error_message
+        end
       end
     end
 
@@ -88,8 +96,10 @@ RSpec.feature 'Categories', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz kategorię' }
-        it { should have_selector 'h1', text: valid_category.name }
-        it { should have_success_message }
+        it 'should display success message' do
+          should have_selector 'h1', text: valid_category.name
+          should have_success_message
+        end
       end
     end
   end
@@ -102,8 +112,10 @@ RSpec.feature 'Categories', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Edytuj kategorię' }
-      it { should have_link 'Wróć', href: category_path(category) }
+      it do
+        should have_selector 'h1', text: 'Edytuj kategorię'
+        should have_link 'Wróć', href: category_path(category)
+      end
     end
 
     context 'with invalid information' do
@@ -111,8 +123,10 @@ RSpec.feature 'Categories', type: :feature do
         fill_in 'Nazwa', with: ''
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h1', text: 'Edytuj kategorię' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h1', text: 'Edytuj kategorię'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
@@ -122,8 +136,10 @@ RSpec.feature 'Categories', type: :feature do
         click_button 'Zapisz zmiany'
       end
 
-      it { should have_selector 'h1', text: new_name }
-      it { should have_success_message }
+      it 'should display success message' do
+        should have_selector 'h1', text: new_name
+        should have_success_message
+      end
     end
   end
 
@@ -140,8 +156,10 @@ RSpec.feature 'Categories', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq categories_path }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq categories_path
+        should have_success_message
+      end
     end
   end
 end

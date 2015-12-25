@@ -25,8 +25,8 @@ RSpec.feature 'Pages', type: :feature do
             visit root_path
           end
 
-          it { should have_selector 'h2', text: 'Kursy na które jesteś zapisany' }
           it 'should list all courses that the student has enrolled in' do
+            should have_selector 'h2', text: 'Kursy na które jesteś zapisany'
             courses.each do |course|
               expect(page).to have_link course.name, href: course_path(course)
             end
@@ -48,8 +48,8 @@ RSpec.feature 'Pages', type: :feature do
             visit root_path
           end
 
-          it { should have_selector 'h2', text: 'Kursy które prowadzisz' }
           it 'should show all owned courses' do
+            should have_selector 'h2', text: 'Kursy które prowadzisz'
             teacher.teacher_courses.each do |course|
               expect(page).to have_link course.name, href: course_path(course)
             end
@@ -64,8 +64,10 @@ RSpec.feature 'Pages', type: :feature do
           visit root_path
         end
 
-        it { should have_link 'Zarządzaj kategoriami', href: categories_path }
-        it { should have_link 'Zarządzaj użytkownikami', href: users_path }
+        it 'should have proper links' do
+          should have_link 'Zarządzaj kategoriami', href: categories_path
+          should have_link 'Zarządzaj użytkownikami', href: users_path
+        end
       end
     end
   end

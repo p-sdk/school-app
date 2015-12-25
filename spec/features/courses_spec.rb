@@ -9,9 +9,9 @@ RSpec.feature 'Courses', type: :feature do
       visit courses_path
     end
 
-    it { should have_selector 'h1', text: 'Kursy' }
-    it { should have_link 'Przeglądaj wg kategorii', href: categories_path }
     it 'should display all courses' do
+      should have_selector 'h1', text: 'Kursy'
+      should have_link 'Przeglądaj wg kategorii', href: categories_path
       Course.all.each do |course|
         expect(page).to have_link course.name, href: course_path(course)
       end
@@ -22,16 +22,20 @@ RSpec.feature 'Courses', type: :feature do
     let(:course) { create :course }
     before { visit course_path(course) }
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_selector 'div.teacher i', text: course.teacher.name }
-    it { should have_selector 'div.desc', text: course.desc }
+    it 'should display the course' do
+      should have_selector 'h1', text: course.name
+      should have_selector 'div.teacher i', text: course.teacher.name
+      should have_selector 'div.desc', text: course.desc
+    end
 
     context 'when not signed in' do
-      it { should_not have_button 'Zapisz się' }
-      it { should_not have_link 'Edytuj', href: edit_course_path(course) }
-      it { should_not have_link 'Zapisani studenci', href: students_course_path(course) }
-      it { should_not have_link 'Wykłady', href: course_lectures_path(course) }
-      it { should_not have_link 'Zadania', href: course_tasks_path(course) }
+      it 'should have proper links' do
+        should_not have_button 'Zapisz się'
+        should_not have_link 'Edytuj', href: edit_course_path(course)
+        should_not have_link 'Zapisani studenci', href: students_course_path(course)
+        should_not have_link 'Wykłady', href: course_lectures_path(course)
+        should_not have_link 'Zadania', href: course_tasks_path(course)
+      end
     end
 
     context 'for the teacher' do
@@ -40,11 +44,13 @@ RSpec.feature 'Courses', type: :feature do
         visit course_path(course)
       end
 
-      it { should_not have_button 'Zapisz się' }
-      it { should have_link 'Edytuj', href: edit_course_path(course) }
-      it { should have_link 'Zapisani studenci', href: students_course_path(course) }
-      it { should have_link 'Wykłady', href: course_lectures_path(course) }
-      it { should have_link 'Zadania', href: course_tasks_path(course) }
+      it 'should have proper links' do
+        should_not have_button 'Zapisz się'
+        should have_link 'Edytuj', href: edit_course_path(course)
+        should have_link 'Zapisani studenci', href: students_course_path(course)
+        should have_link 'Wykłady', href: course_lectures_path(course)
+        should have_link 'Zadania', href: course_tasks_path(course)
+      end
     end
 
     context 'for students' do
@@ -62,17 +68,21 @@ RSpec.feature 'Courses', type: :feature do
           visit course_path(course)
         end
 
-        it { should_not have_button 'Zapisz się' }
-        it { should_not have_link 'Zapisani studenci', href: students_course_path(course) }
-        it { should have_link 'Wykłady', href: course_lectures_path(course) }
-        it { should have_link 'Zadania', href: course_tasks_path(course) }
+        it 'should have proper links' do
+          should_not have_button 'Zapisz się'
+          should_not have_link 'Zapisani studenci', href: students_course_path(course)
+          should have_link 'Wykłady', href: course_lectures_path(course)
+          should have_link 'Zadania', href: course_tasks_path(course)
+        end
       end
 
       context 'when not enrolled' do
-        it { should have_button 'Zapisz się' }
-        it { should_not have_link 'Zapisani studenci', href: students_course_path(course) }
-        it { should_not have_link 'Wykłady', href: course_lectures_path(course) }
-        it { should_not have_link 'Zadania', href: course_tasks_path(course) }
+        it 'should have proper links' do
+          should have_button 'Zapisz się'
+          should_not have_link 'Zapisani studenci', href: students_course_path(course)
+          should_not have_link 'Wykłady', href: course_lectures_path(course)
+          should_not have_link 'Zadania', href: course_tasks_path(course)
+        end
 
         describe 'enrollment' do
           specify do
@@ -102,8 +112,10 @@ RSpec.feature 'Courses', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Utwórz nowy kurs' }
-      it { should have_link 'Wróć', href: root_path }
+      it do
+        should have_selector 'h1', text: 'Utwórz nowy kurs'
+        should have_link 'Wróć', href: root_path
+      end
     end
 
     context 'with invalid information' do
@@ -113,8 +125,10 @@ RSpec.feature 'Courses', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz kurs' }
-        it { should have_selector 'h1', text: 'Utwórz nowy kurs' }
-        it { should have_error_message }
+        it 'should display error message' do
+          should have_selector 'h1', text: 'Utwórz nowy kurs'
+          should have_error_message
+        end
       end
     end
 
@@ -134,8 +148,10 @@ RSpec.feature 'Courses', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz kurs' }
-        it { should have_selector 'h1', text: valid_course.name }
-        it { should have_success_message }
+        it 'should display success message' do
+          should have_selector 'h1', text: valid_course.name
+          should have_success_message
+        end
       end
     end
   end
@@ -148,8 +164,10 @@ RSpec.feature 'Courses', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Edytuj kurs' }
-      it { should have_link 'Wróć', href: course_path(course) }
+      it do
+        should have_selector 'h1', text: 'Edytuj kurs'
+        should have_link 'Wróć', href: course_path(course)
+      end
     end
 
     context 'with invalid information' do
@@ -157,8 +175,10 @@ RSpec.feature 'Courses', type: :feature do
         fill_in 'Nazwa', with: ''
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h1', text: 'Edytuj kurs' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h1', text: 'Edytuj kurs'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
@@ -168,9 +188,11 @@ RSpec.feature 'Courses', type: :feature do
         click_button 'Zapisz zmiany'
       end
 
-      it { should have_selector 'h1', text: course.name }
-      it { should have_selector 'div.desc', text: new_desc }
-      it { should have_success_message }
+      it 'should display success message' do
+        should have_selector 'h1', text: course.name
+        should have_selector 'div.desc', text: new_desc
+        should have_success_message
+      end
     end
   end
 
@@ -187,8 +209,10 @@ RSpec.feature 'Courses', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq courses_path }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq courses_path
+        should have_success_message
+      end
     end
   end
 
@@ -201,10 +225,10 @@ RSpec.feature 'Courses', type: :feature do
       visit students_course_path(course)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_link 'Wróć', href: course_path(course) }
-    it { should have_selector 'h2', text: 'Zapisani studenci' }
     it 'should list all students enrolled to the course' do
+      should have_selector 'h1', text: course.name
+      should have_link 'Wróć', href: course_path(course)
+      should have_selector 'h2', text: 'Zapisani studenci'
       students.each do |student|
         expect(page).to have_link student.name, href: user_path(student)
       end

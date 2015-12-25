@@ -10,9 +10,11 @@ RSpec.feature 'Tasks', type: :feature do
       visit course_tasks_path(course)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_link 'Wróć', href: course_path(course) }
-    it { should have_selector 'h2', text: 'Zadania' }
+    it 'should display a header' do
+      should have_selector 'h1', text: course.name
+      should have_link 'Wróć', href: course_path(course)
+      should have_selector 'h2', text: 'Zadania'
+    end
 
     context 'when there are some tasks' do
       let!(:tasks) { create_list :task, 3, course: course }
@@ -33,24 +35,28 @@ RSpec.feature 'Tasks', type: :feature do
       let(:enrollment) { create :enrollment, course: course }
       before { sign_in_as enrollment.student }
 
-      describe 'show task statuses' do
+      describe 'task statuses' do
         before do
           create :solution, enrollment: enrollment, task: tasks[0],
                             earned_points: rand(1..(tasks[0].points))
           create :solution, enrollment: enrollment, task: tasks[1]
           visit course_tasks_path(course)
         end
-        it { should have_content "#{tasks[0].title} ocenione" }
-        it { should have_content "#{tasks[1].title} czeka na sprawdzenie" }
-        it { should have_content "#{tasks[2].title} nierozwiązane" }
+        it 'should be properly displayed' do
+          should have_content "#{tasks[0].title} ocenione"
+          should have_content "#{tasks[1].title} czeka na sprawdzenie"
+          should have_content "#{tasks[2].title} nierozwiązane"
+        end
       end
 
-      describe 'show course grade' do
+      describe 'course grade' do
         let(:course_max_points) { tasks.map(&:points).sum }
         before { visit course_tasks_path(course) }
 
-        it { should have_content 'Twój wynik' }
-        it { should have_selector '.max-points', text: course_max_points }
+        it 'should display max points' do
+          should have_content 'Twój wynik'
+          should have_selector '.max-points', text: course_max_points
+        end
 
         context 'with no tasks solved' do
           it { should have_selector '.earned-points', text: 0 }
@@ -79,19 +85,25 @@ RSpec.feature 'Tasks', type: :feature do
       visit course_task_path(course, task)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_selector 'h2', text: task.title }
-    it { should have_selector 'div.points', text: "Punktów do zdobycia: #{task.points}" }
-    it { should have_selector 'div.desc', text: task.desc }
-    it { should have_link 'Wróć', href: course_tasks_path(course) }
+    it 'should display the task' do
+      should have_selector 'h1', text: course.name
+      should have_selector 'h2', text: task.title
+      should have_selector 'div.points', text: "Punktów do zdobycia: #{task.points}"
+      should have_selector 'div.desc', text: task.desc
+      should have_link 'Wróć', href: course_tasks_path(course)
+    end
 
     context 'for enrolled student' do
-      it { should_not have_link 'Edytuj' }
-      it { should_not have_link 'Rozwiązania' }
+      it "should not display teacher's links" do
+        should_not have_link 'Edytuj'
+        should_not have_link 'Rozwiązania'
+      end
 
       context 'with unsolved task' do
-        it { should have_selector 'form.new_solution' }
-        it { should_not have_link 'Moje rozwiązanie' }
+        it 'should display a solution form' do
+          should have_selector 'form.new_solution'
+          should_not have_link 'Moje rozwiązanie'
+        end
       end
 
       context 'with solved task' do
@@ -99,8 +111,10 @@ RSpec.feature 'Tasks', type: :feature do
           create :solution, enrollment: enrollment, task: task
           visit course_task_path(course, task)
         end
-        it { should_not have_selector 'form.new_solution' }
-        it { should have_link 'Moje rozwiązanie' }
+        it 'should display link to submitted solution' do
+          should_not have_selector 'form.new_solution'
+          should have_link 'Moje rozwiązanie'
+        end
       end
     end
 
@@ -110,12 +124,14 @@ RSpec.feature 'Tasks', type: :feature do
         visit course_task_path(course, task)
       end
 
-      it { should have_link 'Edytuj', href: edit_course_task_path(course, task) }
-      it { should have_link 'Rozwiązania', href: solutions_course_task_path(course, task) }
-      it { should_not have_selector 'form.new_solution' }
-      it { should_not have_link 'Moje rozwiązanie' }
+      it "should display teacher's links" do
+        should have_link 'Edytuj', href: edit_course_task_path(course, task)
+        should have_link 'Rozwiązania', href: solutions_course_task_path(course, task)
+        should_not have_selector 'form.new_solution'
+        should_not have_link 'Moje rozwiązanie'
+      end
 
-      describe 'show average score' do
+      describe 'average score' do
         let(:enrollments) { create_list :enrollment, 5, course: task.course }
         let(:solutions) do
           enrollments.map { |e| create :graded_solution, task: task, enrollment: e }
@@ -134,9 +150,11 @@ RSpec.feature 'Tasks', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: course.name }
-      it { should have_link 'Wróć', href: course_tasks_path(course) }
-      it { should have_selector 'h2', text: 'Utwórz nowe zadanie' }
+      it do
+        should have_selector 'h1', text: course.name
+        should have_link 'Wróć', href: course_tasks_path(course)
+        should have_selector 'h2', text: 'Utwórz nowe zadanie'
+      end
     end
 
     describe 'with invalid information' do
@@ -146,8 +164,10 @@ RSpec.feature 'Tasks', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz zadanie' }
-        it { should have_selector 'h2', text: 'Utwórz nowe zadanie' }
-        it { should have_error_message }
+        it 'should display error message' do
+          should have_selector 'h2', text: 'Utwórz nowe zadanie'
+          should have_error_message
+        end
       end
     end
 
@@ -165,8 +185,10 @@ RSpec.feature 'Tasks', type: :feature do
 
       describe 'after submission' do
         before { click_button 'Utwórz zadanie' }
-        it { should have_selector 'h2', text: valid_task.title }
-        it { should have_success_message }
+        it 'should display success message' do
+          should have_selector 'h2', text: valid_task.title
+          should have_success_message
+        end
       end
     end
   end
@@ -179,9 +201,11 @@ RSpec.feature 'Tasks', type: :feature do
     end
 
     describe 'page' do
-      it { should have_selector 'h1', text: course.name }
-      it { should have_link 'Wróć', href: course_task_path(course, task) }
-      it { should have_selector 'h2', text: 'Edytuj zadanie' }
+      it do
+        should have_selector 'h1', text: course.name
+        should have_link 'Wróć', href: course_task_path(course, task)
+        should have_selector 'h2', text: 'Edytuj zadanie'
+      end
     end
 
     context 'with invalid information' do
@@ -189,8 +213,10 @@ RSpec.feature 'Tasks', type: :feature do
         fill_in 'Tytuł', with: ''
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h2', text: 'Edytuj zadanie' }
-      it { should have_error_message }
+      it 'should display error message' do
+        should have_selector 'h2', text: 'Edytuj zadanie'
+        should have_error_message
+      end
     end
 
     context 'with valid information' do
@@ -201,10 +227,12 @@ RSpec.feature 'Tasks', type: :feature do
         fill_in 'Liczba punktów', with: new_points
         click_button 'Zapisz zmiany'
       end
-      it { should have_selector 'h2', text: task.title }
-      it { should have_selector 'div.points', text: new_points }
-      it { should have_selector 'div.desc', text: new_desc }
-      it { should have_success_message }
+      it 'should display success message' do
+        should have_selector 'h2', text: task.title
+        should have_selector 'div.points', text: new_points
+        should have_selector 'div.desc', text: new_desc
+        should have_success_message
+      end
     end
   end
 
@@ -221,8 +249,10 @@ RSpec.feature 'Tasks', type: :feature do
 
     context 'after deleting' do
       before { click_link 'Usuń' }
-      it { expect(current_path).to eq course_tasks_path(course) }
-      it { should have_success_message }
+      it 'should display success message' do
+        expect(current_path).to eq course_tasks_path(course)
+        should have_success_message
+      end
     end
   end
 
@@ -234,9 +264,11 @@ RSpec.feature 'Tasks', type: :feature do
       visit solutions_course_task_path(course, task)
     end
 
-    it { should have_selector 'h1', text: course.name }
-    it { should have_selector 'h2', text: task.title }
-    it { should have_link 'Wróć', href: course_task_path(course, task) }
+    it 'should display a header' do
+      should have_selector 'h1', text: course.name
+      should have_selector 'h2', text: task.title
+      should have_link 'Wróć', href: course_task_path(course, task)
+    end
 
     it { should have_selector 'h3', text: 'Rozwiązania oczekujące na sprawdzenie' }
     describe 'list ungraded solutions' do
