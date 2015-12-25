@@ -3,5 +3,5 @@
 - else
   = simple_form_for Solution.new(task: task) do |f|
     = f.input :task_id, as: :hidden
-    = f.input :content, label: 'Rozwiązanie'
+    = f.input :content, label: 'Rozwiązanie', autofocus: true
     = f.button :submit, 'Wyślij', class: 'btn-primary'

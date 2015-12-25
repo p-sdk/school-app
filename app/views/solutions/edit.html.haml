@@ -12,5 +12,5 @@
     = simple_form_for solution do |f|
       = f.error_notification
       = f.input :earned_points, input_html: { min: 0, max: task.points, value: 0 },
-        label: "Uzyskane punkty (0 - #{task.points})", required: true
+        label: "Uzyskane punkty (0 - #{task.points})", required: true, autofocus: true
       = f.button :submit, 'Oceń', class: 'btn-primary'

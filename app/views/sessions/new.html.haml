@@ -2,7 +2,7 @@
   .col-md-6.col-md-offset-3
     %h1 Logowanie
     = simple_form_for :session, url: sessions_path do |f|
-      = f.input :email
+      = f.input :email, autofocus: true
       = f.input :password, label: 'Hasło'
       = f.button :submit, 'Zaloguj', class: 'btn-primary'
 
