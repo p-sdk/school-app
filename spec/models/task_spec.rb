@@ -81,6 +81,25 @@ RSpec.describe Task, type: :model do
     end
   end
 
+  describe '#can_be_solved_by?' do
+    context 'when student is not enrolled in task course' do
+      let(:other_student) { create :user }
+      specify { expect(task.can_be_solved_by?(other_student)).to be false }
+    end
+
+    context 'when student is enrolled in task course' do
+      before { enrollment }
+      context 'when student has not solved the task' do
+        specify { expect(task.can_be_solved_by?(student)).to be true }
+      end
+
+      context 'when student has solved the task' do
+        before { create :solution, enrollment: enrollment, task: task }
+        specify { expect(task.can_be_solved_by?(student)).to be false }
+      end
+    end
+  end
+
   describe '#graded_for?' do
     let(:solution) { create :solution, enrollment: enrollment, task: task }
 

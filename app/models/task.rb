@@ -32,7 +32,7 @@ class Task < ActiveRecord::Base
             numericality: { greater_than: 0, only_integer: true }
 
   def solve(content:, student:)
-    return if solved_by? student
+    return unless can_be_solved_by? student
     s = solutions.build content: content, enrollment: enrollment(student)
     s.save
   end
@@ -41,6 +41,10 @@ class Task < ActiveRecord::Base
     solutions.find_by enrollment: enrollment(student)
   end
   alias_method :solved_by?, :solution_by
+
+  def can_be_solved_by?(student)
+    course.has_student?(student) && !solved_by?(student)
+  end
 
   def graded_for?(student)
     solution_by(student).try :graded?
