@@ -2,8 +2,8 @@ class CategoriesController < ApplicationController
   expose(:categories)
   expose(:category, attributes: :category_params)
 
-  before_action :require_sign_in, except: [:index, :show]
-  before_action :require_admin, except: [:index, :show]
+  before_action :require_sign_in, except: %i(index show)
+  before_action :require_admin, except: %i(index show)
 
   def create
     if category.save

@@ -2,8 +2,8 @@ class CoursesController < ApplicationController
   expose(:courses) { current_user.teacher_courses }
   expose(:course, attributes: :course_params)
 
-  before_action :require_sign_in, except: [:index, :show]
-  before_action :require_teacher, only: [:new, :create]
+  before_action :require_sign_in, except: %i(index show)
+  before_action :require_teacher, only: %i(new create)
 
   def index
     self.courses = Course.all
@@ -40,6 +40,6 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:name, :desc, :category_id)
+    params.require(:course).permit(%i(name desc category_id))
   end
 end

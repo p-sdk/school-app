@@ -4,8 +4,8 @@ class LecturesController < ApplicationController
   expose(:lecture, attributes: :lecture_params)
 
   before_action :require_sign_in
-  before_action :require_correct_user, only: [:index, :show]
-  before_action :require_correct_teacher, only: [:new, :edit, :create, :update, :destroy]
+  before_action :require_correct_user, only: %i(index show)
+  before_action :require_correct_teacher, only: %i(new edit create update destroy)
 
   def create
     if lecture.save
@@ -34,7 +34,7 @@ class LecturesController < ApplicationController
   private
 
   def lecture_params
-    params.require(:lecture).permit(:title, :content, :attachment)
+    params.require(:lecture).permit(%i(title content attachment))
   end
 
   def require_correct_user

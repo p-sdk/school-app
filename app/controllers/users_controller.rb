@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   expose(:students) { User.students }
   expose(:user, attributes: :user_params)
 
-  before_action :require_non_signed_in_user, only: [:new, :create]
-  before_action :require_sign_in, only: [:index, :edit, :update, :destroy]
-  before_action :require_correct_user, only: [:edit, :update, :destroy]
-  before_action :require_admin, only: [:index]
+  before_action :require_non_signed_in_user, only: %i(new create)
+  before_action :require_sign_in, only: %i(index edit update destroy)
+  before_action :require_correct_user, only: %i(edit update destroy)
+  before_action :require_admin, only: :index
 
   def create
     if user.save
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(%i(name email password password_confirmation))
   end
 
   def require_correct_user

@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def requesting_upgrade?
-    teacher == nil
+    teacher.nil?
   end
 
   def upgrade

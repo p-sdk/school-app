@@ -40,14 +40,17 @@ class Task < ActiveRecord::Base
   def solution_by(student)
     solutions.find_by enrollment: enrollment(student)
   end
-  alias_method :solved_by?, :solution_by
+
+  def solved_by?(student)
+    solution_by(student).present?
+  end
 
   def can_be_solved_by?(student)
     course.has_student?(student) && !solved_by?(student)
   end
 
   def graded_for?(student)
-    solution_by(student).try :graded?
+    solution_by(student)&.graded?
   end
 
   def status_for(student)
@@ -57,7 +60,7 @@ class Task < ActiveRecord::Base
   end
 
   def earned_points_by(student)
-    solution_by(student).try :earned_points
+    solution_by(student)&.earned_points
   end
 
   def avg_score

@@ -20,6 +20,7 @@
 class Solution < ActiveRecord::Base
   belongs_to :enrollment, required: true
   belongs_to :task, required: true
+  delegate :student, to: :enrollment
 
   scope :graded, -> { where.not(earned_points: nil) }
   scope :ungraded, -> { where(earned_points: nil) }
@@ -42,14 +43,10 @@ class Solution < ActiveRecord::Base
     !earned_points.nil?
   end
 
-  def student
-    enrollment.student
-  end
-
   private
 
   def check_course
-    return if enrollment.try(:course) == task.try(:course)
+    return if enrollment&.course == task&.course
     errors[:base] << 'This solution is invalid'
   end
 end

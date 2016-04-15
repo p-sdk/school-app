@@ -2,11 +2,11 @@ class SolutionsController < ApplicationController
   expose(:solution, attributes: :solution_params)
   expose(:task) { solution.task }
 
-  before_action :set_create_params, only: [:create]
+  before_action :set_create_params, only: :create
   before_action :require_sign_in
-  before_action :require_correct_user, only: [:show]
-  before_action :require_correct_teacher, only: [:edit, :update, :destroy]
-  before_action :require_correct_student, only: [:create]
+  before_action :require_correct_user, only: :show
+  before_action :require_correct_teacher, only: %i(edit update destroy)
+  before_action :require_correct_student, only: :create
 
   def create
     if @task.solve content: @content, student: current_user

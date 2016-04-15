@@ -7,8 +7,8 @@ class TasksController < ApplicationController
   expose(:graded_solutions) { task.solutions.graded }
 
   before_action :require_sign_in
-  before_action :require_correct_user, only: [:index, :show]
-  before_action :require_correct_teacher, only: [:new, :edit, :create, :update, :destroy, :solutions]
+  before_action :require_correct_user, only: %i(index show)
+  before_action :require_correct_teacher, only: %i(new edit create update destroy solutions)
 
   def create
     if task.save
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :desc, :points)
+    params.require(:task).permit(%i(title desc points))
   end
 
   def require_correct_user

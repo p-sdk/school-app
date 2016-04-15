@@ -1,6 +1,6 @@
 class UpgradesController < ApplicationController
   before_action :require_sign_in
-  before_action :require_admin, only: [:update, :destroy]
+  before_action :require_admin, only: %i(update destroy)
 
   expose(:user)
 
