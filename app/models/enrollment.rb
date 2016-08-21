@@ -19,5 +19,5 @@ class Enrollment < ActiveRecord::Base
   belongs_to :student, class_name: 'User', required: true
   belongs_to :course, required: true
 
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
 end

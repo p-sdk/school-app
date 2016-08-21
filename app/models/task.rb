@@ -17,7 +17,7 @@
 
 class Task < ActiveRecord::Base
   belongs_to :course, required: true
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
 
   validates :title,
             presence: true,

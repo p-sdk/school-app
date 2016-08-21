@@ -12,7 +12,7 @@ RSpec.describe Category, type: :model do
   subject(:category) { create :category }
 
   describe 'validations' do
-    it { should have_many :courses }
+    it { should have_many(:courses).dependent(:destroy) }
 
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }

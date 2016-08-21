@@ -23,8 +23,8 @@ RSpec.describe User, type: :model do
   it { should_not be_teacher }
 
   describe 'validations' do
-    it { should have_many(:teacher_courses).class_name('Course').with_foreign_key(:teacher_id) }
-    it { should have_many(:enrollments).with_foreign_key(:student_id) }
+    it { should have_many(:teacher_courses).class_name('Course').with_foreign_key(:teacher_id).dependent(:destroy) }
+    it { should have_many(:enrollments).with_foreign_key(:student_id).dependent(:destroy) }
     it { should have_many(:courses).through(:enrollments) }
 
     it { should validate_presence_of(:name) }

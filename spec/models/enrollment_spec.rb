@@ -40,6 +40,6 @@ RSpec.describe Enrollment, type: :model do
     it { should belong_to(:course) }
     it { should validate_presence_of(:course) }
 
-    it { should have_many(:solutions) }
+    it { should have_many(:solutions).dependent(:destroy) }
   end
 end

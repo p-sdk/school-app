@@ -17,8 +17,8 @@
 
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :teacher_courses, class_name: 'Course', foreign_key: :teacher_id
-  has_many :enrollments, foreign_key: :student_id
+  has_many :teacher_courses, class_name: 'Course', foreign_key: :teacher_id, dependent: :destroy
+  has_many :enrollments, foreign_key: :student_id, dependent: :destroy
   has_many :courses, through: :enrollments
 
   before_save { email.downcase! }
