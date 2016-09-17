@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
@@ -25,8 +26,11 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'awesome_print'
+  gem 'brakeman', require: false
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen'
   gem 'terminal-notifier-guard'
 end
 
