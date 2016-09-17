@@ -1,33 +1,33 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
-gem 'rails', '~> 4.2'
-gem 'pg'
-
-gem 'decent_exposure'
-gem 'haml-rails'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'bootstrap-sass'
-gem 'font-awesome-sass'
-gem 'redcarpet'
 gem 'bcrypt', '~> 3.1.7'
+gem 'bootstrap-sass'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'decent_exposure'
+gem 'font-awesome-sass'
+gem 'haml-rails'
+gem 'jquery-rails'
 gem 'paperclip'
+gem 'pg'
+gem 'puma'
+gem 'rails', '~> 4.2'
+gem 'redcarpet'
+gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
-  gem 'spring-commands-rspec'
-  gem 'guard-rspec'
-  gem 'terminal-notifier-guard'
   gem 'annotate'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
@@ -37,5 +37,4 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'puma'
 end
