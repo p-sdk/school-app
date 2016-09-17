@@ -63,7 +63,7 @@ RSpec.feature 'Users', type: :feature do
           visit user_path(user)
         end
         it 'should display proper links' do
-          should have_link 'Wróć', users_path
+          should have_link 'Wróć', href: users_path
           should have_link 'Zatwierdź'
           should have_link 'Odrzuć'
         end
