@@ -1,16 +1,24 @@
 require_relative '../lib/faker_helper'
 include FakerHelper
 
-module Seeds
-  module_function
+class Seeds
+  def self.run(&block)
+    start_time = Time.now
+
+    new.instance_eval(&block)
+
+    end_time = Time.now
+    execution_time = end_time - start_time
+    puts "Seeds created in #{execution_time} seconds."
+  end
+
+  private
 
   # @param things [Symbol] the table name, plural
   def create(table, *args)
     send "create_#{table}", *args
     log_table_count(table)
   end
-
-  private
 
   # @param table [Symbol] the table name, plural
   def log_table_count(table)
@@ -135,12 +143,12 @@ module Seeds
   end
 end
 
-include Seeds
-
-create :users, num_teachers: 40, num_students: 1000
-create :categories, num_categories: 3
-create :courses, num_courses: 100
-create :enrollments, per_student: 10
-create :lectures, per_course: 10
-create :tasks, per_course: 10
-create :solutions
+Seeds.run do
+  create :users, num_teachers: 40, num_students: 1000
+  create :categories, num_categories: 3
+  create :courses, num_courses: 100
+  create :enrollments, per_student: 10
+  create :lectures, per_course: 10
+  create :tasks, per_course: 10
+  create :solutions
+end
