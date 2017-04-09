@@ -1,5 +1,3 @@
 %li
   = link_to category.name, category
-  (
-  = category.courses.count
-  )
+  = category.courses_count_formatted

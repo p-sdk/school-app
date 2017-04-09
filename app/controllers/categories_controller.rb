@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  expose(:categories)
+  expose_decorated(:categories)
   expose(:category, attributes: :category_params)
 
   before_action :require_sign_in, except: %i(index show)
