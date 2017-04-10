@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   expose(:users_requesting_upgrade) { User.requesting_upgrade }
   expose(:teachers) { User.teachers }
   expose(:students) { User.students }
-  expose(:user, attributes: :user_params)
+  expose_decorated(:user, attributes: :user_params)
 
   before_action :require_non_signed_in_user, only: %i(new create)
   before_action :require_sign_in, only: %i(index edit update destroy)

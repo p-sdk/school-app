@@ -5,8 +5,7 @@
         = link_to users_path, class: 'btn btn-default' do
           = icon 'arrow-left', 'Wróć do listy użytkowników'
     .center
-      #avatar
-        = gravatar_for user
+      #avatar= user.gravatar
       .email
         %a{ href: "mailto:#{user.email}" }= user.email
 
