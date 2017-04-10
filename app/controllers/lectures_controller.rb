@@ -1,7 +1,7 @@
 class LecturesController < ApplicationController
   expose(:course)
   expose(:lectures, ancestor: :course)
-  expose(:lecture, attributes: :lecture_params)
+  expose_decorated(:lecture, attributes: :lecture_params)
 
   before_action :require_sign_in
   before_action :require_correct_user, only: %i(index show)

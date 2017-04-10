@@ -11,10 +11,8 @@
   .col-md-9
     %h1= course.name
     %h2= lecture.title
-    .lecture= markdown lecture.content
+    .lecture= lecture.content_formatted
     - if lecture.attachment?
       = link_to lecture.attachment.url, target: :_blank do
         = icon 'paperclip', lecture.attachment_file_name
-        (
-        = number_to_human_size(lecture.attachment_file_size)
-        )
+        = lecture.attachment_file_name_formatted
