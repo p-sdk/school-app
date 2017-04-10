@@ -52,40 +52,4 @@ RSpec.describe Course, type: :model do
       specify { expect(course.has_student? student).to be true }
     end
   end
-
-  describe '#points' do
-    context 'when there is no task' do
-      specify { expect(course.points).to eq 0 }
-    end
-
-    context 'when there are some tasks' do
-      let(:task_points) { [20, 30, 70] }
-      let(:correct_points) { task_points.sum }
-      before do
-        task_points.each { |points| create :task, course: course, points: points }
-      end
-
-      specify { expect(course.points).to eq correct_points }
-    end
-  end
-
-  describe '#earned_points_by' do
-    context 'when no task has been solved' do
-      specify { expect(course.earned_points_by student).to eq 0 }
-    end
-
-    context 'when some tasks has been solved and graded' do
-      let(:task_earned_points) { [10, 25, 17] }
-      let(:correct_earned_points) { task_earned_points.sum }
-      before do
-        task_earned_points.each do |points|
-          task = create :task, course: course
-          solution = create :solution, enrollment: enrollment, task: task
-          solution.update! earned_points: points
-        end
-      end
-
-      specify { expect(course.earned_points_by student).to eq correct_earned_points }
-    end
-  end
 end

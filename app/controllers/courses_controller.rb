@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   expose(:courses) { current_user.teacher_courses }
-  expose(:course, attributes: :course_params)
+  expose_decorated(:course, attributes: :course_params)
 
   before_action :require_sign_in, except: %i(index show)
   before_action :require_teacher, only: %i(new create)

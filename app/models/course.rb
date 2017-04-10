@@ -36,12 +36,4 @@ class Course < ActiveRecord::Base
   def has_student?(student)
     students.include? student
   end
-
-  def points
-    tasks.map(&:points).sum
-  end
-
-  def earned_points_by(student)
-    tasks.map { |task| task.earned_points_by student }.compact.sum
-  end
 end

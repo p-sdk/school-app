@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  expose(:course)
+  expose_decorated(:course)
   expose(:tasks, ancestor: :course)
   expose(:task, attributes: :task_params)
   expose(:solution) { task.solution_by current_user }
