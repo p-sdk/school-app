@@ -113,23 +113,6 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe '#status_for' do
-    context 'when task has not been solved' do
-      specify { expect(task.status_for student).to eq 'nierozwiązane' }
-    end
-
-    context 'when task has been solved and waits for review' do
-      before { create :solution, enrollment: enrollment, task: task }
-      specify { expect(task.status_for student).to eq 'czeka na sprawdzenie' }
-    end
-
-    context 'when task has been solved and graded' do
-      let(:solution) { create :solution, enrollment: enrollment, task: task }
-      before { solution.update! earned_points: 10 }
-      specify { expect(task.status_for student).to eq 'ocenione' }
-    end
-  end
-
   describe '#earned_points_by' do
     context 'when task has not been solved' do
       specify { expect(task.earned_points_by student).to be nil }
@@ -144,35 +127,6 @@ RSpec.describe Task, type: :model do
       let(:solution) { create :solution, enrollment: enrollment, task: task }
       before { solution.update! earned_points: 10 }
       specify { expect(task.earned_points_by student).to eq solution.earned_points }
-    end
-  end
-
-  describe '#avg_score' do
-    context 'when nobody solved the task' do
-      specify { expect(task.avg_score).to be nil }
-    end
-
-    context 'when some students solved the task' do
-      let(:enrollments) { create_list :enrollment, 5, course: task.course }
-      let!(:solutions) do
-        enrollments.map { |e| create :solution, task: task, enrollment: e }
-      end
-
-      context 'when no task has been graded' do
-        specify { expect(task.avg_score).to be nil }
-      end
-
-      context 'when some task has been graded' do
-        let(:points) { [20, 7, 12] }
-        let(:avg) { points.sum / points.size }
-        before do
-          points.each_with_index do |pt, i|
-            solutions[i].update! earned_points: pt
-          end
-        end
-
-        specify { expect(task.avg_score).to eq avg }
-      end
     end
   end
 

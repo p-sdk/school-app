@@ -12,7 +12,7 @@
           Rozwiązania
       .avg-score
         Przeciętny wynik:
-        = task.avg_score || '---'
+        = task.average_score
     .points
       Punktów do zdobycia:
       = task.points
@@ -20,5 +20,5 @@
   .col-md-9
     %h1= course.name
     %h2= task.title
-    .desc= markdown task.desc
+    .desc= task.description_formatted
     = render 'solution' if current_user.enrolled_in? course

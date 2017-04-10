@@ -53,20 +53,8 @@ class Task < ActiveRecord::Base
     solution_by(student)&.graded?
   end
 
-  def status_for(student)
-    return 'nierozwiązane' unless solved_by? student
-    return 'ocenione' if graded_for? student
-    'czeka na sprawdzenie'
-  end
-
   def earned_points_by(student)
     solution_by(student)&.earned_points
-  end
-
-  def avg_score
-    graded_points = solutions.graded.map(&:earned_points)
-    return if graded_points.empty?
-    graded_points.sum / graded_points.size
   end
 
   private

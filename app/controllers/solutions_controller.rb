@@ -1,6 +1,6 @@
 class SolutionsController < ApplicationController
   expose(:solution, attributes: :solution_params)
-  expose(:task) { solution.task }
+  expose_decorated(:task) { solution.task }
 
   before_action :set_create_params, only: :create
   before_action :require_sign_in
