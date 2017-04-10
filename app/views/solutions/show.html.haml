@@ -14,7 +14,4 @@
   .col-md-9
     = render 'task_and_solution'
     %h3 Uzyskane punkty
-    - if solution.graded?
-      .points #{solution.earned_points} / #{solution.task.points}
-    - else
-      .alert.alert-info Rozwiązanie czeka na sprawdzenie
+    .points= solution.earned_points_formatted

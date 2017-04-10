@@ -1,5 +1,5 @@
 class SolutionsController < ApplicationController
-  expose(:solution, attributes: :solution_params)
+  expose_decorated(:solution, attributes: :solution_params)
   expose_decorated(:task) { solution.task }
 
   before_action :set_create_params, only: :create
