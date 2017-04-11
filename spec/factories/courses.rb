@@ -15,6 +15,11 @@
 #  index_courses_on_category_id  (category_id)
 #  index_courses_on_teacher_id   (teacher_id)
 #
+# Foreign Keys
+#
+#  fk_rails_a68eff6aff  (teacher_id => users.id)
+#  fk_rails_e072dca946  (category_id => categories.id)
+#
 
 FactoryGirl.define do
   factory :course do

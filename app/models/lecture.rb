@@ -17,6 +17,10 @@
 #
 #  index_lectures_on_course_id  (course_id)
 #
+# Foreign Keys
+#
+#  fk_rails_bbbf25c9a6  (course_id => courses.id)
+#
 
 class Lecture < ActiveRecord::Base
   belongs_to :course, required: true

@@ -14,6 +14,10 @@
 #
 #  index_tasks_on_course_id  (course_id)
 #
+# Foreign Keys
+#
+#  fk_rails_d35d17a7dd  (course_id => courses.id)
+#
 
 class Task < ActiveRecord::Base
   belongs_to :course, required: true

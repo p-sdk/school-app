@@ -16,6 +16,11 @@
 #  index_solutions_on_enrollment_id_and_task_id  (enrollment_id,task_id) UNIQUE
 #  index_solutions_on_task_id                    (task_id)
 #
+# Foreign Keys
+#
+#  fk_rails_8f3c6a6975  (task_id => tasks.id)
+#  fk_rails_da0ffd369c  (enrollment_id => enrollments.id)
+#
 
 require 'rails_helper'
 
