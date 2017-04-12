@@ -25,7 +25,7 @@
 FactoryGirl.define do
   factory :solution do
     association :enrollment
-    association :task
+    task { build :task, course: enrollment.course }
     content { Faker::Lorem.sentence }
 
     factory :graded_solution do
