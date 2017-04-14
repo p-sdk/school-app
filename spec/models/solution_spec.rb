@@ -77,6 +77,26 @@ RSpec.describe Solution, type: :model do
     end
   end
 
+  describe '.graded' do
+    subject { described_class.graded }
+
+    let!(:graded_solution) { create :graded_solution }
+    let!(:not_graded_solution) { create :solution }
+
+    it { is_expected.to include graded_solution }
+    it { is_expected.to_not include not_graded_solution }
+  end
+
+  describe '.ungraded' do
+    subject { described_class.ungraded }
+
+    let!(:graded_solution) { create :graded_solution }
+    let!(:not_graded_solution) { create :solution }
+
+    it { is_expected.to include not_graded_solution }
+    it { is_expected.to_not include graded_solution }
+  end
+
   describe '#graded?' do
     context 'with unset earned_points' do
       it { should_not be_graded }
