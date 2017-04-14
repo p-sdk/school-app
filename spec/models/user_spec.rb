@@ -41,6 +41,40 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password_confirmation) }
   end
 
+  describe '.requesting_upgrade' do
+    subject { described_class.requesting_upgrade }
+
+    let!(:alice) { create :user }
+    let!(:bob) { create :user }
+
+    before do
+      alice.request_upgrade
+    end
+
+    it { is_expected.to include alice }
+    it { is_expected.to_not include bob }
+  end
+
+  describe '.teachers' do
+    subject { described_class.teachers }
+
+    let!(:alice) { create :teacher }
+    let!(:bob) { create :user }
+
+    it { is_expected.to include alice }
+    it { is_expected.to_not include bob }
+  end
+
+  describe '.students' do
+    subject { described_class.students }
+
+    let!(:alice) { create :user }
+    let!(:bob) { create :teacher }
+
+    it { is_expected.to include alice }
+    it { is_expected.to_not include bob }
+  end
+
   describe 'enrolling' do
     let(:enrolled_course) { create :course }
     let(:non_enrolled_course) { create :course }
