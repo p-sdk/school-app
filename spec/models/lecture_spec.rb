@@ -25,7 +25,7 @@
 require 'rails_helper'
 
 RSpec.describe Lecture, type: :model do
-  subject(:lecture) { create :lecture }
+  subject(:lecture) { build :lecture }
 
   describe 'validations' do
     it { should belong_to(:course) }

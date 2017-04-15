@@ -4,6 +4,7 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
   subject { page }
 
   let(:user) { create :user }
+  let(:admin) { create :admin }
 
   describe 'submitting request to upgrade to teacher account' do
     before do
@@ -29,8 +30,6 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
   end
 
   describe 'upgrade' do
-    let(:admin) { create :admin }
-
     before do
       user.request_upgrade
       sign_in_as admin

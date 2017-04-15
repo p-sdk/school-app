@@ -33,11 +33,11 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
   end
 
   describe 'with valid information' do
-    let(:valid_lecture) { build :lecture }
+    let(:lecture_attributes) { attributes_for :lecture }
 
     before do
-      fill_in 'Tytuł', with: valid_lecture.title
-      fill_in 'Treść', with: valid_lecture.content
+      fill_in 'Tytuł', with: lecture_attributes[:title]
+      fill_in 'Treść', with: lecture_attributes[:content]
     end
 
     it 'should create a lecture' do
@@ -47,7 +47,7 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz wykład' }
       it 'should display success message' do
-        should have_selector 'h2', text: valid_lecture.title
+        should have_selector 'h2', text: lecture_attributes[:title]
         should have_success_message
       end
     end

@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.feature 'Student creates a solution', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:enrollment) { create :enrollment, course: course }
-  let(:task) { create :task, course: course }
+  let(:task) { create :task }
+  let(:course) { task.course }
+  let(:student) { u = create :user; u.enroll_in course; u }
   let(:submit) { 'Wyślij' }
 
   before do
-    sign_in_as enrollment.student
+    sign_in_as student
     visit course_task_path(course, task)
   end
 
@@ -25,8 +25,7 @@ RSpec.feature 'Student creates a solution', type: :feature do
   end
 
   context 'with valid information' do
-    let(:valid_solution) { build :solution }
-    before { fill_in 'Rozwiązanie', with: valid_solution.content }
+    before { fill_in 'Rozwiązanie', with: 'Lorem Ipsum' }
 
     it 'should create solution' do
       expect { click_button submit }.to change(Solution, :count).by(1)

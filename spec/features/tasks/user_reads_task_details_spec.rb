@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature 'User reads task details', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:task) { create :task, course: course }
+  let(:task) { create :task }
+  let(:course) { task.course }
   let(:enrollment) { create :enrollment, course: course }
 
   before do

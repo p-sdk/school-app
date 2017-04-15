@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'CoursesController authorization', type: :request do
   subject { response }
+  let(:course) { create :course }
+  let(:teacher) { course.teacher }
+  let(:other_teacher){ create :teacher }
   let(:student) { create :user }
-  let(:teacher) { create :teacher }
-  let(:course) { create :course, teacher: teacher }
 
   describe 'GET #index' do
     let(:path) { courses_path }
@@ -62,7 +63,7 @@ RSpec.describe 'CoursesController authorization', type: :request do
 
       context 'as other teacher' do
         before do
-          sign_in_as create :teacher
+          sign_in_as other_teacher
           get path
         end
         it { should redirect_to root_path }
@@ -124,7 +125,7 @@ RSpec.describe 'CoursesController authorization', type: :request do
 
       context 'as other teacher' do
         before do
-          sign_in_as create :teacher
+          sign_in_as other_teacher
           patch path, params
         end
         it { should redirect_to root_path }
@@ -158,7 +159,7 @@ RSpec.describe 'CoursesController authorization', type: :request do
 
       context 'as other teacher' do
         before do
-          sign_in_as create :teacher
+          sign_in_as other_teacher
           delete path
         end
         it { should redirect_to root_path }
@@ -192,7 +193,7 @@ RSpec.describe 'CoursesController authorization', type: :request do
 
       context 'as other teacher' do
         before do
-          sign_in_as create :teacher
+          sign_in_as other_teacher
           get path
         end
         it { should redirect_to root_path }

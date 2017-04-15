@@ -33,11 +33,12 @@ RSpec.feature 'Teacher creates a task', type: :feature do
   end
 
   describe 'with valid information' do
-    let(:valid_task) { build :task }
+    let(:task_attributes) { attributes_for :task }
+
     before do
-      fill_in 'Tytuł', with: valid_task.title
-      fill_in 'Opis', with: valid_task.desc
-      fill_in 'Liczba punktów', with: valid_task.points
+      fill_in 'Tytuł', with: task_attributes[:title]
+      fill_in 'Opis', with: task_attributes[:desc]
+      fill_in 'Liczba punktów', with: task_attributes[:points]
     end
 
     it 'should create a task' do
@@ -47,7 +48,7 @@ RSpec.feature 'Teacher creates a task', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz zadanie' }
       it 'should display success message' do
-        should have_selector 'h2', text: valid_task.title
+        should have_selector 'h2', text: task_attributes[:title]
         should have_success_message
       end
     end

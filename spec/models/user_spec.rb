@@ -18,7 +18,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { create :user }
+  subject(:user) { build :user }
 
   it { should_not be_teacher }
 
@@ -76,9 +76,13 @@ RSpec.describe User, type: :model do
   end
 
   describe 'enrolling' do
-    let(:enrolled_course) { create :course }
-    let(:non_enrolled_course) { create :course }
-    before { user.enroll_in enrolled_course }
+    let!(:enrolled_course) { create :course }
+    let!(:non_enrolled_course) { create :course }
+
+    before do
+      user.save
+      user.enroll_in enrolled_course
+    end
 
     context 'for enrolled course' do
       it { should be_enrolled_in enrolled_course }

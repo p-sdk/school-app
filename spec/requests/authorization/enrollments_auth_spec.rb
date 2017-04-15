@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'EnrollmentsController authorization', type: :request do
   subject { response }
   let(:user) { create :user }
-  let(:enrollment) { create :enrollment }
+  let(:enrollment) { build :enrollment }
 
   describe 'POST #create' do
     let(:path) { enrollments_path }

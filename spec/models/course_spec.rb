@@ -24,9 +24,7 @@
 require 'rails_helper'
 
 RSpec.describe Course, type: :model do
-  subject(:course) { create :course }
-  let(:student) { create :user }
-  let(:enrollment) { student.enroll_in course }
+  subject(:course) { build :course }
 
   describe 'validations' do
     it { should belong_to(:category) }
@@ -48,12 +46,15 @@ RSpec.describe Course, type: :model do
   end
 
   describe '#has_student?' do
+    let(:student) { build :user }
+
     context 'when student has not enrolled in the course' do
       specify { expect(course.has_student? student).to be false }
     end
 
     context 'when student has enrolled in the course' do
-      before { student.enroll_in course }
+      before { create :enrollment, student: student, course: course }
+
       specify { expect(course.has_student? student).to be true }
     end
   end

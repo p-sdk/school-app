@@ -23,18 +23,15 @@
 require 'rails_helper'
 
 RSpec.describe Enrollment, type: :model do
-  let(:student) { create :user }
-  let(:course) { create :course }
-  subject(:enrollment) { student.enrollments.create!(course: course) }
-
-  specify { expect(enrollment.student).to eq student }
-  specify { expect(enrollment.course).to eq course }
+  subject(:enrollment) { build :enrollment }
 
   describe '[student, course] uniqueness' do
-    let(:second_enrollment) { student.enrollments.build(course: course) }
-    before { enrollment }
+    let(:student) { enrollment.student }
+    let(:course) { enrollment.course }
+    let!(:second_enrollment) { create :enrollment, student: student, course: course }
+
     specify do
-      expect { second_enrollment.save }.to raise_error ActiveRecord::RecordNotUnique
+      expect { enrollment.save }.to raise_error ActiveRecord::RecordNotUnique
     end
   end
 

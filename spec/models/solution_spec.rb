@@ -25,19 +25,14 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  let(:course) { create :course }
-  let(:task) { create :task, course: course }
-  let(:enrollment) { create :enrollment, course: course }
-  subject(:solution) { task.solutions.create!(enrollment: enrollment, content: 'Lorem ipsum') }
-
-  specify { expect(solution.enrollment).to eq enrollment }
-  specify { expect(solution.task).to eq task }
+  subject(:solution) { build :solution }
+  let(:enrollment) { solution.enrollment }
+  let(:task) { solution.task }
 
   describe '[enrollment, task] uniqueness' do
-    let(:second_solution) { task.solutions.build(enrollment: enrollment, content: 'Ipsum lorem') }
-    before { solution }
+    let!(:second_solution) { create :solution, task: task, enrollment: enrollment }
     specify do
-      expect { second_solution.save }.to raise_error ActiveRecord::RecordNotUnique
+      expect { solution.save }.to raise_error ActiveRecord::RecordNotUnique
     end
   end
 
@@ -59,18 +54,17 @@ RSpec.describe Solution, type: :model do
     end
 
     describe 'enrollment and task belong to the same course' do
-      subject(:solution) { build :solution, enrollment: enrollment, task: task }
       specify { expect(solution.enrollment.course).to eq solution.task.course }
       it { should be_valid }
 
       context 'with other task' do
-        let(:other_task) { create :task }
+        let(:other_task) { build :task }
         before { solution.task = other_task }
         it { should_not be_valid }
       end
 
       context 'with other enrollment' do
-        let(:other_enrollment) { create :enrollment }
+        let(:other_enrollment) { build :enrollment }
         before { solution.enrollment = other_enrollment }
         it { should_not be_valid }
       end

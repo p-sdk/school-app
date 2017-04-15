@@ -33,12 +33,13 @@ RSpec.feature 'Teacher creates a course', type: :feature do
 
   context 'with valid information' do
     let!(:category) { create :category }
-    let(:valid_course) { build :course, category: category }
+    let(:course_attributes) { attributes_for :course }
+
     before do
       visit new_course_path
-      fill_in 'Nazwa', with: valid_course.name
-      fill_in 'Opis', with: valid_course.desc
-      select valid_course.category.name, from: 'Kategoria'
+      fill_in 'Nazwa', with: course_attributes[:name]
+      fill_in 'Opis', with: course_attributes[:desc]
+      select category[:name], from: 'Kategoria'
     end
 
     it 'should create a course' do
@@ -47,8 +48,9 @@ RSpec.feature 'Teacher creates a course', type: :feature do
 
     describe 'after submission' do
       before { click_button 'Utwórz kurs' }
+
       it 'should display success message' do
-        should have_selector 'h1', text: valid_course.name
+        should have_selector 'h1', text: course_attributes[:name]
         should have_success_message
       end
     end

@@ -22,10 +22,11 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  subject(:task) { create :task }
-  let(:course) { task.course }
+  subject(:task) { build :task }
   let(:student) { create :user }
-  let(:enrollment) { student.enroll_in course }
+  let(:other_student) { create :user }
+  let(:enrollment) { student.enroll_in task.course }
+  let(:solution) { create :solution, enrollment: enrollment, task: task }
 
   describe 'validations' do
     it { should belong_to(:course) }
@@ -52,7 +53,7 @@ RSpec.describe Task, type: :model do
 
     context 'with invalid student' do
       specify do
-        expect(task.solve content: 'Lorem', student: create(:user)).to be_falsey
+        expect(task.solve content: 'Lorem', student: other_student).to be_falsey
       end
     end
 
@@ -69,7 +70,7 @@ RSpec.describe Task, type: :model do
     end
 
     context 'when task has been solved' do
-      let!(:solution) { create :solution, enrollment: enrollment, task: task }
+      before { solution }
       specify { expect(task.solution_by student).to eq solution }
     end
   end
@@ -80,14 +81,13 @@ RSpec.describe Task, type: :model do
     end
 
     context 'when student has solved the task' do
-      before { create :solution, enrollment: enrollment, task: task }
+      before { solution }
       it { should be_solved_by student }
     end
   end
 
   describe '#can_be_solved_by?' do
     context 'when student is not enrolled in task course' do
-      let(:other_student) { create :user }
       specify { expect(task.can_be_solved_by?(other_student)).to be false }
     end
 
@@ -98,15 +98,13 @@ RSpec.describe Task, type: :model do
       end
 
       context 'when student has solved the task' do
-        before { create :solution, enrollment: enrollment, task: task }
+        before { solution }
         specify { expect(task.can_be_solved_by?(student)).to be false }
       end
     end
   end
 
   describe '#graded_for?' do
-    let(:solution) { create :solution, enrollment: enrollment, task: task }
-
     context 'when task has not been garded' do
       it { should_not be_graded_for student }
     end
@@ -123,12 +121,11 @@ RSpec.describe Task, type: :model do
     end
 
     context 'when task has been solved and waits for review' do
-      before { create :solution, enrollment: enrollment, task: task }
+      before { solution }
       specify { expect(task.earned_points_by student).to be nil }
     end
 
     context 'when task has been solved and graded' do
-      let(:solution) { create :solution, enrollment: enrollment, task: task }
       before { solution.update! earned_points: 10 }
       specify { expect(task.earned_points_by student).to eq solution.earned_points }
     end

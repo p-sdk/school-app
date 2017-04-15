@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Teacher deletes a task', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:task) { create :task, course: course }
+  let(:task) { create :task }
+  let(:course) { task.course }
 
   before do
     sign_in_as course.teacher

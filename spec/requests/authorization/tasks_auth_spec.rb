@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'TasksController authorization', type: :request do
   subject { response }
-  let(:student) { create :user }
-  let(:teacher) { create :teacher }
-  let(:course) { create :course, teacher: teacher }
-  let(:task) { create :task, course: course }
-  before { student.enroll_in course }
+  let(:task) { create :task }
+  let(:course) { task.course }
+  let(:teacher) { course.teacher }
+  let(:other_teacher) { create :teacher }
+  let(:student) { u = create :user; u.enroll_in course; u }
+  let(:other_student) { create :user }
 
   describe 'GET #index' do
     let(:path) { course_tasks_path(course) }
@@ -27,7 +28,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context 'not enrolled in the course' do
           before do
-            sign_in_as create :user
+            sign_in_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -45,7 +46,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -73,7 +74,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context 'not enrolled in the course' do
           before do
-            sign_in_as create :user
+            sign_in_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -91,7 +92,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -127,7 +128,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -163,7 +164,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -200,7 +201,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             post path, params
           end
           it { should redirect_to root_path }
@@ -237,7 +238,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             patch path, params
           end
           it { should redirect_to root_path }
@@ -273,7 +274,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             delete path
           end
           it { should redirect_to root_path }
@@ -309,7 +310,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }

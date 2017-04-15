@@ -3,12 +3,11 @@ require 'rails_helper'
 RSpec.feature 'User reads lecture details', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:student) { create :user }
-  let(:lecture) { create :lecture, course: course }
+  let(:lecture) { create :lecture }
+  let(:course) { lecture.course }
+  let(:student) { u = create :user; u.enroll_in course; u }
 
   before do
-    student.enroll_in course
     sign_in_as student
     visit course_lecture_path(course, lecture)
   end

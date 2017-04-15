@@ -32,9 +32,10 @@ RSpec.feature 'Admin creates a category', type: :feature do
   end
 
   context 'with valid information' do
-    let(:valid_category) { build :category }
+    let(:category_attributes) { attributes_for :category }
+
     before do
-      fill_in 'Nazwa', with: valid_category.name
+      fill_in 'Nazwa', with: category_attributes[:name]
     end
 
     it 'should create a category' do
@@ -44,7 +45,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz kategorię' }
       it 'should display success message' do
-        should have_selector 'h1', text: valid_category.name
+        should have_selector 'h1', text: category_attributes[:name]
         should have_success_message
       end
     end

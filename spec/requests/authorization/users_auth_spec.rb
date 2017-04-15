@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'UsersController authorization', type: :request do
   subject { response }
   let(:user) { create :user }
+  let(:other_user) { create :user }
   let(:admin) { create :admin }
 
   describe 'GET #index' do
@@ -71,7 +72,7 @@ RSpec.describe 'UsersController authorization', type: :request do
 
       context 'as other user' do
         before do
-          sign_in_as create :user
+          sign_in_as other_user
           get path
         end
         it { should redirect_to root_path }
@@ -115,7 +116,7 @@ RSpec.describe 'UsersController authorization', type: :request do
 
       context 'as other user' do
         before do
-          sign_in_as create :user
+          sign_in_as other_user
           patch path, params
         end
         it { should redirect_to root_path }
@@ -141,7 +142,7 @@ RSpec.describe 'UsersController authorization', type: :request do
 
       context 'as other user' do
         before do
-          sign_in_as create :user
+          sign_in_as other_user
           delete path
         end
         it { should redirect_to root_path }

@@ -24,12 +24,13 @@ RSpec.feature 'User signs up', type: :feature do
   end
 
   context 'with valid information' do
-    let(:valid_user) { build :user }
+    let(:user_attributes) { attributes_for :user }
+
     before do
-      fill_in 'Imię i nazwisko', with: valid_user.name
-      fill_in 'Email', with: valid_user.email
-      fill_in 'Hasło', with: valid_user.password
-      fill_in 'Potwierdzenie hasła', with: valid_user.password_confirmation
+      fill_in 'Imię i nazwisko', with: user_attributes[:name]
+      fill_in 'Email', with: user_attributes[:email]
+      fill_in 'Hasło', with: user_attributes[:password]
+      fill_in 'Potwierdzenie hasła', with: user_attributes[:password_confirmation]
     end
 
     it 'should create a user' do

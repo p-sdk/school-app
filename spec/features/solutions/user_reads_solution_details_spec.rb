@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature 'User reads solution details', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:enrollment) { create :enrollment, course: course }
-  let(:task) { create :task, course: course }
-  let(:solution) { create :solution, enrollment: enrollment, task: task }
+  let(:solution) { create :solution }
+  let(:task) { solution.task }
+  let(:course) { task.course }
+  let(:student) { solution.enrollment.student }
 
   before do
     sign_in_as course.teacher
@@ -26,7 +26,7 @@ RSpec.feature 'User reads solution details', type: :feature do
 
   context 'when signed in as student' do
     before do
-      sign_in_as enrollment.student
+      sign_in_as student
       visit solution_path(solution)
     end
     it 'should have proper links' do

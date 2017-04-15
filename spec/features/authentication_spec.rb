@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Authentication', type: :feature do
   subject { page }
+  let(:user) { create :user }
 
   describe 'signin' do
     before { visit signin_path }
@@ -20,7 +21,6 @@ RSpec.feature 'Authentication', type: :feature do
     end
 
     context 'with valid information' do
-      let!(:user) { create :user }
       before { sign_in_as user }
 
       it 'should be signed in' do
@@ -47,8 +47,6 @@ RSpec.feature 'Authentication', type: :feature do
   end
 
   describe 'forwarding' do
-    let(:user) { create :user }
-
     context 'when attempting to visit a protected page' do
       let(:protected_page) { edit_user_path(user) }
       before do

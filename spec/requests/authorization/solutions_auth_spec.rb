@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'SolutionsController authorization', type: :request do
   subject { response }
-  let(:student) { create :user }
-  let(:teacher) { create :teacher }
-  let(:course) { create :course, teacher: teacher }
-  let(:enrollment) { student.enroll_in course }
-  let(:task) { create :task, course: course }
-  let(:solution) { create :solution, enrollment: enrollment, task: task }
+  let(:solution) { create :solution }
+  let(:course) { solution.task.course }
+  let(:teacher) { course.teacher }
+  let(:other_teacher) { create :teacher }
+  let(:student) { solution.enrollment.student }
+  let(:other_student) { create :user }
 
   describe 'GET #show' do
     let(:path) { solution_path(solution) }
@@ -28,9 +28,8 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context 'enrolled in the course' do
           before do
-            second_student = create :user
-            second_student.enroll_in course
-            sign_in_as second_student
+            other_student.enroll_in course
+            sign_in_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -38,7 +37,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :user
+            sign_in_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -56,7 +55,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -92,7 +91,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -121,9 +120,8 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context 'enrolled in the course' do
           before do
-            enrolled_student = create :user
-            enrolled_student.enroll_in course
-            sign_in_as enrolled_student
+            other_student.enroll_in course
+            sign_in_as other_student
             post path, params
           end
           it { should_not redirect_to root_path }
@@ -131,7 +129,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :user
+            sign_in_as other_student
             post path, params
           end
           it { should redirect_to root_path }
@@ -168,7 +166,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             patch path, params
           end
           it { should redirect_to root_path }
@@ -204,7 +202,7 @@ RSpec.describe 'SolutionsController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as create :teacher
+            sign_in_as other_teacher
             delete path
           end
           it { should redirect_to root_path }

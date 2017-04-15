@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Teacher updates a lecture', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
-  let(:lecture) { create :lecture, course: course }
+  let(:lecture) { create :lecture }
+  let(:course) { lecture.course }
 
   before do
     sign_in_as course.teacher

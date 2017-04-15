@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.feature 'User visits home page', type: :feature do
   subject { page }
 
+  let(:user) { create :user }
+  let(:teacher) { create :teacher }
+  let(:admin) { create :admin }
+
   before { visit root_path }
 
   it { should have_selector 'h1', text: 'Witaj na e-kursy' }
@@ -18,7 +22,6 @@ RSpec.feature 'User visits home page', type: :feature do
   end
 
   context 'when signed in' do
-    let(:user) { create :user }
     before do
       sign_in_as user
       visit root_path
@@ -45,7 +48,6 @@ RSpec.feature 'User visits home page', type: :feature do
     end
 
     context 'as teacher' do
-      let(:teacher) { create :teacher }
       before do
         sign_in_as teacher
         visit root_path
@@ -68,7 +70,6 @@ RSpec.feature 'User visits home page', type: :feature do
     end
 
     context 'as admin' do
-      let(:admin) { create :admin }
       before do
         sign_in_as admin
         visit root_path
