@@ -2,13 +2,14 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string
-#  email           :string
-#  password_digest :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  teacher         :boolean          default(FALSE)
+#  id                      :integer          not null, primary key
+#  name                    :string
+#  email                   :string
+#  password_digest         :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  teacher                 :boolean          default(FALSE)
+#  upgrade_request_sent_at :datetime
 #
 # Indexes
 #
@@ -23,7 +24,7 @@ class User < ActiveRecord::Base
 
   before_save { email.downcase! }
 
-  scope :requesting_upgrade, -> { where(teacher: nil) }
+  scope :requesting_upgrade, -> { where.not(upgrade_request_sent_at: nil) }
   scope :teachers, -> { where(teacher: true) }
   scope :students, -> { where.not(teacher: true) }
 
@@ -54,18 +55,19 @@ class User < ActiveRecord::Base
 
   def request_upgrade
     return if teacher?
-    update_attribute :teacher, nil
+    update_attribute :upgrade_request_sent_at, Time.current
   end
 
   def requesting_upgrade?
-    teacher.nil?
+    upgrade_request_sent_at.present?
   end
 
   def approve_upgrade_request
     update_attribute :teacher, true
+    update_attribute :upgrade_request_sent_at, nil
   end
 
   def reject_upgrade_request
-    update_attribute :teacher, false
+    update_attribute :upgrade_request_sent_at, nil
   end
 end
