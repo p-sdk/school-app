@@ -11,13 +11,13 @@ class UpgradesController < ApplicationController
   end
 
   def update
-    user.upgrade
+    user.approve_upgrade_request
     flash[:success] = 'Uprawnienia użytkownika zostały rozszerzone'
     redirect_to user
   end
 
   def destroy
-    user.downgrade
+    user.reject_upgrade_request
     flash[:success] = 'Wniosek o rozszerzenie uprawnień został odrzucony'
     redirect_to user
   end

@@ -128,15 +128,32 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#upgrade' do
-    before { user.upgrade }
-    specify { expect(user.requesting_upgrade?).to be false }
-    specify { expect(user.teacher?).to be true }
+  describe '#approve_upgrade_request' do
+    subject { user.approve_upgrade_request }
+
+    before { user.request_upgrade }
+
+    specify do
+      expect { subject }.to change(user, :requesting_upgrade?).from(true).to(false)
+    end
+
+    specify do
+      expect { subject }.to change(user, :teacher?).from(false).to(true)
+    end
   end
 
-  describe '#downgrade' do
-    before { user.downgrade }
-    specify { expect(user.requesting_upgrade?).to be false }
-    specify { expect(user.teacher?).to be false }
+  describe '#reject_upgrade_request' do
+    subject { user.reject_upgrade_request }
+
+    before { user.request_upgrade }
+
+    specify do
+      expect { subject }.to change(user, :requesting_upgrade?).from(true).to(false)
+    end
+
+    specify do
+      expect { subject }.to_not change(user, :teacher?)
+      expect(user.teacher?).to be false
+    end
   end
 end

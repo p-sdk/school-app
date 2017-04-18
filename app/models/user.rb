@@ -61,11 +61,11 @@ class User < ActiveRecord::Base
     teacher.nil?
   end
 
-  def upgrade
+  def approve_upgrade_request
     update_attribute :teacher, true
   end
 
-  def downgrade
+  def reject_upgrade_request
     update_attribute :teacher, false
   end
 end
