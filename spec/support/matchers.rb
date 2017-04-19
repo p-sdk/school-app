@@ -4,6 +4,12 @@ RSpec::Matchers.define :have_error_message do |msg|
   end
 end
 
+RSpec::Matchers.define :have_warning_message do |msg|
+  match do |page|
+    page.has_selector? 'div.alert.alert-warning', text: msg
+  end
+end
+
 RSpec::Matchers.define :have_success_message do |msg|
   match do |page|
     page.has_selector? 'div.alert.alert-success', text: msg
