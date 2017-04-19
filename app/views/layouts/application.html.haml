@@ -8,7 +8,6 @@
   %body
     = render 'layouts/header'
     .container
-      - flash.each do |key, value|
-        = content_tag :div, value, class: "alert alert-#{key}"
+      = render 'layouts/flash_messages'
       = yield
       -# .debug= debug(params) if Rails.env.development?
