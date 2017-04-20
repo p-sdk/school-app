@@ -17,7 +17,6 @@ Bundler.require(*Rails.groups)
 
 module School
   class Application < Rails::Application
-    config.admin_email = 'admin@example.com'
     config.sass.preferred_syntax = :sass
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -27,7 +27,7 @@
 #
 
 class User < ActiveRecord::Base
-  ROLES = %i(student teacher)
+  ROLES = %i(student teacher admin)
 
   enum role: ROLES
 
@@ -54,10 +54,6 @@ class User < ActiveRecord::Base
 
   def enroll_in(course)
     enrollments.create!(course: course)
-  end
-
-  def admin?
-    email == Rails.configuration.admin_email
   end
 
   def request_upgrade

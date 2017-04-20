@@ -38,7 +38,7 @@ FactoryGirl.define do
     end
 
     factory :admin do
-      email { Rails.application.config.admin_email }
+      role :admin
     end
   end
 end

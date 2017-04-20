@@ -78,17 +78,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#admin?' do
-    context 'for user with admin email' do
-      before { user.update! email: 'admin@example.com' }
-      it { should be_admin }
-    end
-
-    context 'otherwise' do
-      it { should_not be_admin }
-    end
-  end
-
   describe '#request_upgrade' do
     it 'should be requesting upgrade' do
       expect { user.request_upgrade }.to change(user, :requesting_upgrade?).from(false).to(true)
