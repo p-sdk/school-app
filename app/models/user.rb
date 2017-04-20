@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
   def request_upgrade
     return if teacher?
-    update_attribute :upgrade_request_sent_at, Time.current
+    update! upgrade_request_sent_at: Time.current
   end
 
   def requesting_upgrade?
@@ -68,11 +68,11 @@ class User < ActiveRecord::Base
   end
 
   def approve_upgrade_request
-    update_attribute :teacher, true
-    update_attribute :upgrade_request_sent_at, nil
+    update! teacher: true
+    update! upgrade_request_sent_at: nil
   end
 
   def reject_upgrade_request
-    update_attribute :upgrade_request_sent_at, nil
+    update! upgrade_request_sent_at: nil
   end
 end
