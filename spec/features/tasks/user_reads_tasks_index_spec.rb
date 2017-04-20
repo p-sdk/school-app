@@ -6,7 +6,7 @@ RSpec.feature 'User reads tasks index', type: :feature do
   let(:course) { create :course }
 
   before do
-    sign_in_as course.teacher
+    login_as course.teacher
     visit course_tasks_path(course)
   end
 
@@ -33,7 +33,7 @@ RSpec.feature 'User reads tasks index', type: :feature do
   context 'when signed in as student' do
     let!(:tasks) { create_list :task, 3, course: course }
     let(:enrollment) { create :enrollment, course: course }
-    before { sign_in_as enrollment.student }
+    before { login_as enrollment.student }
 
     describe 'task statuses' do
       before do

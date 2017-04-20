@@ -10,15 +10,15 @@ RSpec.describe 'EnrollmentsController authorization', type: :request do
     let(:params) { { enrollment: enrollment.attributes } }
     context 'when not singed in' do
       before { post path, params }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       before do
-        sign_in_as user
+        login_as user
         post path, params
       end
-      it { should_not redirect_to signin_path }
+      it { should_not redirect_to new_user_session_path }
     end
   end
 end

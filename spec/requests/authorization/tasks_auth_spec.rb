@@ -13,14 +13,14 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { course_tasks_path(course) }
     context 'when not singed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         context 'enrolled in the course' do
           before do
-            sign_in_as student
+            login_as student
             get path
           end
           it { should be_success }
@@ -28,7 +28,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context 'not enrolled in the course' do
           before do
-            sign_in_as other_student
+            login_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -38,7 +38,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             get path
           end
           it { should be_success }
@@ -46,7 +46,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -59,14 +59,14 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { course_task_path(course, task) }
     context 'when not singed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         context 'enrolled in the course' do
           before do
-            sign_in_as student
+            login_as student
             get path
           end
           it { should be_success }
@@ -74,7 +74,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context 'not enrolled in the course' do
           before do
-            sign_in_as other_student
+            login_as other_student
             get path
           end
           it { should redirect_to root_path }
@@ -84,7 +84,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             get path
           end
           it { should be_success }
@@ -92,7 +92,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -105,13 +105,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { new_course_task_path(course) }
     context 'when not singed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           get path
         end
         it { should redirect_to root_path }
@@ -120,7 +120,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             get path
           end
           it { should be_success }
@@ -128,7 +128,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -141,13 +141,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { edit_course_task_path(course, task) }
     context 'when not singed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           get path
         end
         it { should redirect_to root_path }
@@ -156,7 +156,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             get path
           end
           it { should be_success }
@@ -164,7 +164,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             get path
           end
           it { should redirect_to root_path }
@@ -178,13 +178,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:params) { { task: task.attributes } }
     context 'when not singed in' do
       before { post path, params }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           post path, params
         end
         it { should redirect_to root_path }
@@ -193,7 +193,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             post path, params
           end
           it { should_not redirect_to root_path }
@@ -201,7 +201,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             post path, params
           end
           it { should redirect_to root_path }
@@ -215,13 +215,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:params) { { task: task.attributes } }
     context 'when not singed in' do
       before { patch path, params }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           patch path, params
         end
         it { should redirect_to root_path }
@@ -230,7 +230,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             patch path, params
           end
           it { should_not redirect_to root_path }
@@ -238,7 +238,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             patch path, params
           end
           it { should redirect_to root_path }
@@ -251,13 +251,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { course_task_path(course, task) }
     context 'when not singed in' do
       before { delete path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           delete path
         end
         it { should redirect_to root_path }
@@ -266,7 +266,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             delete path
           end
           it { should_not redirect_to root_path }
@@ -274,7 +274,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             delete path
           end
           it { should redirect_to root_path }
@@ -287,13 +287,13 @@ RSpec.describe 'TasksController authorization', type: :request do
     let(:path) { solutions_course_task_path(course, task) }
     context 'when not singed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as student' do
         before do
-          sign_in_as student
+          login_as student
           get path
         end
         it { should redirect_to root_path }
@@ -302,7 +302,7 @@ RSpec.describe 'TasksController authorization', type: :request do
       context 'as teacher' do
         context 'who created the course' do
           before do
-            sign_in_as teacher
+            login_as teacher
             get path
           end
           it { should be_success }
@@ -310,7 +310,7 @@ RSpec.describe 'TasksController authorization', type: :request do
 
         context '(other)' do
           before do
-            sign_in_as other_teacher
+            login_as other_teacher
             get path
           end
           it { should redirect_to root_path }

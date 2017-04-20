@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   expose(:teacher_courses) { current_user.teacher_courses }
 
   def home
-    return unless signed_in?
+    return unless user_signed_in?
     render 'dashboard'
   end
 end

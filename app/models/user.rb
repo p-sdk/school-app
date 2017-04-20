@@ -10,14 +10,28 @@
 #  updated_at              :datetime         not null
 #  teacher                 :boolean          default(FALSE)
 #  upgrade_request_sent_at :datetime
+#  encrypted_password      :string           default(""), not null
+#  reset_password_token    :string
+#  reset_password_sent_at  :datetime
+#  remember_created_at     :datetime
+#  sign_in_count           :integer          default(0), not null
+#  current_sign_in_at      :datetime
+#  last_sign_in_at         :datetime
+#  current_sign_in_ip      :inet
+#  last_sign_in_ip         :inet
 #
 # Indexes
 #
-#  index_users_on_email  (email) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ActiveRecord::Base
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_many :teacher_courses, class_name: 'Course', foreign_key: :teacher_id, dependent: :destroy
   has_many :enrollments, foreign_key: :student_id, dependent: :destroy
   has_many :courses, through: :enrollments
@@ -31,15 +45,6 @@ class User < ActiveRecord::Base
   validates :name,
             presence: true,
             length: { in: 3..50 }
-
-  validates :email,
-            presence: true,
-            length: { in: 5..100 },
-            uniqueness: { case_sensitive: false },
-            format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-
-  validates :password, length: { in: 5..60 }
-  validates :password_confirmation, presence: true
 
   def enrolled_in?(course)
     courses.include? course

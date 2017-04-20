@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'User signs up', type: :feature do
   subject { page }
 
-  before { visit signup_path }
+  before { visit new_user_registration_path }
 
   describe 'page' do
     it { should have_selector 'h1', text: 'Rejestracja' }

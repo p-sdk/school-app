@@ -7,7 +7,7 @@ RSpec.feature 'Teacher updates a lecture', type: :feature do
   let(:course) { lecture.course }
 
   before do
-    sign_in_as course.teacher
+    login_as course.teacher
     visit edit_course_lecture_path(course, lecture)
   end
 

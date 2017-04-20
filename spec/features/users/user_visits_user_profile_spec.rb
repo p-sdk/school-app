@@ -32,7 +32,7 @@ RSpec.feature 'User visits user profile', type: :feature do
     before { user.request_upgrade }
     context 'when signed in as admin' do
       before do
-        sign_in_as admin
+        login_as admin
         visit user_path(user)
       end
 

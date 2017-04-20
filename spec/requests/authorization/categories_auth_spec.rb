@@ -22,13 +22,13 @@ RSpec.describe 'CategoriesController authorization', type: :request do
     let(:path) { new_category_path }
     context 'when not signed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           get path
         end
         it { should redirect_to root_path }
@@ -36,7 +36,7 @@ RSpec.describe 'CategoriesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           get path
         end
         it { should be_success }
@@ -48,13 +48,13 @@ RSpec.describe 'CategoriesController authorization', type: :request do
     let(:path) { edit_category_path(category) }
     context 'when not signed in' do
       before { get path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           get path
         end
         it { should redirect_to root_path }
@@ -62,7 +62,7 @@ RSpec.describe 'CategoriesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           get path
         end
         it { should be_success }
@@ -75,13 +75,13 @@ RSpec.describe 'CategoriesController authorization', type: :request do
     let(:params) { { category: category.attributes } }
     context 'when not signed in' do
       before { post path, params }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           post path, params
         end
         it { should redirect_to root_path }
@@ -89,7 +89,7 @@ RSpec.describe 'CategoriesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           post path, params
         end
         it { should_not redirect_to root_path }
@@ -102,13 +102,13 @@ RSpec.describe 'CategoriesController authorization', type: :request do
     let(:params) { { category: category.attributes } }
     context 'when not signed in' do
       before { patch path, params }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           patch path, params
         end
         it { should redirect_to root_path }
@@ -116,7 +116,7 @@ RSpec.describe 'CategoriesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           patch path, params
         end
         it { should_not redirect_to root_path }
@@ -128,13 +128,13 @@ RSpec.describe 'CategoriesController authorization', type: :request do
     let(:path) { category_path(category) }
     context 'when not signed in' do
       before { delete path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           delete path
         end
         it { should_not redirect_to root_path }
@@ -142,7 +142,7 @@ RSpec.describe 'CategoriesController authorization', type: :request do
 
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           delete path
         end
         it { should redirect_to root_path }

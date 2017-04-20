@@ -9,12 +9,12 @@ RSpec.describe 'UpgradesController authorization', type: :request do
     let(:path) { upgrades_path }
     context 'when not singed in' do
       before { post path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when signed in' do
       before do
-        sign_in_as user
+        login_as user
         post path
       end
       it { should redirect_to user_path(user) }
@@ -25,13 +25,13 @@ RSpec.describe 'UpgradesController authorization', type: :request do
     let(:path) { upgrade_user_path(user) }
     context 'when not singed in' do
       before { patch path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when singed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           patch path
         end
         it { should redirect_to root_path }
@@ -39,7 +39,7 @@ RSpec.describe 'UpgradesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           patch path
         end
         it { should_not redirect_to root_path }
@@ -51,13 +51,13 @@ RSpec.describe 'UpgradesController authorization', type: :request do
     let(:path) { upgrade_user_path(user) }
     context 'when not singed in' do
       before { delete path }
-      it { should redirect_to signin_path }
+      it { should redirect_to new_user_session_path }
     end
 
     context 'when singed in' do
       context 'as non-admin user' do
         before do
-          sign_in_as user
+          login_as user
           delete path
         end
         it { should redirect_to root_path }
@@ -65,7 +65,7 @@ RSpec.describe 'UpgradesController authorization', type: :request do
 
       context 'as admin' do
         before do
-          sign_in_as admin
+          login_as admin
           delete path
         end
         it { should_not redirect_to root_path }

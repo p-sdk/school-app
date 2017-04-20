@@ -23,7 +23,7 @@ RSpec.feature 'User reads categories index', type: :feature do
 
   context 'for admin' do
     before do
-      sign_in_as admin
+      login_as admin
       visit categories_path
     end
     it { should have_link 'Dodaj nową kategorię', href: new_category_path }

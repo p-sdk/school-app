@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_action :require_sign_in
+  before_action :authenticate_user!
 
   def create
     course = Course.find(params[:enrollment][:course_id])

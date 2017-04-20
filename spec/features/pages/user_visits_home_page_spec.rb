@@ -23,7 +23,7 @@ RSpec.feature 'User visits home page', type: :feature do
 
   context 'when signed in' do
     before do
-      sign_in_as user
+      login_as user
       visit root_path
     end
     it { should have_link 'Moje kursy', href: root_path }
@@ -49,7 +49,7 @@ RSpec.feature 'User visits home page', type: :feature do
 
     context 'as teacher' do
       before do
-        sign_in_as teacher
+        login_as teacher
         visit root_path
       end
 
@@ -71,7 +71,7 @@ RSpec.feature 'User visits home page', type: :feature do
 
     context 'as admin' do
       before do
-        sign_in_as admin
+        login_as admin
         visit root_path
       end
 

@@ -8,8 +8,8 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
 
   describe 'submitting request to upgrade to teacher account' do
     before do
-      sign_in_as user
-      visit edit_user_path(user)
+      login_as user
+      visit edit_user_registration_path
       click_on 'rozszerzenie'
     end
 
@@ -20,7 +20,7 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
     end
 
     describe 'edit page' do
-      before { visit edit_user_path(user) }
+      before { visit edit_user_registration_path }
 
       it 'should have proper message' do
         should_not have_link 'rozszerzenie'
@@ -32,7 +32,7 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
   describe 'upgrade' do
     before do
       user.request_upgrade
-      sign_in_as admin
+      login_as admin
       visit user_path(user)
     end
 

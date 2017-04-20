@@ -3,7 +3,7 @@ class SolutionsController < ApplicationController
   expose_decorated(:task) { solution.task }
 
   before_action :set_create_params, only: :create
-  before_action :require_sign_in
+  before_action :authenticate_user!
   before_action :require_correct_user, only: :show
   before_action :require_correct_teacher, only: %i(edit update destroy)
   before_action :require_correct_student, only: :create

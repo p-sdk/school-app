@@ -9,7 +9,7 @@ RSpec.feature 'User reads solution details', type: :feature do
   let(:student) { solution.enrollment.student }
 
   before do
-    sign_in_as course.teacher
+    login_as course.teacher
     visit solution_path(solution)
   end
 
@@ -26,7 +26,7 @@ RSpec.feature 'User reads solution details', type: :feature do
 
   context 'when signed in as student' do
     before do
-      sign_in_as student
+      login_as student
       visit solution_path(solution)
     end
     it 'should have proper links' do

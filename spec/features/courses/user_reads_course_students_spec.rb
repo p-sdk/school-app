@@ -8,7 +8,7 @@ RSpec.feature 'User reads course students', type: :feature do
 
   before do
     students.each { |s| s.enroll_in course }
-    sign_in_as course.teacher
+    login_as course.teacher
     visit students_course_path(course)
   end
 

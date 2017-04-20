@@ -8,7 +8,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
   let(:course) { task.course }
 
   before do
-    sign_in_as course.teacher
+    login_as course.teacher
     visit edit_solution_path(solution)
   end
 

@@ -5,7 +5,7 @@ RSpec.feature 'Authentication', type: :feature do
   let(:user) { create :user }
 
   describe 'signin' do
-    before { visit signin_path }
+    before { visit new_user_session_path }
 
     describe 'page' do
       it { should have_selector 'h1', text: 'Logowanie' }
@@ -16,27 +16,31 @@ RSpec.feature 'Authentication', type: :feature do
 
       it 'should display error message' do
         should have_selector 'h1', text: 'Logowanie'
-        should have_error_message
+        should have_warning_message
       end
     end
 
     context 'with valid information' do
-      before { sign_in_as user }
+      before do
+        fill_in 'Email', with: user.email
+        fill_in 'Hasło', with: user.password
+        click_button 'Zaloguj'
+      end
 
       it 'should be signed in' do
         expect(current_path).to eq root_path
         should have_link user.name, href: '#'
         should have_link 'Mój profil', href: user_path(user)
-        should have_link 'Ustawienia', href: edit_user_path(user)
-        should have_link 'Wyloguj', href: signout_path
-        should_not have_link 'Zaloguj', href: signin_path
+        should have_link 'Ustawienia', href: edit_user_registration_path
+        should have_link 'Wyloguj', href: destroy_user_session_path
+        should_not have_link 'Zaloguj', href: new_user_session_path
       end
 
       describe 'followed by signout' do
         before { click_link 'Wyloguj' }
 
         it 'should be signed out' do
-          should have_link 'Zaloguj', href: signin_path
+          should have_link 'Zaloguj', href: new_user_session_path
           should_not have_link user.name
           should_not have_link 'Mój profil'
           should_not have_link 'Ustawienia'
@@ -48,7 +52,7 @@ RSpec.feature 'Authentication', type: :feature do
 
   describe 'forwarding' do
     context 'when attempting to visit a protected page' do
-      let(:protected_page) { edit_user_path(user) }
+      let(:protected_page) { edit_user_registration_path }
       before do
         visit protected_page
         fill_in 'Email', with: user.email
@@ -64,7 +68,7 @@ RSpec.feature 'Authentication', type: :feature do
         context 'when signing in again' do
           before do
             click_link 'Wyloguj'
-            sign_in_as user
+            login_as user
           end
           it 'should render default page' do
             expect(current_path).to eq root_path

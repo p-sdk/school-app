@@ -16,11 +16,11 @@
               = link_to current_user do
                 = icon 'user', 'Mój profil'
             %li
-              = link_to edit_user_path(current_user) do
+              = link_to edit_user_registration_path do
                 = icon 'cogs', 'Ustawienia'
             %li.divider
             %li
-              = link_to signout_path, method: :delete do
+              = link_to destroy_user_session_path, method: :delete do
                 = icon 'sign-out', 'Wyloguj'
       - else
-        %li= link_to 'Zaloguj', signin_path
+        %li= link_to 'Zaloguj', new_user_session_path

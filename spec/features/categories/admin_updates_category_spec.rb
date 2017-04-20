@@ -7,7 +7,7 @@ RSpec.feature 'Admin updates a category', type: :feature do
   let(:category) { create :category }
 
   before do
-    sign_in_as admin
+    login_as admin
     visit edit_category_path(category)
   end
 

@@ -9,7 +9,7 @@ RSpec.feature 'Admin reads users index', type: :feature do
   let!(:requesting_upgrade_users) { create_list :teacher, 2, upgrade_request_sent_at: Time.current }
 
   before do
-    sign_in_as admin
+    login_as admin
     visit users_path
   end
 

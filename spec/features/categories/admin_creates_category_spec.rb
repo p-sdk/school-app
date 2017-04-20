@@ -6,7 +6,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
   let(:admin) { create :admin }
 
   before do
-    sign_in_as admin
+    login_as admin
     visit new_category_path
   end
 

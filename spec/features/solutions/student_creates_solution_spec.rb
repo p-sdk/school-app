@@ -9,7 +9,7 @@ RSpec.feature 'Student creates a solution', type: :feature do
   let(:submit) { 'Wyślij' }
 
   before do
-    sign_in_as student
+    login_as student
     visit course_task_path(course, task)
   end
 

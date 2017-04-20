@@ -7,7 +7,7 @@ RSpec.feature 'Teacher updates a task', type: :feature do
   let(:course) { task.course }
 
   before do
-    sign_in_as course.teacher
+    login_as course.teacher
     visit edit_course_task_path(course, task)
   end
 

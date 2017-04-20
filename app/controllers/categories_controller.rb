@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   expose_decorated(:categories)
   expose(:category, attributes: :category_params)
 
-  before_action :require_sign_in, except: %i(index show)
+  before_action :authenticate_user!, except: %i(index show)
   before_action :require_admin, except: %i(index show)
 
   def create

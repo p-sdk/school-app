@@ -6,7 +6,7 @@ RSpec.feature 'Teacher creates a course', type: :feature do
   let(:teacher) { create :teacher }
 
   before do
-    sign_in_as teacher
+    login_as teacher
     visit new_course_path
   end
 

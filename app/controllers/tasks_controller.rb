@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   expose(:pending_solutions) { task.solutions.ungraded }
   expose(:graded_solutions) { task.solutions.graded }
 
-  before_action :require_sign_in
+  before_action :authenticate_user!
   before_action :require_correct_user, only: %i(index show)
   before_action :require_correct_teacher, only: %i(new edit create update destroy solutions)
 
