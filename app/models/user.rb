@@ -8,7 +8,6 @@
 #  password_digest         :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  teacher                 :boolean          default(FALSE)
 #  upgrade_request_sent_at :datetime
 #  encrypted_password      :string           default(""), not null
 #  reset_password_token    :string
@@ -19,6 +18,7 @@
 #  last_sign_in_at         :datetime
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
+#  role                    :integer          default(0)
 #
 # Indexes
 #
@@ -27,6 +27,10 @@
 #
 
 class User < ActiveRecord::Base
+  ROLES = %i(student teacher)
+
+  enum role: ROLES
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -39,8 +43,6 @@ class User < ActiveRecord::Base
   before_save { email.downcase! }
 
   scope :requesting_upgrade, -> { where.not(upgrade_request_sent_at: nil) }
-  scope :teachers, -> { where(teacher: true) }
-  scope :students, -> { where.not(teacher: true) }
 
   validates :name,
             presence: true,
@@ -68,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def approve_upgrade_request
-    update! teacher: true
+    teacher!
     update! upgrade_request_sent_at: nil
   end
 

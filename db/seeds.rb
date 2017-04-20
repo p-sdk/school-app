@@ -39,7 +39,7 @@ class Seeds
   end
 
   def create_enrollments(per_student:)
-    User.students.each do |student|
+    User.student.each do |student|
       enrollments_num = rand((per_student - 5)..(per_student + 5))
       courses = Course.all.sample(enrollments_num)
       courses.each do |course|
@@ -105,7 +105,7 @@ class Seeds
       name: random_sentence,
       desc: random_text,
       category: Category.all.sample,
-      teacher: User.teachers.sample
+      teacher: User.teacher.sample
     }
   end
 

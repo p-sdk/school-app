@@ -8,7 +8,6 @@
 #  password_digest         :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  teacher                 :boolean          default(FALSE)
 #  upgrade_request_sent_at :datetime
 #  encrypted_password      :string           default(""), not null
 #  reset_password_token    :string
@@ -19,6 +18,7 @@
 #  last_sign_in_at         :datetime
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
+#  role                    :integer          default(0)
 #
 # Indexes
 #
@@ -51,26 +51,6 @@ RSpec.describe User, type: :model do
     before do
       alice.request_upgrade
     end
-
-    it { is_expected.to include alice }
-    it { is_expected.to_not include bob }
-  end
-
-  describe '.teachers' do
-    subject { described_class.teachers }
-
-    let!(:alice) { create :teacher }
-    let!(:bob) { create :user }
-
-    it { is_expected.to include alice }
-    it { is_expected.to_not include bob }
-  end
-
-  describe '.students' do
-    subject { described_class.students }
-
-    let!(:alice) { create :user }
-    let!(:bob) { create :teacher }
 
     it { is_expected.to include alice }
     it { is_expected.to_not include bob }

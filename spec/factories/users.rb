@@ -8,7 +8,6 @@
 #  password_digest         :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
-#  teacher                 :boolean          default(FALSE)
 #  upgrade_request_sent_at :datetime
 #  encrypted_password      :string           default(""), not null
 #  reset_password_token    :string
@@ -19,6 +18,7 @@
 #  last_sign_in_at         :datetime
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
+#  role                    :integer          default(0)
 #
 # Indexes
 #
@@ -34,7 +34,7 @@ FactoryGirl.define do
     password_confirmation 'foobar'
 
     factory :teacher do
-      teacher true
+      role :teacher
     end
 
     factory :admin do
