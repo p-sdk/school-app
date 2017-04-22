@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   resources :upgrades, only: :create
 
   root 'pages#home'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
