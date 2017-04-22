@@ -50,11 +50,11 @@ class SolutionsController < ApplicationController
   def require_correct_user
     return if current_user? solution.student
     return if current_user? course.teacher
-    raise AccessDenied
+    deny_access
   end
 
   def require_correct_student
     return if @task.can_be_solved_by?(current_user)
-    raise AccessDenied
+    deny_access
   end
 end

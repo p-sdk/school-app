@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
-  class AccessDenied < StandardError; end
-
-  rescue_from AccessDenied, with: :access_denied
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   include SessionsHelper
@@ -22,24 +19,24 @@ class ApplicationController < ActionController::Base
   end
 
   def require_teacher
-    raise AccessDenied unless current_user.teacher?
+    deny_access unless current_user.teacher?
   end
 
   def require_course_teacher
-    raise AccessDenied unless current_user? course.teacher
+    deny_access unless current_user? course.teacher
   end
 
   def require_course_user
     return if current_user? course.teacher
     return if course.has_student? current_user
-    raise AccessDenied
+    deny_access
   end
 
   def require_admin
-    raise AccessDenied unless current_user.admin?
+    deny_access unless current_user.admin?
   end
 
-  def access_denied
+  def deny_access
     flash[:danger] = 'Odmowa dostępu'
     redirect_to root_path
   end
