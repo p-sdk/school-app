@@ -7,8 +7,8 @@ class TasksController < ApplicationController
   expose(:graded_solutions) { task.solutions.graded }
 
   before_action :authenticate_user!
-  before_action :require_correct_user, only: %i(index show)
-  before_action :require_correct_teacher, only: %i(new edit create update destroy solutions)
+  before_action :require_course_user, only: %i(index show)
+  before_action :require_course_teacher, only: %i(new edit create update destroy solutions)
 
   def create
     if task.save
@@ -38,15 +38,5 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(%i(title desc points))
-  end
-
-  def require_correct_user
-    return if current_user? course.teacher
-    return if course.has_student? current_user
-    raise AccessDenied
-  end
-
-  def require_correct_teacher
-    raise AccessDenied unless current_user? course.teacher
   end
 end

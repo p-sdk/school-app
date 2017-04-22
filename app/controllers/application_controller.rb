@@ -25,6 +25,16 @@ class ApplicationController < ActionController::Base
     raise AccessDenied unless current_user.teacher?
   end
 
+  def require_course_teacher
+    raise AccessDenied unless current_user? course.teacher
+  end
+
+  def require_course_user
+    return if current_user? course.teacher
+    return if course.has_student? current_user
+    raise AccessDenied
+  end
+
   def require_admin
     raise AccessDenied unless current_user.admin?
   end

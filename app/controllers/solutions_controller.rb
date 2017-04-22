@@ -5,7 +5,7 @@ class SolutionsController < ApplicationController
   before_action :set_create_params, only: :create
   before_action :authenticate_user!
   before_action :require_correct_user, only: :show
-  before_action :require_correct_teacher, only: %i(edit update destroy)
+  before_action :require_course_teacher, only: %i(edit update destroy)
   before_action :require_correct_student, only: :create
 
   def create
@@ -34,6 +34,10 @@ class SolutionsController < ApplicationController
 
   private
 
+  def course
+    task.course
+  end
+
   def set_create_params
     @task = Task.find(params[:solution][:task_id])
     @content = params[:solution][:content]
@@ -45,12 +49,8 @@ class SolutionsController < ApplicationController
 
   def require_correct_user
     return if current_user? solution.student
-    return if current_user? task.course.teacher
+    return if current_user? course.teacher
     raise AccessDenied
-  end
-
-  def require_correct_teacher
-    raise AccessDenied unless current_user? task.course.teacher
   end
 
   def require_correct_student

@@ -4,8 +4,8 @@ class LecturesController < ApplicationController
   expose_decorated(:lecture, attributes: :lecture_params)
 
   before_action :authenticate_user!
-  before_action :require_correct_user, only: %i(index show)
-  before_action :require_correct_teacher, only: %i(new edit create update destroy)
+  before_action :require_course_user, only: %i(index show)
+  before_action :require_course_teacher, only: %i(new edit create update destroy)
 
   def create
     if lecture.save
@@ -35,15 +35,5 @@ class LecturesController < ApplicationController
 
   def lecture_params
     params.require(:lecture).permit(%i(title content attachment))
-  end
-
-  def require_correct_user
-    return if current_user? course.teacher
-    return if course.has_student? current_user
-    raise AccessDenied
-  end
-
-  def require_correct_teacher
-    raise AccessDenied unless current_user? course.teacher
   end
 end
