@@ -33,9 +33,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Lower BCrypt cost
-  BCrypt::Engine.cost = BCrypt::Engine::MIN_COST
-
   # Define default url for mailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

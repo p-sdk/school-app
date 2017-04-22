@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
-gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'decent_decoration'
