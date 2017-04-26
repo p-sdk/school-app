@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  expose_decorated(:categories)
-  expose(:category, attributes: :category_params)
+  expose_decorated(:categories) { Category.all }
+  expose(:category)
 
   before_action :authenticate_user!, except: %i(index show)
   before_action :require_admin, except: %i(index show)
@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    if category.save
+    if category.update(category_params)
       flash[:success] = 'Kategoria została zaktualizowana'
       redirect_to category
     else

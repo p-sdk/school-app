@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  expose(:courses) { current_user.courses }
-  expose(:teacher_courses) { current_user.teacher_courses }
+  expose(:courses, from: :current_user)
+  expose(:teacher_courses, from: :current_user)
 
   def home
     return unless user_signed_in?

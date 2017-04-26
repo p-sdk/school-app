@@ -1,19 +1,13 @@
 class CoursesController < ApplicationController
-  expose(:courses) { current_user.teacher_courses }
-  expose_decorated(:course, attributes: :course_params)
+  expose(:courses) { Course.all }
+  expose_decorated(:course)
 
   before_action :authenticate_user!, except: %i(index show)
   before_action :require_teacher, only: %i(new create)
-
-  def index
-    self.courses = Course.all
-  end
-
-  def show
-    self.courses = Course.all
-  end
+  before_action :require_course_teacher, only: %i(edit update destroy students)
 
   def create
+    course.teacher = current_user
     if course.save
       flash[:success] = 'Kurs został utworzony'
       redirect_to course
@@ -23,7 +17,7 @@ class CoursesController < ApplicationController
   end
 
   def update
-    if course.save
+    if course.update(course_params)
       flash[:success] = 'Kurs został zaktualizowany'
       redirect_to course
     else

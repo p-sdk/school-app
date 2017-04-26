@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   expose_decorated(:course)
-  expose_decorated(:tasks, ancestor: :course)
-  expose_decorated(:task, attributes: :task_params)
+  expose_decorated(:tasks, from: :course)
+  expose_decorated(:task, parent: :course)
   expose(:solution) { task.solution_by current_user }
   expose(:pending_solutions) { task.solutions.ungraded }
   expose(:graded_solutions) { task.solutions.graded }
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if task.save
+    if task.update(task_params)
       flash[:success] = 'Zadanie zostało zaktualizowane'
       redirect_to [course, task]
     else

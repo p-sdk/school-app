@@ -1,7 +1,7 @@
 class LecturesController < ApplicationController
   expose(:course)
-  expose(:lectures, ancestor: :course)
-  expose_decorated(:lecture, attributes: :lecture_params)
+  expose(:lectures, from: :course)
+  expose_decorated(:lecture, parent: :course)
 
   before_action :authenticate_user!
   before_action :require_course_user, only: %i(index show)
@@ -17,7 +17,7 @@ class LecturesController < ApplicationController
   end
 
   def update
-    if lecture.save
+    if lecture.update(lecture_params)
       flash[:success] = 'Wykład został zaktualizowany'
       redirect_to [course, lecture]
     else

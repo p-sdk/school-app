@@ -1,6 +1,6 @@
 class SolutionsController < ApplicationController
-  expose_decorated(:solution, attributes: :solution_params)
-  expose_decorated(:task) { solution.task }
+  expose_decorated(:solution)
+  expose_decorated(:task, from: :solution)
 
   before_action :set_create_params, only: :create
   before_action :authenticate_user!
@@ -18,7 +18,7 @@ class SolutionsController < ApplicationController
   end
 
   def update
-    if solution.save
+    if solution.update(solution_params)
       flash[:success] = 'Rozwiązanie zostało ocenione'
       redirect_to solution
     else
