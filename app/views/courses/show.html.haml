@@ -4,7 +4,7 @@
       - if current_user? course.teacher
         = link_to edit_course_path(course), class: 'btn btn-default' do
           = icon 'edit', 'Edytuj'
-        = link_to students_course_path(course), class: 'btn btn-default' do
+        = link_to course_students_path(course), class: 'btn btn-default' do
           = icon 'group', 'Zapisani studenci'
       - elsif !current_user.enrolled_in? course
         .enroll= render 'enroll'

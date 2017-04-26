@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
   before_action :authenticate_user!, except: %i(index show)
   before_action :require_teacher, only: %i(new create)
-  before_action :require_course_teacher, only: %i(edit update destroy students)
+  before_action :require_course_teacher, only: %i(edit update destroy)
 
   def create
     course.teacher = current_user

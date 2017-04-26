@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses do
-    member { get :students }
+    resources :students, only: :index
     resources :lectures
     resources :tasks do
       member { get :solutions }

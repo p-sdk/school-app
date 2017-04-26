@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User reads course students', type: :feature do
+RSpec.feature 'Teacher reads course students', type: :feature do
   subject { page }
 
   let(:course) { create :course }
@@ -9,7 +9,7 @@ RSpec.feature 'User reads course students', type: :feature do
   before do
     students.each { |s| s.enroll_in course }
     login_as course.teacher
-    visit students_course_path(course)
+    visit course_students_path(course)
   end
 
   it 'should list all students enrolled to the course' do

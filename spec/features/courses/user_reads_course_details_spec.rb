@@ -17,7 +17,7 @@ RSpec.feature 'User reads course details', type: :feature do
     it 'should have proper links' do
       should_not have_button 'Zapisz się'
       should_not have_link 'Edytuj', href: edit_course_path(course)
-      should_not have_link 'Zapisani studenci', href: students_course_path(course)
+      should_not have_link 'Zapisani studenci', href: course_students_path(course)
       should_not have_link 'Wykłady', href: course_lectures_path(course)
       should_not have_link 'Zadania', href: course_tasks_path(course)
     end
@@ -32,7 +32,7 @@ RSpec.feature 'User reads course details', type: :feature do
     it 'should have proper links' do
       should_not have_button 'Zapisz się'
       should have_link 'Edytuj', href: edit_course_path(course)
-      should have_link 'Zapisani studenci', href: students_course_path(course)
+      should have_link 'Zapisani studenci', href: course_students_path(course)
       should have_link 'Wykłady', href: course_lectures_path(course)
       should have_link 'Zadania', href: course_tasks_path(course)
     end
@@ -55,7 +55,7 @@ RSpec.feature 'User reads course details', type: :feature do
 
       it 'should have proper links' do
         should_not have_button 'Zapisz się'
-        should_not have_link 'Zapisani studenci', href: students_course_path(course)
+        should_not have_link 'Zapisani studenci', href: course_students_path(course)
         should have_link 'Wykłady', href: course_lectures_path(course)
         should have_link 'Zadania', href: course_tasks_path(course)
       end
@@ -64,7 +64,7 @@ RSpec.feature 'User reads course details', type: :feature do
     context 'when not enrolled' do
       it 'should have proper links' do
         should have_button 'Zapisz się'
-        should_not have_link 'Zapisani studenci', href: students_course_path(course)
+        should_not have_link 'Zapisani studenci', href: course_students_path(course)
         should_not have_link 'Wykłady', href: course_lectures_path(course)
         should_not have_link 'Zadania', href: course_tasks_path(course)
       end
