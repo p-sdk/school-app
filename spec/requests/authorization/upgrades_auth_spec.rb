@@ -22,7 +22,7 @@ RSpec.describe 'UpgradesController authorization', type: :request do
   end
 
   describe 'PATCH #update' do
-    let(:path) { upgrade_user_path(user) }
+    let(:path) { user_upgrade_path(user) }
     context 'when not singed in' do
       before { patch path }
       it { should redirect_to new_user_session_path }
@@ -48,7 +48,7 @@ RSpec.describe 'UpgradesController authorization', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let(:path) { upgrade_user_path(user) }
+    let(:path) { user_upgrade_path(user) }
     context 'when not singed in' do
       before { delete path }
       it { should redirect_to new_user_session_path }

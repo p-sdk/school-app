@@ -2,10 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: %i(index show) do
-    member do
-      patch 'upgrade' => 'upgrades#update'
-      delete 'upgrade' => 'upgrades#destroy'
-    end
+    resource :upgrade, only: %i(update destroy)
   end
 
   resources :courses do

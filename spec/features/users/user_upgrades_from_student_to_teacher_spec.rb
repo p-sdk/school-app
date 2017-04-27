@@ -29,7 +29,7 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
     end
   end
 
-  describe 'upgrade' do
+  describe 'admin decides on upgrade' do
     before do
       user.request_upgrade
       login_as admin
