@@ -7,7 +7,7 @@
         = link_to course_students_path(course), class: 'btn btn-default' do
           = icon 'group', 'Zapisani studenci'
       - elsif !current_user.enrolled_in? course
-        .enroll= render 'enroll'
+        .enroll= button_to 'Zapisz się', course_students_path(course), class: 'btn btn-primary'
 
     - if current_user?(course.teacher) || course.has_student?(current_user)
       = link_to course_lectures_path(course), class: 'btn btn-default' do

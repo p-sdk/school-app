@@ -41,4 +41,20 @@ RSpec.describe 'StudentsController authorization', type: :request do
       end
     end
   end
+
+  describe 'POST #create' do
+    let(:path) { course_students_path(course) }
+    context 'when not singed in' do
+      before { post path }
+      it { should redirect_to new_user_session_path }
+    end
+
+    context 'when signed in' do
+      before do
+        login_as student
+        post path
+      end
+      it { should_not redirect_to new_user_session_path }
+    end
+  end
 end

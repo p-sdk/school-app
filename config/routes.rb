@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses do
-    resources :students, only: :index
+    resources :students, only: %i(index create)
     resources :lectures
     resources :tasks do
       resources :solutions, controller: :task_solutions, only: :index
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :enrollments, only: :create
   resources :solutions, only: %i(show edit create update destroy)
   resources :upgrades, only: :create
 
