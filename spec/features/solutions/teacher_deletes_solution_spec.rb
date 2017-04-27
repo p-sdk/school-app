@@ -19,7 +19,7 @@ RSpec.feature 'Teacher deletes a solution', type: :feature do
   context 'after deleting' do
     before { click_link 'Usuń' }
     it 'should display success message' do
-      expect(current_path).to eq solutions_course_task_path(course, task)
+      expect(current_path).to eq course_task_solutions_path(course, task)
       should have_success_message
     end
   end

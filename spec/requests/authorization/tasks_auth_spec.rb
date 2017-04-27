@@ -282,40 +282,4 @@ RSpec.describe 'TasksController authorization', type: :request do
       end
     end
   end
-
-  describe 'GET #solutions' do
-    let(:path) { solutions_course_task_path(course, task) }
-    context 'when not singed in' do
-      before { get path }
-      it { should redirect_to new_user_session_path }
-    end
-
-    context 'when signed in' do
-      context 'as student' do
-        before do
-          login_as student
-          get path
-        end
-        it { should redirect_to root_path }
-      end
-
-      context 'as teacher' do
-        context 'who created the course' do
-          before do
-            login_as teacher
-            get path
-          end
-          it { should be_success }
-        end
-
-        context '(other)' do
-          before do
-            login_as other_teacher
-            get path
-          end
-          it { should redirect_to root_path }
-        end
-      end
-    end
-  end
 end

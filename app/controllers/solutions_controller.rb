@@ -29,7 +29,7 @@ class SolutionsController < ApplicationController
   def destroy
     solution.destroy
     flash[:success] = 'Rozwiązanie zostało usunięte'
-    redirect_to solutions_course_task_path(task.course, task)
+    redirect_to course_task_solutions_path(task.course, task)
   end
 
   private

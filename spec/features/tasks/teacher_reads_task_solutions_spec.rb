@@ -9,7 +9,7 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
 
   before do
     login_as course.teacher
-    visit solutions_course_task_path(course, task)
+    visit course_task_solutions_path(course, task)
   end
 
   it 'should display a header' do
@@ -25,7 +25,7 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
       enrollments.map { |e| create :solution, enrollment: e, task: task }
     end
 
-    before { visit solutions_course_task_path(course, task) }
+    before { visit course_task_solutions_path(course, task) }
 
     specify do
       ungraded_solutions.each do |solution|
@@ -41,7 +41,7 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
       enrollments.map { |e| create :graded_solution, enrollment: e, task: task }
     end
 
-    before { visit solutions_course_task_path(course, task) }
+    before { visit course_task_solutions_path(course, task) }
 
     specify do
       graded_solutions.each do |solution|

@@ -3,12 +3,10 @@ class TasksController < ApplicationController
   expose_decorated(:tasks, from: :course)
   expose_decorated(:task, parent: :course)
   expose(:solution) { task.solution_by current_user }
-  expose(:pending_solutions) { task.solutions.ungraded }
-  expose(:graded_solutions) { task.solutions.graded }
 
   before_action :authenticate_user!
   before_action :require_course_user, only: %i(index show)
-  before_action :require_course_teacher, only: %i(new edit create update destroy solutions)
+  before_action :require_course_teacher, only: %i(new edit create update destroy)
 
   def create
     if task.save

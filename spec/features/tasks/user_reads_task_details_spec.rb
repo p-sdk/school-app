@@ -53,7 +53,7 @@ RSpec.feature 'User reads task details', type: :feature do
 
     it "should display teacher's links" do
       should have_link 'Edytuj', href: edit_course_task_path(course, task)
-      should have_link 'Rozwiązania', href: solutions_course_task_path(course, task)
+      should have_link 'Rozwiązania', href: course_task_solutions_path(course, task)
       should_not have_selector 'form.new_solution'
       should_not have_link 'Moje rozwiązanie'
     end

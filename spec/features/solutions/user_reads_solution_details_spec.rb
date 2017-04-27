@@ -20,7 +20,7 @@ RSpec.feature 'User reads solution details', type: :feature do
     should have_selector 'h3', text: 'Rozwiązanie'
     should have_selector 'div.solution', text: solution.content
     should have_content 'Uzyskane punkty'
-    should have_link 'Wróć do listy rozwiązań', href: solutions_course_task_path(course, task)
+    should have_link 'Wróć do listy rozwiązań', href: course_task_solutions_path(course, task)
     should have_link 'Usuń', href: solution_path(solution)
   end
 

@@ -1,7 +1,7 @@
 .row
   .col-md-3
     .back
-      = link_to solutions_course_task_path(task.course, task), class: 'btn btn-default' do
+      = link_to course_task_solutions_path(task.course, task), class: 'btn btn-default' do
         = icon 'arrow-left', 'Wróć do listy rozwiązań'
     .delete
       = link_to solution_path(solution), method: :delete, class: 'btn btn-default' do

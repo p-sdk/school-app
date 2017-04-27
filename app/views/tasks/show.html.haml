@@ -8,7 +8,7 @@
         = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
           = icon 'edit', 'Edytuj'
       .solutions
-        = link_to solutions_course_task_path(course, task), class: 'btn btn-default' do
+        = link_to course_task_solutions_path(course, task), class: 'btn btn-default' do
           Rozwiązania
       .avg-score
         Przeciętny wynik:

@@ -15,7 +15,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
   describe 'page' do
     it 'should display the solution' do
       should have_selector 'h1', text: task.title
-      should have_link 'Wróć', href: solutions_course_task_path(course, task)
+      should have_link 'Wróć', href: course_task_solutions_path(course, task)
       should have_selector 'h3', text: 'Opis'
       should have_selector 'div.desc', text: task.desc
       should have_selector 'h3', text: 'Rozwiązanie'
