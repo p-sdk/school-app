@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
   include SessionsHelper
 
   private
@@ -34,10 +32,6 @@ class ApplicationController < ActionController::Base
 
   def deny_access
     flash[:danger] = 'Odmowa dostępu'
-    redirect_to root_path
-  end
-
-  def not_found
     redirect_to root_path
   end
 end
