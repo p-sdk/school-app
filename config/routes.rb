@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users, only: %i(index show) do
-    resource :upgrade, only: %i(update destroy)
+  resources :users, only: %i[index show] do
+    resource :upgrade, only: %i[update destroy]
   end
 
   resources :courses do
-    resources :students, only: %i(index create)
+    resources :students, only: %i[index create]
     resources :lectures
     resources :tasks do
       resources :solutions, controller: :task_solutions, only: :index
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :solutions, only: %i(show edit create update destroy)
+  resources :solutions, only: %i[show edit create update destroy]
   resources :upgrades, only: :create
 
   root 'pages#home'

@@ -2,8 +2,8 @@ class CategoriesController < ApplicationController
   expose_decorated(:categories) { Category.all }
   expose(:category)
 
-  before_action :authenticate_user!, except: %i(index show)
-  before_action :require_admin, except: %i(index show)
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :require_admin, except: %i[index show]
 
   def create
     if category.save

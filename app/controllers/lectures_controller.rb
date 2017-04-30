@@ -4,8 +4,8 @@ class LecturesController < ApplicationController
   expose_decorated(:lecture, parent: :course)
 
   before_action :authenticate_user!
-  before_action :require_course_user, only: %i(index show)
-  before_action :require_course_teacher, only: %i(new edit create update destroy)
+  before_action :require_course_user, only: %i[index show]
+  before_action :require_course_teacher, only: %i[new edit create update destroy]
 
   def create
     if lecture.save
@@ -34,6 +34,6 @@ class LecturesController < ApplicationController
   private
 
   def lecture_params
-    params.require(:lecture).permit(%i(title content attachment))
+    params.require(:lecture).permit(%i[title content attachment])
   end
 end

@@ -26,7 +26,7 @@
 #
 
 class User < ActiveRecord::Base
-  ROLES = %i(student teacher admin)
+  ROLES = %i[student teacher admin]
 
   enum role: ROLES
 

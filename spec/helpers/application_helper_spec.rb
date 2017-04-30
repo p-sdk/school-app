@@ -13,7 +13,7 @@ RSpec.describe ApplicationHelper do
 
   describe '#alert_name' do
     it 'does not change bootstrap alerts classes' do
-      %i(success info warning danger).each do |name|
+      %i[success info warning danger].each do |name|
         expect(subject.alert_name(name)).to eq name
       end
     end

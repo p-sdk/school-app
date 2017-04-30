@@ -5,8 +5,8 @@ class TasksController < ApplicationController
   expose(:solution) { task.solution_by current_user }
 
   before_action :authenticate_user!
-  before_action :require_course_user, only: %i(index show)
-  before_action :require_course_teacher, only: %i(new edit create update destroy)
+  before_action :require_course_user, only: %i[index show]
+  before_action :require_course_teacher, only: %i[new edit create update destroy]
 
   def create
     if task.save
@@ -35,6 +35,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(%i(title desc points))
+    params.require(:task).permit(%i[title desc points])
   end
 end

@@ -5,7 +5,7 @@ class SolutionsController < ApplicationController
   before_action :set_create_params, only: :create
   before_action :authenticate_user!
   before_action :require_correct_user, only: :show
-  before_action :require_course_teacher, only: %i(edit update destroy)
+  before_action :require_course_teacher, only: %i[edit update destroy]
   before_action :require_correct_student, only: :create
 
   def create
