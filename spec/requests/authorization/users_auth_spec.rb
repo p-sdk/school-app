@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'UsersController authorization', type: :request do
   subject { response }
   let(:user) { create :user }
-  let(:other_user) { create :user }
   let(:admin) { create :admin }
 
   describe 'GET #index' do
