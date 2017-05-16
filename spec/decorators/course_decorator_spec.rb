@@ -3,7 +3,6 @@ require 'spec_helper'
 RSpec.describe CourseDecorator do
   let(:course) { build(:course).decorate }
   let(:enrollment) { create(:enrollment, course: course) }
-  let(:student) { enrollment.student }
 
   describe '#description_formatted' do
     subject { course.description_formatted }
@@ -15,8 +14,8 @@ RSpec.describe CourseDecorator do
     it { is_expected.to eq "<h1>Header</h1>\n" }
   end
 
-  describe '#points_earned_by' do
-    subject { course.points_earned_by(student) }
+  describe '#points_earned_by_enrollment' do
+    subject { course.points_earned_by_enrollment(enrollment) }
 
     context 'when no task has been solved' do
       it { is_expected.to eq 0 }
@@ -32,6 +31,7 @@ RSpec.describe CourseDecorator do
           solution = create :solution, enrollment: enrollment, task: task
           solution.update! earned_points: points
         end
+        create :solution, enrollment: enrollment, task: create(:task, course: course) # ungraded solution
         create :task, course: course # unsolved task
       end
 

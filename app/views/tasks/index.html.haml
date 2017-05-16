@@ -9,7 +9,7 @@
           = icon 'plus', 'Dodaj zadanie'
     - if course.has_student? current_user
       Twój wynik:
-      .earned-points= course.points_earned_by current_user
+      .earned-points= course.points_earned_by_enrollment(current_enrollment)
       \/
       .max-points= course.total_points
 

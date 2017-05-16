@@ -5,8 +5,8 @@ class CourseDecorator < Draper::Decorator
     h.markdown desc
   end
 
-  def points_earned_by(student)
-    tasks.map { |task| task.earned_points_by student }.compact.sum
+  def points_earned_by_enrollment(enrollment)
+    enrollment.solutions.map(&:earned_points).compact.sum
   end
 
   def total_points
