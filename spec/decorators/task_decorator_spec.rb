@@ -3,8 +3,6 @@ require 'spec_helper'
 RSpec.describe TaskDecorator do
   let(:task) { build(:task).decorate }
   let(:enrollment) { create(:enrollment, course: task.course) }
-  let(:student) { enrollment.student }
-  let(:teacher) { task.course.teacher }
 
   describe '#average_score' do
     subject { task.average_score }
@@ -48,11 +46,11 @@ RSpec.describe TaskDecorator do
     it { is_expected.to eq "<h1>Header</h1>\n" }
   end
 
-  describe '#status_for' do
-    subject { task.status_for(student) }
+  describe '#status_for_enrollment' do
+    subject { task.status_for_enrollment(enrollment) }
 
-    context 'when user is a course teacher' do
-      subject { task.status_for(teacher) }
+    context 'when user is a course teacher (enrollment is nil)' do
+      let(:enrollment) { nil }
       it { is_expected.to be_nil }
     end
 

@@ -1,3 +1,3 @@
 %li
   = link_to task.title, [course, task]
-  .task-status= task.status_for(current_user)
+  .task-status= task.status_for_enrollment(current_enrollment)

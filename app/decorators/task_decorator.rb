@@ -11,10 +11,11 @@ class TaskDecorator < Draper::Decorator
     h.markdown desc
   end
 
-  def status_for(user)
-    return if task.course.teacher == user
-    return 'nierozwiązane' unless solved_by? user
-    return 'ocenione' if graded_for? user
+  def status_for_enrollment(enrollment)
+    return unless enrollment
+    solution = enrollment.solutions.detect { |s| s.task_id == id }
+    return 'nierozwiązane' unless solution
+    return 'ocenione' if solution.graded?
     'czeka na sprawdzenie'
   end
 end
