@@ -1,7 +1,8 @@
 .row
   .col-md-3
-    = link_to categories_path, class: 'btn btn-default' do
-      = icon 'list', 'Przeglądaj wg kategorii'
+    - if policy(Category).index?
+      = link_to categories_path, class: 'btn btn-default' do
+        = icon 'list', 'Przeglądaj wg kategorii'
 
   .col-md-9
     %h1 Kursy

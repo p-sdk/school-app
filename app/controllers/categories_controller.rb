@@ -1,9 +1,12 @@
 class CategoriesController < ApplicationController
-  expose_decorated(:categories) { Category.all }
+  expose_decorated(:categories) { policy_scope Category.all }
   expose(:category)
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :require_admin, except: %i[index show]
+  before_action :authorize_category, except: :index
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def create
     if category.save
@@ -33,5 +36,9 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def authorize_category
+    authorize category
   end
 end

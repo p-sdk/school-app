@@ -6,7 +6,7 @@
   .col-md-9
     %h1 Kategorie
 
-    - if current_user&.admin?
+    - if policy(Category).new?
       = link_to new_category_path, class: 'btn btn-primary' do
         = icon 'plus', 'Dodaj nową kategorię'
 
