@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError, with: :deny_access
 
   private
 
