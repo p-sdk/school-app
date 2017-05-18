@@ -14,5 +14,5 @@
 - if policy(Category).new?
   = link_to 'Zarządzaj kategoriami', categories_path, class: 'btn btn-default'
 
-- if current_user.admin?
+- if policy(User).index?
   = link_to 'Zarządzaj użytkownikami', users_path, class: 'btn btn-default'

@@ -5,5 +5,14 @@ class UsersController < ApplicationController
   expose_decorated(:user)
 
   before_action :authenticate_user!, only: :index
-  before_action :require_admin, only: :index
+
+  after_action :verify_authorized
+
+  def index
+    authorize User
+  end
+
+  def show
+    authorize user
+  end
 end

@@ -18,6 +18,6 @@
   .col-md-9
     %h1= course.name
     .teacher
-      %i= link_to course.teacher.name, course.teacher
+      %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
 
     .desc= course.description_formatted
