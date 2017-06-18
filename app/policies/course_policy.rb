@@ -8,10 +8,10 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_teacher? && record.teacher == user
+    user_is_course_teacher?(record)
   end
 
   def destroy?
-    update?
+    user_is_course_teacher?(record)
   end
 end

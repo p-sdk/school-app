@@ -10,14 +10,14 @@ class LecturePolicy < ApplicationPolicy
   end
 
   def create?
-    user_is_teacher? && record.course.teacher == user
+    user_is_course_teacher?(record.course)
   end
 
   def update?
-    create?
+    user_is_course_teacher?(record.course)
   end
 
   def destroy?
-    update?
+    user_is_course_teacher?(record.course)
   end
 end

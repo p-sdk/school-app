@@ -60,4 +60,8 @@ class ApplicationPolicy
   def user_is_teacher?
     user&.teacher?
   end
+
+  def user_is_course_teacher?(course)
+    user_is_teacher? && course.teacher == user
+  end
 end
