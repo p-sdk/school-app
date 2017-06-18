@@ -1,11 +1,13 @@
 class LecturesController < ApplicationController
   expose(:course)
-  expose(:lectures, from: :course)
+  expose(:lectures) { policy_scope course.lectures }
   expose_decorated(:lecture, parent: :course)
 
   before_action :authenticate_user!
-  before_action :require_course_user, only: %i[index show]
-  before_action :require_course_teacher, only: %i[new edit create update destroy]
+  before_action :authorize_lecture, except: :index
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def create
     if lecture.save
@@ -35,5 +37,9 @@ class LecturesController < ApplicationController
 
   def lecture_params
     params.require(:lecture).permit(%i[title content attachment])
+  end
+
+  def authorize_lecture
+    authorize lecture
   end
 end

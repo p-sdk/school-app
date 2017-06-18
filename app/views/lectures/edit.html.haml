@@ -1,11 +1,14 @@
 .row
   .col-md-3
-    .back
-      = link_to [course, lecture], class: 'btn btn-default' do
-        = icon 'arrow-left', 'Wróć'
-    .delete
-      = link_to course_lecture_path(course, lecture), method: :delete, class: 'btn btn-default' do
-        = icon 'trash', 'Usuń wykład'
+    - if policy(lecture).show?
+      .back
+        = link_to [course, lecture], class: 'btn btn-default' do
+          = icon 'arrow-left', 'Wróć'
+
+    - if policy(lecture).destroy?
+      .delete
+        = link_to course_lecture_path(course, lecture), method: :delete, class: 'btn btn-default' do
+          = icon 'trash', 'Usuń wykład'
 
   .col-md-9
     %h1= course.name

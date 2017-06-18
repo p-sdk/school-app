@@ -3,7 +3,8 @@
     .back
       = link_to course_lectures_path(course), class: 'btn btn-default' do
         = icon 'arrow-left', 'Wróć do listy wykładów'
-    - if current_user? course.teacher
+
+    - if policy(lecture).edit?
       .edit
         = link_to edit_course_lecture_path(course, lecture), class: 'btn btn-default' do
           = icon 'edit', 'Edytuj'
