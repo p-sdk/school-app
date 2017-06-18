@@ -11,9 +11,11 @@
       - elsif !current_user.enrolled_in? course
         .enroll= button_to 'Zapisz się', course_students_path(course), class: 'btn btn-primary'
 
-    - if current_user?(course.teacher) || course.has_student?(current_user)
+    - if policy(course).list_lectures?
       = link_to course_lectures_path(course), class: 'btn btn-default' do
         = icon 'file-text', 'Wykłady'
+
+    - if current_user?(course.teacher) || course.has_student?(current_user)
       = link_to course_tasks_path(course), class: 'btn btn-default' do
         = icon 'tasks', 'Zadania'
 

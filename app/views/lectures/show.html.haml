@@ -1,8 +1,9 @@
 .row
   .col-md-3
-    .back
-      = link_to course_lectures_path(course), class: 'btn btn-default' do
-        = icon 'arrow-left', 'Wróć do listy wykładów'
+    - if policy(course).list_lectures?
+      .back
+        = link_to course_lectures_path(course), class: 'btn btn-default' do
+          = icon 'arrow-left', 'Wróć do listy wykładów'
 
     - if policy(lecture).edit?
       .edit

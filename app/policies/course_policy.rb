@@ -14,4 +14,8 @@ class CoursePolicy < ApplicationPolicy
   def destroy?
     user_is_course_teacher?(record)
   end
+
+  def list_lectures?
+    user_is_course_teacher?(record) || record.has_student?(user)
+  end
 end

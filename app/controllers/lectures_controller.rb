@@ -9,6 +9,10 @@ class LecturesController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
+  def index
+    authorize course, :list_lectures?
+  end
+
   def create
     if lecture.save
       flash[:success] = 'Wykład został utworzony'
