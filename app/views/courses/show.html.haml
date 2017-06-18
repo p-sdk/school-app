@@ -1,9 +1,11 @@
 .row
   .col-md-3
+    - if policy(course).edit?
+      = link_to edit_course_path(course), class: 'btn btn-default' do
+        = icon 'edit', 'Edytuj'
+
     - if signed_in?
       - if current_user? course.teacher
-        = link_to edit_course_path(course), class: 'btn btn-default' do
-          = icon 'edit', 'Edytuj'
         = link_to course_students_path(course), class: 'btn btn-default' do
           = icon 'group', 'Zapisani studenci'
       - elsif !current_user.enrolled_in? course

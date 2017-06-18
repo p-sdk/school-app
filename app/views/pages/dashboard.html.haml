@@ -3,12 +3,14 @@
   %ul.courses= render courses
 - else
   Nie zapisałeś się jeszcze na żaden kurs.
-  = link_to 'Przeglądaj kursy', courses_path
+  - if policy(Course).index?
+    = link_to 'Przeglądaj kursy', courses_path
 
-- if current_user.teacher?
-  - unless teacher_courses.empty?
-    %h2 Kursy które prowadzisz
-    %ul.courses= render teacher_courses
+- if teacher_courses.any?
+  %h2 Kursy które prowadzisz
+  %ul.courses= render teacher_courses
+
+- if policy(Course).new?
   .new_course= link_to 'Utwórz nowy kurs', new_course_path, class: 'btn btn-primary'
 
 - if policy(Category).new?

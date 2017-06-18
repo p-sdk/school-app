@@ -1,8 +1,10 @@
 .row
   .col-md-3
-    .back
-      = link_to course, class: 'btn btn-default' do
-        = icon 'arrow-left', 'Wróć do kursu'
+    - if policy(course).show?
+      .back
+        = link_to course, class: 'btn btn-default' do
+          = icon 'arrow-left', 'Wróć do kursu'
+
     - if current_user? course.teacher
       .add
         = link_to new_course_lecture_path(course), class: 'btn btn-primary' do

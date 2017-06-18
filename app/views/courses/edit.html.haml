@@ -1,11 +1,14 @@
 .row
   .col-md-3
-    .back
-      = link_to course, class: 'btn btn-default' do
-        = icon 'arrow-left', 'Wróć'
-    .delete
-      = link_to course_path(course), method: :delete, class: 'btn btn-default' do
-        = icon 'trash', 'Usuń kurs'
+    - if policy(course).show?
+      .back
+        = link_to course, class: 'btn btn-default' do
+          = icon 'arrow-left', 'Wróć'
+
+    - if policy(course).destroy?
+      .delete
+        = link_to course_path(course), method: :delete, class: 'btn btn-default' do
+          = icon 'trash', 'Usuń kurs'
 
   .col-md-9
     %h1 Edytuj kurs

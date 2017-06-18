@@ -1,10 +1,12 @@
 class CoursesController < ApplicationController
-  expose(:courses) { Course.all }
+  expose(:courses) { policy_scope Course.all }
   expose_decorated(:course)
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :require_teacher, only: %i[new create]
-  before_action :require_course_teacher, only: %i[edit update destroy]
+  before_action :authorize_course, except: :index
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def create
     course.teacher = current_user
@@ -35,5 +37,9 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(%i[name desc category_id])
+  end
+
+  def authorize_course
+    authorize course
   end
 end
