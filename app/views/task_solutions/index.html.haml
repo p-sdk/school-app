@@ -1,7 +1,8 @@
 .row
   .col-md-3
-    = link_to course_task_path(course, task), class: 'btn btn-default' do
-      = icon 'arrow-left', 'Wróć do zadania'
+    - if policy(task).show?
+      = link_to course_task_path(course, task), class: 'btn btn-default' do
+        = icon 'arrow-left', 'Wróć do zadania'
 
   .col-md-9
     %h1= course.name

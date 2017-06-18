@@ -4,7 +4,7 @@
       .back
         = link_to course_path(course), class: 'btn btn-default' do
           = icon 'arrow-left', 'Wróć do kursu'
-    - if current_user? course.teacher
+    - if policy(Task.new(course: course)).new?
       .add
         = link_to new_course_task_path(course), class: 'btn btn-primary' do
           = icon 'plus', 'Dodaj zadanie'

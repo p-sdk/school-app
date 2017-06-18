@@ -1,13 +1,19 @@
 class TasksController < ApplicationController
   expose_decorated(:course)
-  expose_decorated(:tasks, from: :course)
+  expose_decorated(:tasks) { policy_scope course.tasks }
   expose_decorated(:task, parent: :course)
   expose(:solution) { task.solution_by current_user }
   expose(:current_enrollment) { current_user.enrollments.includes(:solutions).find_by(course: course) }
 
   before_action :authenticate_user!
-  before_action :require_course_user, only: %i[index show]
-  before_action :require_course_teacher, only: %i[new edit create update destroy]
+  before_action :authorize_task, except: :index
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
+
+  def index
+    authorize course, :list_tasks?
+  end
 
   def create
     if task.save
@@ -37,5 +43,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(%i[title desc points])
+  end
+
+  def authorize_task
+    authorize task
   end
 end

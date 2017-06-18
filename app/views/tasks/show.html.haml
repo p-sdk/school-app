@@ -3,16 +3,20 @@
     .back
       = link_to course_tasks_path(course), class: 'btn btn-default' do
         = icon 'arrow-left', 'Wróć do listy zadań'
-    - if current_user? course.teacher
+
+    - if policy(task).edit?
       .edit
         = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
           = icon 'edit', 'Edytuj'
+
+    - if current_user? course.teacher
       .solutions
         = link_to course_task_solutions_path(course, task), class: 'btn btn-default' do
           Rozwiązania
       .avg-score
         Przeciętny wynik:
         = task.average_score
+
     .points
       Punktów do zdobycia:
       = task.points
