@@ -1,8 +1,9 @@
 .row
   .col-md-3
-    .back
-      = link_to course_tasks_path(course), class: 'btn btn-default' do
-        = icon 'arrow-left', 'Wróć do listy zadań'
+    - if policy(course).list_tasks?
+      .back
+        = link_to course_tasks_path(course), class: 'btn btn-default' do
+          = icon 'arrow-left', 'Wróć do listy zadań'
 
     - if policy(task).edit?
       .edit

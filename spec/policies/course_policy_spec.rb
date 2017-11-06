@@ -41,7 +41,7 @@ RSpec.describe CoursePolicy do
     it { is_expected.to_not permit(other_user, course) }
   end
 
-  permissions :list_lectures? do
+  permissions :list_lectures?, :list_tasks? do
     it { is_expected.to_not permit(nil, course) }
     it { is_expected.to permit(teacher, course) }
     it { is_expected.to_not permit(other_teacher, course) }

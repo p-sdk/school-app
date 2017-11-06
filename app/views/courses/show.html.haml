@@ -15,7 +15,7 @@
       = link_to course_lectures_path(course), class: 'btn btn-default' do
         = icon 'file-text', 'Wykłady'
 
-    - if current_user?(course.teacher) || course.has_student?(current_user)
+    - if policy(course).list_tasks?
       = link_to course_tasks_path(course), class: 'btn btn-default' do
         = icon 'tasks', 'Zadania'
 
