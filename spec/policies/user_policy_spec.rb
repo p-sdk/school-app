@@ -1,26 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe UserPolicy do
-  subject { described_class }
+  subject { described_class.new(user, create(:user)) }
 
-  let(:user) { create :user }
-  let(:admin) { build_stubbed :admin }
+  context 'being a visitor' do
+    let(:user) { nil }
 
-  permissions :index? do
-    it { is_expected.to_not permit(nil) }
-    it { is_expected.to_not permit(user) }
-    it { is_expected.to permit(admin) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions(%i[index create update destroy]) }
   end
 
-  permissions :show? do
-    it { is_expected.to permit(nil, user) }
-    it { is_expected.to permit(user, user) }
-    it { is_expected.to permit(admin, user) }
+  context 'being a user' do
+    let(:user) { build_stubbed :user }
+
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions(%i[index create update destroy]) }
   end
 
-  permissions :update? do
-    it { is_expected.to_not permit(nil, user) }
-    it { is_expected.to_not permit(user, user) }
-    it { is_expected.to permit(admin, user) }
+  context 'being an admin' do
+    let(:user) { build_stubbed :admin }
+
+    it { is_expected.to permit_actions(%i[index show update]) }
+    it { is_expected.to forbid_actions(%i[create destroy]) }
   end
 end

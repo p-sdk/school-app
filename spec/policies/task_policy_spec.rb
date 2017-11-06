@@ -1,28 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe TaskPolicy do
-  subject { described_class }
+  subject { described_class.new(user, task) }
 
   let(:task) { create :task }
   let(:course) { task.course }
-  let(:teacher) { course.teacher }
-  let(:other_teacher) { build_stubbed :teacher }
-  let(:student) { u = create :user; u.enroll_in course; u }
-  let(:other_user) { build_stubbed :user }
 
-  permissions :show? do
-    it { is_expected.to_not permit(nil, task) }
-    it { is_expected.to permit(teacher, task) }
-    it { is_expected.to_not permit(other_teacher, task) }
-    it { is_expected.to permit(student, task) }
-    it { is_expected.to_not permit(other_user, task) }
+  context 'being a visitor' do
+    let(:user) { nil }
+
+    it { is_expected.to forbid_actions(%i[index show create update destroy]) }
   end
 
-  permissions :create?, :update?, :destroy? do
-    it { is_expected.to_not permit(nil, task) }
-    it { is_expected.to permit(teacher, task) }
-    it { is_expected.to_not permit(other_teacher, task) }
-    it { is_expected.to_not permit(student, task) }
-    it { is_expected.to_not permit(other_user, task) }
+  context 'being a user' do
+    let(:user) { build_stubbed :user }
+
+    it { is_expected.to forbid_actions(%i[index show create update destroy]) }
+  end
+
+  context 'being the course student' do
+    let(:user) { u = create :user; u.enroll_in(course); u }
+
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_actions(%i[index create update destroy]) }
+  end
+
+  context 'being a teacher' do
+    let(:user) { build_stubbed :teacher }
+
+    it { is_expected.to forbid_actions(%i[index show create update destroy]) }
+  end
+
+  context 'being the course teacher' do
+    let(:user) { course.teacher }
+
+    it { is_expected.to permit_actions(%i[show create update destroy]) }
+    it { is_expected.to forbid_action(:index) }
   end
 end

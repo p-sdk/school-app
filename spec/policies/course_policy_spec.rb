@@ -1,51 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe CoursePolicy do
-  subject { described_class }
+  subject { described_class.new(user, course) }
 
   let(:course) { create :course }
   let(:teacher) { course.teacher }
-  let(:other_teacher) { build_stubbed :teacher }
-  let(:student) { u = create :user; u.enroll_in course; u }
-  let(:other_user) { build_stubbed :user }
 
-  permissions :index? do
-    it { is_expected.to permit(nil) }
-    it { is_expected.to permit(teacher) }
-    it { is_expected.to permit(other_teacher) }
-    it { is_expected.to permit(student, course) }
-    it { is_expected.to permit(other_user) }
+  context 'being a visitor' do
+    let(:user) { nil }
+
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[create update destroy list_lectures list_tasks]) }
   end
 
-  permissions :show? do
-    it { is_expected.to permit(nil, course) }
-    it { is_expected.to permit(teacher, course) }
-    it { is_expected.to permit(other_teacher, course) }
-    it { is_expected.to permit(student, course) }
-    it { is_expected.to permit(other_user, course) }
+  context 'being a user' do
+    let(:user) { build_stubbed :user }
+
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[create update destroy list_lectures list_tasks]) }
   end
 
-  permissions :create? do
-    it { is_expected.to_not permit(nil, course) }
-    it { is_expected.to permit(teacher, course) }
-    it { is_expected.to permit(other_teacher, course) }
-    it { is_expected.to_not permit(student, course) }
-    it { is_expected.to_not permit(other_user, course) }
+  context 'being the course student' do
+    let(:user) { u = create :user; u.enroll_in(course); u }
+
+    it { is_expected.to permit_actions(%i[index show list_lectures list_tasks]) }
+    it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 
-  permissions :update?, :destroy? do
-    it { is_expected.to_not permit(nil, course) }
-    it { is_expected.to permit(teacher, course) }
-    it { is_expected.to_not permit(other_teacher, course) }
-    it { is_expected.to_not permit(student, course) }
-    it { is_expected.to_not permit(other_user, course) }
+  context 'being a teacher' do
+    let(:user) { build_stubbed :teacher }
+
+    it { is_expected.to permit_actions(%i[index show create]) }
+    it { is_expected.to forbid_actions(%i[update destroy list_lectures list_tasks]) }
   end
 
-  permissions :list_lectures?, :list_tasks? do
-    it { is_expected.to_not permit(nil, course) }
-    it { is_expected.to permit(teacher, course) }
-    it { is_expected.to_not permit(other_teacher, course) }
-    it { is_expected.to permit(student, course) }
-    it { is_expected.to_not permit(other_user, course) }
+  context 'being the course teacher' do
+    let(:user) { course.teacher }
+
+    it { is_expected.to permit_actions(%i[index show create update destroy list_lectures list_tasks]) }
   end
 end

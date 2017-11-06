@@ -177,6 +177,9 @@ GEM
     puma (3.8.2)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.4.1)
+      pundit (~> 1.1, >= 1.1.0)
+      rspec-rails (>= 3.0.0)
     rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -315,6 +318,7 @@ DEPENDENCIES
   pg
   puma
   pundit
+  pundit-matchers
   rails (~> 4.2)
   rails_12factor
   redcarpet
@@ -333,4 +337,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.14.6
+   1.15.4

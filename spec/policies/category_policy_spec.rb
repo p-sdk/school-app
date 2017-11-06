@@ -1,27 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe CategoryPolicy do
-  subject { described_class }
+  subject { described_class.new(user, category) }
 
   let(:category) { create :category }
-  let(:user) { build_stubbed :user }
-  let(:admin) { build_stubbed :admin }
 
-  permissions :index? do
-    it { is_expected.to permit(nil) }
-    it { is_expected.to permit(user) }
-    it { is_expected.to permit(admin) }
+  context 'being a visitor' do
+    let(:user) { nil }
+
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 
-  permissions :show? do
-    it { is_expected.to permit(nil, category) }
-    it { is_expected.to permit(user, category) }
-    it { is_expected.to permit(admin, category) }
+  context 'being a user' do
+    let(:user) { build_stubbed :user }
+
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 
-  permissions :create?, :update?, :destroy? do
-    it { is_expected.to_not permit(nil, category) }
-    it { is_expected.to_not permit(user, category) }
-    it { is_expected.to permit(admin, category) }
+  context 'being an admin' do
+    let(:user) { build_stubbed :admin }
+
+    it { is_expected.to permit_actions(%i[index show create update destroy]) }
   end
 end

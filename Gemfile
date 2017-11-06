@@ -41,6 +41,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'pundit-matchers'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
