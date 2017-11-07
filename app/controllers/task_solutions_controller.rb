@@ -5,5 +5,8 @@ class TaskSolutionsController < ApplicationController
   expose(:graded_solutions) { task.solutions.graded }
 
   before_action :authenticate_user!
-  before_action :require_course_teacher, only: :index
+
+  def index
+    authorize task, :list_solutions?
+  end
 end

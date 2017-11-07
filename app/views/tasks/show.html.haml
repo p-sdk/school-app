@@ -10,7 +10,7 @@
         = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
           = icon 'edit', 'Edytuj'
 
-    - if current_user? course.teacher
+    - if policy(task).list_solutions?
       .solutions
         = link_to course_task_solutions_path(course, task), class: 'btn btn-default' do
           Rozwiązania

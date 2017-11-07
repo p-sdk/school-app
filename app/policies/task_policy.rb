@@ -20,4 +20,8 @@ class TaskPolicy < ApplicationPolicy
   def destroy?
     user_is_course_teacher?(record.course)
   end
+
+  def list_solutions?
+    user_is_course_teacher?(record.course)
+  end
 end
