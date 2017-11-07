@@ -4,7 +4,7 @@
       = link_to edit_course_path(course), class: 'btn btn-default' do
         = icon 'edit', 'Edytuj'
 
-    - if signed_in? && !current_user?(course.teacher) && !current_user.enrolled_in?(course)
+    - if policy(course).enroll?
       .enroll= button_to 'Zapisz się', course_students_path(course), class: 'btn btn-primary'
 
     - if policy(course).list_students?

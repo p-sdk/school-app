@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
   end
 
   def create
+    authorize course, :enroll?
     current_user.enroll_in course
     redirect_to course
   end

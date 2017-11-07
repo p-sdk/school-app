@@ -26,4 +26,8 @@ class CoursePolicy < ApplicationPolicy
   def list_students?
     user_is_course_teacher?(record)
   end
+
+  def enroll?
+    !(user.nil? || user_is_course_teacher?(record) || user&.enrolled_in?(record))
+  end
 end
