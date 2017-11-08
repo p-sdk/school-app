@@ -3,8 +3,10 @@ class SolutionsController < ApplicationController
   expose_decorated(:task, from: :solution)
 
   before_action :authenticate_user!
-  before_action :require_correct_user, only: :show
-  before_action :require_course_teacher, only: %i[edit update destroy]
+  before_action :authorize_solution, except: :create
+
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def create
     authorize task, :solve?
@@ -45,9 +47,7 @@ class SolutionsController < ApplicationController
     params.require(:solution).permit(:earned_points)
   end
 
-  def require_correct_user
-    return if current_user? solution.student
-    return if current_user? course.teacher
-    deny_access
+  def authorize_solution
+    authorize solution
   end
 end

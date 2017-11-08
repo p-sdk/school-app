@@ -5,7 +5,7 @@
         = link_to course_task_solutions_path(task.course, task), class: 'btn btn-default' do
           = icon 'arrow-left', 'Wróć do listy rozwiązań'
 
-    - if current_user.teacher?
+    - if policy(solution).destroy?
       .delete
         = link_to solution_path(solution), method: :delete, class: 'btn btn-default' do
           = icon 'trash', 'Usuń rozwiązanie'
