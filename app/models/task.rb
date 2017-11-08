@@ -36,7 +36,6 @@ class Task < ActiveRecord::Base
             numericality: { greater_than: 0, only_integer: true }
 
   def solve(content:, student:)
-    return unless can_be_solved_by? student
     s = solutions.build content: content, enrollment: enrollment(student)
     s.save
   end
@@ -47,10 +46,6 @@ class Task < ActiveRecord::Base
 
   def solved_by?(student)
     solution_by(student).present?
-  end
-
-  def can_be_solved_by?(student)
-    course.has_student?(student) && !solved_by?(student)
   end
 
   def graded_for?(student)

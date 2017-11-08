@@ -24,4 +24,8 @@ class TaskPolicy < ApplicationPolicy
   def list_solutions?
     user_is_course_teacher?(record.course)
   end
+
+  def solve?
+    record.course.has_student?(user) && !record.solved_by?(user)
+  end
 end

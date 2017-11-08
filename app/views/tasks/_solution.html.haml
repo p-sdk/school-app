@@ -1,6 +1,7 @@
 - if solution
   = link_to 'Moje rozwiązanie', solution
-- else
+
+- if policy(task).solve?
   = simple_form_for Solution.new(task: task) do |f|
     = f.input :task_id, as: :hidden
     = f.input :content, label: 'Rozwiązanie', autofocus: true

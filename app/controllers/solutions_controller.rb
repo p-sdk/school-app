@@ -5,9 +5,9 @@ class SolutionsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_correct_user, only: :show
   before_action :require_course_teacher, only: %i[edit update destroy]
-  before_action :require_correct_student, only: :create
 
   def create
+    authorize task, :solve?
     if task.solve content: solution.content, student: current_user
       flash[:success] = 'Rozwiązanie zostało wysłane'
     else
@@ -48,11 +48,6 @@ class SolutionsController < ApplicationController
   def require_correct_user
     return if current_user? solution.student
     return if current_user? course.teacher
-    deny_access
-  end
-
-  def require_correct_student
-    return if task.can_be_solved_by?(current_user)
     deny_access
   end
 end
