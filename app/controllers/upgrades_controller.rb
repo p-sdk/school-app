@@ -4,8 +4,6 @@ class UpgradesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_upgrade
 
-  after_action :verify_authorized
-
   def create
     current_user.request_upgrade
     flash[:success] = 'Twój wniosek o rozszerzenie uprawnień czeka na akceptację'

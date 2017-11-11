@@ -6,9 +6,6 @@ class LecturesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_lecture, except: :index
 
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
-
   def index
     authorize course, :list_lectures?
   end

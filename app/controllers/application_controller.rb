@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
   protect_from_forgery with: :exception
 
   include SessionsHelper
   include Pundit
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index
 
   rescue_from Pundit::NotAuthorizedError, with: :deny_access
 

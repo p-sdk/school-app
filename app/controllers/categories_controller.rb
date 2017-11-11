@@ -3,10 +3,7 @@ class CategoriesController < ApplicationController
   expose(:category)
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :authorize_category, except: :index
-
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  before_action :authorize_category
 
   def create
     if category.save

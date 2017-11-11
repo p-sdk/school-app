@@ -5,9 +5,6 @@ class SolutionsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_solution, except: :create
 
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
-
   def create
     authorize task, :solve?
     if task.solve content: solution.content, student: current_user

@@ -3,10 +3,7 @@ class CoursesController < ApplicationController
   expose_decorated(:course)
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :authorize_course, except: :index
-
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  before_action :authorize_course
 
   def create
     course.teacher = current_user

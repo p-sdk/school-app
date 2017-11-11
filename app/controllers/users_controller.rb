@@ -5,14 +5,12 @@ class UsersController < ApplicationController
   expose_decorated(:user)
 
   before_action :authenticate_user!, only: :index
+  before_action :authorize_user
+  before_action :skip_policy_scope, only: :index
 
-  after_action :verify_authorized
+  private
 
-  def index
-    authorize User
-  end
-
-  def show
+  def authorize_user
     authorize user
   end
 end
