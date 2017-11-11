@@ -15,9 +15,10 @@
     - if user.teacher?
       %ul.courses= render user.teacher_courses
 
-    - if user.requesting_upgrade? && policy(user).update?
+    - if user.requesting_upgrade? && policy(:upgrade).update?
       %p Ten użytkownik chce uzyskać uprawnienia nauczyciela
       = link_to user_upgrade_path(user), method: :patch, class: 'btn btn-success' do
         = icon 'check', 'Zatwierdź'
+    - if user.requesting_upgrade? && policy(:upgrade).destroy?
       = link_to user_upgrade_path(user), method: :delete, class: 'btn btn-danger' do
         = icon 'remove', 'Odrzuć'

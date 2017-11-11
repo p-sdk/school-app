@@ -2,12 +2,11 @@ class UpgradesController < ApplicationController
   expose(:user)
 
   before_action :authenticate_user!
-  before_action :authorize_user, only: %i[update destroy]
+  before_action :authorize_upgrade
 
   after_action :verify_authorized
 
   def create
-    skip_authorization
     current_user.request_upgrade
     flash[:success] = 'Twój wniosek o rozszerzenie uprawnień czeka na akceptację'
     redirect_to current_user
@@ -27,7 +26,7 @@ class UpgradesController < ApplicationController
 
   private
 
-  def authorize_user
-    authorize user, :update?
+  def authorize_upgrade
+    authorize :upgrade
   end
 end

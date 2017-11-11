@@ -20,7 +20,7 @@ RSpec.describe UserPolicy do
   context 'being an admin' do
     let(:user) { build_stubbed :admin }
 
-    it { is_expected.to permit_actions(%i[index show update]) }
-    it { is_expected.to forbid_actions(%i[create destroy]) }
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 end
