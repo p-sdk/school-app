@@ -1,7 +1,6 @@
 class UpgradesController < ApplicationController
   expose(:user)
 
-  before_action :authenticate_user!
   before_action :authorize_upgrade
 
   def create

@@ -2,7 +2,6 @@ class SolutionsController < ApplicationController
   expose_decorated(:solution, build_params: :solution_params_for_create)
   expose_decorated(:task, from: :solution)
 
-  before_action :authenticate_user!
   before_action :authorize_solution, except: :create
 
   def create

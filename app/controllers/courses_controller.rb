@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   expose(:courses) { policy_scope Course.all }
   expose_decorated(:course)
 
-  before_action :authenticate_user!, except: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :authorize_course
 
   def create

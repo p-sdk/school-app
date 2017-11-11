@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   expose(:solution) { task.solution_by current_user }
   expose(:current_enrollment) { current_user.enrollments.includes(:solutions).find_by(course: course) }
 
-  before_action :authenticate_user!
   before_action :authorize_task, except: :index
 
   def index

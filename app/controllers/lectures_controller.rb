@@ -3,7 +3,6 @@ class LecturesController < ApplicationController
   expose(:lectures) { policy_scope course.lectures }
   expose_decorated(:lecture, parent: :course)
 
-  before_action :authenticate_user!
   before_action :authorize_lecture, except: :index
 
   def index

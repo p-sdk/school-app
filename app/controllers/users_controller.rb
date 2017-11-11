@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   expose(:students) { User.student }
   expose_decorated(:user)
 
-  before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: :show
   before_action :authorize_user
   before_action :skip_policy_scope, only: :index
 
