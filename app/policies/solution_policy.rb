@@ -10,7 +10,8 @@ class SolutionPolicy < ApplicationPolicy
   end
 
   def create?
-    Pundit.policy!(user, record.task).solve?
+    task = record.task
+    task.course.has_student?(user) && !task.solved_by?(user)
   end
 
   def update?
