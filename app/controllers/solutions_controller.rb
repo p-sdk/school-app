@@ -2,11 +2,11 @@ class SolutionsController < ApplicationController
   expose_decorated(:solution, build_params: :solution_params_for_create)
   expose_decorated(:task, from: :solution)
 
-  before_action :authorize_solution, except: :create
+  before_action :authorize_solution
 
   def create
-    authorize task, :solve?
-    if task.solve content: solution.content, student: current_user
+    solution.enrollment = current_enrollment
+    if solution.save
       flash[:success] = 'Rozwiązanie zostało wysłane'
     else
       flash[:danger] = 'Nie udało się wysłać rozwiązania'
@@ -33,6 +33,10 @@ class SolutionsController < ApplicationController
 
   def course
     task.course
+  end
+
+  def current_enrollment
+    current_user.enrollments.find_by(course: course)
   end
 
   def solution_params_for_create
