@@ -35,11 +35,6 @@ class Task < ActiveRecord::Base
             presence: true,
             numericality: { greater_than: 0, only_integer: true }
 
-  def solve(content:, student:)
-    s = solutions.build content: content, enrollment: enrollment(student)
-    s.save
-  end
-
   def solution_by(student)
     solutions.find_by enrollment: enrollment(student)
   end

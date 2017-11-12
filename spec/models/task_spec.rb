@@ -44,26 +44,6 @@ RSpec.describe Task, type: :model do
     it { should have_many(:solutions).dependent(:destroy) }
   end
 
-  describe '#solve' do
-    before { enrollment }
-
-    context 'with invalid content' do
-      specify { expect(task.solve content: '', student: student).to be_falsey }
-    end
-
-    context 'with invalid student' do
-      specify do
-        expect(task.solve content: 'Lorem', student: other_student).to be_falsey
-      end
-    end
-
-    context 'with valid arguments' do
-      specify do
-        expect(task.solve content: 'Lorem', student: student).to be_truthy
-      end
-    end
-  end
-
   describe '#solution_by' do
     context 'when task has not been solved' do
       specify { expect(task.solution_by student).to be nil }
