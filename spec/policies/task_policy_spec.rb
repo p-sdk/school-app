@@ -25,7 +25,9 @@ RSpec.describe TaskPolicy do
     it { is_expected.to forbid_actions(%i[index create update destroy list_solutions]) }
 
     context 'who has already solved the task' do
-      before { task.solve(content: 'Example solution', student: user) }
+      let(:solution) { create :solution }
+      let(:task) { solution.task }
+      let(:user) { solution.student }
 
       it { is_expected.to permit_action(:show) }
       it { is_expected.to forbid_actions(%i[index create update destroy list_solutions solve]) }
