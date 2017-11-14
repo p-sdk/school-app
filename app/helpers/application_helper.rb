@@ -10,7 +10,10 @@ module ApplicationHelper
     map[flash_name]
   end
 
-  def btn_to(*args, &block)
-    link_to(*args, class: 'btn btn-default', &block)
+  def btn_to(*args, **kwargs, &block)
+    context = kwargs.delete(:context) { :default }
+    classes = %W[btn btn-#{context}] + kwargs[:class].to_s.split
+    kwargs[:class] = classes.join(' ')
+    link_to(*args, **kwargs, &block)
   end
 end

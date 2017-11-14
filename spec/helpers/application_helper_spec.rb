@@ -35,5 +35,13 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'works with blocks' do
       expect(helper.btn_to(url) { name }).to eq link_to(url, class: 'btn btn-default') { name }
     end
+
+    it 'can set custom context' do
+      expect(helper.btn_to(name, url, context: :primary)).to eq link_to(name, url, class: 'btn btn-primary')
+    end
+
+    it 'can set custom context, method, class and block' do
+      expect(helper.btn_to(url, context: :primary, method: :delete, class: 'btn-sm') { name }).to eq link_to(url, method: :delete, class: 'btn btn-primary btn-sm') { name }
+    end
   end
 end
