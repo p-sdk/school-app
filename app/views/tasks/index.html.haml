@@ -2,7 +2,7 @@
   .col-md-3
     - if policy(course).show?
       .back
-        = link_to course_path(course), class: 'btn btn-default' do
+        = btn_to course_path(course) do
           = icon 'arrow-left', 'Wróć do kursu'
     - if policy(Task.new(course: course)).new?
       .add

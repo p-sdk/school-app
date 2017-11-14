@@ -2,12 +2,12 @@
   .col-md-3
     - if policy(lecture).show?
       .back
-        = link_to [course, lecture], class: 'btn btn-default' do
+        = btn_to [course, lecture] do
           = icon 'arrow-left', 'Wróć'
 
     - if policy(lecture).destroy?
       .delete
-        = link_to course_lecture_path(course, lecture), method: :delete, class: 'btn btn-default' do
+        = btn_to course_lecture_path(course, lecture), method: :delete do
           = icon 'trash', 'Usuń wykład'
 
   .col-md-9

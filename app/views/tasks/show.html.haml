@@ -2,17 +2,17 @@
   .col-md-3
     - if policy(course).list_tasks?
       .back
-        = link_to course_tasks_path(course), class: 'btn btn-default' do
+        = btn_to course_tasks_path(course) do
           = icon 'arrow-left', 'Wróć do listy zadań'
 
     - if policy(task).edit?
       .edit
-        = link_to edit_course_task_path(course, task), class: 'btn btn-default' do
+        = btn_to edit_course_task_path(course, task) do
           = icon 'edit', 'Edytuj'
 
     - if policy(task).list_solutions?
       .solutions
-        = link_to course_task_solutions_path(course, task), class: 'btn btn-default' do
+        = btn_to course_task_solutions_path(course, task) do
           Rozwiązania
       .avg-score
         Przeciętny wynik:

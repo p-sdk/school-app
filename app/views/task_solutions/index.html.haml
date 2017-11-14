@@ -1,7 +1,7 @@
 .row
   .col-md-3
     - if policy(task).show?
-      = link_to course_task_path(course, task), class: 'btn btn-default' do
+      = btn_to course_task_path(course, task) do
         = icon 'arrow-left', 'Wróć do zadania'
 
   .col-md-9

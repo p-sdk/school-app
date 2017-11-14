@@ -9,4 +9,8 @@ module ApplicationHelper
     map = Hash.new(:info).merge(notice: :success, alert: :warning, error: :danger)
     map[flash_name]
   end
+
+  def btn_to(*args, &block)
+    link_to(*args, class: 'btn btn-default', &block)
+  end
 end

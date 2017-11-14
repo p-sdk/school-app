@@ -1,7 +1,7 @@
 .row
   .col-md-3
     - if policy(category).show?
-      = link_to category, class: 'btn btn-default' do
+      = btn_to category do
         = icon 'arrow-left', 'Wróć'
 
   .col-md-9

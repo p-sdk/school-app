@@ -1,7 +1,7 @@
 .row
   .col-md-3
     - if policy(course).show?
-      = link_to course, class: 'btn btn-default' do
+      = btn_to course do
         = icon 'arrow-left', 'Wróć'
 
   .col-md-9

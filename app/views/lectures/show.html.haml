@@ -2,12 +2,12 @@
   .col-md-3
     - if policy(course).list_lectures?
       .back
-        = link_to course_lectures_path(course), class: 'btn btn-default' do
+        = btn_to course_lectures_path(course) do
           = icon 'arrow-left', 'Wróć do listy wykładów'
 
     - if policy(lecture).edit?
       .edit
-        = link_to edit_course_lecture_path(course, lecture), class: 'btn btn-default' do
+        = btn_to edit_course_lecture_path(course, lecture) do
           = icon 'edit', 'Edytuj'
 
   .col-md-9

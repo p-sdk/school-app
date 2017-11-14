@@ -1,7 +1,7 @@
 .row
   .col-md-3
     - if policy(course).list_tasks?
-      = link_to course_tasks_path(course), class: 'btn btn-default' do
+      = btn_to course_tasks_path(course) do
         = icon 'arrow-left', 'Wróć'
 
   .col-md-9

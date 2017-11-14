@@ -1,18 +1,18 @@
 .row
   .col-md-3
     - if policy(Category).index?
-      = link_to categories_path, class: 'btn btn-default' do
+      = btn_to categories_path do
         = icon 'arrow-left', 'Wróć do listy kategorii'
 
   .col-md-9
     %h1= category.name
 
     - if policy(category).edit?
-      = link_to edit_category_path(category), class: 'btn btn-default' do
+      = btn_to edit_category_path(category) do
         = icon 'edit', 'Edytuj'
 
     - if policy(category).destroy?
-      = link_to category_path(category), method: :delete, class: 'btn btn-default' do
+      = btn_to category_path(category), method: :delete do
         = icon 'trash', 'Usuń'
 
     %ul= render category.courses

@@ -23,4 +23,17 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.alert_name(:error)).to eq :danger
     end
   end
+
+  describe '#btn_to' do
+    let(:name) { 'Foo Bar' }
+    let(:url) { '/foobar' }
+
+    it "sets class to 'btn btn-default'" do
+      expect(helper.btn_to(name, url)).to eq link_to(name, url, class: 'btn btn-default')
+    end
+
+    it 'works with blocks' do
+      expect(helper.btn_to(url) { name }).to eq link_to(url, class: 'btn btn-default') { name }
+    end
+  end
 end

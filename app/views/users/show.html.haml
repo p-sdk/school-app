@@ -2,7 +2,7 @@
   .col-md-3
     - if policy(User).index?
       .back
-        = link_to users_path, class: 'btn btn-default' do
+        = btn_to users_path do
           = icon 'arrow-left', 'Wróć do listy użytkowników'
     .center
       #avatar= user.gravatar

@@ -1,22 +1,22 @@
 .row
   .col-md-3
     - if policy(course).edit?
-      = link_to edit_course_path(course), class: 'btn btn-default' do
+      = btn_to edit_course_path(course) do
         = icon 'edit', 'Edytuj'
 
     - if policy(course).enroll?
       .enroll= button_to 'Zapisz się', course_students_path(course), class: 'btn btn-primary'
 
     - if policy(course).list_students?
-      = link_to course_students_path(course), class: 'btn btn-default' do
+      = btn_to course_students_path(course) do
         = icon 'group', 'Zapisani studenci'
 
     - if policy(course).list_lectures?
-      = link_to course_lectures_path(course), class: 'btn btn-default' do
+      = btn_to course_lectures_path(course) do
         = icon 'file-text', 'Wykłady'
 
     - if policy(course).list_tasks?
-      = link_to course_tasks_path(course), class: 'btn btn-default' do
+      = btn_to course_tasks_path(course) do
         = icon 'tasks', 'Zadania'
 
   .col-md-9

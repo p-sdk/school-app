@@ -1,7 +1,7 @@
 .row
   .col-md-3
     - if policy(Course).index?
-      = link_to courses_path, class: 'btn btn-default' do
+      = btn_to courses_path do
         = icon 'arrow-left', 'Wróć do wszystkich kursów'
 
   .col-md-9
