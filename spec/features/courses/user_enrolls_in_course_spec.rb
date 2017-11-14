@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User enrolls in the course' do
+RSpec.feature 'User enrolls in the course', type: :feature do
   subject { page }
 
   let(:course) { create :course }

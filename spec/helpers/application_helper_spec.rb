@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationHelper do
+RSpec.describe ApplicationHelper, type: :helper do
   subject { Class.new.include(described_class).new }
 
   describe '#markdown' do
