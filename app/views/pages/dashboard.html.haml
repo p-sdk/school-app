@@ -11,7 +11,7 @@
   %ul.courses= render teacher_courses
 
 - if policy(Course).new?
-  .new_course= link_to 'Utwórz nowy kurs', new_course_path, class: 'btn btn-primary'
+  .new_course= btn_to 'Utwórz nowy kurs', new_course_path, context: :primary
 
 - if policy(Category).new?
   = btn_to 'Zarządzaj kategoriami', categories_path

@@ -6,7 +6,7 @@
           = icon 'arrow-left', 'Wróć do kursu'
     - if policy(Task.new(course: course)).new?
       .add
-        = link_to new_course_task_path(course), class: 'btn btn-primary' do
+        = btn_to new_course_task_path(course), context: :primary do
           = icon 'plus', 'Dodaj zadanie'
     - if course.has_student? current_user
       Twój wynik:

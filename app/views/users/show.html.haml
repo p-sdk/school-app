@@ -17,8 +17,8 @@
 
     - if user.requesting_upgrade? && policy(:upgrade).update?
       %p Ten użytkownik chce uzyskać uprawnienia nauczyciela
-      = link_to user_upgrade_path(user), method: :patch, class: 'btn btn-success' do
+      = btn_to user_upgrade_path(user), context: :success, method: :patch do
         = icon 'check', 'Zatwierdź'
     - if user.requesting_upgrade? && policy(:upgrade).destroy?
-      = link_to user_upgrade_path(user), method: :delete, class: 'btn btn-danger' do
+      = btn_to user_upgrade_path(user), context: :danger, method: :delete do
         = icon 'remove', 'Odrzuć'

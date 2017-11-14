@@ -7,7 +7,7 @@
 
     - if policy(Lecture.new(course: course)).new?
       .add
-        = link_to new_course_lecture_path(course), class: 'btn btn-primary' do
+        = btn_to new_course_lecture_path(course), context: :primary do
           = icon 'plus', 'Dodaj wykład'
 
   .col-md-9

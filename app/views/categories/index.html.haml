@@ -8,7 +8,7 @@
     %h1 Kategorie
 
     - if policy(Category).new?
-      = link_to new_category_path, class: 'btn btn-primary' do
+      = btn_to new_category_path, context: :primary do
         = icon 'plus', 'Dodaj nową kategorię'
 
     %ul= render categories
