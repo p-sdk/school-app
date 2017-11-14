@@ -3,10 +3,9 @@
     = link_to root_path, id: 'logo', class: 'navbar-brand' do
       = icon 'graduation-cap', 'e-kursy'
     %ul.nav.navbar-nav.navbar-right
-      - if signed_in?
-        %li= link_to 'Moje kursy', root_path
       %li= link_to 'Kursy', courses_path
       - if signed_in?
+        %li= link_to 'Moje kursy', root_path
         %li.dropdown
           %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' } }
             = current_user.name
