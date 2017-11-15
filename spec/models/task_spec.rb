@@ -23,7 +23,6 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   subject(:task) { build :task }
-  let(:other_student) { create :user }
   let(:student) { create :student, course: task.course }
   let(:solution) { create :solution, enrollment: student.enrollments.first, task: task }
 
