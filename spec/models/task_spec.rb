@@ -92,9 +92,4 @@ RSpec.describe Task, type: :model do
       specify { expect(task.earned_points_by student).to eq solution.earned_points }
     end
   end
-
-  describe '#enrollment' do
-    before { enrollment }
-    specify { expect(task.send :enrollment, student).to eq enrollment }
-  end
 end
