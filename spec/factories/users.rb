@@ -32,6 +32,16 @@ FactoryGirl.define do
     password 'foobar'
     password_confirmation 'foobar'
 
+    factory :student do
+      transient do
+        course { build :course }
+      end
+
+      after(:create) do |user, evaluator|
+        user.courses << evaluator.course
+      end
+    end
+
     factory :teacher do
       role :teacher
     end
