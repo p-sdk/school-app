@@ -6,6 +6,4 @@
 
   .col-md-9
     %h1 Utwórz nową kategorię
-    = simple_form_for category do |f|
-      = render 'fields', f: f
-      = f.button :submit, 'Utwórz kategorię'
+    = render 'form', submit: 'Utwórz kategorię'

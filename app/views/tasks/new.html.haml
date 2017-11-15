@@ -7,6 +7,4 @@
   .col-md-9
     %h1= course.name
     %h2 Utwórz nowe zadanie
-    = simple_form_for [course, task] do |f|
-      = render 'fields', f: f
-      = f.button :submit, 'Utwórz zadanie'
+    = render 'form', submit: 'Utwórz zadanie'

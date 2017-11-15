@@ -7,6 +7,4 @@
   .col-md-9
     %h1= course.name
     %h2 Utwórz nowy wykład
-    = simple_form_for [course, lecture] do |f|
-      = render 'fields', f: f
-      = f.button :submit, 'Utwórz wykład'
+    = render 'form', submit: 'Utwórz wykład'

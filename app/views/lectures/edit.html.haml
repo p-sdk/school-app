@@ -13,6 +13,4 @@
   .col-md-9
     %h1= course.name
     %h2 Edytuj wykład
-    = simple_form_for [course, lecture] do |f|
-      = render 'fields', f: f
-      = f.button :submit, 'Zapisz zmiany'
+    = render 'form', submit: 'Zapisz zmiany'

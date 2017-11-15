@@ -5,6 +5,4 @@
 
   .col-md-9
     %h1 Utwórz nowy kurs
-    = simple_form_for course do |f|
-      = render 'fields', f: f
-      = f.button :submit, 'Utwórz kurs'
+    = render 'form', submit: 'Utwórz kurs'
