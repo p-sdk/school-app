@@ -4,10 +4,9 @@ RSpec.feature 'Teacher reads course students', type: :feature do
   subject { page }
 
   let(:course) { create :course }
-  let(:students) { create_list :user, 3 }
+  let!(:students) { create_list :student, 3, course: course }
 
   before do
-    students.each { |s| s.enroll_in course }
     login_as course.teacher
     visit course_students_path(course)
   end

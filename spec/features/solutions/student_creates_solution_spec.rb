@@ -5,7 +5,7 @@ RSpec.feature 'Student creates a solution', type: :feature do
 
   let(:task) { create :task }
   let(:course) { task.course }
-  let(:student) { u = create :user; u.enroll_in course; u }
+  let(:student) { create :student, course: course }
   let(:submit) { 'Wyślij' }
 
   before do

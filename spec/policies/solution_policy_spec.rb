@@ -19,7 +19,7 @@ RSpec.describe SolutionPolicy do
   end
 
   context 'being the course student' do
-    let(:user) { u = create :user; u.enroll_in(course); u }
+    let(:user) { create :student, course: course }
 
     it { is_expected.to permit_action(:create) }
     it { is_expected.to forbid_actions(%i[index show update destroy]) }

@@ -48,10 +48,7 @@ RSpec.feature 'User reads course details', type: :feature do
     it { should_not have_link 'Edytuj', href: edit_course_path(course) }
 
     context 'when enrolled' do
-      before do
-        student.enroll_in(course)
-        visit course_path(course)
-      end
+      let(:student) { create :student, course: course }
 
       it 'should have proper links' do
         should_not have_button 'Zapisz się'

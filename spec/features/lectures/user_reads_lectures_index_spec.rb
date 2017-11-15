@@ -5,7 +5,7 @@ RSpec.feature 'User reads lectures index', type: :feature do
 
   let(:course) { create :course }
   let!(:lectures) { create_list :lecture, 3, course: course }
-  let(:student) { u = create :user; u.enroll_in course; u }
+  let(:student) { create :student, course: course }
 
   before do
     login_as student

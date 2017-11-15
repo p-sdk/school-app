@@ -5,7 +5,7 @@ RSpec.feature 'User reads lecture details', type: :feature do
 
   let(:lecture) { create :lecture }
   let(:course) { lecture.course }
-  let(:student) { u = create :user; u.enroll_in course; u }
+  let(:student) { create :student, course: course }
 
   before do
     login_as student

@@ -23,10 +23,9 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   subject(:task) { build :task }
-  let(:student) { create :user }
   let(:other_student) { create :user }
-  let(:enrollment) { student.enroll_in task.course }
-  let(:solution) { create :solution, enrollment: enrollment, task: task }
+  let(:student) { create :student, course: task.course }
+  let(:solution) { create :solution, enrollment: student.enrollments.first, task: task }
 
   describe 'validations' do
     it { should belong_to(:course) }

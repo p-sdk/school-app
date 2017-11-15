@@ -21,7 +21,7 @@ RSpec.describe CoursePolicy do
   end
 
   context 'being the course student' do
-    let(:user) { u = create :user; u.enroll_in(course); u }
+    let(:user) { create :student, course: course }
 
     it { is_expected.to permit_actions(%i[index show list_lectures list_tasks]) }
     it { is_expected.to forbid_actions(%i[create update destroy list_students enroll]) }

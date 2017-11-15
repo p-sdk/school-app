@@ -33,10 +33,7 @@ RSpec.feature 'User visits home page', type: :feature do
 
       describe 'enrolled in courses' do
         let(:courses) { create_list :course, 3 }
-        before do
-          courses.each { |c| user.enroll_in c }
-          visit root_path
-        end
+        let(:user) { create :student, course: courses }
 
         it 'should list all courses that the student has enrolled in' do
           should have_selector 'h2', text: 'Kursy na które jesteś zapisany'
