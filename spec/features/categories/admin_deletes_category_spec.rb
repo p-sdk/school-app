@@ -7,7 +7,7 @@ RSpec.feature 'Admin deletes a category', type: :feature do
   let(:category) { create :category }
 
   before do
-    login_as admin
+    sign_in admin
     visit category_path(category)
   end
 

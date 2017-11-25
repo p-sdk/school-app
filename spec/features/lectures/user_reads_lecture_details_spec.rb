@@ -8,7 +8,7 @@ RSpec.feature 'User reads lecture details', type: :feature do
   let(:student) { create :student, course: course }
 
   before do
-    login_as student
+    sign_in student
     visit course_lecture_path(course, lecture)
   end
 
@@ -21,7 +21,7 @@ RSpec.feature 'User reads lecture details', type: :feature do
 
   context 'for the teacher' do
     before do
-      login_as course.teacher
+      sign_in course.teacher
       visit course_lecture_path(course, lecture)
     end
     it { should have_link 'Edytuj', href: edit_course_lecture_path(course, lecture) }

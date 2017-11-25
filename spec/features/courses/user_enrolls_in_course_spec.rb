@@ -7,7 +7,7 @@ RSpec.feature 'User enrolls in the course', type: :feature do
   let(:student) { create :user }
 
   before do
-    login_as student
+    sign_in student
     visit course_path(course)
   end
 

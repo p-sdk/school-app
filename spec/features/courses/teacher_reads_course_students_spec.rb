@@ -7,7 +7,7 @@ RSpec.feature 'Teacher reads course students', type: :feature do
   let!(:students) { create_list :student, 3, course: course }
 
   before do
-    login_as course.teacher
+    sign_in course.teacher
     visit course_students_path(course)
   end
 

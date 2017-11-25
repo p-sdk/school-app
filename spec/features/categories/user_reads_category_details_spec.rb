@@ -21,7 +21,7 @@ RSpec.feature 'User reads category details', type: :feature do
 
   context 'for admin' do
     before do
-      login_as admin
+      sign_in admin
       visit category_path(category)
     end
 

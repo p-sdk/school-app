@@ -8,7 +8,7 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
   let(:enrollments) { create_list :enrollment, 3, course: course }
 
   before do
-    login_as course.teacher
+    sign_in course.teacher
     visit course_task_solutions_path(course, task)
   end
 

@@ -68,7 +68,7 @@ RSpec.feature 'Authentication', type: :feature do
         context 'when signing in again' do
           before do
             click_link 'Wyloguj'
-            login_as user
+            sign_in user
           end
           it 'should render default page' do
             expect(current_path).to eq root_path

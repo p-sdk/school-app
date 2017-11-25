@@ -7,7 +7,7 @@ RSpec.feature 'Teacher deletes a task', type: :feature do
   let(:course) { task.course }
 
   before do
-    login_as course.teacher
+    sign_in course.teacher
     visit edit_course_task_path(course, task)
   end
 

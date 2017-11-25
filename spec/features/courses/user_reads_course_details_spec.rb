@@ -25,7 +25,7 @@ RSpec.feature 'User reads course details', type: :feature do
 
   context 'for the teacher' do
     before do
-      login_as course.teacher
+      sign_in course.teacher
       visit course_path(course)
     end
 
@@ -41,7 +41,7 @@ RSpec.feature 'User reads course details', type: :feature do
   context 'for students' do
     let(:student) { create :user }
     before do
-      login_as student
+      sign_in student
       visit course_path(course)
     end
 

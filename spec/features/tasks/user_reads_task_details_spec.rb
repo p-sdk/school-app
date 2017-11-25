@@ -8,7 +8,7 @@ RSpec.feature 'User reads task details', type: :feature do
   let(:enrollment) { create :enrollment, course: course }
 
   before do
-    login_as enrollment.student
+    sign_in enrollment.student
     visit course_task_path(course, task)
   end
 
@@ -47,7 +47,7 @@ RSpec.feature 'User reads task details', type: :feature do
 
   context 'for the teacher' do
     before do
-      login_as course.teacher
+      sign_in course.teacher
       visit course_task_path(course, task)
     end
 

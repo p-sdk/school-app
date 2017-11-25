@@ -6,7 +6,7 @@ RSpec.feature 'Teacher creates a task', type: :feature do
   let(:course) { create :course }
 
   before do
-    login_as course.teacher
+    sign_in course.teacher
     visit new_course_task_path(course)
   end
 

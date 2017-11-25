@@ -6,7 +6,7 @@ RSpec.feature 'User deletes the account', type: :feature do
   let(:user) { create :user }
 
   before do
-    login_as user
+    sign_in user
     visit edit_user_registration_path
   end
 

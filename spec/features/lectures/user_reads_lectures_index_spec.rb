@@ -8,7 +8,7 @@ RSpec.feature 'User reads lectures index', type: :feature do
   let(:student) { create :student, course: course }
 
   before do
-    login_as student
+    sign_in student
     visit course_lectures_path(course)
   end
 
@@ -23,7 +23,7 @@ RSpec.feature 'User reads lectures index', type: :feature do
 
   context 'for the teacher' do
     before do
-      login_as course.teacher
+      sign_in course.teacher
       visit course_lectures_path(course)
     end
 

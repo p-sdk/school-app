@@ -6,7 +6,7 @@ RSpec.feature 'Teacher deletes a course', type: :feature do
   let(:course) { create :course }
 
   before do
-    login_as course.teacher
+    sign_in course.teacher
     visit edit_course_path(course)
   end
 
