@@ -24,7 +24,7 @@
 class Course < ActiveRecord::Base
   belongs_to :teacher, class_name: 'User', required: true
   has_many :enrollments, dependent: :destroy
-  has_many :students, through: :enrollments, source: :student
+  has_many :students, through: :enrollments
   has_many :lectures, dependent: :destroy
   has_many :tasks, dependent: :destroy
 

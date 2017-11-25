@@ -34,7 +34,7 @@ RSpec.describe Course, type: :model do
     it { should validate_presence_of(:teacher) }
 
     it { should have_many(:enrollments).dependent(:destroy) }
-    it { should have_many(:students).through(:enrollments).source(:student) }
+    it { should have_many(:students).through(:enrollments) }
     it { should have_many(:lectures).dependent(:destroy) }
     it { should have_many(:tasks).dependent(:destroy) }
 
