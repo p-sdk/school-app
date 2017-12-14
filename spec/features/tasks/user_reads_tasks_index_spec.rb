@@ -36,16 +36,9 @@ RSpec.feature 'User reads tasks index', type: :feature do
     before { sign_in enrollment.student }
 
     describe 'task statuses' do
-      before do
-        create :solution, enrollment: enrollment, task: tasks[0],
-               earned_points: rand(1..(tasks[0].points))
-        create :solution, enrollment: enrollment, task: tasks[1]
-        visit course_tasks_path(course)
-      end
-      it 'should be properly displayed' do
-        should have_content "#{tasks[0].title} ocenione"
-        should have_content "#{tasks[1].title} czeka na sprawdzenie"
-        should have_content "#{tasks[2].title} nierozwiązane"
+      before { visit course_tasks_path(course) }
+      it 'should be displayed' do
+        should have_selector '.task-status', count: tasks.size
       end
     end
 
