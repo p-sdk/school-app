@@ -56,16 +56,7 @@ RSpec.feature 'User reads task details', type: :feature do
       should have_link 'Rozwiązania', href: course_task_solutions_path(course, task)
       should_not have_selector 'form.new_solution'
       should_not have_link 'Moje rozwiązanie'
-    end
-
-    describe 'average score' do
-      let(:enrollments) { create_list :enrollment, 5, course: task.course }
-      let(:solutions) do
-        enrollments.map { |e| create :graded_solution, task: task, enrollment: e }
-      end
-      let!(:avg) { solutions.map(&:earned_points).sum / solutions.size }
-      before { visit course_task_path(course, task) }
-      it { should have_selector '.avg-score', text: "Przeciętny wynik: #{avg}" }
+      should have_selector '.avg-score', text: 'Przeciętny wynik'
     end
   end
 end
