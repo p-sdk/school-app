@@ -43,28 +43,11 @@ RSpec.feature 'User reads tasks index', type: :feature do
     end
 
     describe 'course grade' do
-      let(:course_max_points) { tasks.map(&:points).sum }
       before { visit course_tasks_path(course) }
-
-      it 'should display max points' do
+      it 'should display earned / max points for the course' do
         should have_content 'Twój wynik'
-        should have_selector '.max-points', text: course_max_points
-      end
-
-      context 'with no tasks solved' do
-        it { should have_selector '.earned-points', text: 0 }
-      end
-
-      context 'with solved tasks' do
-        let(:solutions) do
-          tasks.map do |t|
-            create :solution, enrollment: enrollment, task: t,
-                   earned_points: rand(1..(t.points))
-          end
-        end
-        let!(:earned_points) { solutions.map(&:earned_points).sum }
-        before { visit course_tasks_path(course) }
-        it { should have_selector '.earned-points', text: earned_points }
+        should have_selector '.earned-points'
+        should have_selector '.max-points'
       end
     end
   end
