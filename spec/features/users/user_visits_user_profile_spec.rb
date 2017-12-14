@@ -4,10 +4,11 @@ RSpec.feature 'User visits user profile', type: :feature do
   subject { page }
 
   let(:user) { create :user }
-  let(:teacher) { create :teacher }
-  let(:admin) { create :admin }
 
-  before { visit user_path(user) }
+  before do
+    sign_in admin if defined? admin
+    visit user_path(user)
+  end
 
   it 'should display the user' do
     should have_selector 'h1', text: user.name
@@ -16,25 +17,19 @@ RSpec.feature 'User visits user profile', type: :feature do
   end
 
   describe 'teacher' do
-    before do
-      create_list :course, 3, teacher: teacher
-      visit user_path(teacher)
-    end
+    let(:user) { create :teacher_with_courses }
 
     it 'should list owned courses' do
-      teacher.teacher_courses.each do |course|
+      user.teacher_courses.each do |course|
         expect(page).to have_link course.name, href: course_path(course)
       end
     end
   end
 
   context 'when the user sent upgrade request' do
-    before { user.request_upgrade }
+    let(:user) { create :user_requesting_upgrade }
     context 'when signed in as admin' do
-      before do
-        sign_in admin
-        visit user_path(user)
-      end
+      let(:admin) { create :admin }
 
       it 'should display proper links' do
         should have_link 'Wróć', href: users_path

@@ -4,8 +4,12 @@ RSpec.feature 'User reads course details', type: :feature do
   subject { page }
 
   let(:course) { create :course }
+  let(:user) { nil }
 
-  before { visit course_path(course) }
+  before do
+    sign_in user if user
+    visit course_path(course)
+  end
 
   it 'should display the course' do
     should have_selector 'h1', text: course.name
@@ -24,10 +28,7 @@ RSpec.feature 'User reads course details', type: :feature do
   end
 
   context 'for the teacher' do
-    before do
-      sign_in course.teacher
-      visit course_path(course)
-    end
+    let(:user) { course.teacher }
 
     it 'should have proper links' do
       should_not have_button 'Zapisz się'
@@ -39,16 +40,12 @@ RSpec.feature 'User reads course details', type: :feature do
   end
 
   context 'for students' do
-    let(:student) { create :user }
-    before do
-      sign_in student
-      visit course_path(course)
-    end
+    let(:user) { create :user }
 
     it { should_not have_link 'Edytuj', href: edit_course_path(course) }
 
     context 'when enrolled' do
-      let(:student) { create :student, course: course }
+      let(:user) { create :student, course: course }
 
       it 'should have proper links' do
         should_not have_button 'Zapisz się'

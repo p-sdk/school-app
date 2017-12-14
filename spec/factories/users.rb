@@ -44,10 +44,24 @@ FactoryGirl.define do
 
     factory :teacher do
       role :teacher
+
+      factory :teacher_with_courses do
+        transient do
+          courses_count { 3 }
+        end
+
+        after(:create) do |teacher, evaluator|
+          create_list :course, evaluator.courses_count, teacher: teacher
+        end
+      end
     end
 
     factory :admin do
       role :admin
+    end
+
+    factory :user_requesting_upgrade do
+      upgrade_request_sent_at { Time.now }
     end
   end
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Teacher creates a course', type: :feature do
   subject { page }
 
+  let!(:category) { create :category }
   let(:teacher) { create :teacher }
 
   before do
@@ -32,11 +33,9 @@ RSpec.feature 'Teacher creates a course', type: :feature do
   end
 
   context 'with valid information' do
-    let!(:category) { create :category }
     let(:course_attributes) { attributes_for :course }
 
     before do
-      visit new_course_path
       fill_in 'Nazwa', with: course_attributes[:name]
       fill_in 'Opis', with: course_attributes[:desc]
       select category[:name], from: 'Kategoria'

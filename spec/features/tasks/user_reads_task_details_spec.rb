@@ -6,9 +6,10 @@ RSpec.feature 'User reads task details', type: :feature do
   let(:task) { create :task }
   let(:course) { task.course }
   let(:enrollment) { create :enrollment, course: course }
+  let(:user) { enrollment.student }
 
   before do
-    sign_in enrollment.student
+    sign_in user
     visit course_task_path(course, task)
   end
 
@@ -34,10 +35,10 @@ RSpec.feature 'User reads task details', type: :feature do
     end
 
     context 'with solved task' do
-      before do
-        create :solution, enrollment: enrollment, task: task
-        visit course_task_path(course, task)
+      let(:enrollment) do
+        create :enrollment_with_solution, course: course, task_to_solve: task
       end
+
       it 'should display link to submitted solution' do
         should_not have_selector 'form.new_solution'
         should have_link 'Moje rozwiązanie'
@@ -46,10 +47,7 @@ RSpec.feature 'User reads task details', type: :feature do
   end
 
   context 'for the teacher' do
-    before do
-      sign_in course.teacher
-      visit course_task_path(course, task)
-    end
+    let(:user) { course.teacher }
 
     it "should display teacher's links" do
       should have_link 'Edytuj', href: edit_course_task_path(course, task)

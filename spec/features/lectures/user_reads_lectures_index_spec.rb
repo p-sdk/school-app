@@ -6,9 +6,10 @@ RSpec.feature 'User reads lectures index', type: :feature do
   let(:course) { create :course }
   let!(:lectures) { create_list :lecture, 3, course: course }
   let(:student) { create :student, course: course }
+  let(:user) { student }
 
   before do
-    sign_in student
+    sign_in user
     visit course_lectures_path(course)
   end
 
@@ -22,10 +23,7 @@ RSpec.feature 'User reads lectures index', type: :feature do
   end
 
   context 'for the teacher' do
-    before do
-      sign_in course.teacher
-      visit course_lectures_path(course)
-    end
+    let(:user) { course.teacher }
 
     it { should have_link 'Dodaj wykład', href: new_course_lecture_path(course) }
   end

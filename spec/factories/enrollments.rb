@@ -24,5 +24,15 @@ FactoryGirl.define do
   factory :enrollment do
     association :student, factory: :user
     association :course
+
+    factory :enrollment_with_solution do
+      transient do
+        task_to_solve { create :task, course: course }
+      end
+
+      after(:create) do |enrollment, evaluator|
+        create :solution, enrollment: enrollment, task: evaluator.task_to_solve
+      end
+    end
   end
 end

@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.feature 'User visits home page', type: :feature do
   subject { page }
 
-  let(:user) { create :user }
-  let(:teacher) { create :teacher }
-  let(:admin) { create :admin }
+  let(:user) { nil }
 
-  before { visit root_path }
+  before do
+    sign_in user if user
+    visit root_path
+  end
 
   it { should have_selector 'h1', text: 'Witaj na e-kursy' }
 
@@ -22,10 +23,8 @@ RSpec.feature 'User visits home page', type: :feature do
   end
 
   context 'when signed in' do
-    before do
-      sign_in user
-      visit root_path
-    end
+    let(:user) { create :user }
+
     it { should have_link 'Moje kursy', href: root_path }
 
     context 'as student' do
@@ -45,18 +44,12 @@ RSpec.feature 'User visits home page', type: :feature do
     end
 
     context 'as teacher' do
-      before do
-        sign_in teacher
-        visit root_path
-      end
+      let(:teacher) { create :teacher_with_courses }
+      let(:user) { teacher }
 
       it { should have_link 'Utwórz nowy kurs', href: new_course_path }
-      describe 'owned courses' do
-        before do
-          create_list :course, 3, teacher: teacher
-          visit root_path
-        end
 
+      describe 'owned courses' do
         it 'should show all owned courses' do
           should have_selector 'h2', text: 'Kursy które prowadzisz'
           teacher.teacher_courses.each do |course|
@@ -67,10 +60,7 @@ RSpec.feature 'User visits home page', type: :feature do
     end
 
     context 'as admin' do
-      before do
-        sign_in admin
-        visit root_path
-      end
+      let(:user) { create :admin }
 
       it 'should have proper links' do
         should have_link 'Zarządzaj kategoriami', href: categories_path

@@ -5,7 +5,13 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
 
   let(:task) { create :task }
   let(:course) { task.course }
-  let(:enrollments) { create_list :enrollment, 3, course: course }
+  let(:enrollments) { create_list :enrollment, 5, course: course }
+  let!(:ungraded_solutions) do
+    enrollments.first(3).map { |e| create :solution, enrollment: e, task: task }
+  end
+  let!(:graded_solutions) do
+    enrollments.last(2).map { |e| create :graded_solution, enrollment: e, task: task }
+  end
 
   before do
     sign_in course.teacher
@@ -20,33 +26,17 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
 
   it { should have_selector 'h3', text: 'Rozwiązania oczekujące na sprawdzenie' }
 
-  describe 'list ungraded solutions' do
-    let!(:ungraded_solutions) do
-      enrollments.map { |e| create :solution, enrollment: e, task: task }
-    end
-
-    before { visit course_task_solutions_path(course, task) }
-
-    specify do
-      ungraded_solutions.each do |solution|
-        expect(page).to have_link solution.student.name, href: edit_solution_path(solution)
-      end
+  it 'lists ungraded solutions' do
+    ungraded_solutions.each do |solution|
+      expect(page).to have_link solution.student.name, href: edit_solution_path(solution)
     end
   end
 
   it { should have_selector 'h3', text: 'Ocenione rozwiązania' }
 
-  describe 'list graded solutions' do
-    let!(:graded_solutions) do
-      enrollments.map { |e| create :graded_solution, enrollment: e, task: task }
-    end
-
-    before { visit course_task_solutions_path(course, task) }
-
-    specify do
-      graded_solutions.each do |solution|
-        expect(page).to have_link solution.student.name, href: solution_path(solution)
-      end
+  it 'lists graded solutions' do
+    graded_solutions.each do |solution|
+      expect(page).to have_link solution.student.name, href: solution_path(solution)
     end
   end
 end

@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.feature 'User reads categories index', type: :feature do
   subject { page }
 
-  let(:admin) { create :admin }
   let(:cat1) { create :category }
   let(:cat2) { create :category }
 
   before do
     create_list :course, 3, category: cat1
     create_list :course, 2, category: cat2
+    sign_in admin if defined? admin
     visit categories_path
   end
 
@@ -22,10 +22,7 @@ RSpec.feature 'User reads categories index', type: :feature do
   end
 
   context 'for admin' do
-    before do
-      sign_in admin
-      visit categories_path
-    end
+    let(:admin) { create :admin }
     it { should have_link 'Dodaj nową kategorię', href: new_category_path }
   end
 end

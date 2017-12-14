@@ -6,10 +6,10 @@ RSpec.feature 'User reads solution details', type: :feature do
   let(:solution) { create :solution }
   let(:task) { solution.task }
   let(:course) { task.course }
-  let(:student) { solution.enrollment.student }
+  let(:user) { course.teacher }
 
   before do
-    sign_in course.teacher
+    sign_in user
     visit solution_path(solution)
   end
 
@@ -25,10 +25,8 @@ RSpec.feature 'User reads solution details', type: :feature do
   end
 
   context 'when signed in as student' do
-    before do
-      sign_in student
-      visit solution_path(solution)
-    end
+    let(:user) { solution.enrollment.student }
+
     it 'should have proper links' do
       should have_link 'Wróć do listy zadań', href: course_tasks_path(course)
       should_not have_link 'Usuń'
@@ -40,10 +38,8 @@ RSpec.feature 'User reads solution details', type: :feature do
   end
 
   context 'when solution is graded' do
-    before do
-      solution.update! earned_points: 25
-      visit solution_path(solution)
-    end
+    let(:solution) { create :solution, earned_points: 25 }
+
     it { should have_selector 'div.points', text: "#{solution.earned_points} / #{task.points}" }
   end
 end

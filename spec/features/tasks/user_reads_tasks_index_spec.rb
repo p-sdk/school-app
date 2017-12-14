@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.feature 'User reads tasks index', type: :feature do
   subject { page }
 
-  let(:course) { create :course }
+  let(:course) { create :course_with_tasks }
+  let(:tasks) { course.tasks }
+  let(:user) { course.teacher }
 
   before do
-    sign_in course.teacher
+    sign_in user
     visit course_tasks_path(course)
   end
 
@@ -16,13 +18,9 @@ RSpec.feature 'User reads tasks index', type: :feature do
     should have_selector 'h2', text: 'Zadania'
   end
 
-  context 'when there are some tasks' do
-    let!(:tasks) { create_list :task, 3, course: course }
-    before { visit course_tasks_path(course) }
-    it 'should list course tasks' do
-      tasks.each do |task|
-        expect(page).to have_link task.title, href: course_task_path(course, task)
-      end
+  it 'should list course tasks' do
+    tasks.each do |task|
+      expect(page).to have_link task.title, href: course_task_path(course, task)
     end
   end
 
@@ -31,24 +29,17 @@ RSpec.feature 'User reads tasks index', type: :feature do
   end
 
   context 'when signed in as student' do
-    let!(:tasks) { create_list :task, 3, course: course }
     let(:enrollment) { create :enrollment, course: course }
-    before { sign_in enrollment.student }
+    let(:user) { enrollment.student }
 
-    describe 'task statuses' do
-      before { visit course_tasks_path(course) }
-      it 'should be displayed' do
-        should have_selector '.task-status', count: tasks.size
-      end
+    it 'shoud display task statuses' do
+      should have_selector '.task-status', count: tasks.size
     end
 
-    describe 'course grade' do
-      before { visit course_tasks_path(course) }
-      it 'should display earned / max points for the course' do
-        should have_content 'Twój wynik'
-        should have_selector '.earned-points'
-        should have_selector '.max-points'
-      end
+    it 'should display earned / max points for the course' do
+      should have_content 'Twój wynik'
+      should have_selector '.earned-points'
+      should have_selector '.max-points'
     end
   end
 end

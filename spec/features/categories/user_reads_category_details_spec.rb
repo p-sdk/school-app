@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.feature 'User reads category details', type: :feature do
   subject { page }
 
-  let(:admin) { create :admin }
   let(:category) { create :category }
 
   before do
     create_list :course, 3, category: category
+    sign_in admin if defined? admin
     visit category_path(category)
   end
 
@@ -20,10 +20,7 @@ RSpec.feature 'User reads category details', type: :feature do
   end
 
   context 'for admin' do
-    before do
-      sign_in admin
-      visit category_path(category)
-    end
+    let(:admin) { create :admin }
 
     it 'should have proper links' do
       should have_link 'Edytuj', href: edit_category_path(category)

@@ -27,5 +27,15 @@ FactoryGirl.define do
     desc { Faker::Lorem.sentence }
     association :teacher
     association :category
+
+    factory :course_with_tasks do
+      transient do
+        tasks_count { 3 }
+      end
+
+      after(:create) do |course, evaluator|
+        create_list :task, evaluator.tasks_count, course: course
+      end
+    end
   end
 end
