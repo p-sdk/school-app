@@ -1,0 +1,15 @@
+pl:
+  helpers:
+    submit:
+      update: Zapisz zmiany
+      category:
+        create: Utwórz kategorię
+      course:
+        create: Utwórz kurs
+      lecture:
+        create: Utwórz wykład
+      solution:
+        create: Wyślij
+        update: Oceń
+      task:
+        create: Utwórz zadanie
