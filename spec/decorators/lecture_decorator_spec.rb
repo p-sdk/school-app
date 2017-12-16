@@ -20,6 +20,6 @@ RSpec.describe LectureDecorator do
       allow(lecture).to receive(:attachment_file_size).and_return(12_345_678)
     end
 
-    it { is_expected.to eq '( 11.8 MB )' }
+    it { is_expected.to eq '( 11,8 MB )' }
   end
 end
