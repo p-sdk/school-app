@@ -7,16 +7,16 @@ class SolutionsController < ApplicationController
   def create
     solution.enrollment = current_enrollment
     if solution.save
-      flash[:success] = 'Rozwiązanie zostało wysłane'
+      flash[:success] = t '.success'
     else
-      flash[:danger] = 'Nie udało się wysłać rozwiązania'
+      flash[:danger] = t '.error'
     end
     redirect_to [task.course, task]
   end
 
   def update
     if solution.update(solution_params_for_update)
-      flash[:success] = 'Rozwiązanie zostało ocenione'
+      flash[:success] = t '.success'
       redirect_to solution
     else
       render :edit
@@ -25,7 +25,7 @@ class SolutionsController < ApplicationController
 
   def destroy
     solution.destroy
-    flash[:success] = 'Rozwiązanie zostało usunięte'
+    flash[:success] = t '.success'
     redirect_to course_task_solutions_path(task.course, task)
   end
 

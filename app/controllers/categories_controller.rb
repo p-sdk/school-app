@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 
   def create
     if category.save
-      flash[:success] = 'Kategoria została utworzona'
+      flash[:success] = t '.success'
       redirect_to category
     else
       render :new
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 
   def update
     if category.update(category_params)
-      flash[:success] = 'Kategoria została zaktualizowana'
+      flash[:success] = t '.success'
       redirect_to category
     else
       render :edit
@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     category.destroy
-    flash[:success] = 'Kategoria została usunięta'
+    flash[:success] = t '.success'
     redirect_to categories_path
   end
 

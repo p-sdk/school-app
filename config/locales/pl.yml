@@ -1,4 +1,5 @@
 pl:
+  access_denied: Odmowa dostępu
   helpers:
     submit:
       update: Zapisz zmiany
@@ -13,3 +14,46 @@ pl:
         update: Oceń
       task:
         create: Utwórz zadanie
+  categories:
+    create:
+      success: Kategoria została utworzona
+    update:
+      success: Kategoria została zaktualizowana
+    destroy:
+      success: Kategoria została usunięta
+  courses:
+    create:
+      success: Kurs został utworzony
+    update:
+      success: Kurs został zaktualizowany
+    destroy:
+      success: Kurs został usunięty
+  lectures:
+    create:
+      success: Wykład został utworzony
+    update:
+      success: Wykład został zaktualizowany
+    destroy:
+      success: Wykład został usunięty
+  solutions:
+    create:
+      success: Rozwiązanie zostało wysłane
+      error: Nie udało się wysłać rozwiązania
+    update:
+      success: Rozwiązanie zostało ocenione
+    destroy:
+      success: Rozwiązanie zostało usunięte
+  tasks:
+    create:
+      success: Zadanie zostało utworzone
+    update:
+      success: Zadanie zostało zaktualizowane
+    destroy:
+      success: Zadanie zostało usunięte
+  upgrades:
+    create:
+      success: Twój wniosek o rozszerzenie uprawnień czeka na akceptację
+    update:
+      success: Uprawnienia użytkownika zostały rozszerzone
+    destroy:
+      success: Wniosek o rozszerzenie uprawnień został odrzucony

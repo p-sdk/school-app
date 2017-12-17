@@ -11,7 +11,7 @@ class LecturesController < ApplicationController
 
   def create
     if lecture.save
-      flash[:success] = 'Wykład został utworzony'
+      flash[:success] = t '.success'
       redirect_to [course, lecture]
     else
       render :new
@@ -20,7 +20,7 @@ class LecturesController < ApplicationController
 
   def update
     if lecture.update(lecture_params)
-      flash[:success] = 'Wykład został zaktualizowany'
+      flash[:success] = t '.success'
       redirect_to [course, lecture]
     else
       render :edit
@@ -29,7 +29,7 @@ class LecturesController < ApplicationController
 
   def destroy
     lecture.destroy
-    flash[:success] = 'Wykład został usunięty'
+    flash[:success] = t '.success'
     redirect_to course_lectures_path(course)
   end
 
