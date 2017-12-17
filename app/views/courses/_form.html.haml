@@ -1,8 +1,8 @@
 = simple_form_for course do |f|
   = f.error_notification
 
-  = f.association :category, label: 'Kategoria', prompt: 'Wybierz kategorię'
-  = f.input :name, label: 'Nazwa'
-  = f.input :desc, label: 'Opis'
+  = f.association :category, prompt: :translate
+  = f.input :name
+  = f.input :desc
 
   = f.button :submit

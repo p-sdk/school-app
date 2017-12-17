@@ -1,8 +1,8 @@
 = simple_form_for [course, lecture] do |f|
   = f.error_notification
 
-  = f.input :title, label: 'Tytuł'
-  = f.input :content, label: 'Treść'
-  = f.input :attachment, label: 'Załącznik'
+  = f.input :title
+  = f.input :content
+  = f.input :attachment
 
   = f.button :submit

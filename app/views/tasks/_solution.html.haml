@@ -4,5 +4,5 @@
 - if policy(Solution.new(task: task)).new?
   = simple_form_for Solution.new(task: task) do |f|
     = f.input :task_id, as: :hidden
-    = f.input :content, label: 'Rozwiązanie', autofocus: true
+    = f.input :content, autofocus: true
     = f.button :submit

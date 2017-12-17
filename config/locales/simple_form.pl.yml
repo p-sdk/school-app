@@ -1,0 +1,25 @@
+pl:
+  simple_form:
+    required:
+      text: 'wymagane'
+      mark: '*'
+    error_notification:
+      default_message: "Popraw poniższe błędy:"
+    labels:
+      defaults:
+        name: Nazwa
+        title: Tytuł
+        desc: Opis
+      course:
+        category: Kategoria
+      lecture:
+        attachment: Załącznik
+        content: Treść
+      solution:
+        content: Rozwiązanie
+        earned_points: Uzyskane punkty
+      task:
+        points: Liczba punktów
+    prompts:
+      course:
+        category: Wybierz kategorię

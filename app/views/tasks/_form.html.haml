@@ -1,8 +1,8 @@
 = simple_form_for [course, task] do |f|
   = f.error_notification
 
-  = f.input :title, label: 'Tytuł'
-  = f.input :desc, label: 'Opis'
-  = f.input :points, label: 'Liczba punktów', input_html: { min: 1 }
+  = f.input :title
+  = f.input :desc
+  = f.input :points, input_html: { min: 1 }
 
   = f.button :submit
