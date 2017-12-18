@@ -14,8 +14,8 @@ class TaskDecorator < Draper::Decorator
   def status_for_enrollment(enrollment)
     return unless enrollment
     solution = enrollment.solutions.detect { |s| s.task_id == id }
-    return 'nierozwiązane' unless solution
-    return 'ocenione' if solution.graded?
-    'czeka na sprawdzenie'
+    return I18n.t('decorators.task.unsolved') unless solution
+    return I18n.t('decorators.task.graded') if solution.graded?
+    I18n.t('decorators.task.ungraded')
   end
 end

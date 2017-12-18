@@ -1,5 +1,12 @@
 pl:
   access_denied: Odmowa dostępu
+  decorators:
+    task:
+      graded: ocenione
+      ungraded: czeka na sprawdzenie
+      unsolved: nierozwiązane
+    solution:
+      ungraded: Rozwiązanie czeka na sprawdzenie
   helpers:
     submit:
       update: Zapisz zmiany

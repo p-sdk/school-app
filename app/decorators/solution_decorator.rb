@@ -6,7 +6,7 @@ class SolutionDecorator < Draper::Decorator
   end
 
   def earned_points_formatted
-    return 'Rozwiązanie czeka na sprawdzenie' unless graded?
+    return I18n.t('decorators.solution.ungraded') unless graded?
     "#{earned_points} / #{task.points}"
   end
 end
