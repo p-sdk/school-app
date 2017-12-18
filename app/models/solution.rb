@@ -52,6 +52,6 @@ class Solution < ActiveRecord::Base
 
   def check_course
     return if enrollment&.course == task&.course
-    errors[:base] << 'This solution is invalid'
+    errors[:base] << I18n.t('errors.messages.record_invalid')
   end
 end
