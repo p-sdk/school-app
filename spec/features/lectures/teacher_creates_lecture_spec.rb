@@ -34,10 +34,12 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
 
   describe 'with valid information' do
     let(:lecture_attributes) { attributes_for :lecture }
+    let(:file) { 'spec/fixtures/foo.html' }
 
     before do
       fill_in 'Tytuł', with: lecture_attributes[:title]
       fill_in 'Treść', with: lecture_attributes[:content]
+      attach_file 'Załącznik', file
     end
 
     it 'should create a lecture' do
@@ -48,6 +50,7 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
       before { click_button 'Utwórz wykład' }
       it 'should display success message' do
         should have_selector 'h2', text: lecture_attributes[:title]
+        should have_content File.basename(file)
         should have_success_message
       end
     end
