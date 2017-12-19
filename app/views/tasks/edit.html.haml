@@ -3,13 +3,13 @@
     - if policy(task).show?
       .back
         = btn_to course_task_path(course, task) do
-          = icon 'arrow-left', 'Wróć'
+          = icon 'arrow-left', t(:back)
     - if policy(task).destroy?
       .delete
         = btn_to course_task_path(course, task), method: :delete do
-          = icon 'trash', 'Usuń zadanie'
+          = icon 'trash', t('.delete')
 
   .col-md-9
     %h1= course.name
-    %h2 Edytuj zadanie
+    %h2= t '.title'
     = render 'form'

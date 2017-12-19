@@ -3,12 +3,12 @@
     - if policy(course).list_lectures?
       .back
         = btn_to course_lectures_path(course) do
-          = icon 'arrow-left', 'Wróć do listy wykładów'
+          = icon 'arrow-left', t('.back_to_lectures')
 
     - if policy(lecture).edit?
       .edit
         = btn_to edit_course_lecture_path(course, lecture) do
-          = icon 'edit', 'Edytuj'
+          = icon 'edit', t(:edit)
 
   .col-md-9
     %h1= course.name

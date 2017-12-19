@@ -1,11 +1,11 @@
 %h1= task.title
 
 .solution-description
-  %h3 Opis
+  %h3= t '.description'
   .desc= task.description_formatted
 
-%h3 Rozwiązanie
+%h3= t '.solution'
 .solution= solution.content_formatted
 
-Autor:
+= t '.author'
 %i.author= solution.student.name

@@ -3,12 +3,12 @@
     - if policy(task).list_solutions?
       .back
         = btn_to course_task_solutions_path(task.course, task) do
-          = icon 'arrow-left', 'Wróć do listy rozwiązań'
+          = icon 'arrow-left', t('.back_to_solutions')
 
     - if policy(solution).destroy?
       .delete
         = btn_to solution_path(solution), method: :delete do
-          = icon 'trash', 'Usuń rozwiązanie'
+          = icon 'trash', t('.delete')
 
   .col-md-9
     = render 'task_and_solution'

@@ -3,14 +3,14 @@
     - if policy(course).show?
       .back
         = btn_to course do
-          = icon 'arrow-left', 'Wróć do kursu'
+          = icon 'arrow-left', t('.course')
 
     - if policy(Lecture.new(course: course)).new?
       .add
         = btn_to new_course_lecture_path(course), context: :primary do
-          = icon 'plus', 'Dodaj wykład'
+          = icon 'plus', t('.add_lecture')
 
   .col-md-9
     %h1= course.name
-    %h2 Wykłady
+    %h2= t '.title'
     %ul.lectures= render lectures

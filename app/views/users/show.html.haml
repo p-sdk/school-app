@@ -3,7 +3,7 @@
     - if policy(User).index?
       .back
         = btn_to users_path do
-          = icon 'arrow-left', 'Wróć do listy użytkowników'
+          = icon 'arrow-left', t('.back_to_users')
     .center
       #avatar= user.gravatar
       .email
@@ -16,9 +16,9 @@
       %ul.courses= render user.teacher_courses
 
     - if user.requesting_upgrade? && policy(:upgrade).update?
-      %p Ten użytkownik chce uzyskać uprawnienia nauczyciela
+      %p= t '.upgrade_request_pending'
       = btn_to user_upgrade_path(user), context: :success, method: :patch do
-        = icon 'check', 'Zatwierdź'
+        = icon 'check', t('.approve')
     - if user.requesting_upgrade? && policy(:upgrade).destroy?
       = btn_to user_upgrade_path(user), context: :danger, method: :delete do
-        = icon 'remove', 'Odrzuć'
+        = icon 'remove', t('.reject')

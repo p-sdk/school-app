@@ -2,8 +2,8 @@
   .col-md-3
     - if policy(category).show?
       = btn_to category do
-        = icon 'arrow-left', 'Wróć'
+        = icon 'arrow-left', t(:back)
 
   .col-md-9
-    %h1 Edytuj kategorię
+    %h1= t '.title'
     = render 'form'

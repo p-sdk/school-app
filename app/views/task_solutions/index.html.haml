@@ -2,14 +2,14 @@
   .col-md-3
     - if policy(task).show?
       = btn_to course_task_path(course, task) do
-        = icon 'arrow-left', 'Wróć do zadania'
+        = icon 'arrow-left', t('.back_to_task')
 
   .col-md-9
     %h1= course.name
     %h2= task.title
 
-    %h3 Rozwiązania oczekujące na sprawdzenie
+    %h3= t '.ungraded_solutions'
     %ul= render pending_solutions
 
-    %h3 Ocenione rozwiązania
+    %h3= t '.graded_solutions'
     %ul= render graded_solutions

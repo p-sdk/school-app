@@ -1,5 +1,5 @@
 - if solution
-  = link_to 'Moje rozwiązanie', solution
+  = link_to t('.my_solution'), solution
 
 - if policy(Solution.new(task: task)).new?
   = simple_form_for Solution.new(task: task) do |f|

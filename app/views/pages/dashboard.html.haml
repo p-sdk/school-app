@@ -1,20 +1,20 @@
 - if courses.any?
-  %h2 Kursy na które jesteś zapisany
+  %h2= t '.student_courses'
   %ul.courses= render courses
 - else
-  Nie zapisałeś się jeszcze na żaden kurs.
+  = t '.no_student_courses'
   - if policy(Course).index?
-    = link_to 'Przeglądaj kursy', courses_path
+    = link_to t('.browse_courses'), courses_path
 
 - if teacher_courses.any?
-  %h2 Kursy które prowadzisz
+  %h2= t '.teacher_courses'
   %ul.courses= render teacher_courses
 
 - if policy(Course).new?
-  .new_course= btn_to 'Utwórz nowy kurs', new_course_path, context: :primary
+  .new_course= btn_to t('.add_course'), new_course_path, context: :primary
 
 - if policy(Category).new?
-  = btn_to 'Zarządzaj kategoriami', categories_path
+  = btn_to t('.manage_categories'), categories_path
 
 - if policy(User).index?
-  = btn_to 'Zarządzaj użytkownikami', users_path
+  = btn_to t('.manage_users'), users_path

@@ -3,23 +3,23 @@
     - if policy(course).list_tasks?
       .back
         = btn_to course_tasks_path(course) do
-          = icon 'arrow-left', 'Wróć do listy zadań'
+          = icon 'arrow-left', t('.back_to_tasks')
 
     - if policy(task).edit?
       .edit
         = btn_to edit_course_task_path(course, task) do
-          = icon 'edit', 'Edytuj'
+          = icon 'edit', t(:edit)
 
     - if policy(task).list_solutions?
       .solutions
         = btn_to course_task_solutions_path(course, task) do
-          Rozwiązania
+          = t '.solutions'
       .avg-score
-        Przeciętny wynik:
+        = t '.average_score'
         = task.average_score
 
     .points
-      Punktów do zdobycia:
+      = t '.points_to_earn'
       = task.points
 
   .col-md-9

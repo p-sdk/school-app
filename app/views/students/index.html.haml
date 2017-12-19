@@ -2,9 +2,9 @@
   .col-md-3
     - if policy(course).show?
       = btn_to course do
-        = icon 'arrow-left', 'Wróć'
+        = icon 'arrow-left', t(:back)
 
   .col-md-9
     %h1= course.name
-    %h2 Zapisani studenci
+    %h2= t '.title'
     %ul.students= render students

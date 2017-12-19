@@ -2,13 +2,13 @@
   .col-md-3
     - if policy(Course).index?
       = btn_to courses_path do
-        = icon 'arrow-left', 'Wróć do wszystkich kursów'
+        = icon 'arrow-left', t('.back_to_courses')
 
   .col-md-9
-    %h1 Kategorie
+    %h1= t '.title'
 
     - if policy(Category).new?
       = btn_to new_category_path, context: :primary do
-        = icon 'plus', 'Dodaj nową kategorię'
+        = icon 'plus', t('.add_category')
 
     %ul= render categories

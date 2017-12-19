@@ -2,22 +2,22 @@
   .col-md-3
     - if policy(course).edit?
       = btn_to edit_course_path(course) do
-        = icon 'edit', 'Edytuj'
+        = icon 'edit', t(:edit)
 
     - if policy(course).enroll?
-      .enroll= button_to 'Zapisz się', course_students_path(course), class: 'btn btn-primary'
+      .enroll= button_to t('.enroll'), course_students_path(course), class: 'btn btn-primary'
 
     - if policy(course).list_students?
       = btn_to course_students_path(course) do
-        = icon 'group', 'Zapisani studenci'
+        = icon 'group', t('.students')
 
     - if policy(course).list_lectures?
       = btn_to course_lectures_path(course) do
-        = icon 'file-text', 'Wykłady'
+        = icon 'file-text', t('.lectures')
 
     - if policy(course).list_tasks?
       = btn_to course_tasks_path(course) do
-        = icon 'tasks', 'Zadania'
+        = icon 'tasks', t('.tasks')
 
   .col-md-9
     %h1= course.name

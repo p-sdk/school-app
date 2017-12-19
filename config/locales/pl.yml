@@ -1,15 +1,56 @@
+---
 pl:
   access_denied: Odmowa dostępu
+  app_name: e-kursy
+  back: Wróć
+  categories:
+    create:
+      success: Kategoria została utworzona
+    destroy:
+      success: Kategoria została usunięta
+    edit:
+      title: Edytuj kategorię
+    index:
+      add_category: Dodaj nową kategorię
+      back_to_courses: Wróć do wszystkich kursów
+      title: Kategorie
+    new:
+      title: Utwórz nową kategorię
+    show:
+      back_to_categories: Wróć do listy kategorii
+    update:
+      success: Kategoria została zaktualizowana
+  courses:
+    create:
+      success: Kurs został utworzony
+    destroy:
+      success: Kurs został usunięty
+    edit:
+      delete: Usuń kurs
+      title: Edytuj kurs
+    index:
+      categories: Przeglądaj wg kategorii
+      title: Kursy
+    new:
+      title: Utwórz nowy kurs
+    show:
+      enroll: Zapisz się
+      lectures: Wykłady
+      students: Zapisani studenci
+      tasks: Zadania
+    update:
+      success: Kurs został zaktualizowany
   decorators:
+    solution:
+      ungraded: Rozwiązanie czeka na sprawdzenie
     task:
       graded: ocenione
       ungraded: czeka na sprawdzenie
       unsolved: nierozwiązane
-    solution:
-      ungraded: Rozwiązanie czeka na sprawdzenie
+  delete: Usuń
+  edit: Edytuj
   helpers:
     submit:
-      update: Zapisz zmiany
       category:
         create: Utwórz kategorię
       course:
@@ -21,46 +62,109 @@ pl:
         update: Oceń
       task:
         create: Utwórz zadanie
-  categories:
-    create:
-      success: Kategoria została utworzona
-    update:
-      success: Kategoria została zaktualizowana
-    destroy:
-      success: Kategoria została usunięta
-  courses:
-    create:
-      success: Kurs został utworzony
-    update:
-      success: Kurs został zaktualizowany
-    destroy:
-      success: Kurs został usunięty
+      update: Zapisz zmiany
   lectures:
     create:
       success: Wykład został utworzony
-    update:
-      success: Wykład został zaktualizowany
     destroy:
       success: Wykład został usunięty
+    edit:
+      delete: Usuń wykład
+      title: Edytuj wykład
+    index:
+      add_lecture: Dodaj wykład
+      course: Wróć do kursu
+      title: Wykłady
+    new:
+      title: Utwórz nowy wykład
+    show:
+      back_to_lectures: Wróć do listy wykładów
+    update:
+      success: Wykład został zaktualizowany
+  my_courses: Moje kursy
+  my_profile: Mój profil
+  pages:
+    dashboard:
+      add_course: Utwórz nowy kurs
+      browse_courses: Przeglądaj kursy
+      manage_categories: Zarządzaj kategoriami
+      manage_users: Zarządzaj użytkownikami
+      no_student_courses: Nie zapisałeś się jeszcze na żaden kurs.
+      student_courses: Kursy na które jesteś zapisany
+      teacher_courses: Kursy które prowadzisz
+    home:
+      sign_up: Zarejestruj się
+      title: Witaj na e-kursy
+  settings: Ustawienia
+  sign_in: Zaloguj
+  sign_out: Wyloguj
   solutions:
     create:
-      success: Rozwiązanie zostało wysłane
       error: Nie udało się wysłać rozwiązania
-    update:
-      success: Rozwiązanie zostało ocenione
+      success: Rozwiązanie zostało wysłane
     destroy:
       success: Rozwiązanie zostało usunięte
+    edit:
+      back_to_solutions: Wróć do listy rozwiązań
+      delete: Usuń rozwiązanie
+    show:
+      back_to_solutions: Wróć do listy rozwiązań
+      back_to_tasks: Wróć do listy zadań
+      delete: Usuń rozwiązanie
+      points: Uzyskane punkty
+    task_and_solution:
+      author: 'Autor:'
+      description: Opis
+      solution: Rozwiązanie
+    update:
+      success: Rozwiązanie zostało ocenione
+  students:
+    index:
+      title: Zapisani studenci
+  task_solutions:
+    index:
+      back_to_task: Wróć do zadania
+      graded_solutions: Ocenione rozwiązania
+      ungraded_solutions: Rozwiązania oczekujące na sprawdzenie
   tasks:
     create:
       success: Zadanie zostało utworzone
-    update:
-      success: Zadanie zostało zaktualizowane
     destroy:
       success: Zadanie zostało usunięte
+    edit:
+      delete: Usuń zadanie
+      title: Edytuj zadanie
+    index:
+      add_task: Dodaj zadanie
+      course: Wróć do kursu
+      title: Zadania
+      your_score: 'Twój wynik:'
+    new:
+      title: Utwórz nowe zadanie
+    show:
+      average_score: 'Przeciętny wynik:'
+      back_to_tasks: Wróć do listy zadań
+      points_to_earn: 'Punktów do zdobycia:'
+      solutions: Rozwiązania
+    solution:
+      my_solution: Moje rozwiązanie
+    update:
+      success: Zadanie zostało zaktualizowane
   upgrades:
     create:
       success: Twój wniosek o rozszerzenie uprawnień czeka na akceptację
-    update:
-      success: Uprawnienia użytkownika zostały rozszerzone
     destroy:
       success: Wniosek o rozszerzenie uprawnień został odrzucony
+    update:
+      success: Uprawnienia użytkownika zostały rozszerzone
+  users:
+    index:
+      students: Studenci
+      teachers: Nauczyciele
+      title: Użytkownicy
+      users_requesting_upgrade: Użytkownicy wnioskujący o rozszerzenie uprawnień
+    show:
+      approve: Zatwierdź
+      back_to_users: Wróć do listy użytkowników
+      reject: Odrzuć
+      upgrade_request_pending: Ten użytkownik chce uzyskać uprawnienia nauczyciela

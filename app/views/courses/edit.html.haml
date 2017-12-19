@@ -3,13 +3,13 @@
     - if policy(course).show?
       .back
         = btn_to course do
-          = icon 'arrow-left', 'Wróć'
+          = icon 'arrow-left', t(:back)
 
     - if policy(course).destroy?
       .delete
         = btn_to course_path(course), method: :delete do
-          = icon 'trash', 'Usuń kurs'
+          = icon 'trash', t('.delete')
 
   .col-md-9
-    %h1 Edytuj kurs
+    %h1= t '.title'
     = render 'form'

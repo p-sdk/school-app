@@ -3,14 +3,14 @@
     - if policy(lecture).show?
       .back
         = btn_to [course, lecture] do
-          = icon 'arrow-left', 'Wróć'
+          = icon 'arrow-left', t(:back)
 
     - if policy(lecture).destroy?
       .delete
         = btn_to course_lecture_path(course, lecture), method: :delete do
-          = icon 'trash', 'Usuń wykład'
+          = icon 'trash', t('.delete')
 
   .col-md-9
     %h1= course.name
-    %h2 Edytuj wykład
+    %h2= t '.title'
     = render 'form'

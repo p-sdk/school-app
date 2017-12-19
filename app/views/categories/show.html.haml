@@ -2,17 +2,17 @@
   .col-md-3
     - if policy(Category).index?
       = btn_to categories_path do
-        = icon 'arrow-left', 'Wróć do listy kategorii'
+        = icon 'arrow-left', t('.back_to_categories')
 
   .col-md-9
     %h1= category.name
 
     - if policy(category).edit?
       = btn_to edit_category_path(category) do
-        = icon 'edit', 'Edytuj'
+        = icon 'edit', t(:edit)
 
     - if policy(category).destroy?
       = btn_to category_path(category), method: :delete do
-        = icon 'trash', 'Usuń'
+        = icon 'trash', t(:delete)
 
     %ul= render category.courses

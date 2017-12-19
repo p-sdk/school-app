@@ -2,8 +2,8 @@
   .col-md-3
     - if policy(Category).index?
       = btn_to categories_path do
-        = icon 'arrow-left', 'Wróć'
+        = icon 'arrow-left', t(:back)
 
   .col-md-9
-    %h1 Utwórz nową kategorię
+    %h1= t '.title'
     = render 'form'
