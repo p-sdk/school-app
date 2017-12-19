@@ -34,6 +34,7 @@ group :development do
   gem 'awesome_print'
   gem 'brakeman', require: false
   gem 'guard-rspec'
+  gem 'i18n-tasks'
   gem 'letter_opener_web'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
