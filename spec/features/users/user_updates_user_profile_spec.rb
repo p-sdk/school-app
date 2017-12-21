@@ -32,7 +32,7 @@ RSpec.feature 'User updates user profile', type: :feature do
     before do
       fill_in 'Imię i nazwisko', with: new_name
       fill_in 'Email', with: new_email
-      fill_in 'Current password', with: user.password
+      fill_in 'Aktualne hasło', with: user.password
       click_button 'Zapisz zmiany'
     end
 

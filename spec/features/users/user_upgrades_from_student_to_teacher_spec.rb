@@ -24,7 +24,7 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
 
       it 'should have proper message' do
         should_not have_link 'rozszerzenie'
-        should have_content 'czeka na akceptację'
+        should have_content 'czeka na rozpatrzenie'
       end
     end
   end
