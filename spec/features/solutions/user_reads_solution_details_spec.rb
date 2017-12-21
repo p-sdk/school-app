@@ -14,10 +14,10 @@ RSpec.feature 'User reads solution details', type: :feature do
   end
 
   it 'should display the solution' do
-    should have_selector 'h1', text: task.title
-    should have_selector 'h3', text: 'Opis'
+    should have_heading task.title
+    should have_heading 'Opis'
     should have_selector 'div.desc', text: task.desc
-    should have_selector 'h3', text: 'Rozwiązanie'
+    should have_heading 'Rozwiązanie'
     should have_selector 'div.solution', text: solution.content
     should have_content 'Uzyskane punkty'
     should have_link 'Wróć do listy rozwiązań', href: course_task_solutions_path(course, task)

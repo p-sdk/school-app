@@ -9,7 +9,7 @@ RSpec.feature 'User reads courses index', type: :feature do
   end
 
   it 'should display all courses' do
-    should have_selector 'h1', text: 'Kursy'
+    should have_heading 'Kursy'
     should have_link 'Przeglądaj wg kategorii', href: categories_path
     Course.all.each do |course|
       expect(page).to have_link course.name, href: course_path(course)

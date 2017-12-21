@@ -14,8 +14,8 @@ RSpec.feature 'User reads task details', type: :feature do
   end
 
   it 'should display the task' do
-    should have_selector 'h1', text: course.name
-    should have_selector 'h2', text: task.title
+    should have_heading course.name
+    should have_heading task.title
     should have_selector 'div.points', text: "Punktów do zdobycia: #{task.points}"
     should have_selector 'div.desc', text: task.desc
     should have_link 'Wróć', href: course_tasks_path(course)

@@ -14,8 +14,8 @@ RSpec.feature 'User reads lectures index', type: :feature do
   end
 
   it 'should list course lectures' do
-    should have_selector 'h1', text: course.name
-    should have_selector 'h2', text: 'Wykłady'
+    should have_heading course.name
+    should have_heading 'Wykłady'
     should have_link 'Wróć', href: course_path(course)
     lectures.each do |lecture|
       expect(page).to have_link lecture.title, href: course_lecture_path(course, lecture)

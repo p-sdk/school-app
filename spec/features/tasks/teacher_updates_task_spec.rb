@@ -13,9 +13,9 @@ RSpec.feature 'Teacher updates a task', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: course.name
+      should have_heading course.name
       should have_link 'Wróć', href: course_task_path(course, task)
-      should have_selector 'h2', text: 'Edytuj zadanie'
+      should have_heading 'Edytuj zadanie'
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.feature 'Teacher updates a task', type: :feature do
       click_button 'Zapisz zmiany'
     end
     it 'should display error message' do
-      should have_selector 'h2', text: 'Edytuj zadanie'
+      should have_heading 'Edytuj zadanie'
       should have_error_message
     end
   end
@@ -39,7 +39,7 @@ RSpec.feature 'Teacher updates a task', type: :feature do
       click_button 'Zapisz zmiany'
     end
     it 'should display success message' do
-      should have_selector 'h2', text: task.title
+      should have_heading task.title
       should have_selector 'div.points', text: new_points
       should have_selector 'div.desc', text: new_desc
       should have_success_message

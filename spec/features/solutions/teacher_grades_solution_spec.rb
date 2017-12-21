@@ -14,11 +14,11 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
 
   describe 'page' do
     it 'should display the solution' do
-      should have_selector 'h1', text: task.title
+      should have_heading task.title
       should have_link 'Wróć', href: course_task_solutions_path(course, task)
-      should have_selector 'h3', text: 'Opis'
+      should have_heading 'Opis'
       should have_selector 'div.desc', text: task.desc
-      should have_selector 'h3', text: 'Rozwiązanie'
+      should have_heading 'Rozwiązanie'
       should have_selector 'div.solution', text: solution.content
       should have_content 'Uzyskane punkty'
       should have_content "(0 - #{task.points})"
@@ -46,7 +46,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
       click_button 'Oceń'
     end
     it 'should display success message' do
-      should have_selector 'h3', text: 'Uzyskane punkty'
+      should have_heading 'Uzyskane punkty'
       should have_selector 'div.points', text: "#{solution.earned_points} / #{solution.task.points}"
       should have_success_message
     end

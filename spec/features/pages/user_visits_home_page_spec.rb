@@ -10,14 +10,14 @@ RSpec.feature 'User visits home page', type: :feature do
     visit root_path
   end
 
-  it { should have_selector 'h1', text: 'Witaj na e-kursy' }
+  it { should have_heading 'Witaj na e-kursy' }
 
   it 'should have the right links on the layout' do
     click_link 'Kursy'
-    expect(page).to have_selector 'h1', text: 'Kursy'
+    expect(page).to have_heading 'Kursy'
     click_link 'logo'
     click_link 'Zarejestruj'
-    expect(page).to have_selector 'h1', text: 'Rejestracja'
+    expect(page).to have_heading 'Rejestracja'
     click_link 'logo'
     expect(current_path).to eq root_path
   end
@@ -35,7 +35,7 @@ RSpec.feature 'User visits home page', type: :feature do
         let(:user) { create :student, course: courses }
 
         it 'should list all courses that the student has enrolled in' do
-          should have_selector 'h2', text: 'Kursy na które jesteś zapisany'
+          should have_heading 'Kursy na które jesteś zapisany'
           courses.each do |course|
             expect(page).to have_link course.name, href: course_path(course)
           end
@@ -51,7 +51,7 @@ RSpec.feature 'User visits home page', type: :feature do
 
       describe 'owned courses' do
         it 'should show all owned courses' do
-          should have_selector 'h2', text: 'Kursy które prowadzisz'
+          should have_heading 'Kursy które prowadzisz'
           teacher.teacher_courses.each do |course|
             expect(page).to have_link course.name, href: course_path(course)
           end

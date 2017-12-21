@@ -14,8 +14,8 @@ RSpec.feature 'User reads lecture details', type: :feature do
   end
 
   it 'should display the lecture' do
-    should have_selector 'h1', text: course.name
-    should have_selector 'h2', text: lecture.title
+    should have_heading course.name
+    should have_heading lecture.title
     should have_link 'Wróć', href: course_lectures_path(course)
     should have_selector 'div.lecture', text: lecture.content
   end

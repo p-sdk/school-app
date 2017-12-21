@@ -12,9 +12,9 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: course.name
+      should have_heading course.name
       should have_link 'Wróć', href: course_lectures_path(course)
-      should have_selector 'h2', text: 'Utwórz nowy wykład'
+      should have_heading 'Utwórz nowy wykład'
     end
   end
 
@@ -26,7 +26,7 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz wykład' }
       it 'should display error message' do
-        should have_selector 'h2', text: 'Utwórz nowy wykład'
+        should have_heading 'Utwórz nowy wykład'
         should have_error_message
       end
     end
@@ -49,7 +49,7 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz wykład' }
       it 'should display success message' do
-        should have_selector 'h2', text: lecture_attributes[:title]
+        should have_heading lecture_attributes[:title]
         should have_content File.basename(file)
         should have_success_message
       end

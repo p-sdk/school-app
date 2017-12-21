@@ -13,7 +13,7 @@ RSpec.feature 'User reads category details', type: :feature do
 
   it 'should have link to courses from the category' do
     should have_link 'Wróć', href: categories_path
-    should have_selector 'h1', text: category.name
+    should have_heading category.name
     category.courses.each do |course|
       expect(page).to have_link course.name, href: course_path(course)
     end

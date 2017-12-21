@@ -12,7 +12,7 @@ RSpec.feature 'User reads course details', type: :feature do
   end
 
   it 'should display the course' do
-    should have_selector 'h1', text: course.name
+    should have_heading course.name
     should have_selector 'div.teacher i', text: course.teacher.name
     should have_selector 'div.desc', text: course.desc
   end

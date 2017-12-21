@@ -12,9 +12,9 @@ RSpec.feature 'Teacher creates a task', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: course.name
+      should have_heading course.name
       should have_link 'Wróć', href: course_tasks_path(course)
-      should have_selector 'h2', text: 'Utwórz nowe zadanie'
+      should have_heading 'Utwórz nowe zadanie'
     end
   end
 
@@ -26,7 +26,7 @@ RSpec.feature 'Teacher creates a task', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz zadanie' }
       it 'should display error message' do
-        should have_selector 'h2', text: 'Utwórz nowe zadanie'
+        should have_heading 'Utwórz nowe zadanie'
         should have_error_message
       end
     end
@@ -48,7 +48,7 @@ RSpec.feature 'Teacher creates a task', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz zadanie' }
       it 'should display success message' do
-        should have_selector 'h2', text: task_attributes[:title]
+        should have_heading task_attributes[:title]
         should have_success_message
       end
     end

@@ -13,7 +13,7 @@ RSpec.feature 'Admin reads users index', type: :feature do
     visit users_path
   end
 
-  it { should have_selector 'h1', text: 'Użytkownicy' }
+  it { should have_heading 'Użytkownicy' }
 
   it 'should list all users requesting upgrade' do
     requesting_upgrade_users.each do |user|

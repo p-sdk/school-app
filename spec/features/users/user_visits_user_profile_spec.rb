@@ -11,7 +11,7 @@ RSpec.feature 'User visits user profile', type: :feature do
   end
 
   it 'should display the user' do
-    should have_selector 'h1', text: user.name
+    should have_heading user.name
     should have_link user.email
     should have_selector 'div#avatar img.gravatar'
   end

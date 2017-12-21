@@ -12,7 +12,7 @@ RSpec.feature 'User updates user profile', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: 'Edytuj mój profil'
+      should have_heading 'Edytuj mój profil'
       should have_link 'rozszerzenie'
     end
   end
@@ -20,7 +20,7 @@ RSpec.feature 'User updates user profile', type: :feature do
   context 'with invalid information' do
     before { click_button 'Zapisz zmiany' }
     it 'should display error message' do
-      should have_selector 'h1', text: 'Edytuj mój profil'
+      should have_heading 'Edytuj mój profil'
       should have_error_message
     end
   end
@@ -39,7 +39,7 @@ RSpec.feature 'User updates user profile', type: :feature do
     it 'should display success message' do
       should have_success_message
       visit user_path(user)
-      should have_selector 'h1', text: new_name
+      should have_heading new_name
       should have_selector 'div.email', text: new_email
     end
   end

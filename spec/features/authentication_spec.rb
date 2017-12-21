@@ -8,14 +8,14 @@ RSpec.feature 'Authentication', type: :feature do
     before { visit new_user_session_path }
 
     describe 'page' do
-      it { should have_selector 'h1', text: 'Logowanie' }
+      it { should have_heading 'Logowanie' }
     end
 
     context 'with invalid information' do
       before { click_button 'Zaloguj' }
 
       it 'should display error message' do
-        should have_selector 'h1', text: 'Logowanie'
+        should have_heading 'Logowanie'
         should have_warning_message
       end
     end

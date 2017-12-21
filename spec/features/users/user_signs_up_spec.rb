@@ -6,7 +6,7 @@ RSpec.feature 'User signs up', type: :feature do
   before { visit new_user_registration_path }
 
   describe 'page' do
-    it { should have_selector 'h1', text: 'Rejestracja' }
+    it { should have_heading 'Rejestracja' }
   end
 
   context 'with invalid information' do
@@ -17,7 +17,7 @@ RSpec.feature 'User signs up', type: :feature do
     describe 'after submission' do
       before { click_button 'Załóż konto' }
       it 'should display error message' do
-        should have_selector 'h1', text: 'Rejestracja'
+        should have_heading 'Rejestracja'
         should have_error_message
       end
     end

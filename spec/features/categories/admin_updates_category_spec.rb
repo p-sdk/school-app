@@ -13,7 +13,7 @@ RSpec.feature 'Admin updates a category', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: 'Edytuj kategorię'
+      should have_heading 'Edytuj kategorię'
       should have_link 'Wróć', href: category_path(category)
     end
   end
@@ -24,7 +24,7 @@ RSpec.feature 'Admin updates a category', type: :feature do
       click_button 'Zapisz zmiany'
     end
     it 'should display error message' do
-      should have_selector 'h1', text: 'Edytuj kategorię'
+      should have_heading 'Edytuj kategorię'
       should have_error_message
     end
   end
@@ -37,7 +37,7 @@ RSpec.feature 'Admin updates a category', type: :feature do
     end
 
     it 'should display success message' do
-      should have_selector 'h1', text: new_name
+      should have_heading new_name
       should have_success_message
     end
   end

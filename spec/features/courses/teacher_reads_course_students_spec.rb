@@ -12,9 +12,9 @@ RSpec.feature 'Teacher reads course students', type: :feature do
   end
 
   it 'should list all students enrolled to the course' do
-    should have_selector 'h1', text: course.name
+    should have_heading course.name
     should have_link 'Wróć', href: course_path(course)
-    should have_selector 'h2', text: 'Zapisani studenci'
+    should have_heading 'Zapisani studenci'
     students.each do |student|
       expect(page).to have_link student.name, href: user_path(student)
     end

@@ -12,7 +12,7 @@ RSpec.feature 'Teacher updates a course', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: 'Edytuj kurs'
+      should have_heading 'Edytuj kurs'
       should have_link 'Wróć', href: course_path(course)
     end
   end
@@ -23,7 +23,7 @@ RSpec.feature 'Teacher updates a course', type: :feature do
       click_button 'Zapisz zmiany'
     end
     it 'should display error message' do
-      should have_selector 'h1', text: 'Edytuj kurs'
+      should have_heading 'Edytuj kurs'
       should have_error_message
     end
   end
@@ -36,7 +36,7 @@ RSpec.feature 'Teacher updates a course', type: :feature do
     end
 
     it 'should display success message' do
-      should have_selector 'h1', text: course.name
+      should have_heading course.name
       should have_selector 'div.desc', text: new_desc
       should have_success_message
     end

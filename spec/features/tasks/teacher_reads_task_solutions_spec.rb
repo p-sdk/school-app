@@ -19,12 +19,12 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
   end
 
   it 'should display a header' do
-    should have_selector 'h1', text: course.name
-    should have_selector 'h2', text: task.title
+    should have_heading course.name
+    should have_heading task.title
     should have_link 'Wróć', href: course_task_path(course, task)
   end
 
-  it { should have_selector 'h3', text: 'Rozwiązania oczekujące na sprawdzenie' }
+  it { should have_heading 'Rozwiązania oczekujące na sprawdzenie' }
 
   it 'lists ungraded solutions' do
     ungraded_solutions.each do |solution|
@@ -32,7 +32,7 @@ RSpec.feature 'Teacher reads task solutions', type: :feature do
     end
   end
 
-  it { should have_selector 'h3', text: 'Ocenione rozwiązania' }
+  it { should have_heading 'Ocenione rozwiązania' }
 
   it 'lists graded solutions' do
     graded_solutions.each do |solution|

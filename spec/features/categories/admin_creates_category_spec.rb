@@ -12,7 +12,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
 
   describe 'page' do
     it do
-      should have_selector 'h1', text: 'Utwórz nową kategorię'
+      should have_heading 'Utwórz nową kategorię'
       should have_link 'Wróć', href: categories_path
     end
   end
@@ -25,7 +25,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz kategorię' }
       it 'should display error message' do
-        should have_selector 'h1', text: 'Utwórz nową kategorię'
+        should have_heading 'Utwórz nową kategorię'
         should have_error_message
       end
     end
@@ -45,7 +45,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
     describe 'after submission' do
       before { click_button 'Utwórz kategorię' }
       it 'should display success message' do
-        should have_selector 'h1', text: category_attributes[:name]
+        should have_heading category_attributes[:name]
         should have_success_message
       end
     end
