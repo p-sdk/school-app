@@ -1,17 +1,15 @@
-.row
-  .col-md-3
-    = btn_to root_path do
-      = icon 'arrow-left', t(:back)
+- content_for :sidebar do
+  = btn_to root_path do
+    = icon 'arrow-left', t(:back)
 
-  .col-md-9
-    %h1= t '.title'
+%h1= t '.title'
 
-    - if users_requesting_upgrade.any?
-      %h2= t '.users_requesting_upgrade'
-      %ul= render users_requesting_upgrade
+- if users_requesting_upgrade.any?
+  %h2= t '.users_requesting_upgrade'
+  %ul= render users_requesting_upgrade
 
-    %h2= t '.teachers'
-    %ul= render teachers
+%h2= t '.teachers'
+%ul= render teachers
 
-    %h2= t '.students'
-    %ul= render students
+%h2= t '.students'
+%ul= render students

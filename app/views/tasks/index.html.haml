@@ -1,20 +1,20 @@
-.row
-  .col-md-3
-    - if policy(course).show?
-      .back
-        = btn_to course_path(course) do
-          = icon 'arrow-left', t('.course')
-    - if policy(Task.new(course: course)).new?
-      .add
-        = btn_to new_course_task_path(course), context: :primary do
-          = icon 'plus', t('.add_task')
-    - if course.has_student? current_user
-      = t '.your_score'
-      .earned-points= course.points_earned_by_enrollment(current_enrollment)
-      \/
-      .max-points= course.total_points
+- content_for :sidebar do
+  - if policy(course).show?
+    .back
+      = btn_to course_path(course) do
+        = icon 'arrow-left', t('.course')
 
-  .col-md-9
-    %h1= course.name
-    %h2= t '.title'
-    %ul.tasks= render tasks
+  - if policy(Task.new(course: course)).new?
+    .add
+      = btn_to new_course_task_path(course), context: :primary do
+        = icon 'plus', t('.add_task')
+
+  - if course.has_student? current_user
+    = t '.your_score'
+    .earned-points= course.points_earned_by_enrollment(current_enrollment)
+    \/
+    .max-points= course.total_points
+
+%h1= course.name
+%h2= t '.title'
+%ul.tasks= render tasks

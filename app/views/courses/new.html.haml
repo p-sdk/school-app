@@ -1,8 +1,6 @@
-.row
-  .col-md-3
-    = btn_to root_path do
-      = icon 'arrow-left', t(:back)
+- content_for :sidebar do
+  = btn_to root_path do
+    = icon 'arrow-left', t(:back)
 
-  .col-md-9
-    %h1= t '.title'
-    = render 'form'
+%h1= t '.title'
+= render 'form'

@@ -1,20 +1,18 @@
-.row
-  .col-md-3
-    - if policy(task).list_solutions?
-      .back
-        = btn_to course_task_solutions_path(task.course, task) do
-          = icon 'arrow-left', t('.back_to_solutions')
+- content_for :sidebar do
+  - if policy(task).list_solutions?
+    .back
+      = btn_to course_task_solutions_path(task.course, task) do
+        = icon 'arrow-left', t('.back_to_solutions')
 
-    - if policy(solution).destroy?
-      .delete
-        = btn_to solution_path(solution), method: :delete do
-          = icon 'trash', t('.delete')
+  - if policy(solution).destroy?
+    .delete
+      = btn_to solution_path(solution), method: :delete do
+        = icon 'trash', t('.delete')
 
-    - if policy(task.course).list_tasks?
-      = btn_to course_tasks_path(task.course) do
-        = icon 'arrow-left', t('.back_to_tasks')
+  - if policy(task.course).list_tasks?
+    = btn_to course_tasks_path(task.course) do
+      = icon 'arrow-left', t('.back_to_tasks')
 
-  .col-md-9
-    = render 'task_and_solution'
-    %h3= t '.points'
-    .points= solution.earned_points_formatted
+= render 'task_and_solution'
+%h3= t '.points'
+.points= solution.earned_points_formatted

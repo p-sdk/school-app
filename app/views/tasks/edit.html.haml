@@ -1,15 +1,14 @@
-.row
-  .col-md-3
-    - if policy(task).show?
-      .back
-        = btn_to course_task_path(course, task) do
-          = icon 'arrow-left', t(:back)
-    - if policy(task).destroy?
-      .delete
-        = btn_to course_task_path(course, task), method: :delete do
-          = icon 'trash', t('.delete')
+- content_for :sidebar do
+  - if policy(task).show?
+    .back
+      = btn_to course_task_path(course, task) do
+        = icon 'arrow-left', t(:back)
 
-  .col-md-9
-    %h1= course.name
-    %h2= t '.title'
-    = render 'form'
+  - if policy(task).destroy?
+    .delete
+      = btn_to course_task_path(course, task), method: :delete do
+        = icon 'trash', t('.delete')
+
+%h1= course.name
+%h2= t '.title'
+= render 'form'

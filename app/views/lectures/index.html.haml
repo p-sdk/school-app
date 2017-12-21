@@ -1,16 +1,14 @@
-.row
-  .col-md-3
-    - if policy(course).show?
-      .back
-        = btn_to course do
-          = icon 'arrow-left', t('.course')
+- content_for :sidebar do
+  - if policy(course).show?
+    .back
+      = btn_to course do
+        = icon 'arrow-left', t('.course')
 
-    - if policy(Lecture.new(course: course)).new?
-      .add
-        = btn_to new_course_lecture_path(course), context: :primary do
-          = icon 'plus', t('.add_lecture')
+  - if policy(Lecture.new(course: course)).new?
+    .add
+      = btn_to new_course_lecture_path(course), context: :primary do
+        = icon 'plus', t('.add_lecture')
 
-  .col-md-9
-    %h1= course.name
-    %h2= t '.title'
-    %ul.lectures= render lectures
+%h1= course.name
+%h2= t '.title'
+%ul.lectures= render lectures

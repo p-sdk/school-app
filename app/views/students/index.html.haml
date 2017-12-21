@@ -1,10 +1,8 @@
-.row
-  .col-md-3
-    - if policy(course).show?
-      = btn_to course do
-        = icon 'arrow-left', t(:back)
+- content_for :sidebar do
+  - if policy(course).show?
+    = btn_to course do
+      = icon 'arrow-left', t(:back)
 
-  .col-md-9
-    %h1= course.name
-    %h2= t '.title'
-    %ul.students= render students
+%h1= course.name
+%h2= t '.title'
+%ul.students= render students

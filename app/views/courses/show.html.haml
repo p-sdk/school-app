@@ -1,27 +1,25 @@
-.row
-  .col-md-3
-    - if policy(course).edit?
-      = btn_to edit_course_path(course) do
-        = icon 'edit', t(:edit)
+- content_for :sidebar do
+  - if policy(course).edit?
+    = btn_to edit_course_path(course) do
+      = icon 'edit', t(:edit)
 
-    - if policy(course).enroll?
-      .enroll= button_to t('.enroll'), course_students_path(course), class: 'btn btn-primary'
+  - if policy(course).enroll?
+    .enroll= button_to t('.enroll'), course_students_path(course), class: 'btn btn-primary'
 
-    - if policy(course).list_students?
-      = btn_to course_students_path(course) do
-        = icon 'group', t('.students')
+  - if policy(course).list_students?
+    = btn_to course_students_path(course) do
+      = icon 'group', t('.students')
 
-    - if policy(course).list_lectures?
-      = btn_to course_lectures_path(course) do
-        = icon 'file-text', t('.lectures')
+  - if policy(course).list_lectures?
+    = btn_to course_lectures_path(course) do
+      = icon 'file-text', t('.lectures')
 
-    - if policy(course).list_tasks?
-      = btn_to course_tasks_path(course) do
-        = icon 'tasks', t('.tasks')
+  - if policy(course).list_tasks?
+    = btn_to course_tasks_path(course) do
+      = icon 'tasks', t('.tasks')
 
-  .col-md-9
-    %h1= course.name
-    .teacher
-      %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
+%h1= course.name
+.teacher
+  %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
 
-    .desc= course.description_formatted
+.desc= course.description_formatted

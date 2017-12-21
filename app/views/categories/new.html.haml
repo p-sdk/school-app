@@ -1,9 +1,7 @@
-.row
-  .col-md-3
-    - if policy(Category).index?
-      = btn_to categories_path do
-        = icon 'arrow-left', t(:back)
+- content_for :sidebar do
+  - if policy(Category).index?
+    = btn_to categories_path do
+      = icon 'arrow-left', t(:back)
 
-  .col-md-9
-    %h1= t '.title'
-    = render 'form'
+%h1= t '.title'
+= render 'form'

@@ -1,24 +1,24 @@
-.row
-  .col-md-3
-    - if policy(User).index?
-      .back
-        = btn_to users_path do
-          = icon 'arrow-left', t('.back_to_users')
-    .center
-      #avatar= user.gravatar
-      .email
-        = mail_to user.email
+- content_for :sidebar do
+  - if policy(User).index?
+    .back
+      = btn_to users_path do
+        = icon 'arrow-left', t('.back_to_users')
 
-  .col-md-9
-    %h1= user.name
+  .center
+    #avatar= user.gravatar
+    .email
+      = mail_to user.email
 
-    - if user.teacher?
-      %ul.courses= render user.teacher_courses
+%h1= user.name
 
-    - if user.requesting_upgrade? && policy(:upgrade).update?
-      %p= t '.upgrade_request_pending'
-      = btn_to user_upgrade_path(user), context: :success, method: :patch do
-        = icon 'check', t('.approve')
-    - if user.requesting_upgrade? && policy(:upgrade).destroy?
-      = btn_to user_upgrade_path(user), context: :danger, method: :delete do
-        = icon 'remove', t('.reject')
+- if user.teacher?
+  %ul.courses= render user.teacher_courses
+
+- if user.requesting_upgrade? && policy(:upgrade).update?
+  %p= t '.upgrade_request_pending'
+  = btn_to user_upgrade_path(user), context: :success, method: :patch do
+    = icon 'check', t('.approve')
+
+- if user.requesting_upgrade? && policy(:upgrade).destroy?
+  = btn_to user_upgrade_path(user), context: :danger, method: :delete do
+    = icon 'remove', t('.reject')
