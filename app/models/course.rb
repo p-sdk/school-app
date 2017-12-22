@@ -28,8 +28,7 @@ class Course < ActiveRecord::Base
   has_many :lectures, dependent: :destroy
   has_many :tasks, dependent: :destroy
 
-  belongs_to :category
-  validates :category, presence: true
+  belongs_to :category, required: true
 
   validates :name,
             presence: true,
