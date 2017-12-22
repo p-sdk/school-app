@@ -25,22 +25,14 @@ require 'rails_helper'
 RSpec.describe Enrollment, type: :model do
   subject(:enrollment) { build :enrollment }
 
-  describe '[student, course] uniqueness' do
-    let(:student) { enrollment.student }
-    let(:course) { enrollment.course }
-    let!(:second_enrollment) { create :enrollment, student: student, course: course }
-
-    specify do
-      expect { enrollment.save }.to raise_error ActiveRecord::RecordNotUnique
-    end
-  end
-
   describe 'validations' do
     it { should belong_to(:student).class_name('User') }
     it { should validate_presence_of(:student) }
 
     it { should belong_to(:course) }
     it { should validate_presence_of(:course) }
+
+    it { is_expected.to validate_uniqueness_of(:student_id).scoped_to(:course_id) }
 
     it { should have_many(:solutions).dependent(:destroy) }
   end

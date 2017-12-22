@@ -25,4 +25,6 @@ class Enrollment < ActiveRecord::Base
   belongs_to :course, required: true
 
   has_many :solutions, dependent: :destroy
+
+  validates_uniqueness_of :student_id, scope: :course_id
 end
