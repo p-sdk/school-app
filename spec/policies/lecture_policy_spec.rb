@@ -36,5 +36,10 @@ RSpec.describe LecturePolicy do
 
     it { is_expected.to permit_actions(%i[show create update destroy]) }
     it { is_expected.to forbid_action(:index) }
+
+    it { is_expected.to permit_mass_assignment_of(:attachment) }
+    it { is_expected.to permit_mass_assignment_of(:content) }
+    it { is_expected.to forbid_mass_assignment_of(:course_id) }
+    it { is_expected.to permit_mass_assignment_of(:title) }
   end
 end

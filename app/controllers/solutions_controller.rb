@@ -1,5 +1,5 @@
 class SolutionsController < ApplicationController
-  expose_decorated(:solution, build_params: :solution_params_for_create)
+  expose_decorated(:solution)
   expose_decorated(:task, from: :solution)
 
   before_action :authorize_solution
@@ -15,7 +15,7 @@ class SolutionsController < ApplicationController
   end
 
   def update
-    if solution.update(solution_params_for_update)
+    if solution.update(solution_params)
       flash[:success] = t '.success'
       redirect_to solution
     else
@@ -39,12 +39,8 @@ class SolutionsController < ApplicationController
     current_user.enrollments.find_by(course: course)
   end
 
-  def solution_params_for_create
-    params.require(:solution).permit(:task_id, :content)
-  end
-
-  def solution_params_for_update
-    params.require(:solution).permit(:earned_points)
+  def solution_params
+    permitted_attributes(Solution)
   end
 
   def authorize_solution

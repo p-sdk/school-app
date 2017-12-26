@@ -30,4 +30,8 @@ class CoursePolicy < ApplicationPolicy
   def enroll?
     !(user.nil? || user_is_course_teacher?(record) || user&.enrolled_in?(record))
   end
+
+  def permitted_attributes
+    %i[category_id desc name]
+  end
 end

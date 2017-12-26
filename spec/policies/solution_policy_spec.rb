@@ -23,6 +23,11 @@ RSpec.describe SolutionPolicy do
 
     it { is_expected.to permit_action(:create) }
     it { is_expected.to forbid_actions(%i[index show update destroy]) }
+
+    it { is_expected.to permit_mass_assignment_of(:content) }
+    it { is_expected.to forbid_mass_assignment_of(:earned_points) }
+    it { is_expected.to forbid_mass_assignment_of(:enrollment_id) }
+    it { is_expected.to permit_mass_assignment_of(:task_id) }
   end
 
   context 'being the solution submitter' do
@@ -43,5 +48,10 @@ RSpec.describe SolutionPolicy do
 
     it { is_expected.to permit_actions(%i[show update destroy]) }
     it { is_expected.to forbid_actions(%i[index create]) }
+
+    it { is_expected.to forbid_mass_assignment_of(:content) }
+    it { is_expected.to permit_mass_assignment_of(:earned_points) }
+    it { is_expected.to forbid_mass_assignment_of(:enrollment_id) }
+    it { is_expected.to forbid_mass_assignment_of(:task_id) }
   end
 end

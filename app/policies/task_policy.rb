@@ -24,4 +24,8 @@ class TaskPolicy < ApplicationPolicy
   def list_solutions?
     user_is_course_teacher?(record.course)
   end
+
+  def permitted_attributes
+    %i[desc points title]
+  end
 end

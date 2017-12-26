@@ -23,5 +23,7 @@ RSpec.describe CategoryPolicy do
     let(:user) { build_stubbed :admin }
 
     it { is_expected.to permit_actions(%i[index show create update destroy]) }
+
+    it { is_expected.to permit_mass_assignment_of(:name) }
   end
 end

@@ -14,4 +14,8 @@ class CategoryPolicy < ApplicationPolicy
   def destroy?
     user_is_admin?
   end
+
+  def permitted_attributes
+    %i[name]
+  end
 end

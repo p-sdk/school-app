@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(%i[title desc points])
+    permitted_attributes(Task)
   end
 
   def authorize_task

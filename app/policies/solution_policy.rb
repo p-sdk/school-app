@@ -21,4 +21,12 @@ class SolutionPolicy < ApplicationPolicy
   def destroy?
     user_is_course_teacher?(record.task.course)
   end
+
+  def permitted_attributes
+    if user_is_teacher?
+      %i[earned_points]
+    else
+      %i[content task_id]
+    end
+  end
 end

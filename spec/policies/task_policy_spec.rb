@@ -36,5 +36,10 @@ RSpec.describe TaskPolicy do
 
     it { is_expected.to permit_actions(%i[show create update destroy list_solutions]) }
     it { is_expected.to forbid_action(:index) }
+
+    it { is_expected.to forbid_mass_assignment_of(:course_id) }
+    it { is_expected.to permit_mass_assignment_of(:desc) }
+    it { is_expected.to permit_mass_assignment_of(:points) }
+    it { is_expected.to permit_mass_assignment_of(:title) }
   end
 end

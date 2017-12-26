@@ -20,4 +20,8 @@ class LecturePolicy < ApplicationPolicy
   def destroy?
     user_is_course_teacher?(record.course)
   end
+
+  def permitted_attributes
+    %i[attachment content title]
+  end
 end

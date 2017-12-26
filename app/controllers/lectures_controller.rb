@@ -36,7 +36,7 @@ class LecturesController < ApplicationController
   private
 
   def lecture_params
-    params.require(:lecture).permit(%i[title content attachment])
+    permitted_attributes(Lecture)
   end
 
   def authorize_lecture

@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name)
+    permitted_attributes(Category)
   end
 
   def authorize_category

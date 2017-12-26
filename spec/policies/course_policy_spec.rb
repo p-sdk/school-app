@@ -32,6 +32,11 @@ RSpec.describe CoursePolicy do
 
     it { is_expected.to permit_actions(%i[index show create enroll]) }
     it { is_expected.to forbid_actions(%i[update destroy list_lectures list_students list_tasks]) }
+
+    it { is_expected.to permit_mass_assignment_of(:category_id) }
+    it { is_expected.to permit_mass_assignment_of(:desc) }
+    it { is_expected.to permit_mass_assignment_of(:name) }
+    it { is_expected.to forbid_mass_assignment_of(:teacher_id) }
   end
 
   context 'being the course teacher' do
@@ -39,5 +44,10 @@ RSpec.describe CoursePolicy do
 
     it { is_expected.to permit_actions(%i[index show create update destroy list_lectures list_students list_tasks]) }
     it { is_expected.to forbid_action(:enroll) }
+
+    it { is_expected.to permit_mass_assignment_of(:category_id) }
+    it { is_expected.to permit_mass_assignment_of(:desc) }
+    it { is_expected.to permit_mass_assignment_of(:name) }
+    it { is_expected.to forbid_mass_assignment_of(:teacher_id) }
   end
 end
