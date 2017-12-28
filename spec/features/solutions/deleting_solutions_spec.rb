@@ -7,20 +7,15 @@ RSpec.feature 'Teacher deletes a solution', type: :feature do
   let(:task) { solution.task }
   let(:course) { task.course }
 
-  before do
+  background do
     sign_in course.teacher
     visit edit_solution_path(solution)
   end
 
-  it 'should delete the solution' do
+  scenario 'successfully' do
     expect { click_link 'Usuń' }.to change(Solution, :count).by(-1)
-  end
 
-  context 'after deleting' do
-    before { click_link 'Usuń' }
-    it 'should display success message' do
-      expect(current_path).to eq course_task_solutions_path(course, task)
-      should have_success_message
-    end
+    expect(current_path).to eq course_task_solutions_path(course, task)
+    should have_success_message
   end
 end

@@ -6,34 +6,23 @@ RSpec.feature 'Student creates a solution', type: :feature do
   let(:task) { create :task }
   let(:course) { task.course }
   let(:student) { create :student, course: course }
-  let(:submit) { 'Wyślij' }
 
-  before do
+  background do
     sign_in student
     visit course_task_path(course, task)
   end
 
-  context 'with invalid information' do
-    it 'should not create solution' do
-      expect { click_button submit }.not_to change(Solution, :count)
-    end
+  scenario 'with invalid attributes' do
+    expect { click_button 'Wyślij' }.not_to change(Solution, :count)
 
-    describe 'after submission' do
-      before { click_button submit }
-      it { should have_error_message }
-    end
+    should have_error_message
   end
 
-  context 'with valid information' do
-    before { fill_in 'Rozwiązanie', with: 'Lorem Ipsum' }
+  scenario 'with valid attributes' do
+    fill_in 'Rozwiązanie', with: 'Lorem Ipsum'
 
-    it 'should create solution' do
-      expect { click_button submit }.to change(Solution, :count).by(1)
-    end
+    expect { click_button 'Wyślij' }.to change(Solution, :count).by(1)
 
-    describe 'after submission' do
-      before { click_button submit }
-      it { should have_success_message }
-    end
+    should have_success_message
   end
 end
