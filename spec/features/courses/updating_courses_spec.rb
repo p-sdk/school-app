@@ -4,41 +4,31 @@ RSpec.feature 'Teacher updates a course', type: :feature do
   subject { page }
 
   let(:course) { create :course }
+  let(:new_desc) { 'Sunt in culpa qui officia deserunt.' }
 
-  before do
+  background do
     sign_in course.teacher
-    visit edit_course_path(course)
+    visit course_path(course)
+    click_link 'Edytuj'
   end
 
-  describe 'page' do
-    it do
-      should have_heading 'Edytuj kurs'
-      should have_link 'Wróć', href: course_path(course)
-    end
+  scenario 'with invalid attributes' do
+    should have_heading 'Edytuj kurs'
+    should have_link 'Wróć', href: course_path(course)
+
+    fill_in 'Nazwa', with: ''
+    click_button 'Zapisz zmiany'
+
+    should have_heading 'Edytuj kurs'
+    should have_error_message
   end
 
-  context 'with invalid information' do
-    before do
-      fill_in 'Nazwa', with: ''
-      click_button 'Zapisz zmiany'
-    end
-    it 'should display error message' do
-      should have_heading 'Edytuj kurs'
-      should have_error_message
-    end
-  end
+  scenario 'with valid attributes' do
+    fill_in 'Opis', with: new_desc
+    click_button 'Zapisz zmiany'
 
-  context 'with valid information' do
-    let(:new_desc) { 'Sunt in culpa qui officia deserunt mollit anim id est laborum.' }
-    before do
-      fill_in 'Opis', with: new_desc
-      click_button 'Zapisz zmiany'
-    end
-
-    it 'should display success message' do
-      should have_heading course.name
-      should have_selector 'div.desc', text: new_desc
-      should have_success_message
-    end
+    should have_heading course.name
+    should have_selector 'div.desc', text: new_desc
+    should have_success_message
   end
 end

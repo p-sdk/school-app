@@ -1,18 +1,66 @@
 require 'rails_helper'
 
-RSpec.feature 'User reads courses index', type: :feature do
+RSpec.feature 'User views courses', type: :feature do
   subject { page }
 
-  before do
-    create_list :course, 6
-    visit courses_path
+  let!(:courses) { create_list :course, 6 }
+  let(:course) { courses.first }
+  let(:user) { nil }
+
+  background do
+    sign_in user if user
+    visit root_path
+    click_link 'Kursy'
   end
 
-  it 'should display all courses' do
+  scenario 'successfully' do
     should have_heading 'Kursy'
     should have_link 'Przeglądaj wg kategorii', href: categories_path
-    Course.all.each do |course|
+    courses.each do |course|
       expect(page).to have_link course.name, href: course_path(course)
+    end
+
+    click_link course.name
+
+    should have_heading course.name
+    should have_selector 'div.teacher i', text: course.teacher.name
+    should have_selector 'div.desc', text: course.desc
+  end
+
+  context 'when not signed in' do
+    scenario 'should have proper links' do
+      click_link course.name
+
+      should_not have_button 'Zapisz się'
+      should_not have_link 'Edytuj', href: edit_course_path(course)
+      should_not have_link 'Zapisani studenci', href: course_students_path(course)
+      should_not have_link 'Wykłady', href: course_lectures_path(course)
+      should_not have_link 'Zadania', href: course_tasks_path(course)
+    end
+  end
+
+  context 'when signed in as the teacher' do
+    let(:user) { course.teacher }
+
+    scenario 'should have proper links' do
+      click_link course.name
+
+      should_not have_button 'Zapisz się'
+      should have_link 'Edytuj', href: edit_course_path(course)
+      should have_link 'Zapisani studenci', href: course_students_path(course)
+      should have_link 'Wykłady', href: course_lectures_path(course)
+      should have_link 'Zadania', href: course_tasks_path(course)
+    end
+  end
+
+  context 'when signed in as a student' do
+    let(:user) { create :student, course: course }
+
+    scenario 'should have proper links' do
+      click_link course.name
+
+      should_not have_link 'Edytuj', href: edit_course_path(course)
+      should_not have_link 'Zapisani studenci', href: course_students_path(course)
     end
   end
 end

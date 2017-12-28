@@ -47,8 +47,6 @@ RSpec.feature 'User visits home page', type: :feature do
       let(:teacher) { create :teacher_with_courses }
       let(:user) { teacher }
 
-      it { should have_link 'Utwórz nowy kurs', href: new_course_path }
-
       describe 'owned courses' do
         it 'should show all owned courses' do
           should have_heading 'Kursy które prowadzisz'

@@ -6,27 +6,20 @@ RSpec.feature 'User enrolls in the course', type: :feature do
   let(:course) { create :course }
   let(:student) { create :user }
 
-  before do
+  background do
     sign_in student
     visit course_path(course)
   end
 
-  describe 'enrollment' do
-    specify do
-      expect do
-        click_button 'Zapisz się'
-      end.to change(student.courses, :count).by(1)
-    end
+  scenario 'successfully' do
+    should_not have_link 'Wykłady', href: course_lectures_path(course)
+    should_not have_link 'Zadania', href: course_tasks_path(course)
 
-    specify do
-      expect do
-        click_button 'Zapisz się'
-      end.to change(course.students, :count).by(1)
-    end
+    expect { click_button 'Zapisz się' }.to change(student.courses, :count).by(1)
 
-    describe 'after submission' do
-      before { click_button 'Zapisz się' }
-      it { should_not have_button 'Zapisz się' }
-    end
+    expect(current_path).to eq course_path(course)
+    should have_link 'Wykłady', href: course_lectures_path(course)
+    should have_link 'Zadania', href: course_tasks_path(course)
+    should_not have_button 'Zapisz się'
   end
 end

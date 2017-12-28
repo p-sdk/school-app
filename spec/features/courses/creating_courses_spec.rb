@@ -5,53 +5,32 @@ RSpec.feature 'Teacher creates a course', type: :feature do
 
   let!(:category) { create :category }
   let(:teacher) { create :teacher }
+  let(:course_attributes) { attributes_for :course }
 
-  before do
+  background do
     sign_in teacher
-    visit new_course_path
+    visit root_path
+    click_link 'Utwórz nowy kurs'
   end
 
-  describe 'page' do
-    it do
-      should have_heading 'Utwórz nowy kurs'
-      should have_link 'Wróć', href: root_path
-    end
+  scenario 'with invalid attributes' do
+    should have_heading 'Utwórz nowy kurs'
+    should have_link 'Wróć', href: root_path
+
+    expect { click_button 'Utwórz kurs' }.to_not change(Course, :count)
+
+    should have_heading 'Utwórz nowy kurs'
+    should have_error_message
   end
 
-  context 'with invalid information' do
-    it 'should not create a course' do
-      expect { click_button 'Utwórz kurs' }.to_not change(Course, :count)
-    end
+  scenario 'with valid attributes' do
+    fill_in 'Nazwa', with: course_attributes[:name]
+    fill_in 'Opis', with: course_attributes[:desc]
+    select category[:name], from: 'Kategoria'
 
-    describe 'after submission' do
-      before { click_button 'Utwórz kurs' }
-      it 'should display error message' do
-        should have_heading 'Utwórz nowy kurs'
-        should have_error_message
-      end
-    end
-  end
+    expect { click_button 'Utwórz kurs' }.to change(Course, :count).by(1)
 
-  context 'with valid information' do
-    let(:course_attributes) { attributes_for :course }
-
-    before do
-      fill_in 'Nazwa', with: course_attributes[:name]
-      fill_in 'Opis', with: course_attributes[:desc]
-      select category[:name], from: 'Kategoria'
-    end
-
-    it 'should create a course' do
-      expect { click_button 'Utwórz kurs' }.to change(Course, :count).by(1)
-    end
-
-    describe 'after submission' do
-      before { click_button 'Utwórz kurs' }
-
-      it 'should display success message' do
-        should have_heading course_attributes[:name]
-        should have_success_message
-      end
-    end
+    should have_heading course_attributes[:name]
+    should have_success_message
   end
 end

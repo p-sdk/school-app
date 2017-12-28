@@ -5,20 +5,15 @@ RSpec.feature 'Teacher deletes a course', type: :feature do
 
   let(:course) { create :course }
 
-  before do
+  background do
     sign_in course.teacher
     visit edit_course_path(course)
   end
 
-  it 'should delete the course' do
+  scenario 'successfully' do
     expect { click_link 'Usuń' }.to change(Course, :count).by(-1)
-  end
 
-  context 'after deleting' do
-    before { click_link 'Usuń' }
-    it 'should display success message' do
-      expect(current_path).to eq courses_path
-      should have_success_message
-    end
+    expect(current_path).to eq courses_path
+    should have_success_message
   end
 end
