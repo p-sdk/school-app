@@ -4,50 +4,30 @@ RSpec.feature 'Admin creates a category', type: :feature do
   subject { page }
 
   let(:admin) { create :admin }
+  let(:category_attributes) { attributes_for :category }
 
-  before do
+  background do
     sign_in admin
-    visit new_category_path
+    visit categories_path
+    click_link 'Dodaj nową kategorię'
   end
 
-  describe 'page' do
-    it do
-      should have_heading 'Utwórz nową kategorię'
-      should have_link 'Wróć', href: categories_path
-    end
+  scenario 'with invalid attributes' do
+    should have_heading 'Utwórz nową kategorię'
+    should have_link 'Wróć', href: categories_path
+
+    expect { click_button 'Utwórz kategorię' }.not_to change(Category, :count)
+
+    should have_heading 'Utwórz nową kategorię'
+    should have_error_message
   end
 
-  context 'with invalid information' do
-    it 'should not create a category' do
-      expect { click_button 'Utwórz kategorię' }.not_to change(Category, :count)
-    end
+  scenario 'with valid attributes' do
+    fill_in 'Nazwa', with: category_attributes[:name]
 
-    describe 'after submission' do
-      before { click_button 'Utwórz kategorię' }
-      it 'should display error message' do
-        should have_heading 'Utwórz nową kategorię'
-        should have_error_message
-      end
-    end
-  end
+    expect { click_button 'Utwórz kategorię' }.to change(Category, :count).by(1)
 
-  context 'with valid information' do
-    let(:category_attributes) { attributes_for :category }
-
-    before do
-      fill_in 'Nazwa', with: category_attributes[:name]
-    end
-
-    it 'should create a category' do
-      expect { click_button 'Utwórz kategorię' }.to change(Category, :count).by(1)
-    end
-
-    describe 'after submission' do
-      before { click_button 'Utwórz kategorię' }
-      it 'should display success message' do
-        should have_heading category_attributes[:name]
-        should have_success_message
-      end
-    end
+    should have_heading category_attributes[:name]
+    should have_success_message
   end
 end
