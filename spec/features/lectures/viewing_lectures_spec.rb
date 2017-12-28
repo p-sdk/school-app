@@ -1,30 +1,33 @@
 require 'rails_helper'
 
-RSpec.feature 'User reads lectures index', type: :feature do
+RSpec.feature 'User views lectures', type: :feature do
   subject { page }
 
   let(:course) { create :course }
   let!(:lectures) { create_list :lecture, 3, course: course }
+  let(:lecture) { lectures.first }
   let(:student) { create :student, course: course }
   let(:user) { student }
 
-  before do
+  background do
     sign_in user
-    visit course_lectures_path(course)
+    visit course_path(course)
+    click_link 'Wykłady'
   end
 
-  it 'should list course lectures' do
+  scenario 'successfully' do
     should have_heading course.name
     should have_heading 'Wykłady'
     should have_link 'Wróć', href: course_path(course)
     lectures.each do |lecture|
       expect(page).to have_link lecture.title, href: course_lecture_path(course, lecture)
     end
-  end
 
-  context 'for the teacher' do
-    let(:user) { course.teacher }
+    click_link lecture.title
 
-    it { should have_link 'Dodaj wykład', href: new_course_lecture_path(course) }
+    should have_heading course.name
+    should have_heading lecture.title
+    should have_link 'Wróć', href: course_lectures_path(course)
+    should have_selector 'div.lecture', text: lecture.content
   end
 end

@@ -5,44 +5,32 @@ RSpec.feature 'Teacher updates a lecture', type: :feature do
 
   let(:lecture) { create :lecture }
   let(:course) { lecture.course }
+  let(:new_content) { 'Officia deserunt mollit' }
 
-  before do
+  background do
     sign_in course.teacher
-    visit edit_course_lecture_path(course, lecture)
+    visit course_lecture_path(course, lecture)
+    click_link 'Edytuj'
   end
 
-  describe 'page' do
-    it do
-      should have_heading course.name
-      should have_heading 'Edytuj wykład'
-      should have_link 'Wróć', href: course_lecture_path(course, lecture)
-    end
+  scenario 'with invalid attributes' do
+    should have_heading course.name
+    should have_heading 'Edytuj wykład'
+    should have_link 'Wróć', href: course_lecture_path(course, lecture)
+
+    fill_in 'Tytuł', with: ''
+    click_button 'Zapisz zmiany'
+
+    should have_heading 'Edytuj wykład'
+    should have_error_message
   end
 
-  context 'with invalid information' do
-    before do
-      fill_in 'Tytuł', with: ''
-      click_button 'Zapisz zmiany'
-    end
+  scenario 'with valid attributes' do
+    fill_in 'Treść', with: new_content
+    click_button 'Zapisz zmiany'
 
-    it 'should display error message' do
-      should have_heading 'Edytuj wykład'
-      should have_error_message
-    end
-  end
-
-  context 'with valid information' do
-    let(:new_content) { 'Officia deserunt mollit' }
-
-    before do
-      fill_in 'Treść', with: new_content
-      click_button 'Zapisz zmiany'
-    end
-
-    it 'should display success message' do
-      should have_heading lecture.title
-      should have_selector 'div.lecture', text: new_content
-      should have_success_message
-    end
+    should have_heading lecture.title
+    should have_selector 'div.lecture', text: new_content
+    should have_success_message
   end
 end
