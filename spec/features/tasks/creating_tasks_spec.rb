@@ -4,53 +4,33 @@ RSpec.feature 'Teacher creates a task', type: :feature do
   subject { page }
 
   let(:course) { create :course }
+  let(:task_attributes) { attributes_for :task }
 
-  before do
+  background do
     sign_in course.teacher
-    visit new_course_task_path(course)
+    visit course_tasks_path(course)
+    click_link 'Dodaj zadanie'
   end
 
-  describe 'page' do
-    it do
-      should have_heading course.name
-      should have_link 'Wróć', href: course_tasks_path(course)
-      should have_heading 'Utwórz nowe zadanie'
-    end
+  scenario 'with invalid attributes' do
+    should have_heading course.name
+    should have_heading 'Utwórz nowe zadanie'
+    should have_link 'Wróć', href: course_tasks_path(course)
+
+    expect { click_button 'Utwórz zadanie' }.not_to change(Task, :count)
+
+    should have_heading 'Utwórz nowe zadanie'
+    should have_error_message
   end
 
-  describe 'with invalid information' do
-    it 'should not create a task' do
-      expect { click_button 'Utwórz zadanie' }.not_to change(Task, :count)
-    end
+  scenario 'with valid attributes' do
+    fill_in 'Tytuł', with: task_attributes[:title]
+    fill_in 'Opis', with: task_attributes[:desc]
+    fill_in 'Liczba punktów', with: task_attributes[:points]
 
-    describe 'after submission' do
-      before { click_button 'Utwórz zadanie' }
-      it 'should display error message' do
-        should have_heading 'Utwórz nowe zadanie'
-        should have_error_message
-      end
-    end
-  end
+    expect { click_button 'Utwórz zadanie' }.to change(Task, :count).by(1)
 
-  describe 'with valid information' do
-    let(:task_attributes) { attributes_for :task }
-
-    before do
-      fill_in 'Tytuł', with: task_attributes[:title]
-      fill_in 'Opis', with: task_attributes[:desc]
-      fill_in 'Liczba punktów', with: task_attributes[:points]
-    end
-
-    it 'should create a task' do
-      expect { click_button 'Utwórz zadanie' }.to change(Task, :count).by(1)
-    end
-
-    describe 'after submission' do
-      before { click_button 'Utwórz zadanie' }
-      it 'should display success message' do
-        should have_heading task_attributes[:title]
-        should have_success_message
-      end
-    end
+    should have_heading task_attributes[:title]
+    should have_success_message
   end
 end
