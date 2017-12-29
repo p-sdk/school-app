@@ -1,69 +1,54 @@
 require 'rails_helper'
 
-RSpec.feature 'User visits home page', type: :feature do
+RSpec.feature 'User views home page', type: :feature do
   subject { page }
 
-  let(:user) { nil }
-
-  before do
+  background do
     sign_in user if user
     visit root_path
   end
 
-  it { should have_heading 'Witaj na e-kursy' }
+  context 'when not signed in' do
+    let(:user) { nil }
 
-  it 'should have the right links on the layout' do
-    click_link 'Kursy'
-    expect(page).to have_heading 'Kursy'
-    click_link 'logo'
-    click_link 'Zarejestruj'
-    expect(page).to have_heading 'Rejestracja'
-    click_link 'logo'
-    expect(current_path).to eq root_path
+    scenario 'sees welcome message' do
+      should have_heading 'Witaj na e-kursy'
+    end
   end
 
-  context 'when signed in' do
-    let(:user) { create :user }
+  context 'when signed in as student' do
+    let(:courses) { create_list :course, 3 }
+    let(:user) { create :student, course: courses }
 
-    it { should have_link 'Moje kursy', href: root_path }
+    scenario 'successfully' do
+      should have_link 'Moje kursy', href: root_path
+      should_not have_link 'Utwórz nowy kurs', href: new_course_path
 
-    context 'as student' do
-      it { should_not have_link 'Utwórz nowy kurs', href: new_course_path }
-
-      describe 'enrolled in courses' do
-        let(:courses) { create_list :course, 3 }
-        let(:user) { create :student, course: courses }
-
-        it 'should list all courses that the student has enrolled in' do
-          should have_heading 'Kursy na które jesteś zapisany'
-          courses.each do |course|
-            expect(page).to have_link course.name, href: course_path(course)
-          end
-        end
+      should have_heading 'Kursy na które jesteś zapisany'
+      courses.each do |course|
+        expect(page).to have_link course.name, href: course_path(course)
       end
     end
+  end
 
-    context 'as teacher' do
-      let(:teacher) { create :teacher_with_courses }
-      let(:user) { teacher }
+  context 'when signed in as teacher' do
+    let(:teacher) { create :teacher_with_courses }
+    let(:user) { teacher }
 
-      describe 'owned courses' do
-        it 'should show all owned courses' do
-          should have_heading 'Kursy które prowadzisz'
-          teacher.teacher_courses.each do |course|
-            expect(page).to have_link course.name, href: course_path(course)
-          end
-        end
+    scenario 'successfully' do
+      should have_heading 'Kursy które prowadzisz'
+      teacher.teacher_courses.each do |course|
+        expect(page).to have_link course.name, href: course_path(course)
       end
     end
+  end
 
-    context 'as admin' do
-      let(:user) { create :admin }
+  context 'when signed in as admin' do
+    let(:user) { create :admin }
 
-      it 'should have proper links' do
-        should have_link 'Zarządzaj kategoriami', href: categories_path
-        should have_link 'Zarządzaj użytkownikami', href: users_path
-      end
+    scenario 'successfully' do
+      should have_link 'Zarządzaj kategoriami', href: categories_path
+      should have_link 'Zarządzaj użytkownikami', href: users_path
     end
   end
 end
