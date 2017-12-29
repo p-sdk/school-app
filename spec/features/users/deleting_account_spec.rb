@@ -5,17 +5,14 @@ RSpec.feature 'User deletes the account', type: :feature do
 
   let(:user) { create :user }
 
-  before do
+  background do
     sign_in user
     visit edit_user_registration_path
   end
 
-  it 'should delete the user' do
+  scenario 'successfully' do
     expect { click_link 'Usuń' }.to change(User, :count).by(-1)
-  end
 
-  context 'after deleting' do
-    before { click_link 'Usuń' }
-    it { is_expected.to have_success_message }
+    is_expected.to have_success_message
   end
 end

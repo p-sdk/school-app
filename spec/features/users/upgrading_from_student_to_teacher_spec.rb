@@ -6,52 +6,44 @@ RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
   let(:user) { create :user }
   let(:admin) { create :admin }
 
-  describe 'submitting request to upgrade to teacher account' do
-    before do
-      sign_in user
-      visit edit_user_registration_path
-      click_on 'rozszerzenie'
+  background do
+    sign_in user
+    visit edit_user_registration_path
+    click_link 'rozszerzenie'
+  end
+
+  scenario 'submitting request to upgrade to teacher account' do
+    expect(User.requesting_upgrade).to include user
+    expect(user.reload).to be_requesting_upgrade
+    should have_success_message
+
+    visit edit_user_registration_path
+
+    should_not have_link 'rozszerzenie'
+    should have_content 'czeka na rozpatrzenie'
+  end
+
+  context 'admin decides on upgrade' do
+    background do
+      sign_in admin
+      visit users_path
+      first('a', text: user.name).click
     end
 
-    it 'should be waiting for approval' do
-      expect(User.requesting_upgrade).to include user
-      expect(user.reload).to be_requesting_upgrade
+    scenario 'approving' do
+      click_link 'Zatwierdź'
+
+      expect(User.requesting_upgrade).not_to include user
+      expect(user.reload).to be_teacher
       should have_success_message
     end
 
-    describe 'edit page' do
-      before { visit edit_user_registration_path }
+    scenario 'dismissing' do
+      click_link 'Odrzuć'
 
-      it 'should have proper message' do
-        should_not have_link 'rozszerzenie'
-        should have_content 'czeka na rozpatrzenie'
-      end
-    end
-  end
-
-  describe 'admin decides on upgrade' do
-    before do
-      user.request_upgrade
-      sign_in admin
-      visit user_path(user)
-    end
-
-    context 'after approving' do
-      before { click_on 'Zatwierdź' }
-      it 'should upgrade the user' do
-        expect(User.requesting_upgrade).not_to include user
-        expect(user.reload).to be_teacher
-        should have_success_message
-      end
-    end
-
-    context 'after dismissing' do
-      before { click_on 'Odrzuć' }
-      it 'should not upgrade the user' do
-        expect(User.requesting_upgrade).not_to include user
-        expect(user.reload).not_to be_teacher
-        should have_success_message
-      end
+      expect(User.requesting_upgrade).not_to include user
+      expect(user.reload).not_to be_teacher
+      should have_success_message
     end
   end
 end

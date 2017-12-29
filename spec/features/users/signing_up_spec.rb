@@ -3,47 +3,32 @@ require 'rails_helper'
 RSpec.feature 'User signs up', type: :feature do
   subject { page }
 
-  before { visit new_user_registration_path }
+  let(:user_attributes) { attributes_for :user }
 
-  describe 'page' do
-    it { should have_heading 'Rejestracja' }
+  background do
+    visit root_path
+    click_link 'Zarejestruj się'
   end
 
-  context 'with invalid information' do
-    it 'should not create a user' do
-      expect { click_button 'Załóż konto' }.not_to change(User, :count)
-    end
+  scenario 'with invalid attributes' do
+    should have_heading 'Rejestracja'
 
-    describe 'after submission' do
-      before { click_button 'Załóż konto' }
-      it 'should display error message' do
-        should have_heading 'Rejestracja'
-        should have_error_message
-      end
-    end
+    expect { click_button 'Załóż konto' }.not_to change(User, :count)
+
+    should have_heading 'Rejestracja'
+    should have_error_message
   end
 
-  context 'with valid information' do
-    let(:user_attributes) { attributes_for :user }
+  scenario 'with valid attributes' do
+    fill_in 'Imię i nazwisko', with: user_attributes[:name]
+    fill_in 'Email', with: user_attributes[:email]
+    fill_in 'Hasło', with: user_attributes[:password]
+    fill_in 'Potwierdzenie hasła', with: user_attributes[:password_confirmation]
 
-    before do
-      fill_in 'Imię i nazwisko', with: user_attributes[:name]
-      fill_in 'Email', with: user_attributes[:email]
-      fill_in 'Hasło', with: user_attributes[:password]
-      fill_in 'Potwierdzenie hasła', with: user_attributes[:password_confirmation]
-    end
+    expect { click_button 'Załóż konto' }.to change(User, :count).by(1)
 
-    it 'should create a user' do
-      expect { click_button 'Załóż konto' }.to change(User, :count).by(1)
-    end
-
-    describe 'after submission' do
-      before { click_button 'Załóż konto' }
-      it 'should display success message' do
-        should have_link 'Przeglądaj kursy', href: courses_path
-        should have_link 'Wyloguj'
-        should have_success_message
-      end
-    end
+    should have_link 'Przeglądaj kursy', href: courses_path
+    should have_link 'Wyloguj'
+    should have_success_message
   end
 end

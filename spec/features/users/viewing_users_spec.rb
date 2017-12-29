@@ -1,35 +1,65 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin reads users index', type: :feature do
+RSpec.feature 'User views users', type: :feature do
   subject { page }
 
-  let(:admin) { create :admin }
   let!(:students) { create_list :user, 2 }
-  let!(:teachers) { create_list :teacher, 2 }
-  let!(:requesting_upgrade_users) { create_list :teacher, 2, upgrade_request_sent_at: Time.current }
+  let!(:teachers) { create_list :teacher_with_courses, 2 }
+  let!(:requesting_upgrade_users) { create_list :user_requesting_upgrade, 2 }
+  let(:teacher) { teachers.first }
 
-  before do
-    sign_in admin
-    visit users_path
+  background do
+    sign_in user if user
   end
 
-  it { should have_heading 'Użytkownicy' }
+  context 'when signed in as a teacher' do
+    let(:user) { teacher }
+    let(:course) { teacher.teacher_courses.first }
+    let!(:students) { create_list :student, 3, course: course }
+    let(:student) { students.first }
 
-  it 'should list all users requesting upgrade' do
-    requesting_upgrade_users.each do |user|
-      expect(page).to have_link user.name, href: user_path(user)
+    scenario 'view course students' do
+      visit course_path(course)
+      click_link 'Zapisani studenci'
+
+      should have_heading course.name
+      should have_heading 'Zapisani studenci'
+      should have_link 'Wróć', href: course_path(course)
+      students.each do |student|
+        expect(page).to have_link student.name, href: user_path(student)
+      end
+
+      click_link student.name
+
+      should have_heading student.name
+      should have_link student.email
+      should have_selector 'div#avatar img.gravatar'
     end
   end
 
-  it 'should list all teachers' do
-    teachers.each do |teacher|
-      expect(page).to have_link teacher.name, href: user_path(teacher)
-    end
-  end
+  context 'when signed in as an admin' do
+    let(:user) { create :admin }
 
-  it 'should list all students' do
-    students.each do |student|
-      expect(page).to have_link student.name, href: user_path(student)
+    scenario 'successfully' do
+      visit root_path
+      click_link 'Zarządzaj użytkownikami'
+
+      should have_heading 'Użytkownicy'
+      requesting_upgrade_users.each do |user|
+        expect(page).to have_link user.name, href: user_path(user)
+      end
+      teachers.each do |teacher|
+        expect(page).to have_link teacher.name, href: user_path(teacher)
+      end
+      students.each do |student|
+        expect(page).to have_link student.name, href: user_path(student)
+      end
+
+      click_link teacher.name
+
+      teacher.teacher_courses.each do |course|
+        expect(page).to have_link course.name, href: course_path(course)
+      end
     end
   end
 end
