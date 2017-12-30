@@ -1,22 +1,18 @@
 - content_for :sidebar do
   - if policy(course).edit?
-    = btn_to edit_course_path(course) do
-      = icon 'edit', t(:edit)
+    .edit= link_to t(:edit), edit_course_path(course)
 
   - if policy(course).enroll?
-    .enroll= button_to t('.enroll'), course_students_path(course), class: 'btn btn-primary'
+    .enroll= button_to t('.enroll'), course_students_path(course)
 
   - if policy(course).list_students?
-    = btn_to course_students_path(course) do
-      = icon 'group', t('.students')
+    .students= link_to t('.students'), course_students_path(course)
 
   - if policy(course).list_lectures?
-    = btn_to course_lectures_path(course) do
-      = icon 'file-text', t('.lectures')
+    .lectures= link_to t('.lectures'), course_lectures_path(course)
 
   - if policy(course).list_tasks?
-    = btn_to course_tasks_path(course) do
-      = icon 'tasks', t('.tasks')
+    .tasks= link_to t('.tasks'), course_tasks_path(course)
 
 %h1= course.name
 .teacher

@@ -1,12 +1,10 @@
 - content_for :sidebar do
   - if policy(Course).index?
-    = btn_to courses_path do
-      = icon 'arrow-left', t('.back_to_courses')
+    .back= link_to t('.back_to_courses'), courses_path
 
 %h1= t '.title'
 
 - if policy(Category).new?
-  = btn_to new_category_path, context: :primary do
-    = icon 'plus', t('.add_category')
+  .new= link_to t('.add_category'), new_category_path
 
 %ul= render categories

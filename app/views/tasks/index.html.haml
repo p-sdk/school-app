@@ -1,19 +1,16 @@
 - content_for :sidebar do
   - if policy(course).show?
-    .back
-      = btn_to course_path(course) do
-        = icon 'arrow-left', t('.course')
+    .back= link_to t('.course'), course_path(course)
 
   - if policy(Task.new(course: course)).new?
-    .add
-      = btn_to new_course_task_path(course), context: :primary do
-        = icon 'plus', t('.add_task')
+    .new= link_to t('.add_task'), new_course_task_path(course)
 
   - if course.has_student? current_user
-    = t '.your_score'
-    .earned-points= course.points_earned_by_enrollment(current_enrollment)
-    \/
-    .max-points= course.total_points
+    .score
+      = t '.your_score'
+      .earned-points= course.points_earned_by_enrollment(current_enrollment)
+      \/
+      .max-points= course.total_points
 
 %h1= course.name
 %h2= t '.title'

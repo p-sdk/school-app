@@ -1,8 +1,6 @@
 - content_for :sidebar do
   - if policy(User).index?
-    .back
-      = btn_to users_path do
-        = icon 'arrow-left', t('.back_to_users')
+    .back= link_to t('.back_to_users'), users_path
 
   .center
     #avatar= user.gravatar
@@ -16,9 +14,7 @@
 
 - if user.requesting_upgrade? && policy(:upgrade).update?
   %p= t '.upgrade_request_pending'
-  = btn_to user_upgrade_path(user), context: :success, method: :patch do
-    = icon 'check', t('.approve')
+  .approve= link_to t('.approve'), user_upgrade_path(user), method: :patch
 
 - if user.requesting_upgrade? && policy(:upgrade).destroy?
-  = btn_to user_upgrade_path(user), context: :danger, method: :delete do
-    = icon 'remove', t('.reject')
+  .reject= link_to t('.reject'), user_upgrade_path(user), method: :delete

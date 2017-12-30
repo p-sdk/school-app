@@ -11,10 +11,10 @@
   %ul.courses= render teacher_courses
 
 - if policy(Course).new?
-  .new_course= btn_to t('.add_course'), new_course_path, context: :primary
+  .new= link_to t('.add_course'), new_course_path
 
 - if policy(Category).new?
-  = btn_to t('.manage_categories'), categories_path
+  .categories= link_to t('.manage_categories'), categories_path
 
 - if policy(User).index?
-  = btn_to t('.manage_users'), users_path
+  .users= link_to t('.manage_users'), users_path

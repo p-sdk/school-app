@@ -1,6 +1,5 @@
 - content_for :sidebar do
-  = btn_to root_path do
-    = icon 'arrow-left', t(:back)
+  .back= link_to t(:back), root_path
 
 %h1= t '.title'
 

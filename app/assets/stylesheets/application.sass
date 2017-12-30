@@ -13,6 +13,95 @@ h1
 textarea
   height: 400px !important
 
+.approve,
+.back,
+.categories,
+.delete,
+.edit,
+.enroll,
+.lectures,
+.new,
+.reject,
+.sign-up,
+.solutions,
+.students,
+.tasks,
+.users
+  display: inline
+
+  &>a,
+  input[type=submit]
+    @extend .btn
+
+    &:before
+      font-family: FontAwesome
+      padding-right: .5em
+
+.back,
+.categories,
+.delete,
+.edit,
+.lectures,
+.solutions,
+.students,
+.tasks,
+.users
+  &>a
+    @extend .btn-default
+
+.approve>a
+  @extend .btn-success
+
+  &:before
+    @extend .fa-check
+
+.back>a
+  &:before
+    @extend .fa-arrow-left
+
+.categories>a
+  &:before
+    @extend .fa-list
+
+.delete>a
+  &:before
+    @extend .fa-trash
+
+.edit>a
+  &:before
+    @extend .fa-edit
+
+.enroll input[type=submit]
+  @extend .btn-primary
+
+.lectures>a
+  &:before
+    @extend .fa-file-text
+
+.new>a
+  @extend .btn-primary
+
+  &:before
+    @extend .fa-plus
+
+.reject>a
+  @extend .btn-danger
+
+  &:before
+    @extend .fa-remove
+
+.sign-up>a
+  @extend .btn-primary
+  @extend .btn-lg
+
+.students>a
+  &:before
+    @extend .fa-users
+
+.tasks>a
+  &:before
+    @extend .fa-tasks
+
 .btn
   margin: 5px
 

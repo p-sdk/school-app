@@ -1,13 +1,9 @@
 - content_for :sidebar do
   - if policy(lecture).show?
-    .back
-      = btn_to [course, lecture] do
-        = icon 'arrow-left', t(:back)
+    .back= link_to t(:back), [course, lecture]
 
   - if policy(lecture).destroy?
-    .delete
-      = btn_to course_lecture_path(course, lecture), method: :delete do
-        = icon 'trash', t('.delete')
+    .delete= link_to t('.delete'), course_lecture_path(course, lecture), method: :delete
 
 %h1= course.name
 %h2= t '.title'

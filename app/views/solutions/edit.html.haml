@@ -1,13 +1,9 @@
 - content_for :sidebar do
   - if policy(task).list_solutions?
-    .back
-      = btn_to course_task_solutions_path(task.course, task) do
-        = icon 'arrow-left', t('.back_to_solutions')
+    .back= link_to t('.back_to_solutions'), course_task_solutions_path(task.course, task)
 
   - if policy(solution).destroy?
-    .delete
-      = btn_to solution_path(solution), method: :delete do
-        = icon 'trash', t('.delete')
+    .delete= link_to t('.delete'), solution_path(solution), method: :delete
 
 = render 'task_and_solution'
 = simple_form_for solution do |f|

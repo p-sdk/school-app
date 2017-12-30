@@ -1,3 +1,3 @@
 .jumbotron.center
   %h1= t '.title'
-  = btn_to t('.sign_up'), new_user_registration_path, context: :primary, class: 'btn-lg'
+  .sign-up= link_to t('.sign_up'), new_user_registration_path

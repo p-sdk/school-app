@@ -1,16 +1,13 @@
 - content_for :sidebar do
   - if policy(Category).index?
-    = btn_to categories_path do
-      = icon 'arrow-left', t('.back_to_categories')
+    .back= link_to t('.back_to_categories'), categories_path
 
 %h1= category.name
 
 - if policy(category).edit?
-  = btn_to edit_category_path(category) do
-    = icon 'edit', t(:edit)
+  .edit= link_to t(:edit), edit_category_path(category)
 
 - if policy(category).destroy?
-  = btn_to category_path(category), method: :delete do
-    = icon 'trash', t(:delete)
+  .delete= link_to t(:delete), category_path(category), method: :delete
 
 %ul= render category.courses
