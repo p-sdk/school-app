@@ -9,11 +9,4 @@ module ApplicationHelper
     map = Hash.new(:info).merge(notice: :success, alert: :warning, error: :danger)
     map[flash_name]
   end
-
-  def btn_to(*args, **kwargs, &block)
-    context = kwargs.delete(:context) { :default }
-    classes = %W[btn btn-#{context}] + kwargs[:class].to_s.split
-    kwargs[:class] = classes.join(' ')
-    link_to(*args, **kwargs, &block)
-  end
 end
