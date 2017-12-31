@@ -3,7 +3,7 @@
     .back= link_to t(:back), course
 
   - if policy(course).destroy?
-    .delete= link_to t('.delete'), course_path(course), method: :delete
+    .delete= link_to t('.delete'), course, method: :delete
 
 %h1= t '.title'
 = render 'form'

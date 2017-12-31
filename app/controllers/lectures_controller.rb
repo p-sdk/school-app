@@ -30,7 +30,7 @@ class LecturesController < ApplicationController
   def destroy
     lecture.destroy
     flash[:success] = t '.success'
-    redirect_to course_lectures_path(course)
+    redirect_to [course, :lectures]
   end
 
   private

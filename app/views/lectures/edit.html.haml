@@ -3,7 +3,7 @@
     .back= link_to t(:back), [course, lecture]
 
   - if policy(lecture).destroy?
-    .delete= link_to t('.delete'), course_lecture_path(course, lecture), method: :delete
+    .delete= link_to t('.delete'), [course, lecture], method: :delete
 
 %h1= course.name
 %h2= t '.title'

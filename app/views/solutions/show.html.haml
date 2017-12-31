@@ -1,12 +1,12 @@
 - content_for :sidebar do
   - if policy(task).list_solutions?
-    .back= link_to t('.back_to_solutions'), course_task_solutions_path(task.course, task)
+    .back= link_to t('.back_to_solutions'), [task.course, task, :solutions]
 
   - if policy(solution).destroy?
-    .delete= link_to t('.delete'), solution_path(solution), method: :delete
+    .delete= link_to t('.delete'), solution, method: :delete
 
   - if policy(task.course).list_tasks?
-    .back= link_to t('.back_to_tasks'), course_tasks_path(task.course)
+    .back= link_to t('.back_to_tasks'), [task.course, :tasks]
 
 = render 'task_and_solution'
 %h3= t '.points'

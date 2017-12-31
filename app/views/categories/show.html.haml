@@ -5,9 +5,9 @@
 %h1= category.name
 
 - if policy(category).edit?
-  .edit= link_to t(:edit), edit_category_path(category)
+  .edit= link_to t(:edit), [:edit, category]
 
 - if policy(category).destroy?
-  .delete= link_to t(:delete), category_path(category), method: :delete
+  .delete= link_to t(:delete), category, method: :delete
 
 %ul= render category.courses

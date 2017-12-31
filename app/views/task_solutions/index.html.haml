@@ -1,6 +1,6 @@
 - content_for :sidebar do
   - if policy(task).show?
-    .back= link_to t('.back_to_task'), course_task_path(course, task)
+    .back= link_to t('.back_to_task'), [course, task]
 
 %h1= course.name
 %h2= task.title

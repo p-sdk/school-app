@@ -1,9 +1,9 @@
 - content_for :sidebar do
   - if policy(course).show?
-    .back= link_to t('.course'), course_path(course)
+    .back= link_to t('.course'), course
 
   - if policy(Task.new(course: course)).new?
-    .new= link_to t('.add_task'), new_course_task_path(course)
+    .new= link_to t('.add_task'), [:new, course, :task]
 
   - if course.has_student? current_user
     .score

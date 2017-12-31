@@ -3,7 +3,7 @@
     .back= link_to t('.course'), course
 
   - if policy(Lecture.new(course: course)).new?
-    .new= link_to t('.add_lecture'), new_course_lecture_path(course)
+    .new= link_to t('.add_lecture'), [:new, course, :lecture]
 
 %h1= course.name
 %h2= t '.title'

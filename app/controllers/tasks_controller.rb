@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   def destroy
     task.destroy
     flash[:success] = t '.success'
-    redirect_to course_tasks_path(course)
+    redirect_to [course, :tasks]
   end
 
   private

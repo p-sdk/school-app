@@ -14,7 +14,7 @@
 
 - if user.requesting_upgrade? && policy(:upgrade).update?
   %p= t '.upgrade_request_pending'
-  .approve= link_to t('.approve'), user_upgrade_path(user), method: :patch
+  .approve= link_to t('.approve'), [user, :upgrade], method: :patch
 
 - if user.requesting_upgrade? && policy(:upgrade).destroy?
-  .reject= link_to t('.reject'), user_upgrade_path(user), method: :delete
+  .reject= link_to t('.reject'), [user, :upgrade], method: :delete

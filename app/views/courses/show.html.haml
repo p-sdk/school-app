@@ -1,18 +1,18 @@
 - content_for :sidebar do
   - if policy(course).edit?
-    .edit= link_to t(:edit), edit_course_path(course)
+    .edit= link_to t(:edit), [:edit, course]
 
   - if policy(course).enroll?
-    .enroll= button_to t('.enroll'), course_students_path(course)
+    .enroll= button_to t('.enroll'), [course, :students]
 
   - if policy(course).list_students?
-    .students= link_to t('.students'), course_students_path(course)
+    .students= link_to t('.students'), [course, :students]
 
   - if policy(course).list_lectures?
-    .lectures= link_to t('.lectures'), course_lectures_path(course)
+    .lectures= link_to t('.lectures'), [course, :lectures]
 
   - if policy(course).list_tasks?
-    .tasks= link_to t('.tasks'), course_tasks_path(course)
+    .tasks= link_to t('.tasks'), [course, :tasks]
 
 %h1= course.name
 .teacher
