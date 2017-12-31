@@ -9,12 +9,12 @@ Rails.application.routes.draw do
     resources :students, only: %i[index create]
     resources :lectures
     resources :tasks do
-      resources :solutions, controller: :task_solutions, only: :index
+      resources :solutions, controller: :task_solutions, only: %i[index create]
     end
   end
 
   resources :categories
-  resources :solutions, only: %i[show edit create update destroy]
+  resources :solutions, only: %i[show edit update destroy]
   resources :upgrades, only: :create
 
   root 'pages#home'

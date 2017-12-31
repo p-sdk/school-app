@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   expose_decorated(:course)
   expose_decorated(:tasks) { policy_scope course.tasks }
   expose_decorated(:task, parent: :course)
-  expose(:solution) { task.solution_by current_user }
+  expose(:solution) { task.solution_by(current_user) || Solution.new(task: task) }
   expose(:current_enrollment) { current_user.enrollments.includes(:solutions).find_by(course: course) }
 
   before_action :authorize_task, except: :index

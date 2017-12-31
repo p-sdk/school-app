@@ -1,8 +1,7 @@
-- if solution
+- unless solution.new_record?
   = link_to t('.my_solution'), solution
 
-- if policy(Solution.new(task: task)).new?
-  = simple_form_for Solution.new(task: task) do |f|
-    = f.input :task_id, as: :hidden
+- if policy(solution).new?
+  = simple_form_for [course, task, solution] do |f|
     = f.input :content, autofocus: true
     = f.button :submit

@@ -99,9 +99,6 @@ pl:
   sign_in: Zaloguj
   sign_out: Wyloguj
   solutions:
-    create:
-      error: Nie udało się wysłać rozwiązania
-      success: Rozwiązanie zostało wysłane
     destroy:
       success: Rozwiązanie zostało usunięte
     edit:
@@ -122,6 +119,9 @@ pl:
     index:
       title: Zapisani studenci
   task_solutions:
+    create:
+      error: Nie udało się wysłać rozwiązania
+      success: Rozwiązanie zostało wysłane
     index:
       back_to_task: Wróć do zadania
       graded_solutions: Ocenione rozwiązania
