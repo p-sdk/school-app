@@ -36,7 +36,7 @@ pl:
     show:
       enroll: Zapisz się
       lectures: Wykłady
-      students: Zapisani studenci
+      students: Studenci
       tasks: Zadania
     update:
       success: Kurs został zaktualizowany

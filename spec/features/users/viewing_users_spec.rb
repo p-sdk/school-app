@@ -20,7 +20,7 @@ RSpec.feature 'User views users', type: :feature do
 
     scenario 'view course students' do
       visit course_path(course)
-      click_link 'Zapisani studenci'
+      click_link 'Studenci'
 
       should have_heading course.name
       should have_heading 'Zapisani studenci'
