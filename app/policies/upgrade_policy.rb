@@ -8,6 +8,6 @@ class UpgradePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user_is_admin?
+    update?
   end
 end

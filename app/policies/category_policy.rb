@@ -8,11 +8,11 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_admin?
+    create?
   end
 
   def destroy?
-    user_is_admin?
+    create?
   end
 
   def permitted_attributes

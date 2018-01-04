@@ -14,15 +14,15 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_course_teacher?(record.course)
+    create?
   end
 
   def destroy?
-    user_is_course_teacher?(record.course)
+    create?
   end
 
   def list_solutions?
-    user_is_course_teacher?(record.course)
+    create?
   end
 
   def permitted_attributes

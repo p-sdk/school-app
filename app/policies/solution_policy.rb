@@ -19,7 +19,7 @@ class SolutionPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user_is_course_teacher?(record.task.course)
+    update?
   end
 
   def permitted_attributes

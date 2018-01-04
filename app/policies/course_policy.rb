@@ -12,7 +12,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user_is_course_teacher?(record)
+    update?
   end
 
   def list_lectures?
@@ -20,11 +20,11 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def list_tasks?
-    user_is_course_teacher?(record) || record.has_student?(user)
+    list_lectures?
   end
 
   def list_students?
-    user_is_course_teacher?(record)
+    update?
   end
 
   def enroll?
