@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index
 
-  rescue_from Pundit::NotAuthorizedError, with: :deny_access
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   private
 
@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
-  def deny_access
-    flash[:danger] = t :access_denied
+  def not_authorized
+    flash[:danger] = t :not_authorized
     redirect_to root_path
   end
 end

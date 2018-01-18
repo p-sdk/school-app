@@ -1,6 +1,5 @@
 ---
 pl:
-  access_denied: Odmowa dostępu
   app_name: e-kursy
   back: Wróć
   categories:
@@ -83,6 +82,7 @@ pl:
       success: Wykład został zaktualizowany
   my_courses: Moje kursy
   my_profile: Mój profil
+  not_authorized: Odmowa dostępu
   pages:
     dashboard:
       add_course: Utwórz nowy kurs
