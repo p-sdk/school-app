@@ -1,4 +1,7 @@
 - content_for :sidebar do
+  - if policy(category).show?
+    .category= link_to category.name, category
+
   - if policy(course).edit?
     .edit= link_to t(:edit), [:edit, course]
 
