@@ -1,9 +1,8 @@
 - content_for :sidebar do
-  - if policy(task).show?
-    .back= link_to t(:back), [course, task]
-
   - if policy(task).destroy?
     .delete= link_to t('.delete'), [course, task], method: :delete
+
+- breadcrumb task
 
 %h1= course.name
 %h2= t '.title'

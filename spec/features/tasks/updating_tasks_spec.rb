@@ -17,7 +17,7 @@ RSpec.feature 'Teacher updates a task', type: :feature do
   scenario 'with invalid attributes' do
     should have_heading course.name
     should have_heading 'Edytuj zadanie'
-    should have_link 'Wróć', href: course_task_path(course, task)
+    should have_link task.title, href: course_task_path(course, task)
 
     fill_in 'Tytuł', with: ''
     click_button 'Zapisz zmiany'

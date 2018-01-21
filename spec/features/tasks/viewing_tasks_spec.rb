@@ -17,7 +17,7 @@ RSpec.feature 'User views tasks', type: :feature do
   scenario 'successfully' do
     should have_heading course.name
     should have_heading 'Zadania'
-    should have_link 'Wróć', href: course_path(course)
+    should have_link course.name, href: course_path(course)
     tasks.each do |task|
       expect(page).to have_link task.title, href: course_task_path(course, task)
     end
@@ -26,7 +26,7 @@ RSpec.feature 'User views tasks', type: :feature do
 
     should have_heading course.name
     should have_heading task.title
-    should have_link 'Wróć', href: course_tasks_path(course)
+    should have_link 'Zadania', href: course_tasks_path(course)
     should have_selector 'div.points', text: "Punktów do zdobycia: #{task.points}"
     should have_selector 'div.desc', text: task.desc
   end

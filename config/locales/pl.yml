@@ -1,7 +1,15 @@
 ---
 pl:
   app_name: e-kursy
-  back: Wróć
+  breadcrumbs:
+    categories: Kategorie
+    courses: Kursy
+    lectures: Wykłady
+    new_course: Nowy kurs
+    solutions: Rozwiązania
+    students: Studenci
+    tasks: Zadania
+    users: Użytkownicy
   categories:
     create:
       success: Kategoria została utworzona
@@ -11,12 +19,9 @@ pl:
       title: Edytuj kategorię
     index:
       add_category: Dodaj nową kategorię
-      back_to_courses: Wróć do wszystkich kursów
       title: Kategorie
     new:
       title: Utwórz nową kategorię
-    show:
-      back_to_categories: Wróć do listy kategorii
     update:
       success: Kategoria została zaktualizowana
   courses:
@@ -72,12 +77,9 @@ pl:
       title: Edytuj wykład
     index:
       add_lecture: Dodaj wykład
-      course: Wróć do kursu
       title: Wykłady
     new:
       title: Utwórz nowy wykład
-    show:
-      back_to_lectures: Wróć do listy wykładów
     update:
       success: Wykład został zaktualizowany
   my_courses: Moje kursy
@@ -102,11 +104,8 @@ pl:
     destroy:
       success: Rozwiązanie zostało usunięte
     edit:
-      back_to_solutions: Wróć do listy rozwiązań
       delete: Usuń rozwiązanie
     show:
-      back_to_solutions: Wróć do listy rozwiązań
-      back_to_tasks: Wróć do listy zadań
       delete: Usuń rozwiązanie
       points: Uzyskane punkty
     task_and_solution:
@@ -123,7 +122,6 @@ pl:
       error: Nie udało się wysłać rozwiązania
       success: Rozwiązanie zostało wysłane
     index:
-      back_to_task: Wróć do zadania
       graded_solutions: Ocenione rozwiązania
       ungraded_solutions: Rozwiązania oczekujące na sprawdzenie
   tasks:
@@ -136,14 +134,12 @@ pl:
       title: Edytuj zadanie
     index:
       add_task: Dodaj zadanie
-      course: Wróć do kursu
       title: Zadania
       your_score: 'Twój wynik:'
     new:
       title: Utwórz nowe zadanie
     show:
       average_score: 'Przeciętny wynik:'
-      back_to_tasks: Wróć do listy zadań
       points_to_earn: 'Punktów do zdobycia:'
       solutions: Rozwiązania
     solution:
@@ -165,6 +161,5 @@ pl:
       users_requesting_upgrade: Użytkownicy wnioskujący o rozszerzenie uprawnień
     show:
       approve: Zatwierdź
-      back_to_users: Wróć do listy użytkowników
       reject: Odrzuć
       upgrade_request_pending: Ten użytkownik chce uzyskać uprawnienia nauczyciela

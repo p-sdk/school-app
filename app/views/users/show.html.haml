@@ -1,11 +1,10 @@
 - content_for :sidebar do
-  - if policy(User).index?
-    .back= link_to t('.back_to_users'), users_path
-
   .center
     #avatar= user.gravatar
     .email
       = mail_to user.email
+
+- breadcrumb user
 
 %h1= user.name
 

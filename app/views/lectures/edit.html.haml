@@ -1,9 +1,8 @@
 - content_for :sidebar do
-  - if policy(lecture).show?
-    .back= link_to t(:back), [course, lecture]
-
   - if policy(lecture).destroy?
     .delete= link_to t('.delete'), [course, lecture], method: :delete
+
+- breadcrumb lecture
 
 %h1= course.name
 %h2= t '.title'

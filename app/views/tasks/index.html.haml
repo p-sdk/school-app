@@ -1,7 +1,4 @@
 - content_for :sidebar do
-  - if policy(course).show?
-    .back= link_to t('.course'), course
-
   - if policy(Task.new(course: course)).new?
     .new= link_to t('.add_task'), [:new, course, :task]
 
@@ -11,6 +8,8 @@
       .earned-points= course.points_earned_by_enrollment(current_enrollment)
       \/
       .max-points= course.total_points
+
+- breadcrumb :tasks, course
 
 %h1= course.name
 %h2= t '.title'

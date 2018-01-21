@@ -28,7 +28,7 @@ RSpec.feature 'User views task solutions', type: :feature do
 
       should have_heading course.name
       should have_heading task.title
-      should have_link 'Wróć', href: course_task_path(course, task)
+      should have_link task.title, href: course_task_path(course, task)
 
       should have_heading 'Rozwiązania oczekujące na sprawdzenie'
       ungraded_solutions.each do |solution|
@@ -52,7 +52,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should have_selector 'div.points', text: "#{graded_solution.earned_points} / #{task.points}"
       should have_link 'Usuń', href: solution_path(graded_solution)
 
-      click_link 'Wróć do listy rozwiązań'
+      click_link 'Rozwiązania', href: course_task_solutions_path(course, task)
       click_link ungraded_solution.student.name
 
       expect(current_path).to eq edit_solution_path(ungraded_solution)
@@ -65,7 +65,8 @@ RSpec.feature 'User views task solutions', type: :feature do
     scenario 'successfully' do
       click_link 'Moje rozwiązanie'
 
-      should have_link 'Wróć do listy zadań', href: course_tasks_path(course)
+      should have_link task.title, href: course_task_path(course, task)
+      should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
       should have_content 'Rozwiązanie czeka na sprawdzenie'
     end
@@ -77,7 +78,8 @@ RSpec.feature 'User views task solutions', type: :feature do
     scenario 'successfully' do
       click_link 'Moje rozwiązanie'
 
-      should have_link 'Wróć do listy zadań', href: course_tasks_path(course)
+      should have_link task.title, href: course_task_path(course, task)
+      should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
       should have_selector 'div.points', text: "#{graded_solution.earned_points} / #{task.points}"
     end

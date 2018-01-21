@@ -15,7 +15,7 @@ RSpec.feature 'Teacher creates a task', type: :feature do
   scenario 'with invalid attributes' do
     should have_heading course.name
     should have_heading 'Utwórz nowe zadanie'
-    should have_link 'Wróć', href: course_tasks_path(course)
+    should have_link 'Zadania', href: course_tasks_path(course)
 
     expect { click_button 'Utwórz zadanie' }.not_to change(Task, :count)
 

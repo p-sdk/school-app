@@ -14,7 +14,6 @@ RSpec.feature 'User views categories', type: :feature do
   end
 
   scenario 'successfully' do
-    should have_link 'Wróć', href: courses_path
     should have_content "#{cat1.name} ( #{cat1.courses.size} )"
     should have_content "#{cat2.name} ( #{cat2.courses.size} )"
     should have_link cat1.name, href: category_path(cat1)
@@ -22,7 +21,7 @@ RSpec.feature 'User views categories', type: :feature do
 
     click_link cat1.name
 
-    should have_link 'Wróć', href: categories_path
+    should have_link 'Kategorie', href: categories_path
     should have_heading cat1.name
     cat1.courses.each do |course|
       expect(page).to have_link course.name, href: course_path(course)

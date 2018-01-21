@@ -24,7 +24,7 @@ RSpec.feature 'User views users', type: :feature do
 
       should have_heading course.name
       should have_heading 'Zapisani studenci'
-      should have_link 'Wróć', href: course_path(course)
+      should have_link course.name, href: course_path(course)
       students.each do |student|
         expect(page).to have_link student.name, href: user_path(student)
       end
@@ -57,6 +57,7 @@ RSpec.feature 'User views users', type: :feature do
 
       click_link teacher.name
 
+      should have_link 'Użytkownicy', href: users_path
       teacher.teacher_courses.each do |course|
         expect(page).to have_link course.name, href: course_path(course)
       end

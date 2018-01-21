@@ -14,7 +14,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
 
   scenario 'with invalid attributes' do
     should have_heading 'Utwórz nową kategorię'
-    should have_link 'Wróć', href: categories_path
+    should have_link 'Kategorie', href: categories_path
 
     expect { click_button 'Utwórz kategorię' }.not_to change(Category, :count)
 

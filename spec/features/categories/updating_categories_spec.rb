@@ -15,7 +15,7 @@ RSpec.feature 'Admin updates a category', type: :feature do
 
   scenario 'with invalid attributes' do
     should have_heading 'Edytuj kategorię'
-    should have_link 'Wróć', href: category_path(category)
+    should have_link category.name, href: category_path(category)
 
     fill_in 'Nazwa', with: ''
     click_button 'Zapisz zmiany'

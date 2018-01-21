@@ -1,9 +1,8 @@
 - content_for :sidebar do
-  - if policy(course).list_lectures?
-    .back= link_to t('.back_to_lectures'), [course, :lectures]
-
   - if policy(lecture).edit?
     .edit= link_to t(:edit), [:edit, course, lecture]
+
+- breadcrumb lecture
 
 %h1= course.name
 %h2= lecture.title

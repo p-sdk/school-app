@@ -13,5 +13,6 @@
         .col-md-3
           = yield :sidebar
         .col-md-9
+          = breadcrumbs style: :bootstrap, link_current: true, link_current_to_request_path: false
           = yield
       -# .debug= debug(params) if Rails.env.development?

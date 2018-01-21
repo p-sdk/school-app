@@ -18,7 +18,7 @@ RSpec.feature 'User views lectures', type: :feature do
   scenario 'successfully' do
     should have_heading course.name
     should have_heading 'Wykłady'
-    should have_link 'Wróć', href: course_path(course)
+    should have_link course.name, href: course_path(course)
     lectures.each do |lecture|
       expect(page).to have_link lecture.title, href: course_lecture_path(course, lecture)
     end
@@ -27,7 +27,7 @@ RSpec.feature 'User views lectures', type: :feature do
 
     should have_heading course.name
     should have_heading lecture.title
-    should have_link 'Wróć', href: course_lectures_path(course)
+    should have_link 'Wykłady', href: course_lectures_path(course)
     should have_selector 'div.lecture', text: lecture.content
   end
 end

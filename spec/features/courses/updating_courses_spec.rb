@@ -14,7 +14,7 @@ RSpec.feature 'Teacher updates a course', type: :feature do
 
   scenario 'with invalid attributes' do
     should have_heading 'Edytuj kurs'
-    should have_link 'Wróć', href: course_path(course)
+    should have_link course.name, href: course_path(course)
 
     fill_in 'Nazwa', with: ''
     click_button 'Zapisz zmiany'

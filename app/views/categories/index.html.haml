@@ -1,6 +1,4 @@
-- content_for :sidebar do
-  - if policy(Course).index?
-    .back= link_to t('.back_to_courses'), courses_path
+- breadcrumb :categories
 
 %h1= t '.title'
 

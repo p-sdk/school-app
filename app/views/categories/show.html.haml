@@ -1,6 +1,4 @@
-- content_for :sidebar do
-  - if policy(Category).index?
-    .back= link_to t('.back_to_categories'), categories_path
+- breadcrumb category
 
 %h1= category.name
 

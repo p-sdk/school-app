@@ -15,7 +15,7 @@ RSpec.feature 'Teacher creates a course', type: :feature do
 
   scenario 'with invalid attributes' do
     should have_heading 'Utwórz nowy kurs'
-    should have_link 'Wróć', href: root_path
+    should have_link 'e-kursy', href: root_path
 
     expect { click_button 'Utwórz kurs' }.to_not change(Course, :count)
 

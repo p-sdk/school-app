@@ -1,9 +1,8 @@
 - content_for :sidebar do
-  - if policy(task).list_solutions?
-    .back= link_to t('.back_to_solutions'), [task.course, task, :solutions]
-
   - if policy(solution).destroy?
     .delete= link_to t('.delete'), solution, method: :delete
+
+- breadcrumb solution
 
 = render 'task_and_solution'
 = simple_form_for solution do |f|

@@ -1,6 +1,4 @@
-- content_for :sidebar do
-  - if policy(Category).index?
-    .back= link_to t(:back), categories_path
+- breadcrumb :categories
 
 %h1= t '.title'
 = render 'form'
