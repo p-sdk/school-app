@@ -1,6 +1,7 @@
 - breadcrumb :users
 
-%h1= t '.title'
+.page-header
+  %h1= t '.title'
 
 - if users_requesting_upgrade.any?
   %h2= t '.users_requesting_upgrade'

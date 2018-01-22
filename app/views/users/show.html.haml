@@ -6,7 +6,8 @@
 
 - breadcrumb user
 
-%h1= user.name
+.page-header
+  %h1= user.name
 
 - if user.teacher?
   %ul.courses= render user.teacher_courses

@@ -1,6 +1,7 @@
 - breadcrumb :categories
 
-%h1= t '.title'
+.page-header
+  %h1= t '.title'
 
 - if policy(Category).new?
   .new= link_to t('.add_category'), new_category_path

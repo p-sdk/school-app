@@ -19,7 +19,9 @@
 
 - breadcrumb course
 
-%h1= course.name
+.page-header
+  %h1= course.name
+
 .teacher
   %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
 

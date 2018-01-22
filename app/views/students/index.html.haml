@@ -1,5 +1,8 @@
 - breadcrumb :users, course
 
-%h1= course.name
+.page-header
+  %h1= course.name
+
 %h2= t '.title'
+
 %ul.students= render students
