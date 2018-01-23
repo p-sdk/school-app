@@ -14,7 +14,7 @@ RSpec.feature 'Teacher deletes a task', type: :feature do
   scenario 'successfully' do
     expect { click_link 'Usuń' }.to change(Task, :count).by(-1)
 
-    expect(current_path).to eq course_tasks_path(course)
+    expect(current_path).to eq course_path(course)
     should have_success_message
   end
 end

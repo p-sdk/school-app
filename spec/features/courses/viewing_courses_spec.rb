@@ -36,7 +36,7 @@ RSpec.feature 'User views courses', type: :feature do
       should_not have_link 'Edytuj', href: edit_course_path(course)
       should_not have_link 'Studenci', href: course_students_path(course)
       should_not have_heading 'Wykłady'
-      should_not have_link 'Zadania', href: course_tasks_path(course)
+      should_not have_heading 'Zadania'
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.feature 'User views courses', type: :feature do
       should have_link 'Edytuj', href: edit_course_path(course)
       should have_link 'Studenci', href: course_students_path(course)
       should have_heading 'Wykłady'
-      should have_link 'Zadania', href: course_tasks_path(course)
+      should have_heading 'Zadania'
     end
   end
 

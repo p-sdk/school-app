@@ -14,8 +14,15 @@
   - if policy(Lecture.new(course: course)).new?
     .new= link_to t('.add_lecture'), [:new, course, :lecture]
 
-  - if policy(course).list_tasks?
-    .tasks= link_to t('.tasks'), [course, :tasks]
+  - if policy(Task.new(course: course)).new?
+    .new= link_to t('.add_task'), [:new, course, :task]
+
+  - if course.has_student? current_user
+    .score
+      = t '.your_score'
+      .earned-points= course.points_earned_by_enrollment(current_enrollment)
+      \/
+      .max-points= course.total_points
 
 - breadcrumb course
 
@@ -33,3 +40,10 @@
       %h2.panel-title= t '.lectures'
 
     .list-group= render lectures
+
+- if policy(course).list_tasks?
+  #tasks.panel.panel-default
+    .panel-heading
+      %h2.panel-title= t '.tasks'
+
+    .list-group= render tasks

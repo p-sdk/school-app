@@ -39,10 +39,12 @@ pl:
       title: Utwórz nowy kurs
     show:
       add_lecture: Dodaj wykład
+      add_task: Dodaj zadanie
       enroll: Zapisz się
       lectures: Wykłady
       students: Studenci
       tasks: Zadania
+      your_score: 'Twój wynik:'
     update:
       success: Kurs został zaktualizowany
   decorators:
@@ -130,10 +132,6 @@ pl:
     edit:
       delete: Usuń zadanie
       title: Edytuj zadanie
-    index:
-      add_task: Dodaj zadanie
-      title: Zadania
-      your_score: 'Twój wynik:'
     new:
       title: Utwórz nowe zadanie
     show:

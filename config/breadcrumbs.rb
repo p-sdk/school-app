@@ -34,7 +34,7 @@ crumb :lecture do |lecture|
 end
 
 crumb :tasks do |course|
-  link t('breadcrumbs.tasks'), [course, :tasks] if policy(course).list_tasks?
+  link t('breadcrumbs.tasks') if policy(course).list_tasks?
   parent course
 end
 

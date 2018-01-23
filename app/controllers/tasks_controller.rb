@@ -1,15 +1,9 @@
 class TasksController < ApplicationController
   expose_decorated(:course)
-  expose_decorated(:tasks) { policy_scope course.tasks }
   expose_decorated(:task, parent: :course)
   expose(:solution) { task.solution_by(current_user) || Solution.new(task: task) }
-  expose(:current_enrollment) { current_user.enrollments.includes(:solutions).find_by(course: course) }
 
-  before_action :authorize_task, except: :index
-
-  def index
-    authorize course, :list_tasks?
-  end
+  before_action :authorize_task
 
   def create
     if task.save
@@ -32,7 +26,7 @@ class TasksController < ApplicationController
   def destroy
     task.destroy
     flash[:success] = t '.success'
-    redirect_to [course, :tasks]
+    redirect_to course
   end
 
   private

@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
   expose_decorated(:course)
   expose(:category) { course.category }
   expose(:lectures) { policy_scope course.lectures }
+  expose_decorated(:tasks) { policy_scope course.tasks }
+  expose(:current_enrollment) { current_user.enrollments.includes(:solutions).find_by(course: course) }
 
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :authorize_course

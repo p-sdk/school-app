@@ -15,9 +15,7 @@
 - breadcrumb task
 
 .page-header
-  %h1= course.name
-
-%h2= task.title
+  %h1= task.title
 
 .desc= task.description_formatted
 = render 'solution' if current_user.enrolled_in? course
