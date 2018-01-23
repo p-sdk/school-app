@@ -14,7 +14,7 @@ RSpec.feature 'Teacher deletes a lecture', type: :feature do
   scenario 'successfully' do
     expect { click_link 'Usuń' }.to change(Lecture, :count).by(-1)
 
-    expect(current_path).to eq course_lectures_path(course)
+    expect(current_path).to eq course_path(course)
     should have_success_message
   end
 end

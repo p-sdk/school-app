@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :students, only: %i[index create]
-    resources :lectures
+    resources :lectures, except: :index
     resources :tasks do
       resources :solutions, controller: :task_solutions, only: %i[index create]
     end

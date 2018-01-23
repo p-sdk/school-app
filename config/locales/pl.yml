@@ -38,6 +38,7 @@ pl:
     new:
       title: Utwórz nowy kurs
     show:
+      add_lecture: Dodaj wykład
       enroll: Zapisz się
       lectures: Wykłady
       students: Studenci
@@ -75,9 +76,6 @@ pl:
     edit:
       delete: Usuń wykład
       title: Edytuj wykład
-    index:
-      add_lecture: Dodaj wykład
-      title: Wykłady
     new:
       title: Utwórz nowy wykład
     update:

@@ -14,7 +14,6 @@ RSpec.feature 'Teacher updates a lecture', type: :feature do
   end
 
   scenario 'with invalid attributes' do
-    should have_heading course.name
     should have_heading 'Edytuj wykład'
     should have_link lecture.title, href: course_lecture_path(course, lecture)
 

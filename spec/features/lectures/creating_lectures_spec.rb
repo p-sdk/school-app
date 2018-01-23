@@ -9,14 +9,13 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
 
   background do
     sign_in course.teacher
-    visit course_lectures_path(course)
+    visit course_path(course)
     click_link 'Dodaj wykład'
   end
 
   scenario 'with invalid attributes' do
-    should have_heading course.name
     should have_heading 'Utwórz nowy wykład'
-    should have_link 'Wykłady', href: course_lectures_path(course)
+    should have_link course.name, href: course_path(course)
 
     expect { click_button 'Utwórz wykład' }.not_to change(Lecture, :count)
 

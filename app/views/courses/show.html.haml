@@ -11,8 +11,8 @@
   - if policy(course).list_students?
     .students= link_to t('.students'), [course, :students]
 
-  - if policy(course).list_lectures?
-    .lectures= link_to t('.lectures'), [course, :lectures]
+  - if policy(Lecture.new(course: course)).new?
+    .new= link_to t('.add_lecture'), [:new, course, :lecture]
 
   - if policy(course).list_tasks?
     .tasks= link_to t('.tasks'), [course, :tasks]
@@ -26,3 +26,10 @@
   %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
 
 .desc= course.description_formatted
+
+- if policy(course).list_lectures?
+  #lectures.panel.panel-default
+    .panel-heading
+      %h2.panel-title= t '.lectures'
+
+    .list-group= render lectures

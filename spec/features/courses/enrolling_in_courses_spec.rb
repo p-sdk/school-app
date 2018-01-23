@@ -12,13 +12,13 @@ RSpec.feature 'User enrolls in the course', type: :feature do
   end
 
   scenario 'successfully' do
-    should_not have_link 'Wykłady', href: course_lectures_path(course)
+    should_not have_heading 'Wykłady'
     should_not have_link 'Zadania', href: course_tasks_path(course)
 
     expect { click_button 'Zapisz się' }.to change(student.courses, :count).by(1)
 
     expect(current_path).to eq course_path(course)
-    should have_link 'Wykłady', href: course_lectures_path(course)
+    should have_heading 'Wykłady'
     should have_link 'Zadania', href: course_tasks_path(course)
     should_not have_button 'Zapisz się'
   end

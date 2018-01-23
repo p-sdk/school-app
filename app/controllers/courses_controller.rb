@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   expose(:courses) { policy_scope Course.all }
   expose_decorated(:course)
   expose(:category) { course.category }
+  expose(:lectures) { policy_scope course.lectures }
 
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :authorize_course

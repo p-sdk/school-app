@@ -1,13 +1,8 @@
 class LecturesController < ApplicationController
   expose(:course)
-  expose(:lectures) { policy_scope course.lectures }
   expose_decorated(:lecture, parent: :course)
 
-  before_action :authorize_lecture, except: :index
-
-  def index
-    authorize course, :list_lectures?
-  end
+  before_action :authorize_lecture
 
   def create
     if lecture.save
@@ -30,7 +25,7 @@ class LecturesController < ApplicationController
   def destroy
     lecture.destroy
     flash[:success] = t '.success'
-    redirect_to [course, :lectures]
+    redirect_to course
   end
 
   private
