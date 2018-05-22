@@ -40,4 +40,8 @@ class Course < ActiveRecord::Base
   def has_student?(student)
     students.include? student
   end
+
+  def to_param
+    "#{id}-#{name}".parameterize
+  end
 end

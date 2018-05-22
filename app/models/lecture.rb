@@ -36,4 +36,8 @@ class Lecture < ActiveRecord::Base
   has_attached_file :attachment
   do_not_validate_attachment_file_type :attachment
   validates_attachment :attachment, size: { less_than: 25.megabytes }
+
+  def to_param
+    "#{id}-#{title}".parameterize
+  end
 end

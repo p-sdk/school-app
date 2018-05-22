@@ -72,4 +72,8 @@ class User < ActiveRecord::Base
   def reject_upgrade_request
     update! upgrade_request_sent_at: nil
   end
+
+  def to_param
+    "#{id}-#{name}".parameterize
+  end
 end

@@ -13,4 +13,8 @@ class Category < ActiveRecord::Base
             presence: true,
             uniqueness: true,
             length: { in: 3..100 }
+
+  def to_param
+    "#{id}-#{name}".parameterize
+  end
 end

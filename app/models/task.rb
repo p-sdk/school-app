@@ -51,6 +51,10 @@ class Task < ActiveRecord::Base
     solution_by(student)&.earned_points
   end
 
+  def to_param
+    "#{id}-#{title}".parameterize
+  end
+
   private
 
   def enrollment(student)
