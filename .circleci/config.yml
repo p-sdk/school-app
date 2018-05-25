@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.3.6-node
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: localhost
+          PGUSER: circleci
+          RAILS_ENV: test
+      - image: circleci/postgres:10-alpine
+        environment:
+          POSTGRES_DB: school_test
+          POSTGRES_USER: circleci
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - bundle-{{ checksum "Gemfile.lock" }}
+          - bundle-
+
+      - run: bundle check || bundle install
+
+      - save_cache:
+          key: bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run: bundle exec rake db:schema:load
+
+      - run: bundle exec rspec
