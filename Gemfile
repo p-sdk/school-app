@@ -8,6 +8,7 @@ gem 'decent_exposure'
 gem 'devise'
 gem 'devise-i18n'
 gem 'draper'
+gem 'faker'
 gem 'font-awesome-sass'
 gem 'gretel'
 gem 'hamlit-rails'
@@ -27,7 +28,6 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'rspec-rails'
 end
 
