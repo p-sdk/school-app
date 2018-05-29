@@ -31,7 +31,10 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
     expect { click_button 'Utwórz wykład' }.to change(Lecture, :count).by(1)
 
     should have_heading lecture_attributes[:title]
-    should have_content File.basename(file)
     should have_success_message
+
+    click_link File.basename(file)
+
+    should have_css 'p', text: 'Foo bar baz'
   end
 end
