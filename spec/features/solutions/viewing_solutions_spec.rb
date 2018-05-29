@@ -26,8 +26,8 @@ RSpec.feature 'User views task solutions', type: :feature do
     scenario 'successfully' do
       click_link 'Rozwiązania'
 
-      should have_heading course.name
       should have_heading task.title
+      should have_link course.name, href: course_path(course)
       should have_link task.title, href: course_task_path(course, task)
 
       should have_heading 'Rozwiązania oczekujące na sprawdzenie'

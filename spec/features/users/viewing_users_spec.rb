@@ -22,7 +22,6 @@ RSpec.feature 'User views users', type: :feature do
       visit course_path(course)
       click_link 'Studenci'
 
-      should have_heading course.name
       should have_heading 'Zapisani studenci'
       should have_link course.name, href: course_path(course)
       students.each do |student|
