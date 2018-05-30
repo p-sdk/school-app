@@ -85,10 +85,11 @@ class Seeds
       if i < num_teachers
         user_params[:name] = random_teacher_name
         user_params[:email] = "teacher#{i + 1}@example.com"
-        user_params[:teacher] = true
+        user_params[:role] = :teacher
       else
         user_params[:name] = random_name
         user_params[:email] = "student#{i + 1 - num_teachers}@example.com"
+        user_params[:role] = :student
       end
       User.create! user_params
     end
