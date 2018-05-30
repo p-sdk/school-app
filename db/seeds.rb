@@ -142,11 +142,11 @@ class Seeds
 end
 
 Seeds.run do
-  create :users, num_teachers: 40, num_students: 1000
+  create :users, num_teachers: 4, num_students: 100
   create :categories, num_categories: 3
-  create :courses, num_courses: 100
-  create :enrollments, per_student: 10
-  create :lectures, per_course: 10
-  create :tasks, per_course: 10
+  create :courses, num_courses: 10
+  create :enrollments, per_student: 3
+  create :lectures, per_course: 5
+  create :tasks, per_course: 5
   create :solutions
 end
