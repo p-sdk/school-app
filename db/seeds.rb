@@ -40,8 +40,7 @@ class Seeds
 
   def create_enrollments(per_student:)
     User.student.each do |student|
-      enrollments_num = rand((per_student - 5)..(per_student + 5))
-      courses = Course.all.sample(enrollments_num)
+      courses = Course.all.sample(per_student)
       courses.each do |course|
         Enrollment.create! student: student, course: course
       end
@@ -50,8 +49,7 @@ class Seeds
 
   def create_lectures(per_course:)
     Course.all.each do |course|
-      lectures_num = rand((per_course - 5)..(per_course + 5))
-      lectures_num.times do
+      per_course.times do
         Lecture.create! lecture_params(course: course)
       end
     end
@@ -68,8 +66,7 @@ class Seeds
 
   def create_tasks(per_course:)
     Course.all.each do |course|
-      tasks_num = rand((per_course - 5)..(per_course + 5))
-      tasks_num.times do
+      per_course.times do
         Task.create! task_params(course: course)
       end
     end
