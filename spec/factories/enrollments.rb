@@ -20,7 +20,7 @@
 #  fk_rails_f01c555e06  (student_id => users.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :enrollment do
     association :student, factory: :user
     association :course

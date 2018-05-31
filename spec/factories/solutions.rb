@@ -22,7 +22,7 @@
 #  fk_rails_da0ffd369c  (enrollment_id => enrollments.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :solution do
     association :enrollment
     task { build :task, course: enrollment.course }

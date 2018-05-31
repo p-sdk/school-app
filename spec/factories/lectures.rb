@@ -22,7 +22,7 @@
 #  fk_rails_bbbf25c9a6  (course_id => courses.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lecture do
     sequence(:title) { |n| "Lecture #{n}" }
     content { Faker::Lorem.sentence }

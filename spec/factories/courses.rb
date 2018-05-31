@@ -21,7 +21,7 @@
 #  fk_rails_e072dca946  (category_id => categories.id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :course do
     sequence(:name) { |n| "Course #{n}" }
     desc { Faker::Lorem.sentence }
