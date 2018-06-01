@@ -1,4 +1,15 @@
 .earned-points,
-.max-points,
-.task-status
+.max-points
   display: inline
+
+.task-status
+  @extend .badge
+
+  // HACK there are no context modifiers for badges
+  // TODO change to .label + .label-pill after upgrade to Bootstrap 4
+  &.unsolved
+    @extend .progress-bar-danger
+  &.ungraded
+    @extend .progress-bar-warning
+  &.graded
+    @extend .progress-bar-success

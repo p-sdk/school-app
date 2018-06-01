@@ -1,3 +1,3 @@
 = link_to [course, task], class: 'list-group-item' do
   = task.title
-  .task-status.badge= task.status_for_enrollment(current_enrollment)
+  = task.status_for_enrollment(current_enrollment)

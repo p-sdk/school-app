@@ -14,8 +14,16 @@ class TaskDecorator < Draper::Decorator
   def status_for_enrollment(enrollment)
     return unless enrollment
     solution = enrollment.solutions.detect { |s| s.task_id == id }
-    return I18n.t('decorators.task.unsolved') unless solution
-    return I18n.t('decorators.task.graded') if solution.graded?
-    I18n.t('decorators.task.ungraded')
+    return status_badge(:unsolved) unless solution
+    return status_badge(:graded) if solution.graded?
+    status_badge(:ungraded)
+  end
+
+  private
+
+  def status_badge(type)
+    h.content_tag 'span', class: ['task-status', type] do
+      I18n.t("decorators.task.#{type}")
+    end
   end
 end

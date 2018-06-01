@@ -55,13 +55,13 @@ RSpec.describe TaskDecorator do
     end
 
     context 'when task has not been solved' do
-      it { is_expected.to eq 'nierozwiązane' }
+      it { is_expected.to eq '<span class="task-status unsolved">nierozwiązane</span>' }
     end
 
     context 'when task has been solved and waits for review' do
       before { create :solution, enrollment: enrollment, task: task }
 
-      it { is_expected.to eq 'czeka na sprawdzenie' }
+      it { is_expected.to eq '<span class="task-status ungraded">czeka na sprawdzenie</span>' }
     end
 
     context 'when task has been solved and graded' do
@@ -69,7 +69,7 @@ RSpec.describe TaskDecorator do
 
       before { solution.update! earned_points: 10 }
 
-      it { is_expected.to eq 'ocenione' }
+      it { is_expected.to eq '<span class="task-status graded">ocenione</span>' }
     end
   end
 end
