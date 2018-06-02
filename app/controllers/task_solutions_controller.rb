@@ -17,7 +17,7 @@ class TaskSolutionsController < ApplicationController
     else
       flash[:danger] = t '.error'
     end
-    redirect_to [task.course, task]
+    redirect_to [course, task]
   end
 
   private
