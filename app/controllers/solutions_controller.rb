@@ -21,10 +21,6 @@ class SolutionsController < ApplicationController
 
   private
 
-  def course
-    task.course
-  end
-
   def solution_params
     permitted_attributes(Solution)
   end
