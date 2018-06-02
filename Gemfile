@@ -38,6 +38,7 @@ group :development do
   gem 'brakeman', require: false
   gem 'guard-rspec'
   gem 'letter_opener_web'
+  gem 'pry-doc'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
   gem 'terminal-notifier-guard'
