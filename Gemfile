@@ -42,6 +42,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
   gem 'terminal-notifier-guard'
+  gem 'web-console'
 end
 
 group :test do
