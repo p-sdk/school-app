@@ -21,14 +21,14 @@
 #  fk_rails_e072dca946  (category_id => categories.id)
 #
 
-class Course < ActiveRecord::Base
-  belongs_to :teacher, class_name: 'User', required: true
+class Course < ApplicationRecord
+  belongs_to :teacher, class_name: 'User'
   has_many :enrollments, dependent: :destroy
   has_many :students, through: :enrollments
   has_many :lectures, dependent: :destroy
   has_many :tasks, dependent: :destroy
 
-  belongs_to :category, required: true
+  belongs_to :category
 
   validates :name,
             presence: true,

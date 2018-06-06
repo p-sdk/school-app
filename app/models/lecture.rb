@@ -22,8 +22,8 @@
 #  fk_rails_bbbf25c9a6  (course_id => courses.id)
 #
 
-class Lecture < ActiveRecord::Base
-  belongs_to :course, required: true
+class Lecture < ApplicationRecord
+  belongs_to :course
 
   validates :title,
             presence: true,

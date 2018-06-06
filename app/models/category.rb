@@ -6,7 +6,7 @@
 #  name :string
 #
 
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   has_many :courses, dependent: :destroy
 
   validates :name,

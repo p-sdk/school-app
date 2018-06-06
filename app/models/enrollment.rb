@@ -20,9 +20,9 @@
 #  fk_rails_f01c555e06  (student_id => users.id)
 #
 
-class Enrollment < ActiveRecord::Base
-  belongs_to :student, class_name: 'User', required: true
-  belongs_to :course, required: true
+class Enrollment < ApplicationRecord
+  belongs_to :student, class_name: 'User'
+  belongs_to :course
 
   has_many :solutions, dependent: :destroy
 

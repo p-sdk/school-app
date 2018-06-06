@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 gem 'bootstrap-sass'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 gem 'decent_decoration'
 gem 'decent_exposure'
 gem 'devise'
@@ -14,16 +14,16 @@ gem 'gretel'
 gem 'hamlit-rails'
 gem 'jquery-rails'
 gem 'paperclip'
-gem 'pg', '0.20'
+gem 'pg'
 gem 'puma'
 gem 'pundit'
-gem 'rails', '~> 4.2'
-gem 'rails-i18n', '~> 4.0.0'
+gem 'rails', '5.0.7'
+gem 'rails-i18n', '~> 5.1'
 gem 'redcarpet'
-gem 'sass-rails', '~> 5.0'
-gem 'simple_form', '~> 3.5'
+gem 'sass-rails'
+gem 'simple_form'
 gem 'turbolinks'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 group :development, :test do
   gem 'byebug'
@@ -50,8 +50,4 @@ group :test do
   gem 'pundit-matchers'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-end
-
-group :production do
-  gem 'rails_12factor'
 end

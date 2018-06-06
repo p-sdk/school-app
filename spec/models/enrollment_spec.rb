@@ -27,10 +27,8 @@ RSpec.describe Enrollment, type: :model do
 
   describe 'validations' do
     it { should belong_to(:student).class_name('User') }
-    it { should validate_presence_of(:student) }
 
     it { should belong_to(:course) }
-    it { should validate_presence_of(:course) }
 
     it { is_expected.to validate_uniqueness_of(:student_id).scoped_to(:course_id) }
 

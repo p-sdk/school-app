@@ -28,10 +28,8 @@ RSpec.describe Course, type: :model do
 
   describe 'validations' do
     it { should belong_to(:category) }
-    it { should validate_presence_of(:category) }
 
     it { should belong_to(:teacher).class_name('User') }
-    it { should validate_presence_of(:teacher) }
 
     it { should have_many(:enrollments).dependent(:destroy) }
     it { should have_many(:students).through(:enrollments) }

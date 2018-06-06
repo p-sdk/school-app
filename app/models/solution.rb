@@ -22,9 +22,9 @@
 #  fk_rails_da0ffd369c  (enrollment_id => enrollments.id)
 #
 
-class Solution < ActiveRecord::Base
-  belongs_to :enrollment, required: true
-  belongs_to :task, required: true
+class Solution < ApplicationRecord
+  belongs_to :enrollment
+  belongs_to :task
   delegate :student, to: :enrollment
 
   scope :graded, -> { where.not(earned_points: nil) }

@@ -38,10 +38,8 @@ RSpec.describe Solution, type: :model do
 
   describe 'validations' do
     it { should belong_to(:enrollment) }
-    it { should validate_presence_of(:enrollment) }
 
     it { should belong_to(:task) }
-    it { should validate_presence_of(:task) }
 
     it { should validate_presence_of(:content) }
     it { should validate_length_of(:content).is_at_most(100_000) }
