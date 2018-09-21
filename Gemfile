@@ -36,6 +36,7 @@ group :development do
   gem 'annotate'
   gem 'awesome_print'
   gem 'brakeman', require: false
+  gem 'bullet'
   gem 'guard-rspec'
   gem 'letter_opener_web'
   gem 'pry-doc'

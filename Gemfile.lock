@@ -59,6 +59,9 @@ GEM
       sass (>= 3.3.4)
     brakeman (4.3.0)
     builder (3.2.3)
+    bullet (5.7.6)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11.0)
     byebug (10.0.2)
     capybara (3.2.1)
       addressable
@@ -331,6 +334,7 @@ GEM
     uglifier (4.1.11)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
+    uniform_notifier (1.11.0)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.6.2)
@@ -353,6 +357,7 @@ DEPENDENCIES
   awesome_print
   bootstrap-sass
   brakeman
+  bullet
   byebug
   capybara
   coffee-rails
