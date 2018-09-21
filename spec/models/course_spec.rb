@@ -35,6 +35,7 @@ RSpec.describe Course, type: :model do
     it { should have_many(:students).through(:enrollments) }
     it { should have_many(:lectures).dependent(:destroy) }
     it { should have_many(:tasks).dependent(:destroy) }
+    it { should have_many(:solutions).through(:tasks) }
 
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }

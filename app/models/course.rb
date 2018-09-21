@@ -27,6 +27,7 @@ class Course < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :lectures, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :solutions, through: :tasks
 
   belongs_to :category
 
