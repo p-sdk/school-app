@@ -6,10 +6,10 @@ class CourseDecorator < Draper::Decorator
   end
 
   def points_earned_by_enrollment(enrollment)
-    enrollment.solutions.map(&:earned_points).compact.sum
+    enrollment.solutions.sum(:earned_points)
   end
 
   def total_points
-    tasks.map(&:points).sum
+    tasks.sum(:points)
   end
 end

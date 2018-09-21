@@ -2,9 +2,9 @@ class TaskDecorator < Draper::Decorator
   delegate_all
 
   def average_score
-    graded_points = solutions.graded.map(&:earned_points)
-    return '---' if graded_points.empty?
-    graded_points.sum / graded_points.size
+    graded_solutions = solutions.graded
+    return '---' if graded_solutions.empty?
+    graded_solutions.average(:earned_points).round(1)
   end
 
   def description_formatted
