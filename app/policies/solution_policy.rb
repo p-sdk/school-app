@@ -4,7 +4,7 @@ class SolutionPolicy < ApplicationPolicy
       if user&.teacher?
         scope.where(task: user.teacher_courses.includes(:tasks).flat_map(&:task_ids))
       else
-        scope.where(enrollment: user&.enrollments)
+        scope.for_student(user)
       end
     end
   end

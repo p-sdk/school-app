@@ -29,6 +29,7 @@ class Solution < ApplicationRecord
 
   scope :graded, -> { where.not(earned_points: nil) }
   scope :ungraded, -> { where(earned_points: nil) }
+  scope :for_student, ->(student) { where(enrollment: student&.enrollments) }
 
   validates :content,
             presence: true,
