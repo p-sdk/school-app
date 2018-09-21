@@ -5,8 +5,8 @@ class CourseDecorator < Draper::Decorator
     h.markdown desc
   end
 
-  def points_earned_by_enrollment(enrollment)
-    enrollment.solutions.sum(:earned_points)
+  def points_earned_by_student(student)
+    solutions.for_student(student).sum(:earned_points)
   end
 
   def total_points

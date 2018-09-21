@@ -20,7 +20,7 @@
   - if course.has_student? current_user
     .score
       = t '.your_score'
-      .earned-points= course.points_earned_by_enrollment(current_enrollment)
+      .earned-points= course.points_earned_by_student(current_user)
       \/
       .max-points= course.total_points
 
