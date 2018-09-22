@@ -13,6 +13,6 @@ RSpec.describe UserDecorator do
       user.name = 'John Johnson'
     end
 
-    it { is_expected.to eq "<img alt=\"John Johnson\" class=\"gravatar\" src=\"#{url}\" />" }
+    it { is_expected.to eq %(<img alt="John Johnson" class="gravatar" src="#{url}" />) }
   end
 end
