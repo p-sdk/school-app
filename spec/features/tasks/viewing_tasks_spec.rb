@@ -47,8 +47,7 @@ RSpec.feature 'User views tasks', type: :feature do
     scenario 'successfully' do
       should have_selector '.task-status', count: tasks.size
       should have_content 'Twój wynik'
-      should have_selector '.earned-points'
-      should have_selector '.max-points'
+      should have_selector '.score'
 
       click_link task.title
 
