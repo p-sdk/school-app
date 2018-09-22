@@ -44,7 +44,7 @@ pl:
       lectures: Wykłady
       students: Studenci
       tasks: Zadania
-      your_score: 'Twój wynik:'
+      your_score: Twój wynik
     update:
       success: Kurs został zaktualizowany
   decorators:

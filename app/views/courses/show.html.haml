@@ -18,11 +18,13 @@
     .new= link_to t('.add_task'), [:new, course, :task]
 
   - if course.has_student? current_user
-    .score
-      = t '.your_score'
-      .earned-points= course.points_earned_by_student(current_user)
-      \/
-      .max-points= course.total_points
+    .score.panel.panel-default
+      .panel-heading
+        %h3.panel-title= t '.your_score'
+      .panel-body
+        .earned-points= course.points_earned_by_student(current_user)
+        \/
+        .max-points= course.total_points
 
 - breadcrumb course
 
