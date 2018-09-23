@@ -11,9 +11,9 @@ class TaskDecorator < Draper::Decorator
     h.markdown desc
   end
 
-  def status_for_enrollment(enrollment)
-    return unless enrollment
-    solution = enrollment.solutions.detect { |s| s.task_id == id }
+  def status_for(user, solutions)
+    return if course.teacher == user
+    solution = solutions.detect { |s| s.task_id == id }
     return status_badge(:unsolved) unless solution
     return status_badge(:graded) if solution.graded?
     status_badge(:ungraded)

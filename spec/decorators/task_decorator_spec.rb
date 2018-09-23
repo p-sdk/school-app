@@ -2,7 +2,10 @@ require 'spec_helper'
 
 RSpec.describe TaskDecorator do
   let(:task) { build(:task).decorate }
-  let(:enrollment) { create(:enrollment, course: task.course) }
+  let(:course) { task.course }
+  let(:enrollment) { create(:enrollment, course: course) }
+  let(:student) { enrollment.student }
+  let(:teacher) { course.teacher }
 
   describe '#average_score' do
     subject { task.average_score }
@@ -12,7 +15,7 @@ RSpec.describe TaskDecorator do
     end
 
     context 'when some students solved the task' do
-      let(:enrollments) { create_list :enrollment, 5, course: task.course }
+      let(:enrollments) { create_list :enrollment, 5, course: course }
       let!(:solutions) do
         enrollments.map { |e| create :solution, task: task, enrollment: e }
       end
@@ -46,11 +49,13 @@ RSpec.describe TaskDecorator do
     it { is_expected.to eq "<h1>Header</h1>\n" }
   end
 
-  describe '#status_for_enrollment' do
-    subject { task.status_for_enrollment(enrollment) }
+  describe '#status_for' do
+    let(:user) { student }
+    let(:solutions) { Solution.none }
+    subject { task.status_for(user, solutions) }
 
-    context 'when user is a course teacher (enrollment is nil)' do
-      let(:enrollment) { nil }
+    context 'when user is a course teacher' do
+      let(:user) { teacher }
       it { is_expected.to be_nil }
     end
 
@@ -59,15 +64,13 @@ RSpec.describe TaskDecorator do
     end
 
     context 'when task has been solved and waits for review' do
-      before { create :solution, enrollment: enrollment, task: task }
+      let(:solutions) { create_list :solution, 1, enrollment: enrollment, task: task }
 
       it { is_expected.to eq '<span class="task-status ungraded">czeka na sprawdzenie</span>' }
     end
 
     context 'when task has been solved and graded' do
-      let(:solution) { create :solution, enrollment: enrollment, task: task }
-
-      before { solution.update! earned_points: 10 }
+      let(:solutions) { create_list :solution, 1, enrollment: enrollment, task: task, earned_points: 10 }
 
       it { is_expected.to eq '<span class="task-status graded">ocenione</span>' }
     end
