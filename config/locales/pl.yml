@@ -135,7 +135,7 @@ pl:
     new:
       title: Utwórz nowe zadanie
     show:
-      average_score: 'Przeciętny wynik:'
+      average_score: Przeciętny wynik
       points_to_earn: 'Punktów do zdobycia:'
       solutions: Rozwiązania
     solution:

@@ -5,8 +5,8 @@
   - if policy(task).list_solutions?
     .solutions= link_to t('.solutions'), [course, task, :solutions]
     .avg-score
-      = t '.average_score'
-      = task.average_score
+      = render 'shared/panel', title: t('.average_score') do
+        .panel-body= task.average_score
 
   .points
     = t '.points_to_earn'
