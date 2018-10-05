@@ -1,4 +1,8 @@
 .panel.panel-default
-  .panel-heading
-    %h3.panel-title= title
-  = yield
+  - if title
+    .panel-heading
+      %h3.panel-title= title
+  - if list
+    .list-group= yield
+  - else
+    .panel-body= yield

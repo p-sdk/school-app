@@ -19,8 +19,8 @@
 
   - if course.has_student? current_user
     .score
-      = render 'shared/panel', title: t('.your_score') do
-        .panel-body= course.score_for(current_user)
+      = bs_panel t('.your_score') do
+        = course.score_for(current_user)
 
 - breadcrumb course
 
@@ -34,10 +34,10 @@
 
 - if policy(course).list_lectures?
   #lectures
-    = render 'shared/panel', title: t('.lectures') do
-      .list-group= render lectures
+    = bs_panel_list t('.lectures') do
+      = render lectures
 
 - if policy(course).list_tasks?
   #tasks
-    = render 'shared/panel', title: t('.tasks') do
-      .list-group= render tasks
+    = bs_panel_list t('.tasks') do
+      = render tasks
