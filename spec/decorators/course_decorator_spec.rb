@@ -40,6 +40,16 @@ RSpec.describe CourseDecorator do
     end
   end
 
+  describe '#score_for' do
+    subject { course.score_for(student) }
+
+    it do
+      allow(course).to receive(:points_earned_by_student).with(student) { 123 }
+      allow(course).to receive(:total_points) { 200 }
+      is_expected.to eq '123 / 200'
+    end
+  end
+
   describe '#total_points' do
     subject { course.total_points }
 

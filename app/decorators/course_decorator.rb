@@ -9,6 +9,10 @@ class CourseDecorator < Draper::Decorator
     solutions.for_student(student).sum(:earned_points)
   end
 
+  def score_for(student)
+    "#{points_earned_by_student(student)} / #{total_points}"
+  end
+
   def total_points
     tasks.sum(:points)
   end

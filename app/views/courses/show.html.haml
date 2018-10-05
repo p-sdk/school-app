@@ -20,8 +20,7 @@
   - if course.has_student? current_user
     .score
       = render 'shared/panel', title: t('.your_score') do
-        .panel-body
-          #{course.points_earned_by_student(current_user)} / #{course.total_points}
+        .panel-body= course.score_for(current_user)
 
 - breadcrumb course
 
