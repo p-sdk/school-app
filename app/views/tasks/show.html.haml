@@ -9,8 +9,8 @@
         = task.average_score
 
   .points
-    = t '.points_to_earn'
-    = task.points
+    = bs_panel t('.points_to_earn') do
+      = task.points
 
 - breadcrumb task
 

@@ -25,7 +25,7 @@ RSpec.feature 'User views tasks', type: :feature do
 
     should have_heading task.title
     should have_link course.name, href: course_path(course)
-    should have_selector 'div.points', text: "Punktów do zdobycia: #{task.points}"
+    should have_selector '.points', text: "Punktów do zdobycia\n#{task.points}"
     should have_selector 'div.desc', text: task.desc
   end
 
