@@ -60,7 +60,7 @@ RSpec.feature 'User views task solutions', type: :feature do
   end
 
   context 'when signed in as student with ungraded solution' do
-    let(:user) { ungraded_solution.enrollment.student }
+    let(:user) { ungraded_solution.student }
 
     scenario 'successfully' do
       click_link 'Moje rozwiązanie'
@@ -73,7 +73,7 @@ RSpec.feature 'User views task solutions', type: :feature do
   end
 
   context 'when signed in as student with graded solution' do
-    let(:user) { graded_solution.enrollment.student }
+    let(:user) { graded_solution.student }
 
     scenario 'successfully' do
       click_link 'Moje rozwiązanie'

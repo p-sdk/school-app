@@ -31,7 +31,7 @@ RSpec.describe SolutionPolicy do
   end
 
   context 'being the solution submitter' do
-    let(:user) { solution.enrollment.student }
+    let(:user) { solution.student }
 
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_actions(%i[index create update destroy]) }
