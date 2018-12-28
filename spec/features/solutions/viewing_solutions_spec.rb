@@ -32,15 +32,15 @@ RSpec.feature 'User views task solutions', type: :feature do
 
       should have_heading 'Rozwiązania oczekujące na sprawdzenie'
       ungraded_solutions.each do |solution|
-        expect(page).to have_link solution.student.name, href: edit_solution_path(solution)
+        expect(page).to have_link solution.student_name, href: edit_solution_path(solution)
       end
 
       should have_heading 'Ocenione rozwiązania'
       graded_solutions.each do |solution|
-        expect(page).to have_link solution.student.name, href: solution_path(solution)
+        expect(page).to have_link solution.student_name, href: solution_path(solution)
       end
 
-      click_link graded_solution.student.name
+      click_link graded_solution.student_name
 
       expect(current_path).to eq solution_path(graded_solution)
       should have_heading task.title
@@ -53,7 +53,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should have_link 'Usuń', href: solution_path(graded_solution)
 
       click_link 'Rozwiązania', href: course_task_solutions_path(course, task)
-      click_link ungraded_solution.student.name
+      click_link ungraded_solution.student_name
 
       expect(current_path).to eq edit_solution_path(ungraded_solution)
     end

@@ -49,7 +49,7 @@ crumb :solutions do |task|
 end
 
 crumb :solution do |solution|
-  link solution.student.name, solution if policy(solution).show?
+  link solution.student_name, solution if policy(solution).show?
   parent :solutions, solution.task
 end
 

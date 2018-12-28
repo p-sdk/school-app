@@ -10,7 +10,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
   background do
     sign_in course.teacher
     visit course_task_solutions_path(course, task)
-    click_link solution.student.name
+    click_link solution.student_name
   end
 
   scenario 'with invalid attributes' do

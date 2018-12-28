@@ -1,4 +1,4 @@
 - if solution.graded?
-  %li= link_to solution.student.name, solution
+  %li= link_to solution.student_name, solution
 - else
-  %li= link_to solution.student.name, [:edit, solution]
+  %li= link_to solution.student_name, [:edit, solution]

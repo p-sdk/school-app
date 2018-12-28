@@ -103,4 +103,8 @@ RSpec.describe Solution, type: :model do
   describe '#student' do
     specify { expect(solution.student).to eq enrollment.student }
   end
+
+  describe '#student_name' do
+    specify { expect(solution.student_name).to eq solution.student.name }
+  end
 end

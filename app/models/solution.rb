@@ -26,6 +26,7 @@ class Solution < ApplicationRecord
   belongs_to :enrollment
   belongs_to :task
   delegate :student, to: :enrollment
+  delegate :name, to: :student, prefix: true
 
   scope :graded, -> { where.not(earned_points: nil) }
   scope :ungraded, -> { where(earned_points: nil) }
