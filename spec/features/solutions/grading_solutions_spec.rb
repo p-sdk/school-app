@@ -44,7 +44,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
     click_button 'Oceń'
 
     should have_heading 'Uzyskane punkty'
-    should have_selector 'div.points', text: "#{solution.earned_points} / #{solution.task.points}"
+    should have_selector 'div.points', text: "#{solution.earned_points} / #{task.points}"
     should have_success_message
   end
 end

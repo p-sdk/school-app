@@ -7,6 +7,6 @@
 = render 'task_and_solution'
 = simple_form_for solution do |f|
   = f.error_notification
-  = f.input :earned_points, input_html: { min: 0, max: task.points, value: 0 },
-    hint: "(0 - #{task.points})", required: true, autofocus: true
+  = f.input :earned_points, input_html: { min: 0, max: solution.max_points, value: 0 },
+    hint: "(0 - #{solution.max_points})", required: true, autofocus: true
   = f.button :submit

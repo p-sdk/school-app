@@ -40,7 +40,7 @@ class Solution < ApplicationRecord
             on: :update,
             numericality: {
               greater_than_or_equal_to: 0,
-              less_than_or_equal_to: ->(s) { s.task.points },
+              less_than_or_equal_to: ->(s) { s.max_points },
               only_integer: true
             }
 
@@ -48,6 +48,10 @@ class Solution < ApplicationRecord
 
   def graded?
     !earned_points.nil?
+  end
+
+  def max_points
+    task.points
   end
 
   private

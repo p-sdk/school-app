@@ -100,6 +100,10 @@ RSpec.describe Solution, type: :model do
     end
   end
 
+  describe '#max_points' do
+    specify { expect(solution.max_points).to eq task.points }
+  end
+
   describe '#student' do
     specify { expect(solution.student).to eq enrollment.student }
   end

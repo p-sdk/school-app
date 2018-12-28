@@ -7,6 +7,6 @@ class SolutionDecorator < Draper::Decorator
 
   def earned_points_formatted
     return I18n.t('decorators.solution.ungraded') unless graded?
-    "#{earned_points} / #{task.points}"
+    "#{earned_points} / #{max_points}"
   end
 end
