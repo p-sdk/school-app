@@ -45,7 +45,7 @@ RSpec.feature 'User views tasks', type: :feature do
     let(:user) { enrollment.student }
 
     scenario 'successfully' do
-      should have_selector '.task-status', count: tasks.size
+      should have_selector '.task-status-badge', count: tasks.size
       should have_content 'Twój wynik'
       should have_selector '.score'
 

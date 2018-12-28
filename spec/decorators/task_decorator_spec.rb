@@ -49,10 +49,10 @@ RSpec.describe TaskDecorator do
     it { is_expected.to eq "<h1>Header</h1>\n" }
   end
 
-  describe '#status_for' do
+  describe '#status_badge_for' do
     let(:user) { student }
     let(:solutions) { Solution.none }
-    subject { task.status_for(user, solutions) }
+    subject { task.status_badge_for(user, solutions) }
 
     context 'when user is a course teacher' do
       let(:user) { teacher }
@@ -60,19 +60,19 @@ RSpec.describe TaskDecorator do
     end
 
     context 'when task has not been solved' do
-      it { is_expected.to eq '<span class="task-status unsolved">nierozwiązane</span>' }
+      it { is_expected.to eq '<span class="task-status-badge unsolved">nierozwiązane</span>' }
     end
 
     context 'when task has been solved and waits for review' do
       let(:solutions) { create_list :solution, 1, enrollment: enrollment, task: task }
 
-      it { is_expected.to eq '<span class="task-status ungraded">czeka na sprawdzenie</span>' }
+      it { is_expected.to eq '<span class="task-status-badge ungraded">czeka na sprawdzenie</span>' }
     end
 
     context 'when task has been solved and graded' do
       let(:solutions) { create_list :solution, 1, enrollment: enrollment, task: task, earned_points: 10 }
 
-      it { is_expected.to eq '<span class="task-status graded">ocenione</span>' }
+      it { is_expected.to eq '<span class="task-status-badge graded">ocenione</span>' }
     end
   end
 end

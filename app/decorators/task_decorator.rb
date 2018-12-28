@@ -11,7 +11,7 @@ class TaskDecorator < Draper::Decorator
     h.markdown desc
   end
 
-  def status_for(user, solutions)
+  def status_badge_for(user, solutions)
     return if course.teacher == user
     solution = solutions.detect { |s| s.task_id == id }
     return status_badge(:unsolved) unless solution
@@ -22,7 +22,7 @@ class TaskDecorator < Draper::Decorator
   private
 
   def status_badge(type)
-    h.content_tag 'span', class: ['task-status', type] do
+    h.content_tag 'span', class: ['task-status-badge', type] do
       I18n.t("decorators.task.#{type}")
     end
   end
