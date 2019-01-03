@@ -25,8 +25,6 @@ RSpec.feature 'User views tasks', type: :feature do
 
     should have_heading task.title
     should have_link course.name, href: course_path(course)
-    should have_selector '.points', text: "Punktów do zdobycia\n#{task.points}"
-    should have_selector 'div.desc', text: task.desc
   end
 
   context 'when signed in as the teacher' do
@@ -36,7 +34,9 @@ RSpec.feature 'User views tasks', type: :feature do
       should have_link 'Rozwiązania', href: course_task_solutions_path(course, task)
       should_not have_selector 'form.new_solution'
       should_not have_link 'Moje rozwiązanie'
-      should have_selector '.avg-score', text: 'Przeciętny wynik'
+      should have_selector '.avg-score'
+      should have_selector '.points'
+      should have_selector '.desc'
     end
   end
 
@@ -53,6 +53,8 @@ RSpec.feature 'User views tasks', type: :feature do
 
       should_not have_link 'Edytuj'
       should_not have_link 'Rozwiązania'
+      should have_selector '.points'
+      should have_selector '.desc'
     end
 
     context 'with unsolved task' do
