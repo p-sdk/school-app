@@ -28,10 +28,14 @@ FactoryBot.define do
     factory :enrollment_with_solution do
       transient do
         task_to_solve { create :task, course: course }
+        earned_points { nil }
       end
 
       after(:create) do |enrollment, evaluator|
-        create :solution, enrollment: enrollment, task: evaluator.task_to_solve
+        create :solution,
+               enrollment: enrollment,
+               task: evaluator.task_to_solve,
+               earned_points: evaluator.earned_points
       end
     end
   end
