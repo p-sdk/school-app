@@ -61,6 +61,7 @@ RSpec.feature 'User views tasks', type: :feature do
 
         should have_selector 'form.new_solution'
         should_not have_link 'Moje rozwiązanie'
+        should_not have_selector '.score'
       end
     end
 
@@ -74,6 +75,25 @@ RSpec.feature 'User views tasks', type: :feature do
 
         should_not have_selector 'form.new_solution'
         should have_link 'Moje rozwiązanie'
+        should_not have_selector '.score'
+      end
+    end
+
+    context 'with graded task' do
+      let(:earned_points) { task.points / 2 }
+      let(:enrollment) do
+        create :enrollment_with_solution,
+               course: course,
+               task_to_solve: task,
+               earned_points: earned_points
+      end
+
+      scenario 'display task score' do
+        click_link task.title
+
+        should_not have_selector 'form.new_solution'
+        should have_link 'Moje rozwiązanie'
+        should have_selector '.score'
       end
     end
   end

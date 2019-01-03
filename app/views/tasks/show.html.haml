@@ -12,6 +12,11 @@
     = bs_panel t('.points_to_earn') do
       = task.points
 
+  - if task.graded_for?(current_user)
+    .score
+      = bs_panel t('.earned_points') do
+        = task.earned_points_by(current_user)
+
 - breadcrumb task
 
 .page-header
