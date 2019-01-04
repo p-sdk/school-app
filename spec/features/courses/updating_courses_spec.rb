@@ -28,7 +28,7 @@ RSpec.feature 'Teacher updates a course', type: :feature do
     click_button 'Zapisz zmiany'
 
     should have_heading course.name
-    should have_selector 'div.desc', text: new_desc
+    should have_selector '.description', text: new_desc
     should have_success_message
   end
 end

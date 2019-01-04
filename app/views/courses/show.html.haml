@@ -30,7 +30,7 @@
 .teacher
   %i= link_to_if policy(course.teacher).show?, course.teacher.name, course.teacher
 
-.desc= course.description_formatted
+.description= course.description_formatted
 
 - if policy(course).list_lectures?
   #lectures

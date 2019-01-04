@@ -25,7 +25,7 @@ RSpec.feature 'User views courses', type: :feature do
     should have_heading course.name
     should have_link course.category.name, href: category_path(course.category)
     should have_selector 'div.teacher i', text: course.teacher.name
-    should have_selector 'div.desc', text: course.desc
+    should have_selector '.description', text: course.desc
   end
 
   context 'when not signed in' do
