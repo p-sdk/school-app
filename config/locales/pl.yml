@@ -110,8 +110,8 @@ pl:
     show:
       author: Autor
       delete: Usuń rozwiązanie
-      points: Uzyskane punkty
       points_to_earn: Punktów do zdobycia
+      score: Uzyskane punkty
     task_and_solution:
       description: Opis
       solution: Rozwiązanie

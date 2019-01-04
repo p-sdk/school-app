@@ -11,8 +11,10 @@
     = bs_panel t('.points_to_earn') do
       = task.points
 
+  .score
+    = bs_panel t('.score') do
+      = solution.earned_points_formatted
+
 - breadcrumb solution
 
 = render 'task_and_solution'
-%h3= t '.points'
-.score= solution.earned_points_formatted
