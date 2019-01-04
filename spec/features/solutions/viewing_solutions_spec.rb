@@ -44,12 +44,11 @@ RSpec.feature 'User views task solutions', type: :feature do
 
       expect(current_path).to eq solution_path(graded_solution)
       should have_heading task.title
-      should have_heading 'Opis'
-      should have_selector 'div.desc', text: task.desc
       should have_heading 'Rozwiązanie'
       should have_selector 'div.solution', text: graded_solution.content
       should have_content 'Uzyskane punkty'
       should have_selector 'div.points', text: "#{graded_solution.earned_points} / #{task.points}"
+      should have_selector '.description'
       should have_selector '.author'
       should have_link 'Usuń', href: solution_path(graded_solution)
 
@@ -57,6 +56,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       click_link ungraded_solution.student_name
 
       expect(current_path).to eq edit_solution_path(ungraded_solution)
+      should have_selector '.description'
       should have_selector '.author'
     end
   end
@@ -70,6 +70,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should have_link task.title, href: course_task_path(course, task)
       should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
+      should have_selector '.description'
       should_not have_selector '.author'
       should have_content 'Rozwiązanie czeka na sprawdzenie'
     end
@@ -85,6 +86,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
       should have_selector 'div.points', text: "#{graded_solution.earned_points} / #{task.points}"
+      should have_selector '.description'
       should_not have_selector '.author'
     end
   end
