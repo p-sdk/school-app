@@ -22,11 +22,10 @@ RSpec.describe SolutionDecorator do
 
     context 'solution has been graded' do
       before do
-        allow(solution.task).to receive(:points).and_return(20)
         solution.earned_points = 14
       end
 
-      it { is_expected.to eq '14 / 20' }
+      it { is_expected.to eq 14 }
     end
   end
 end
