@@ -32,7 +32,7 @@ RSpec.feature 'Teacher updates a task', type: :feature do
 
     should have_heading task.title
     should have_selector 'div.points', text: new_points
-    should have_selector 'div.desc', text: new_desc
+    should have_selector '.description', text: new_desc
     should have_success_message
   end
 end

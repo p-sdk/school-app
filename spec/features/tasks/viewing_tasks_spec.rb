@@ -36,7 +36,7 @@ RSpec.feature 'User views tasks', type: :feature do
       should_not have_link 'Moje rozwiązanie'
       should have_selector '.avg-score'
       should have_selector '.points'
-      should have_selector '.desc'
+      should have_selector '.description'
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.feature 'User views tasks', type: :feature do
       should_not have_link 'Edytuj'
       should_not have_link 'Rozwiązania'
       should have_selector '.points'
-      should have_selector '.desc'
+      should have_selector '.description'
     end
 
     context 'with unsolved task' do
