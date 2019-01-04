@@ -2,6 +2,11 @@
   - if policy(solution).destroy?
     .delete= link_to t('.delete'), solution, method: :delete
 
+  - if policy(solution).update?
+    .author
+      = bs_panel t('.author') do
+        = solution.student_name
+
 - breadcrumb solution
 
 = render 'task_and_solution'

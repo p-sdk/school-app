@@ -104,12 +104,13 @@ pl:
     destroy:
       success: Rozwiązanie zostało usunięte
     edit:
+      author: Autor
       delete: Usuń rozwiązanie
     show:
+      author: Autor
       delete: Usuń rozwiązanie
       points: Uzyskane punkty
     task_and_solution:
-      author: 'Autor:'
       description: Opis
       solution: Rozwiązanie
     update:
