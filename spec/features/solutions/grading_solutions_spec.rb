@@ -6,6 +6,7 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
   let(:solution) { create :solution }
   let(:task) { solution.task }
   let(:course) { task.course }
+  let(:earned_points) { task.points / 2 }
 
   background do
     sign_in course.teacher
@@ -40,11 +41,10 @@ RSpec.feature 'Teacher grades a solution', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Uzyskane punkty', with: rand(0..task.points)
+    fill_in 'Uzyskane punkty', with: earned_points
     click_button 'Oceń'
 
-    should have_heading 'Uzyskane punkty'
-    should have_selector 'div.points', text: "#{solution.earned_points} / #{task.points}"
+    should have_content earned_points
     should have_success_message
   end
 end
