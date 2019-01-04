@@ -46,6 +46,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should have_heading task.title
       should have_selector '.description'
       should have_selector '.solution'
+      should have_selector '.points'
       should have_selector '.score'
       should have_selector '.author'
       should have_link 'Usuń', href: solution_path(graded_solution)
@@ -57,6 +58,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should have_heading task.title
       should have_selector '.description'
       should have_selector '.solution'
+      should have_selector '.points'
       should_not have_selector '.score'
       should have_selector '.author'
       should have_link 'Usuń', href: solution_path(ungraded_solution)
@@ -74,6 +76,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should_not have_link 'Usuń'
       should have_selector '.description'
       should have_selector '.solution'
+      should have_selector '.points'
       should have_selector '.score'
       should_not have_selector '.author'
       should have_content 'Rozwiązanie czeka na sprawdzenie'
@@ -91,6 +94,7 @@ RSpec.feature 'User views task solutions', type: :feature do
       should_not have_link 'Usuń'
       should have_selector '.description'
       should have_selector '.solution'
+      should have_selector '.points'
       should have_selector '.score'
       should_not have_selector '.author'
     end

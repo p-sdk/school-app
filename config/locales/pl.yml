@@ -106,10 +106,12 @@ pl:
     edit:
       author: Autor
       delete: Usuń rozwiązanie
+      points_to_earn: Punktów do zdobycia
     show:
       author: Autor
       delete: Usuń rozwiązanie
       points: Uzyskane punkty
+      points_to_earn: Punktów do zdobycia
     task_and_solution:
       description: Opis
       solution: Rozwiązanie

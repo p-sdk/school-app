@@ -7,6 +7,10 @@
       = bs_panel t('.author') do
         = solution.student_name
 
+  .points
+    = bs_panel t('.points_to_earn') do
+      = task.points
+
 - breadcrumb solution
 
 = render 'task_and_solution'
