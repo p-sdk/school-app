@@ -18,8 +18,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_8f3c6a6975  (task_id => tasks.id)
-#  fk_rails_da0ffd369c  (enrollment_id => enrollments.id)
+#  fk_rails_...  (enrollment_id => enrollments.id)
+#  fk_rails_...  (task_id => tasks.id)
 #
 
 FactoryBot.define do

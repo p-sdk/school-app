@@ -19,7 +19,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_bbbf25c9a6  (course_id => courses.id)
+#  fk_rails_...  (course_id => courses.id)
 #
 
 class Lecture < ApplicationRecord

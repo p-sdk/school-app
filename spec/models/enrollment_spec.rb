@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_2e119501f4  (course_id => courses.id)
-#  fk_rails_f01c555e06  (student_id => users.id)
+#  fk_rails_...  (course_id => courses.id)
+#  fk_rails_...  (student_id => users.id)
 #
 
 require 'rails_helper'

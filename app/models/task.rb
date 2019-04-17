@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_d35d17a7dd  (course_id => courses.id)
+#  fk_rails_...  (course_id => courses.id)
 #
 
 class Task < ApplicationRecord

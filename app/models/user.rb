@@ -17,7 +17,7 @@
 #  last_sign_in_at         :datetime
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
-#  role                    :integer          default(0)
+#  role                    :integer          default("student")
 #
 # Indexes
 #

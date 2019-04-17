@@ -17,8 +17,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_a68eff6aff  (teacher_id => users.id)
-#  fk_rails_e072dca946  (category_id => categories.id)
+#  fk_rails_...  (category_id => categories.id)
+#  fk_rails_...  (teacher_id => users.id)
 #
 
 FactoryBot.define do
