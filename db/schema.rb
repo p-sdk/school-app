@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -27,21 +26,19 @@ ActiveRecord::Schema.define(version: 20170420122736) do
     t.datetime "updated_at",  null: false
     t.integer  "teacher_id"
     t.integer  "category_id"
+    t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
+    t.index ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
   end
-
-  add_index "courses", ["category_id"], name: "index_courses_on_category_id", using: :btree
-  add_index "courses", ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
 
   create_table "enrollments", force: :cascade do |t|
     t.integer  "student_id", null: false
     t.integer  "course_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id", using: :btree
+    t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true, using: :btree
+    t.index ["student_id"], name: "index_enrollments_on_student_id", using: :btree
   end
-
-  add_index "enrollments", ["course_id"], name: "index_enrollments_on_course_id", using: :btree
-  add_index "enrollments", ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true, using: :btree
-  add_index "enrollments", ["student_id"], name: "index_enrollments_on_student_id", using: :btree
 
   create_table "lectures", force: :cascade do |t|
     t.string   "title"
@@ -53,9 +50,8 @@ ActiveRecord::Schema.define(version: 20170420122736) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.index ["course_id"], name: "index_lectures_on_course_id", using: :btree
   end
-
-  add_index "lectures", ["course_id"], name: "index_lectures_on_course_id", using: :btree
 
   create_table "solutions", force: :cascade do |t|
     t.integer  "enrollment_id", null: false
@@ -64,11 +60,10 @@ ActiveRecord::Schema.define(version: 20170420122736) do
     t.integer  "earned_points"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["enrollment_id", "task_id"], name: "index_solutions_on_enrollment_id_and_task_id", unique: true, using: :btree
+    t.index ["enrollment_id"], name: "index_solutions_on_enrollment_id", using: :btree
+    t.index ["task_id"], name: "index_solutions_on_task_id", using: :btree
   end
-
-  add_index "solutions", ["enrollment_id", "task_id"], name: "index_solutions_on_enrollment_id_and_task_id", unique: true, using: :btree
-  add_index "solutions", ["enrollment_id"], name: "index_solutions_on_enrollment_id", using: :btree
-  add_index "solutions", ["task_id"], name: "index_solutions_on_task_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
@@ -77,9 +72,8 @@ ActiveRecord::Schema.define(version: 20170420122736) do
     t.integer  "course_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_tasks_on_course_id", using: :btree
   end
-
-  add_index "tasks", ["course_id"], name: "index_tasks_on_course_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -97,10 +91,9 @@ ActiveRecord::Schema.define(version: 20170420122736) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "role",                    default: 0
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users", column: "teacher_id"
