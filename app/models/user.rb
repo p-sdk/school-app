@@ -18,9 +18,14 @@
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
 #  role                    :integer          default("student")
+#  confirmation_token      :string
+#  confirmed_at            :datetime
+#  confirmation_sent_at    :datetime
+#  unconfirmed_email       :string
 #
 # Indexes
 #
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -31,8 +36,8 @@ class User < ApplicationRecord
   enum role: ROLES
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :teacher_courses, class_name: 'Course', foreign_key: :teacher_id, dependent: :destroy

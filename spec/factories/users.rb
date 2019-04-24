@@ -18,9 +18,14 @@
 #  current_sign_in_ip      :inet
 #  last_sign_in_ip         :inet
 #  role                    :integer          default("student")
+#  confirmation_token      :string
+#  confirmed_at            :datetime
+#  confirmation_sent_at    :datetime
+#  unconfirmed_email       :string
 #
 # Indexes
 #
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -31,6 +36,7 @@ FactoryBot.define do
     sequence(:email) { |n| "person_#{n}@example.com" }
     password 'foobar'
     password_confirmation 'foobar'
+    confirmed_at { Time.zone.now }
 
     factory :student do
       transient do
