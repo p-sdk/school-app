@@ -5,6 +5,9 @@ RSpec.feature 'Teacher creates a task', type: :feature do
 
   let(:course) { create :course }
   let(:task_attributes) { attributes_for :task }
+  let(:title) { task_attributes[:title] }
+  let(:description) { task_attributes[:desc] }
+  let(:points) { task_attributes[:points] }
 
   background do
     sign_in course.teacher
@@ -23,13 +26,13 @@ RSpec.feature 'Teacher creates a task', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Tytuł', with: task_attributes[:title]
-    fill_in 'Opis', with: task_attributes[:desc]
-    fill_in 'Liczba punktów', with: task_attributes[:points]
+    fill_in 'Tytuł', with: title
+    fill_in 'Opis', with: description
+    fill_in 'Liczba punktów', with: points
 
     expect { click_button 'Utwórz zadanie' }.to change(Task, :count).by(1)
 
-    should have_heading task_attributes[:title]
+    should have_heading title
     should have_success_message
   end
 end

@@ -4,6 +4,9 @@ RSpec.feature 'User signs up', type: :feature do
   subject { page }
 
   let(:user_attributes) { attributes_for :user }
+  let(:name) { user_attributes[:name] }
+  let(:email) { user_attributes[:email] }
+  let(:password) { user_attributes[:password] }
 
   background do
     visit root_path
@@ -20,13 +23,14 @@ RSpec.feature 'User signs up', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Imię i nazwisko', with: user_attributes[:name]
-    fill_in 'Email', with: user_attributes[:email]
-    fill_in 'Hasło', with: user_attributes[:password]
-    fill_in 'Potwierdzenie hasła', with: user_attributes[:password_confirmation]
+    fill_in 'Imię i nazwisko', with: name
+    fill_in 'Email', with: email
+    fill_in 'Hasło', with: password
+    fill_in 'Potwierdzenie hasła', with: password
 
     expect { click_button 'Załóż konto' }.to change(User, :count).by(1)
 
+    should have_link name
     should have_link 'Przeglądaj kursy', href: courses_path
     should have_link 'Wyloguj'
     should have_success_message

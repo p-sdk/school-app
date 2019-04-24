@@ -6,6 +6,8 @@ RSpec.feature 'Teacher creates a course', type: :feature do
   let!(:category) { create :category }
   let(:teacher) { create :teacher }
   let(:course_attributes) { attributes_for :course }
+  let(:name) { course_attributes[:name] }
+  let(:description) { course_attributes[:desc] }
 
   background do
     sign_in teacher
@@ -24,13 +26,13 @@ RSpec.feature 'Teacher creates a course', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Nazwa', with: course_attributes[:name]
-    fill_in 'Opis', with: course_attributes[:desc]
+    fill_in 'Nazwa', with: name
+    fill_in 'Opis', with: description
     select category[:name], from: 'Kategoria'
 
     expect { click_button 'Utwórz kurs' }.to change(Course, :count).by(1)
 
-    should have_heading course_attributes[:name]
+    should have_heading name
     should have_success_message
   end
 end

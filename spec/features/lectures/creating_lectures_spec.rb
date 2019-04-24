@@ -5,6 +5,8 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
 
   let(:course) { create :course }
   let(:lecture_attributes) { attributes_for :lecture }
+  let(:title) { lecture_attributes[:title] }
+  let(:content) { lecture_attributes[:content] }
   let(:file) { 'spec/fixtures/foo.html' }
 
   background do
@@ -24,13 +26,13 @@ RSpec.feature 'Teacher creates a lecture', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Tytuł', with: lecture_attributes[:title]
-    fill_in 'Treść', with: lecture_attributes[:content]
+    fill_in 'Tytuł', with: title
+    fill_in 'Treść', with: content
     attach_file 'Załącznik', file
 
     expect { click_button 'Utwórz wykład' }.to change(Lecture, :count).by(1)
 
-    should have_heading lecture_attributes[:title]
+    should have_heading title
     should have_success_message
 
     click_link File.basename(file)

@@ -5,6 +5,7 @@ RSpec.feature 'Admin creates a category', type: :feature do
 
   let(:admin) { create :admin }
   let(:category_attributes) { attributes_for :category }
+  let(:name) { category_attributes[:name] }
 
   background do
     sign_in admin
@@ -23,11 +24,11 @@ RSpec.feature 'Admin creates a category', type: :feature do
   end
 
   scenario 'with valid attributes' do
-    fill_in 'Nazwa', with: category_attributes[:name]
+    fill_in 'Nazwa', with: name
 
     expect { click_button 'Utwórz kategorię' }.to change(Category, :count).by(1)
 
-    should have_heading category_attributes[:name]
+    should have_heading name
     should have_success_message
   end
 end
