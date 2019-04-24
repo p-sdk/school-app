@@ -30,6 +30,9 @@ RSpec.feature 'User updates user profile', type: :feature do
 
     should have_success_message
 
+    open_email(new_email)
+    current_email.click_link 'Potwierdź swoje konto'
+
     visit user_path(user)
 
     should have_heading new_name

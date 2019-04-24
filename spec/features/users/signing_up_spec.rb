@@ -30,6 +30,13 @@ RSpec.feature 'User signs up', type: :feature do
 
     expect { click_button 'Załóż konto' }.to change(User, :count).by(1)
 
+    open_email(email)
+    current_email.click_link 'Potwierdź swoje konto'
+
+    fill_in 'Email', with: email
+    fill_in 'Hasło', with: password
+    click_button 'Zaloguj'
+
     should have_link name
     should have_link 'Przeglądaj kursy', href: courses_path
     should have_link 'Wyloguj'
