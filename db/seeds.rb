@@ -77,7 +77,8 @@ class Seeds
     num_users.times do |i|
       user_params = {
         password: 'foobar',
-        password_confirmation: 'foobar'
+        password_confirmation: 'foobar',
+        confirmed_at: Time.zone.now
       }
       if i < num_teachers
         user_params[:name] = random_teacher_name
