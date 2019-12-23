@@ -34,8 +34,8 @@ FactoryBot.define do
   factory :user do
     sequence(:name) { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com" }
-    password 'foobar'
-    password_confirmation 'foobar'
+    password { 'foobar' }
+    password_confirmation { 'foobar' }
     confirmed_at { Time.zone.now }
 
     factory :student do
@@ -49,7 +49,7 @@ FactoryBot.define do
     end
 
     factory :teacher do
-      role :teacher
+      role { :teacher }
 
       factory :teacher_with_courses do
         transient do
@@ -63,7 +63,7 @@ FactoryBot.define do
     end
 
     factory :admin do
-      role :admin
+      role { :admin }
     end
 
     factory :user_requesting_upgrade do
