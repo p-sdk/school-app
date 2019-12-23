@@ -20,7 +20,7 @@ module FakerHelper
   end
 
   def random_text
-    Array.new(rand(3..6)) { Faker::Lorem.paragraph(rand(5..15)) }.join("\n\n")
+    Array.new(rand(3..6)) { Faker::Lorem.paragraph(sentence_count: rand(5..15)) }.join("\n\n")
   end
 
   def random_sentence
