@@ -6,7 +6,7 @@ $ ->
   description = $ '.solution-description'
   if description.length
     button = $ '<a id="show-desc" class="btn btn-default" href="#"><i class="fa fa-file-text"></i> Pokaż opis</a>'
-    sidebar = $('.back').parent()
+    sidebar = $('#sidebar')
     sidebar.append(button)
     description.hide()
     button.on 'click', (e) ->
