@@ -10,7 +10,7 @@
     .container
       = render 'layouts/flash_messages'
       .row
-        .col-md-3
+        .col-md-3#sidebar
           = yield :sidebar
         .col-md-9
           = breadcrumbs style: :bootstrap, link_current: true, link_current_to_request_path: false
