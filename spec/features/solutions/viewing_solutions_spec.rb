@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views task solutions' do
+RSpec.feature 'User views task solutions', js: true do
   subject { page }
 
   let(:task) { create :task }
