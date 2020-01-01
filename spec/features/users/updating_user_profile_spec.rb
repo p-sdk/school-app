@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User updates user profile', type: :feature do
+RSpec.feature 'User updates user profile' do
   subject { page }
 
   let(:user) { create :user }

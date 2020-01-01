@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User signs up', type: :feature do
+RSpec.feature 'User signs up' do
   subject { page }
 
   let(:user_attributes) { attributes_for :user }

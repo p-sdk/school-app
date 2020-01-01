@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views categories', type: :feature do
+RSpec.feature 'User views categories' do
   subject { page }
 
   let(:cat1) { create :category }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Signing in', type: :feature do
+RSpec.feature 'Signing in' do
   subject { page }
   let(:user) { create :user }
   let(:protected_page) { edit_user_registration_path }

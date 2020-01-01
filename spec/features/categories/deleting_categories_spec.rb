@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin deletes a category', type: :feature do
+RSpec.feature 'Admin deletes a category' do
   subject { page }
 
   let(:admin) { create :admin }

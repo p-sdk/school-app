@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views home page', type: :feature do
+RSpec.feature 'User views home page' do
   subject { page }
 
   background do

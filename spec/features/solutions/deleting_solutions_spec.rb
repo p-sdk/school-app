@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Teacher deletes a solution', type: :feature do
+RSpec.feature 'Teacher deletes a solution' do
   subject { page }
 
   let(:solution) { create :solution }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Teacher deletes a task', type: :feature do
+RSpec.feature 'Teacher deletes a task' do
   subject { page }
 
   let(:task) { create :task }

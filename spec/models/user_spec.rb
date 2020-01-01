@@ -32,7 +32,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   subject(:user) { build :user }
 
   it { should_not be_teacher }

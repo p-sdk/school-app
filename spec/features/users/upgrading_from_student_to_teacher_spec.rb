@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User upgrades from a student to a teacher', type: :feature do
+RSpec.feature 'User upgrades from a student to a teacher' do
   subject { page }
 
   let(:user) { create :user }

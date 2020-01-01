@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Teacher updates a lecture', type: :feature do
+RSpec.feature 'Teacher updates a lecture' do
   subject { page }
 
   let(:lecture) { create :lecture }

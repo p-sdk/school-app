@@ -24,7 +24,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Solution, type: :model do
+RSpec.describe Solution do
   subject(:solution) { build :solution }
   let(:enrollment) { solution.enrollment }
   let(:task) { solution.task }

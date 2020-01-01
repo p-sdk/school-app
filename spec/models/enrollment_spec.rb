@@ -22,7 +22,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Enrollment, type: :model do
+RSpec.describe Enrollment do
   subject(:enrollment) { build :enrollment }
 
   describe 'validations' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Teacher deletes a course', type: :feature do
+RSpec.feature 'Teacher deletes a course' do
   subject { page }
 
   let(:course) { create :course }

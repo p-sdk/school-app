@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Teacher grades a solution', type: :feature do
+RSpec.feature 'Teacher grades a solution' do
   subject { page }
 
   let(:solution) { create :solution }

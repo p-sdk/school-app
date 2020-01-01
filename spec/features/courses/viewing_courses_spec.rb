@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views courses', type: :feature do
+RSpec.feature 'User views courses' do
   subject { page }
 
   let!(:courses) { create_list :course, 6 }

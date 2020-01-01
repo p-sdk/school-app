@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User deletes the account', type: :feature do
+RSpec.feature 'User deletes the account' do
   subject { page }
 
   let(:user) { create :user }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BootstrapHelper, type: :helper do
+RSpec.describe BootstrapHelper do
   describe '#bs_panel' do
     context 'without title' do
       subject { helper.bs_panel { 'Foobar' } }

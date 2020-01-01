@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin updates a category', type: :feature do
+RSpec.feature 'Admin updates a category' do
   subject { page }
 
   let(:admin) { create :admin }

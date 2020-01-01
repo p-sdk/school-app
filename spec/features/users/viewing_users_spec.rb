@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User views users', type: :feature do
+RSpec.feature 'User views users' do
   subject { page }
 
   let!(:students) { create_list :user, 2 }

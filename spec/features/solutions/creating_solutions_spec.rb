@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Student creates a solution', type: :feature do
+RSpec.feature 'Student creates a solution' do
   subject { page }
 
   let(:task) { create :task }
