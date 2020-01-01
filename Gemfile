@@ -50,6 +50,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'pundit-matchers'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
