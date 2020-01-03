@@ -44,7 +44,7 @@ RSpec.feature 'User views task solutions', js: true do
 
       expect(current_path).to eq solution_path(graded_solution)
       should have_heading task.title
-      should have_selector '.description'
+      should have_link 'Pokaż opis'
       should have_selector '.solution'
       should have_selector '.points'
       should have_selector '.score'
@@ -56,12 +56,18 @@ RSpec.feature 'User views task solutions', js: true do
 
       expect(current_path).to eq edit_solution_path(ungraded_solution)
       should have_heading task.title
-      should have_selector '.description'
+      should have_link 'Pokaż opis'
       should have_selector '.solution'
       should have_selector '.points'
       should_not have_selector '.score'
       should have_selector '.author'
       should have_link 'Usuń', href: solution_path(ungraded_solution)
+
+      should_not have_selector '.description'
+      click_link 'Pokaż opis'
+      should have_selector '.description'
+      click_link 'Pokaż opis'
+      should_not have_selector '.description'
     end
   end
 
@@ -74,7 +80,7 @@ RSpec.feature 'User views task solutions', js: true do
       should have_link task.title, href: course_task_path(course, task)
       should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
-      should have_selector '.description'
+      should have_link 'Pokaż opis'
       should have_selector '.solution'
       should have_selector '.points'
       should have_selector '.score'
@@ -92,7 +98,7 @@ RSpec.feature 'User views task solutions', js: true do
       should have_link task.title, href: course_task_path(course, task)
       should_not have_link 'Rozwiązania'
       should_not have_link 'Usuń'
-      should have_selector '.description'
+      should have_link 'Pokaż opis'
       should have_selector '.solution'
       should have_selector '.points'
       should have_selector '.score'
