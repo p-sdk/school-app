@@ -114,6 +114,7 @@ pl:
       score: Uzyskane punkty
     task_and_solution:
       description: Opis
+      show-description: Pokaż opis
       solution: Rozwiązanie
     update:
       success: Rozwiązanie zostało ocenione

@@ -5,7 +5,12 @@
 $(document).on 'turbolinks:load', ->
   description = $ '.solution-description'
   if description.length
-    button = $ '<a id="show-desc" class="btn btn-default" href="#"><i class="fa fa-file-text"></i> Pokaż opis</a>'
+    button = $ '
+               <a id="show-description" class="btn btn-default" href="#">
+                 <i class="fa fa-file-text"></i>
+                 <%= I18n.t "solutions.task_and_solution.show-description" %>
+               </a>
+               '
     sidebar = $('#sidebar')
     sidebar.append(button)
     description.hide()
