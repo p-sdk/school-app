@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User updates user profile' do
+RSpec.feature 'User updates user profile', js: true do
   subject { page }
 
   let(:user) { create :user }
@@ -10,6 +10,7 @@ RSpec.feature 'User updates user profile' do
   background do
     sign_in user
     visit root_path
+    click_link user.name
     click_link 'Ustawienia'
   end
 

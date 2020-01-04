@@ -22,7 +22,7 @@ RSpec.feature 'User signs up' do
     should have_error_message
   end
 
-  scenario 'with valid attributes' do
+  scenario 'with valid attributes', js: true do
     fill_in 'Imię i nazwisko', with: name
     fill_in 'Email', with: email
     fill_in 'Hasło', with: password
@@ -37,9 +37,10 @@ RSpec.feature 'User signs up' do
     fill_in 'Hasło', with: password
     click_button 'Zaloguj'
 
-    should have_link name
     should have_link 'Przeglądaj kursy', href: courses_path
-    should have_link 'Wyloguj'
     should have_success_message
+
+    click_link name
+    should have_link 'Wyloguj'
   end
 end

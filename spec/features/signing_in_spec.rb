@@ -17,7 +17,7 @@ RSpec.feature 'Signing in' do
     should have_warning_message
   end
 
-  scenario 'with valid attributes' do
+  scenario 'with valid attributes', js: true do
     visit root_path
     click_link 'Zaloguj'
     fill_in 'Email', with: user.email
@@ -25,7 +25,8 @@ RSpec.feature 'Signing in' do
     click_button 'Zaloguj'
 
     expect(current_path).to eq root_path
-    should have_link user.name, href: '#'
+
+    click_link user.name
     should have_link 'Mój profil', href: user_path(user)
     should have_link 'Ustawienia', href: edit_user_registration_path
     should have_link 'Wyloguj', href: destroy_user_session_path
@@ -36,7 +37,7 @@ RSpec.feature 'Signing in' do
     should_not have_link user.name
   end
 
-  scenario 'forwarding when attempting to visit a protected page' do
+  scenario 'forwarding when attempting to visit a protected page', js: true do
     visit protected_page
     fill_in 'Email', with: user.email
     fill_in 'Hasło', with: user.password
@@ -44,6 +45,7 @@ RSpec.feature 'Signing in' do
 
     expect(current_path).to eq protected_page
 
+    click_link user.name
     click_link 'Wyloguj'
     sign_in user
 
