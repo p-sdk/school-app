@@ -25,7 +25,7 @@ RSpec.feature 'Teacher creates a lecture' do
     should have_error_message
   end
 
-  scenario 'with valid attributes' do
+  scenario 'with valid attributes', js: true do
     fill_in 'Tytuł', with: title
     fill_in 'Treść', with: content
     attach_file 'Załącznik', file
@@ -35,8 +35,9 @@ RSpec.feature 'Teacher creates a lecture' do
     should have_heading title
     should have_success_message
 
-    click_link File.basename(file)
-
-    should have_css 'p', text: 'Foo bar baz'
+    new_window = window_opened_by { click_link File.basename(file) }
+    within_window new_window do
+      should have_css 'p', text: 'Foo bar baz'
+    end
   end
 end
