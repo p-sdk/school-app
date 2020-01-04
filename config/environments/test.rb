@@ -35,7 +35,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
   # Define default url for mailer
-  config.action_mailer.default_url_options = { host: 'school.test' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
