@@ -17,7 +17,6 @@ RSpec.feature 'Teacher grades a solution' do
   scenario 'with invalid attributes' do
     should have_heading task.title
     should have_link 'Rozwiązania', href: course_task_solutions_path(course, task)
-    should have_selector '.description'
     should have_heading 'Rozwiązanie'
     should have_selector 'div.solution', text: solution.content
     should have_content 'Uzyskane punkty'

@@ -32,12 +32,8 @@ RSpec.feature 'Signing in' do
     should_not have_link 'Zaloguj', href: new_user_session_path
 
     click_link 'Wyloguj'
-
     should have_link 'Zaloguj', href: new_user_session_path
     should_not have_link user.name
-    should_not have_link 'Mój profil'
-    should_not have_link 'Ustawienia'
-    should_not have_link 'Wyloguj'
   end
 
   scenario 'forwarding when attempting to visit a protected page' do
