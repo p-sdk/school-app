@@ -75,6 +75,15 @@ class Seeds
   def create_users(num_teachers:, num_students:)
     1.upto(num_teachers) { |i| User.create! teacher_params(i) }
     1.upto(num_students) { |i| User.create! student_params(i) }
+    User.create! admin_params
+  end
+
+  def admin_params
+    {
+      name: 'Admin',
+      email: "admin@example.com",
+      role: :admin
+    }.reverse_merge(user_params)
   end
 
   def category_params
