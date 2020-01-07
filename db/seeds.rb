@@ -73,24 +73,8 @@ class Seeds
   end
 
   def create_users(num_teachers:, num_students:)
-    num_users = num_teachers + num_students
-    num_users.times do |i|
-      user_params = {
-        password: 'foobar',
-        password_confirmation: 'foobar',
-        confirmed_at: Time.zone.now
-      }
-      if i < num_teachers
-        user_params[:name] = random_teacher_name
-        user_params[:email] = "teacher#{i + 1}@example.com"
-        user_params[:role] = :teacher
-      else
-        user_params[:name] = random_name
-        user_params[:email] = "student#{i + 1 - num_teachers}@example.com"
-        user_params[:role] = :student
-      end
-      User.create! user_params
-    end
+    1.upto(num_teachers) { |i| User.create! teacher_params(i) }
+    1.upto(num_students) { |i| User.create! student_params(i) }
   end
 
   def category_params
@@ -132,12 +116,36 @@ class Seeds
     params
   end
 
+  def student_params(num)
+    {
+      name: random_name,
+      email: "student#{num}@example.com",
+      role: :student
+    }.reverse_merge(user_params)
+  end
+
   def task_params(course:)
     {
       course: course,
       title: random_sentence,
       desc: random_text,
       points: rand(1..10) * 10
+    }
+  end
+
+  def teacher_params(num)
+    {
+      name: random_teacher_name,
+      email: "teacher#{num}@example.com",
+      role: :teacher
+    }.reverse_merge(user_params)
+  end
+
+  def user_params
+    {
+      password: 'foobar',
+      password_confirmation: 'foobar',
+      confirmed_at: Time.zone.now
     }
   end
 end
