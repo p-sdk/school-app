@@ -10,5 +10,5 @@
 .lecture= lecture.content_formatted
 - if lecture.attachment?
   = link_to lecture.attachment.url, target: :_blank do
-    = icon 'paperclip', lecture.attachment_file_name
+    = icon 'fas', 'paperclip', lecture.attachment_file_name
     = lecture.attachment_file_size_formatted

@@ -35,7 +35,8 @@ textarea
     @extend .btn
 
     &:before
-      font-family: FontAwesome
+      @extend %fa-icon
+      @extend .fas
       padding-right: .5em
 
 .back,
@@ -67,7 +68,7 @@ textarea
 
 .delete>a
   &:before
-    @extend .fa-trash
+    @extend .fa-trash-alt
 
 .edit>a
   &:before
@@ -90,7 +91,7 @@ textarea
   @extend .btn-danger
 
   &:before
-    @extend .fa-remove
+    @extend .fa-times
 
 .sign-up>a
   @extend .btn-primary
@@ -98,7 +99,7 @@ textarea
 
 .solutions>a
   &:before
-    @extend .fa-files-o
+    @extend .fa-copy
 
 .students>a
   &:before

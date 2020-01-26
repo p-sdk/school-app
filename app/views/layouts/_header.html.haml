@@ -1,7 +1,7 @@
 %header.navbar.navbar-fixed-top.navbar-inverse
   .container
     = link_to root_path, id: 'logo', class: 'navbar-brand' do
-      = icon 'graduation-cap', t(:app_name)
+      = icon 'fas', 'graduation-cap', t(:app_name)
     %ul.nav.navbar-nav.navbar-right
       %li= link_to t('courses.index.title'), courses_path
       - if signed_in?
@@ -13,13 +13,13 @@
           %ul.dropdown-menu
             %li
               = link_to current_user do
-                = icon 'user', t(:my_profile)
+                = icon 'fas', 'user', t(:my_profile)
             %li
               = link_to edit_user_registration_path do
-                = icon 'cogs', t(:settings)
+                = icon 'fas', 'cogs', t(:settings)
             %li.divider
             %li
               = link_to destroy_user_session_path, method: :delete do
-                = icon 'sign-out', t(:sign_out)
+                = icon 'fas', 'sign-out-alt', t(:sign_out)
       - else
         %li= link_to t(:sign_in), new_user_session_path
