@@ -30,19 +30,9 @@ jobs:
       - ruby/install-deps
       - ruby/save-cache
 
-      - restore_cache:
-          keys:
-            - yarn-{{ checksum "yarn.lock" }}
-            - yarn-
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      - save_cache:
-          key: yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      - node/with-cache:
+          steps:
+            - run: yarn install
 
       - run:
           name: Wait for DB
@@ -61,6 +51,7 @@ jobs:
 
 orbs:
   heroku: circleci/heroku@1.0.1
+  node: circleci/node@1.1.6
   ruby: circleci/ruby@0.2.1
 
 workflows:
