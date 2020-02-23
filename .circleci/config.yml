@@ -38,9 +38,9 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: bundle exec rake db:schema:load
+      - run: bin/rails db:schema:load
 
-      - run: bundle exec rspec
+      - run: bin/rspec
 
   deploy:
     executor: heroku/default
