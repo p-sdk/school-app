@@ -7,7 +7,6 @@ jobs:
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
           PGHOST: localhost
           PGUSER: circleci
           RAILS_ENV: test
@@ -32,9 +31,7 @@ jobs:
           - bundle-{{ checksum "Gemfile.lock" }}
           - bundle-
 
-      - run: 
-          name: Bundle Install
-          command: bundle check || bundle install
+      - ruby/install-deps
 
       - save_cache:
           key: bundle-{{ checksum "Gemfile.lock" }}
@@ -72,6 +69,7 @@ jobs:
 
 orbs:
   heroku: circleci/heroku@1.0.1
+  ruby: circleci/ruby@0.2.1
 
 workflows:
   version: 2
