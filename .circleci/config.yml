@@ -26,17 +26,9 @@ jobs:
           name: Which bundler?
           command: bundle -v
 
-      - restore_cache:
-          keys:
-          - bundle-{{ checksum "Gemfile.lock" }}
-          - bundle-
-
+      - ruby/load-cache
       - ruby/install-deps
-
-      - save_cache:
-          key: bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      - ruby/save-cache
 
       - restore_cache:
           keys:
