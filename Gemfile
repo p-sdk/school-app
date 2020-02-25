@@ -36,13 +36,11 @@ group :development do
   gem 'awesome_print'
   gem 'brakeman', require: false
   gem 'bullet'
-  gem 'guard-rspec'
   gem 'letter_opener_web'
   gem 'pry-doc'
   gem 'rubocop', require: false
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
-  gem 'terminal-notifier-guard'
   gem 'web-console'
 end
 
