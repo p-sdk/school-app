@@ -22,7 +22,10 @@ jobs:
           name: Which bundler?
           command: bundle -v
 
-      - ruby/load-cache
+      - restore_cache:
+          keys:
+          - gems-v1-{{ checksum "Gemfile.lock"  }}
+          - gems-v1-
       - ruby/install-deps
       - ruby/save-cache
 
