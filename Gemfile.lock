@@ -84,7 +84,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.6)
     crass (1.0.6)
     decent_decoration (0.1.0)
       decent_exposure (~> 3.0)
@@ -113,7 +113,7 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    faker (2.10.1)
+    faker (2.10.2)
       i18n (>= 1.6, < 2)
     ffi (1.12.1)
     font-awesome-sass (5.12.0)
