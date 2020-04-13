@@ -2,13 +2,13 @@
 #
 # Table name: courses
 #
-#  id          :integer          not null, primary key
-#  name        :string
+#  id          :bigint           not null, primary key
 #  desc        :text
+#  name        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  teacher_id  :integer
 #  category_id :integer
+#  teacher_id  :integer
 #
 # Indexes
 #

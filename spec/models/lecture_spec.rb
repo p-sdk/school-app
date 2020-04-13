@@ -2,16 +2,16 @@
 #
 # Table name: lectures
 #
-#  id                      :integer          not null, primary key
-#  title                   :string
-#  content                 :text
-#  course_id               :integer          not null
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  attachment_file_name    :string
+#  id                      :bigint           not null, primary key
 #  attachment_content_type :string
+#  attachment_file_name    :string
 #  attachment_file_size    :integer
 #  attachment_updated_at   :datetime
+#  content                 :text
+#  title                   :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  course_id               :integer          not null
 #
 # Indexes
 #

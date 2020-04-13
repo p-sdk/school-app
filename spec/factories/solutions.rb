@@ -2,13 +2,13 @@
 #
 # Table name: solutions
 #
-#  id            :integer          not null, primary key
-#  enrollment_id :integer          not null
-#  task_id       :integer          not null
+#  id            :bigint           not null, primary key
 #  content       :text
 #  earned_points :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  enrollment_id :integer          not null
+#  task_id       :integer          not null
 #
 # Indexes
 #
