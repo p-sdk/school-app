@@ -2,7 +2,7 @@
 #
 # Table name: solutions
 #
-#  id            :bigint           not null, primary key
+#  id            :integer          not null, primary key
 #  content       :text
 #  earned_points :integer
 #  created_at    :datetime         not null
@@ -15,11 +15,6 @@
 #  index_solutions_on_enrollment_id              (enrollment_id)
 #  index_solutions_on_enrollment_id_and_task_id  (enrollment_id,task_id) UNIQUE
 #  index_solutions_on_task_id                    (task_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (enrollment_id => enrollments.id)
-#  fk_rails_...  (task_id => tasks.id)
 #
 
 FactoryBot.define do

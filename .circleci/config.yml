@@ -7,9 +7,7 @@ jobs:
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
-          DATABASE_URL: "postgres://postgres@localhost:5432/circle_test"
           RAILS_ENV: test
-      - image: circleci/postgres:10-alpine
 
     steps:
       - checkout
@@ -32,10 +30,6 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn install
-
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run: bin/rails db:schema:load
 

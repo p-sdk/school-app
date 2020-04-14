@@ -2,16 +2,16 @@
 #
 # Table name: users
 #
-#  id                      :bigint           not null, primary key
+#  id                      :integer          not null, primary key
 #  confirmation_sent_at    :datetime
 #  confirmation_token      :string
 #  confirmed_at            :datetime
 #  current_sign_in_at      :datetime
-#  current_sign_in_ip      :inet
+#  current_sign_in_ip      :string
 #  email                   :string
 #  encrypted_password      :string           default(""), not null
 #  last_sign_in_at         :datetime
-#  last_sign_in_ip         :inet
+#  last_sign_in_ip         :string
 #  name                    :string
 #  remember_created_at     :datetime
 #  reset_password_sent_at  :datetime

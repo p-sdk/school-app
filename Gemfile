@@ -13,7 +13,6 @@ gem 'font-awesome-sass'
 gem 'gretel'
 gem 'hamlit-rails'
 gem 'paperclip'
-gem 'pg'
 gem 'puma'
 gem 'pundit'
 gem 'rails', '5.1.7'
@@ -29,6 +28,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'i18n-tasks'
   gem 'rspec-rails'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -51,4 +51,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+end
+
+group :production do
+  gem 'pg'
 end

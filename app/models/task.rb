@@ -2,7 +2,7 @@
 #
 # Table name: tasks
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  desc       :text
 #  points     :integer
 #  title      :string
@@ -13,10 +13,6 @@
 # Indexes
 #
 #  index_tasks_on_course_id  (course_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (course_id => courses.id)
 #
 
 class Task < ApplicationRecord

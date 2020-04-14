@@ -303,6 +303,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     temple (0.8.2)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -377,6 +378,7 @@ DEPENDENCIES
   simplecov
   spring-commands-rspec
   spring-watcher-listen
+  sqlite3
   turbolinks
   uglifier
   web-console

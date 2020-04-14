@@ -2,10 +2,10 @@
 #
 # Table name: lectures
 #
-#  id                      :bigint           not null, primary key
+#  id                      :integer          not null, primary key
 #  attachment_content_type :string
 #  attachment_file_name    :string
-#  attachment_file_size    :integer
+#  attachment_file_size    :bigint
 #  attachment_updated_at   :datetime
 #  content                 :text
 #  title                   :string
@@ -16,10 +16,6 @@
 # Indexes
 #
 #  index_lectures_on_course_id  (course_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (course_id => courses.id)
 #
 
 class Lecture < ApplicationRecord

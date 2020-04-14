@@ -4,7 +4,7 @@ class AddUpgradeRequestToUsers < ActiveRecord::Migration[4.2]
 
     execute <<~SQL
       UPDATE users
-        SET upgrade_request_sent_at = now(), teacher = false
+        SET upgrade_request_sent_at = datetime('now'), teacher = false
         WHERE teacher IS NULL
     SQL
   end

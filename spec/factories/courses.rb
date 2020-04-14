@@ -2,7 +2,7 @@
 #
 # Table name: courses
 #
-#  id          :bigint           not null, primary key
+#  id          :integer          not null, primary key
 #  desc        :text
 #  name        :string
 #  created_at  :datetime         not null
@@ -14,11 +14,6 @@
 #
 #  index_courses_on_category_id  (category_id)
 #  index_courses_on_teacher_id   (teacher_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (category_id => categories.id)
-#  fk_rails_...  (teacher_id => users.id)
 #
 
 FactoryBot.define do
