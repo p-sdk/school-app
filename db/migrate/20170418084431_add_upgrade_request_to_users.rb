@@ -1,4 +1,4 @@
-class AddUpgradeRequestToUsers < ActiveRecord::Migration
+class AddUpgradeRequestToUsers < ActiveRecord::Migration[4.2]
   def up
     add_column :users, :upgrade_request_sent_at, :datetime
 

@@ -1,4 +1,4 @@
-class AddAttachmentToLectures < ActiveRecord::Migration
+class AddAttachmentToLectures < ActiveRecord::Migration[4.2]
   def self.up
     change_table :lectures do |t|
       t.attachment :attachment
