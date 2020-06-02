@@ -31,6 +31,8 @@ jobs:
           steps:
             - run: yarn install
 
+      - run: bundle exec rubocop
+
       - run: bin/rails db:schema:load
 
       - run: bin/rspec
