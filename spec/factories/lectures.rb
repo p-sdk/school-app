@@ -24,5 +24,4 @@ FactoryBot.define do
     content { Faker::Lorem.sentence }
     association :course
   end
-
 end
