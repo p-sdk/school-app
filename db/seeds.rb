@@ -59,6 +59,7 @@ class Seeds
     Task.all.each do |task|
       task.course.enrollments.each do |enrollment|
         next if random_boolean # half of tasks is not solved
+
         Solution.create! solution_params(task: task, enrollment: enrollment)
       end
     end

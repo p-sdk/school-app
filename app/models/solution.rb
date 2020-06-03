@@ -53,6 +53,7 @@ class Solution < ApplicationRecord
 
   def check_course
     return if enrollment&.course == task&.course
+
     errors[:base] << I18n.t('errors.messages.record_invalid')
   end
 end

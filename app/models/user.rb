@@ -62,6 +62,7 @@ class User < ApplicationRecord
 
   def request_upgrade
     return if teacher?
+
     update! upgrade_request_sent_at: Time.current
   end
 

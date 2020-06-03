@@ -4,6 +4,7 @@ class TaskDecorator < Draper::Decorator
   def average_score
     graded_solutions = solutions.graded
     return '---' if graded_solutions.empty?
+
     graded_solutions.average(:earned_points).round(1)
   end
 
@@ -13,6 +14,7 @@ class TaskDecorator < Draper::Decorator
 
   def status_badge_for(user, solutions)
     return if course.teacher == user
+
     status_badge(status(solutions))
   end
 
@@ -22,6 +24,7 @@ class TaskDecorator < Draper::Decorator
     solution = solutions.detect { |s| s.task_id == id }
     return :unsolved unless solution
     return :graded if solution.graded?
+
     :ungraded
   end
 

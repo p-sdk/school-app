@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   def home
     skip_authorization
     return unless user_signed_in?
+
     render 'dashboard'
   end
 end

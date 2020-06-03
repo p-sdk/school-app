@@ -6,18 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 9
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/controllers/pages_controller.rb'
-    - 'app/decorators/solution_decorator.rb'
-    - 'app/decorators/task_decorator.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/solution.rb'
-    - 'app/models/user.rb'
-    - 'db/seeds.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Layout/EmptyLines:
