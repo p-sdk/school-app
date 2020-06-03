@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Layout/CommentIndentation:
-  Exclude:
-    - 'config/environments/development.rb'
-    - 'spec/spec_helper.rb'
-
 # Offense count: 9
 # Cop supports --auto-correct.
 Layout/EmptyLineAfterGuardClause:
