@@ -3,3 +3,7 @@ inherit_from: .rubocop_todo.yml
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'db/schema.rb'
+
+Layout/HashAlignment:
+  Exclude:
+    - 'lib/tasks/auto_annotate_models.rake'
