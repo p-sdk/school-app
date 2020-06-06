@@ -153,14 +153,6 @@ Style/StringLiteralsInInterpolation:
   Exclude:
     - 'bin/yarn'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: .
-# SupportedStyles: percent, brackets
-Style/SymbolArray:
-  EnforcedStyle: percent
-  MinSize: 5
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.
