@@ -1,6 +1,6 @@
 inherit_from: .rubocop_todo.yml
 
-Layout/EmptyLinesAroundBlockBody:
+AllCops:
   Exclude:
     - 'db/schema.rb'
 
