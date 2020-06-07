@@ -31,7 +31,7 @@
 #
 
 class User < ApplicationRecord
-  ROLES = %i[student teacher admin]
+  ROLES = %i[student teacher admin].freeze
 
   enum role: ROLES
 

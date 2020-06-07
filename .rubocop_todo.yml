@@ -77,11 +77,3 @@ Style/IfUnlessModifier:
 Style/MixinUsage:
   Exclude:
     - 'db/seeds.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: literals, strict
-Style/MutableConstant:
-  Exclude:
-    - 'app/models/user.rb'
