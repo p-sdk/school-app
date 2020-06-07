@@ -82,7 +82,7 @@ class Seeds
   def admin_params
     {
       name: 'Admin',
-      email: "admin@example.com",
+      email: 'admin@example.com',
       role: :admin
     }.reverse_merge(user_params)
   end

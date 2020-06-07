@@ -101,18 +101,3 @@ Style/NestedParenthesizedCalls:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'config/spring.rb'
-
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Exclude:
-    - 'config/environments/production.rb'
-    - 'config/puma.rb'
-    - 'config/routes.rb'
-    - 'db/migrate/20170419101915_add_devise_to_users.rb'
-    - 'db/seeds.rb'
-    - 'spec/decorators/solution_decorator_spec.rb'
-    - 'spec/helpers/application_helper_spec.rb'
-    - 'spec/rails_helper.rb'

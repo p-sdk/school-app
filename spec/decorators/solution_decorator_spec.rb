@@ -13,7 +13,7 @@ RSpec.describe SolutionDecorator do
     it { is_expected.to eq "<h1>Header</h1>\n" }
   end
 
-  describe "#earned_points_formatted" do
+  describe '#earned_points_formatted' do
     subject { solution.earned_points_formatted }
 
     context 'solution not graded' do

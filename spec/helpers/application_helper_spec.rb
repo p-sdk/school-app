@@ -16,7 +16,7 @@ RSpec.describe ApplicationHelper do
       end
     end
 
-    it "converts flash names to bootstrap alert names" do
+    it 'converts flash names to bootstrap alert names' do
       expect(helper.alert_name(:notice)).to eq :success
       expect(helper.alert_name(:foobar)).to eq :info
       expect(helper.alert_name(:alert)).to eq :warning
