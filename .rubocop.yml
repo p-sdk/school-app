@@ -8,3 +8,6 @@ AllCops:
 Layout/HashAlignment:
   Exclude:
     - 'lib/tasks/auto_annotate_models.rake'
+
+Metrics:
+  Enabled: false
