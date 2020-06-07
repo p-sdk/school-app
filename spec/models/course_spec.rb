@@ -43,13 +43,13 @@ RSpec.describe Course do
     let(:student) { build :user }
 
     context 'when student has not enrolled in the course' do
-      specify { expect(course.has_student? student).to be false }
+      specify { expect(course.has_student?(student)).to be false }
     end
 
     context 'when student has enrolled in the course' do
       before { create :enrollment, student: student, course: course }
 
-      specify { expect(course.has_student? student).to be true }
+      specify { expect(course.has_student?(student)).to be true }
     end
   end
 end

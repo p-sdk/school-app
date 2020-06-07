@@ -39,12 +39,12 @@ RSpec.describe Task do
 
   describe '#solution_by' do
     context 'when task has not been solved' do
-      specify { expect(task.solution_by student).to be nil }
+      specify { expect(task.solution_by(student)).to be nil }
     end
 
     context 'when task has been solved' do
       before { solution }
-      specify { expect(task.solution_by student).to eq solution }
+      specify { expect(task.solution_by(student)).to eq solution }
     end
   end
 
@@ -72,17 +72,17 @@ RSpec.describe Task do
 
   describe '#earned_points_by' do
     context 'when task has not been solved' do
-      specify { expect(task.earned_points_by student).to be nil }
+      specify { expect(task.earned_points_by(student)).to be nil }
     end
 
     context 'when task has been solved and waits for review' do
       before { solution }
-      specify { expect(task.earned_points_by student).to be nil }
+      specify { expect(task.earned_points_by(student)).to be nil }
     end
 
     context 'when task has been solved and graded' do
       before { solution.update! earned_points: 10 }
-      specify { expect(task.earned_points_by student).to eq solution.earned_points }
+      specify { expect(task.earned_points_by(student)).to eq solution.earned_points }
     end
   end
 end
