@@ -14,3 +14,9 @@ Metrics:
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
