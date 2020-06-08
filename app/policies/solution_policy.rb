@@ -11,7 +11,7 @@ class SolutionPolicy < ApplicationPolicy
 
   def create?
     task = record.task
-    task.course.has_student?(user) && !task.solved_by?(user)
+    task.course.studied_by?(user) && !task.solved_by?(user)
   end
 
   def update?

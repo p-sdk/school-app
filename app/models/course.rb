@@ -33,7 +33,7 @@ class Course < ApplicationRecord
 
   validates :desc, length: { maximum: 100_000 }
 
-  def has_student?(student)
+  def studied_by?(student)
     students.include? student
   end
 

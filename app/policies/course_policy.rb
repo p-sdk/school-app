@@ -16,7 +16,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def list_lectures?
-    user_is_course_teacher?(record) || record.has_student?(user)
+    user_is_course_teacher?(record) || record.studied_by?(user)
   end
 
   def list_tasks?

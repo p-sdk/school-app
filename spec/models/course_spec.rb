@@ -39,17 +39,17 @@ RSpec.describe Course do
     it { should validate_length_of(:desc). is_at_most(100_000) }
   end
 
-  describe '#has_student?' do
+  describe '#studied_by?' do
     let(:student) { build :user }
 
     context 'when student has not enrolled in the course' do
-      specify { expect(course.has_student?(student)).to be false }
+      specify { expect(course.studied_by?(student)).to be false }
     end
 
     context 'when student has enrolled in the course' do
       before { create :enrollment, student: student, course: course }
 
-      specify { expect(course.has_student?(student)).to be true }
+      specify { expect(course.studied_by?(student)).to be true }
     end
   end
 end

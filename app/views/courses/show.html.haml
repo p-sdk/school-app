@@ -17,7 +17,7 @@
   - if policy(Task.new(course: course)).new?
     .new= link_to t('.add_task'), [:new, course, :task]
 
-  - if course.has_student? current_user
+  - if course.studied_by? current_user
     .score
       = bs_panel t('.your_score') do
         = course.score_for(current_user)
