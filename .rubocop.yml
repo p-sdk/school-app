@@ -11,3 +11,6 @@ Layout/HashAlignment:
 
 Metrics:
   Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
