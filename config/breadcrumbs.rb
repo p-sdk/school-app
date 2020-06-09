@@ -57,8 +57,8 @@ crumb :users do |course|
   if course
     link t('breadcrumbs.students'), [course, :students] if policy(course).list_students?
     parent course
-  else
-    link t('breadcrumbs.users'), users_path if policy(User).index?
+  elsif policy(User).index?
+    link t('breadcrumbs.users'), users_path
   end
 end
 
