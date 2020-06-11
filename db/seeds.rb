@@ -1,7 +1,8 @@
 require_relative '../lib/faker_helper'
-include FakerHelper
 
 class Seeds
+  include FakerHelper
+
   def self.run(&block)
     start_time = Time.now
 
