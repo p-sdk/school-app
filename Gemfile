@@ -45,10 +45,10 @@ group :development do
 end
 
 group :test do
+  gem 'apparition'
   gem 'capybara'
   gem 'capybara-email'
   gem 'pundit-matchers'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end

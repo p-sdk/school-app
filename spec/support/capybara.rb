@@ -6,6 +6,7 @@ end
 
 Capybara::Session.include(CapybaraMatchers)
 
-Capybara.javascript_driver = :selenium_chrome_headless
+require 'capybara/apparition'
+Capybara.javascript_driver = :apparition
 Capybara.server = :puma, { Silent: true }
 Capybara.server_port = 3001
